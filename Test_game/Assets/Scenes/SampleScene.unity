@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1497629655}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 1189796272}
   - component: {fileID: 1189796271}
   m_Layer: 0
-  m_Name: placeholder graphic
+  m_Name: placeholder bottom mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -294,7 +294,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 13bdbe15926fe9245bf761608ebce517, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -335,8 +335,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1681275480}
+  m_Children: []
   m_Father: {fileID: 1288827287}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -385,6 +384,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d87ec57d776efc4b8833029ffbdde22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  size: {x: 4, y: 4}
+  allFields:
+  - {fileID: 4061235399453281645, guid: 66277ace809076d4e9ce086fc560ec11, type: 3}
+  allItems:
+  - {fileID: 6423533811985635194, guid: b30d9229c2bac1d469762958ebf7fe07, type: 3}
 --- !u!1 &1497629653
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,11 +509,11 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1189796274}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: da340be0c75cf354eb4fbda0415f3770, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da340be0c75cf354eb4fbda0415f3770, type: 3}
       propertyPath: m_LocalPosition.x
@@ -553,12 +557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: da340be0c75cf354eb4fbda0415f3770, type: 3}
       propertyPath: m_Name
-      value: EyeBallin
+      value: EyeBallin (test)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da340be0c75cf354eb4fbda0415f3770, type: 3}
---- !u!4 &1681275480 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: da340be0c75cf354eb4fbda0415f3770, type: 3}
-  m_PrefabInstance: {fileID: 1681275479}
-  m_PrefabAsset: {fileID: 0}
