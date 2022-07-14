@@ -4,9 +4,9 @@ namespace Gameplay.Board
 {
     public enum ItemType
     {
-        Player,
         Obstacle,
         Enemy,
+        Player,
     }
 
     // In-engine gameobject component
