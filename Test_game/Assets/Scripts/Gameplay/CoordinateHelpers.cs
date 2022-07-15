@@ -22,7 +22,6 @@ namespace Gameplay
         // "Vertical" position is on the Z plane in transform worldspace.
         private static Vector3 VerticalToHorizontalPosition(this Vector2 pos)
         {
-            
             return new Vector3(pos.x, Board.Instance.tileSpawnHeight, pos.y);
         }
         // "Horizontal" position is on the Y plane in the transform worldspace.

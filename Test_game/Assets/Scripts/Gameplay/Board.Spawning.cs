@@ -6,39 +6,59 @@ namespace Gameplay
 {
     public partial class Board
     {
+        // player specific
         private Entity SpawnPlayer()
         {
-            Entity player = SpawnItem(EntityType.Player);
+            Entity player = SpawnEntityOfType(EntityTypes.Player);
             Field playerStartField = _fields[0, 0];
             playerStartField.LoseCurrentEntity();
             playerStartField.ReceiveEntity(player);
             return player;
         }
 
-        private Field SpawnField(FieldType desiredType)
+        // fields
+        private Field SpawnRandomField()
         {
-            // Get valid field assets
-            List<Field> validFieldAssets = allFields.Where(fieldAsset => fieldAsset.Type == desiredType).ToList();
-            if (validFieldAssets.Count == 0) throw new UnityException("No fields of type " + desiredType + " found!");
+            float random = Random.value;
+            FieldTypes selectedType;
+            if (random < voidFieldRate)
+                selectedType = FieldTypes.Void;
+            else if (random < voidFieldRate + hillFieldRate)
+                selectedType = FieldTypes.Hill;
+            else
+                selectedType = FieldTypes.Flat;
+            return SpawnFieldOfType(selectedType);
+        }
+        private Field SpawnFieldOfType(FieldTypes desiredType)
+        {
+            Field chosenFieldAsset = RandomFieldAssetOfType(desiredType);
 
-            // Choose field asset
-            Field chosenFieldAsset = validFieldAssets[Random.Range(0, validFieldAssets.Count)];
-
-            // Spawn asset and return it
+            // Spawn asset and return reference
             return Instantiate(chosenFieldAsset, fieldsParent).GetComponent<Field>();
         }
-
-        private Entity SpawnItem(EntityType desiredType)
+        private Field RandomFieldAssetOfType(FieldTypes type)
+        {
+            List<Field> validFieldAssets = allFields.Where(fieldAsset => fieldAsset.Type == type).ToList();
+            if (validFieldAssets.Count == 0) throw new UnityException("No fields of type " + type + " found!");
+            // Choose random field asset, return
+            return validFieldAssets[Random.Range(0, validFieldAssets.Count)];
+        }
+        
+        // entities
+        private Entity SpawnEntityOfType(EntityTypes desiredType)
         {
             // Get valid field assets
-            List<Entity> validItemAssets = allEntities.Where(itemAsset => itemAsset.Type == desiredType).ToList();
-            if (validItemAssets.Count == 0) throw new UnityException("No entity of type " + desiredType + " found!");
+            Entity chosenEntityAsset = RandomEntityOfType(desiredType);
 
-            // Choose (random) field asset
-            Entity chosenFieldAsset = validItemAssets[Random.Range(0, validItemAssets.Count)];
-
-            // Spawn asset and return it
-            return Instantiate(chosenFieldAsset).GetComponent<Entity>();;
+            // Spawn asset and return reference
+            return Instantiate(chosenEntityAsset).GetComponent<Entity>();
+        }
+        private Entity RandomEntityOfType(EntityTypes type)
+        {
+            List<Entity> validEntityAssets = allEntities.Where(entityAsset => entityAsset.Type == type).ToList();
+            if (validEntityAssets.Count == 0) throw new UnityException("No entity of type " + type + " found!");
+            // Choose random entity asset, return
+            return validEntityAssets[Random.Range(0, validEntityAssets.Count)];
         }
     }
 }

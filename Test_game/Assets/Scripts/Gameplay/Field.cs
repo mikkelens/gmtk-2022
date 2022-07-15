@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public enum FieldType
+    public enum FieldTypes
     {
         Flat,
         Hill,
@@ -16,11 +16,11 @@ namespace Gameplay
     {
         // settings
         [SerializeField] private float highlightModifier = 1.5f;
-        [SerializeField] private FieldType type;
+        [SerializeField] private FieldTypes type;
         [AssetsOnly]
         [SerializeField] private Entity startingEntity;
         
-        public FieldType Type => type;
+        public FieldTypes Type => type;
         
         // info
         private Vector2Int _coordinates;

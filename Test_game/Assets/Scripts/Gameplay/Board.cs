@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,6 +14,9 @@ namespace Gameplay
         [SerializeField] public float tileSpawnSpacing = 1f;
         [SerializeField] public float tileSpawnHeight = 0.25f;
         [SerializeField] private Transform fieldsParent;
+        
+        [SerializeField] private float hillFieldRate = 0.0f;
+        [SerializeField] private float voidFieldRate = 0.0f; 
 
         // data
         private Field[,] _fields; // fields on the board
@@ -31,14 +35,14 @@ namespace Gameplay
         private void Start()
         {
             if (fieldsParent == null) fieldsParent = transform;
-            
+
             // Spawn fields
             _fields = new Field[size.x, size.y];
             for (int y = 0; y < size.y; y++)
             {
                 for (int x = 0; x < size.x; x++)
                 {
-                    Field field = _fields[x, y] = SpawnField(FieldType.Flat);
+                    Field field = _fields[x, y] = SpawnRandomField();
 
                     // TODO: make it choose a specific type other than flat?
                     // TODO: Give field a specific entity?
@@ -84,7 +88,7 @@ namespace Gameplay
             {
                 _playerEntity.FieldParent.GiveCurrentEntity(target);
             }
-            else if (target.CurrentEntity.Type == EntityType.Monster)
+            else if (target.CurrentEntity.Type == EntityTypes.Monster)
             {
                 target.CurrentEntity.TakeDamage();
             }
@@ -98,7 +102,7 @@ namespace Gameplay
 
         private void CheckAfterTurn() // enemy hit player, etc.
         {
-            List<Entity> monsters = allEntities.Where(entity => entity.Type == EntityType.Monster).ToList();
+            List<Entity> monsters = allEntities.Where(entity => entity.Type == EntityTypes.Monster).ToList();
             foreach (Entity monster in monsters)
             {
                 Vector2Int distances = (monster.Coordinates - _playerEntity.Coordinates).Abs();

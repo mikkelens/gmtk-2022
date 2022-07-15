@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public enum EntityType
+    public enum EntityTypes
     {
         Obstacle,
         Monster,
@@ -14,10 +14,10 @@ namespace Gameplay
     public class Entity : MonoBehaviour
     {
         // settings
-        [SerializeField] private EntityType type;
+        [SerializeField] private EntityTypes type;
         [SerializeField] private int health;
         
-        public EntityType Type => type;
+        public EntityTypes Type => type;
         
         // info
         private Vector2Int _coordinates;
@@ -35,7 +35,7 @@ namespace Gameplay
             {
                 _fieldParent.LoseCurrentEntity();
                 
-                if (type == EntityType.Monster) Destroy(gameObject); // todo: graphical death
+                if (type == EntityTypes.Monster) Destroy(gameObject); // todo: graphical death
             }
         }
 
