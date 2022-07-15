@@ -3,16 +3,19 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public class Player2D : MonoBehaviour
+    public partial class Player2D : MonoBehaviour
     {
         [SerializeField] private float maxSpeed = 5f;
         [SerializeField] private float walkAccelSpeed = 65f;
         [SerializeField] private float stopBonus = 3f;
 
         Transform _transform;
-        private Vector2 _moveInput;
         private Vector2 _velocity; // on the topdown plane view
     
+        // player input, set in partial class "Player2D.Input.cs" //
+        private Vector2 _moveInput;
+        private Vector2 _aimInput;
+
         private void Start()
         {
             _transform = transform;
