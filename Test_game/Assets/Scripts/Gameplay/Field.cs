@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Gameplay
@@ -14,6 +15,7 @@ namespace Gameplay
     public class Field : MonoBehaviour
     {
         // settings
+        [SerializeField] private float highlightModifier = 1.5f;
         [SerializeField] private FieldType type;
         [AssetsOnly]
         [SerializeField] private Entity startingEntity;
@@ -24,11 +26,20 @@ namespace Gameplay
         private Vector2Int _coordinates;
         private Entity _currentEntity;
 
+        private Transform _meshTransform;
+        private bool _highlighted;
+        private Vector3 _normalSize;
 
         [ShowInInspector]
         public Vector2Int Coordinates => _coordinates;
         [ShowInInspector]
         public Entity CurrentEntity => _currentEntity;
+
+        private void Awake()
+        {
+            _meshTransform = GetComponentInChildren<MeshRenderer>().transform;
+            _normalSize = _meshTransform.localScale;
+        }
 
         public void SpawnStartingEntity() // On board generation
         {
@@ -59,6 +70,13 @@ namespace Gameplay
             if (_currentEntity != null) throw new UnityException("Field already has an entity...");
             entity.SetParentField(this);
             _currentEntity = entity;
+        }
+
+        public void HighlightField(bool highlight) // On mouse hover
+        {
+            if (_highlighted == highlight) return;
+            _meshTransform.localScale = highlight ? _normalSize * highlightModifier : _normalSize;
+            _highlighted = highlight;
         }
     }
 }

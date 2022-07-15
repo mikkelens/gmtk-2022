@@ -434,7 +434,7 @@ MonoBehaviour:
   - {fileID: 7536147031767977119, guid: 0d0e81be7a0fd0540bd310ed07392924, type: 3}
   allEntities:
   - {fileID: 3275292363810505407, guid: 3950ddad5b195a2418724e1bd76417eb, type: 3}
-  tileSpawnSpacing: 1.25
+  tileSpawnSpacing: 1.75
   tileSpawnHeight: 0.25
   fieldsParent: {fileID: 1705748549}
 --- !u!1 &1497629653
