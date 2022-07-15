@@ -12,6 +12,7 @@ namespace Input
 
         private bool _hasLetGoOfMoveKeys;
         private Vector2 _lastMousePos;
+        private Field _lastHighlightedField;
         
         private void Awake()
         {
@@ -49,26 +50,46 @@ namespace Input
         {
             ClickOnScreen();
         }
-
+        
+        private void ClickOnScreen() // Click on field
+        {
+            var clickedField = TryFindFieldUnderMouse(_lastMousePos);
+            if (clickedField != null) _board.TryClickField(clickedField);
+        }
         private void MousePos(Vector2 pos)
         {
             _lastMousePos = pos;
+
+            // Highlight field
+            Field fieldUnderMouse = TryFindFieldUnderMouse(pos);
+            if (fieldUnderMouse == _lastHighlightedField) return; // both same field or both null, no need to do anything
+            if (_lastHighlightedField != null)
+            {
+                _lastHighlightedField.HighlightField(false); // unhighlight old field
+                _lastHighlightedField = null;
+            }
+            if (fieldUnderMouse != null)
+            {
+                fieldUnderMouse.HighlightField(true); // highlight new field
+                _lastHighlightedField = fieldUnderMouse; // remember
+            }
         }
         
-        private void ClickOnScreen()
+        // Get field (for highlighting and moving using mouse)
+        private Field TryFindFieldUnderMouse(Vector2 mousePos)
         {
             Camera cam = Camera.main;
             if (cam == null) throw new UnityException("No main camera in scene!");
-            Ray mouseRay = cam.ScreenPointToRay(_lastMousePos);
+            Ray mouseRay = cam.ScreenPointToRay(mousePos);
             bool hit = Physics.Raycast(mouseRay, out RaycastHit hitData, Mathf.Infinity, LayerMask.GetMask("Field"));
             float distance = hit ? hitData.distance : 6f;
             Debug.DrawRay(mouseRay.origin, mouseRay.direction * distance, hit ? Color.green : Color.red, 0.25f);
             
-            if (!hit) return;
-            Field hitField = hitData.transform.parent.GetComponent<Field>();
-            _board.TryClickField(hitField);
+            if (!hit) return null;
+            return hitData.transform.GetComponentInParent<Field>();
         }
         
+        // Simply move in direction
         private void MoveKeys(Vector2 move)
         {
             if (!_hasLetGoOfMoveKeys) return;
