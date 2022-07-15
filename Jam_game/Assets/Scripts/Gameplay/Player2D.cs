@@ -13,9 +13,10 @@ namespace Gameplay
         Transform _transform;
         private Vector2 _velocity; // on the topdown plane view
     
-        // player input, set in partial class "Player2D.Input.cs" //
+        // player input, set in partial class "Player2D.Input.cs"
+        private float _lastMoveInputChangeTime; // time of last change of move input, for rotating player in a realistic way
         private Vector2 _moveInput;
-        private Vector2 _lastMoveInput; // moveInput, but not affected by letting go of input
+        private Vector2 _nonZeroMoveInput; // moveInput, but not affected by letting go of input
         private Vector2 _aimInput;
 
         
@@ -27,16 +28,16 @@ namespace Gameplay
 
         private void Update() // set visuals and use input here
         {
-            // todo: smooth visual turn
             // look at input direction
-            TurnTowardsWorldDirection(_lastMoveInput.PlaneToWorld().normalized);
+            Vector3 targetLook = _nonZeroMoveInput.PlaneToWorld().normalized;
+            if (_transform.forward != targetLook)
+                TurnTowardsWorldDirection(targetLook);
             
             // change velocity
             Vector2 target = _moveInput.normalized * maxSpeed;
         
             float likeness = Vector2.Dot(_velocity.normalized, target.normalized);
             float stopFactor = (1f - likeness) / 2f; // from (-1 to 1) to (0 to 1), and in reverse
-            Debug.Log($"Stopfactor: {stopFactor}");
             float accel = walkAccelSpeed;
             accel += walkAccelSpeed * stopBonus * stopFactor;
         

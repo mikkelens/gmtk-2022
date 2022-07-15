@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Gameplay;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,7 +13,7 @@ public class Camera2D : MonoBehaviour
     private Player2D _player;
     
     private Vector3 _offset;
-
+    
     private void Start()
     {
         _offset = transform.position;

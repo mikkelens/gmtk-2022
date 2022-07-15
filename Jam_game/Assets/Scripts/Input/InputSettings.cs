@@ -125,7 +125,7 @@ namespace Input
                     ""name"": ""ControllerAim"",
                     ""type"": ""Value"",
                     ""id"": ""bcd0c360-272b-4062-a043-f406a429939b"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -164,7 +164,7 @@ namespace Input
                 {
                     ""name"": """",
                     ""id"": ""943c12c0-e621-45ef-8e48-0c610f9b98e7"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",

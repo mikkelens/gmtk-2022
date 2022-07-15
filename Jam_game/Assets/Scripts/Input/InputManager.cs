@@ -49,17 +49,19 @@ namespace Input
             // movement //
             // move
             _settings.Movement.Move.performed += ctx => player.SetMoveInput(ctx.ReadValue<Vector2>());
-            _settings.Movement.Move.canceled += ctx => player.SetMoveInput(Vector2.zero);
+            _settings.Movement.Move.canceled += _ => player.SetMoveInput(Vector2.zero);
             
             // combat //
             // aim
             if (useControllerAim)
             {
                 _settings.Combat.MouseAim.performed += ctx => player.SetAimInput(ctx.ReadValue<Vector2>());
+                _settings.Combat.MouseAim.canceled += _ => player.SetAimInput(Vector2.zero);
             }
             else
             {
                 _settings.Combat.ControllerAim.performed += ctx => player.SetAimInput(ctx.ReadValue<Vector2>());
+                _settings.Combat.ControllerAim.canceled += _ => player.SetAimInput(Vector2.zero);
             }
         }
     }
