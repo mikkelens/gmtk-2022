@@ -45,11 +45,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|Walk (1)
-      takeName: Armature|Walk
+      name: Armature|Death
+      takeName: Armature|Death
       internalID: 0
       firstFrame: 0
-      lastFrame: 30
+      lastFrame: 26
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
