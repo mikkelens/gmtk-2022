@@ -7,13 +7,15 @@ namespace Gameplay
         public void SetMoveInput(Vector2 input)
         {
             _moveInput = input;
-            Debug.Log($"Move input: {input}");
+            if (input != Vector2.zero) _lastMoveInput = input;
+
+            // Debug.Log($"Move input: {input}");
         }
 
         public void SetAimInput(Vector2 input)
         {
             _aimInput = input;
-            Debug.Log($"Aim input: {input}");
+            // Debug.Log($"Aim input: {input}");
         }
     }
 }
