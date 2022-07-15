@@ -113,19 +113,19 @@ namespace Input
             ""id"": ""426244c4-8e23-4ea3-a037-182345ef6c27"",
             ""actions"": [
                 {
-                    ""name"": ""ControllerAim"",
+                    ""name"": ""MouseAim"",
                     ""type"": ""Value"",
-                    ""id"": ""bcd0c360-272b-4062-a043-f406a429939b"",
-                    ""expectedControlType"": ""Button"",
+                    ""id"": ""96f8d0dc-5c6c-4c98-8f87-f4c26011c6fe"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""MouseAim"",
+                    ""name"": ""ControllerAim"",
                     ""type"": ""Value"",
-                    ""id"": ""96f8d0dc-5c6c-4c98-8f87-f4c26011c6fe"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""id"": ""bcd0c360-272b-4062-a043-f406a429939b"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -163,17 +163,6 @@ namespace Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e46b08a0-21d2-4e8c-9d92-4e5b10fc3d69"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KBM"",
-                    ""action"": ""MouseAim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""943c12c0-e621-45ef-8e48-0c610f9b98e7"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
@@ -191,6 +180,17 @@ namespace Input
                     ""processors"": """",
                     ""groups"": ""KBM"",
                     ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e46b08a0-21d2-4e8c-9d92-4e5b10fc3d69"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""MouseAim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -215,8 +215,8 @@ namespace Input
             m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
             // Combat
             m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
-            m_Combat_ControllerAim = m_Combat.FindAction("ControllerAim", throwIfNotFound: true);
             m_Combat_MouseAim = m_Combat.FindAction("MouseAim", throwIfNotFound: true);
+            m_Combat_ControllerAim = m_Combat.FindAction("ControllerAim", throwIfNotFound: true);
             m_Combat_Melee = m_Combat.FindAction("Melee", throwIfNotFound: true);
             m_Combat_Throw = m_Combat.FindAction("Throw", throwIfNotFound: true);
         }
@@ -311,16 +311,16 @@ namespace Input
         // Combat
         private readonly InputActionMap m_Combat;
         private ICombatActions m_CombatActionsCallbackInterface;
-        private readonly InputAction m_Combat_ControllerAim;
         private readonly InputAction m_Combat_MouseAim;
+        private readonly InputAction m_Combat_ControllerAim;
         private readonly InputAction m_Combat_Melee;
         private readonly InputAction m_Combat_Throw;
         public struct CombatActions
         {
             private @InputSettings m_Wrapper;
             public CombatActions(@InputSettings wrapper) { m_Wrapper = wrapper; }
-            public InputAction @ControllerAim => m_Wrapper.m_Combat_ControllerAim;
             public InputAction @MouseAim => m_Wrapper.m_Combat_MouseAim;
+            public InputAction @ControllerAim => m_Wrapper.m_Combat_ControllerAim;
             public InputAction @Melee => m_Wrapper.m_Combat_Melee;
             public InputAction @Throw => m_Wrapper.m_Combat_Throw;
             public InputActionMap Get() { return m_Wrapper.m_Combat; }
@@ -332,12 +332,12 @@ namespace Input
             {
                 if (m_Wrapper.m_CombatActionsCallbackInterface != null)
                 {
-                    @ControllerAim.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnControllerAim;
-                    @ControllerAim.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnControllerAim;
-                    @ControllerAim.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnControllerAim;
                     @MouseAim.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnMouseAim;
                     @MouseAim.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnMouseAim;
                     @MouseAim.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnMouseAim;
+                    @ControllerAim.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnControllerAim;
+                    @ControllerAim.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnControllerAim;
+                    @ControllerAim.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnControllerAim;
                     @Melee.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnMelee;
                     @Melee.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnMelee;
                     @Melee.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnMelee;
@@ -348,12 +348,12 @@ namespace Input
                 m_Wrapper.m_CombatActionsCallbackInterface = instance;
                 if (instance != null)
                 {
-                    @ControllerAim.started += instance.OnControllerAim;
-                    @ControllerAim.performed += instance.OnControllerAim;
-                    @ControllerAim.canceled += instance.OnControllerAim;
                     @MouseAim.started += instance.OnMouseAim;
                     @MouseAim.performed += instance.OnMouseAim;
                     @MouseAim.canceled += instance.OnMouseAim;
+                    @ControllerAim.started += instance.OnControllerAim;
+                    @ControllerAim.performed += instance.OnControllerAim;
+                    @ControllerAim.canceled += instance.OnControllerAim;
                     @Melee.started += instance.OnMelee;
                     @Melee.performed += instance.OnMelee;
                     @Melee.canceled += instance.OnMelee;
@@ -388,8 +388,8 @@ namespace Input
         }
         public interface ICombatActions
         {
-            void OnControllerAim(InputAction.CallbackContext context);
             void OnMouseAim(InputAction.CallbackContext context);
+            void OnControllerAim(InputAction.CallbackContext context);
             void OnMelee(InputAction.CallbackContext context);
             void OnThrow(InputAction.CallbackContext context);
         }

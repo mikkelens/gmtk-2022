@@ -18,6 +18,8 @@ namespace Input
         private void Awake()
         {
             Instance = this;
+            
+            _settings = new InputSettings();
         }
 
         private void OnEnable()
@@ -33,8 +35,6 @@ namespace Input
         [SuppressMessage("ReSharper", "HeapView.ClosureAllocation")]
         private void Start()
         {
-            _settings = new InputSettings();
-
             // game manager
             _gameManager = GameManager.Instance;
             if (_gameManager == null) throw new UnityException("No game manager in scene.");

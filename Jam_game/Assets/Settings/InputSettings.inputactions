@@ -89,19 +89,19 @@
             "id": "426244c4-8e23-4ea3-a037-182345ef6c27",
             "actions": [
                 {
-                    "name": "ControllerAim",
+                    "name": "MouseAim",
                     "type": "Value",
-                    "id": "bcd0c360-272b-4062-a043-f406a429939b",
-                    "expectedControlType": "Button",
+                    "id": "96f8d0dc-5c6c-4c98-8f87-f4c26011c6fe",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MouseAim",
+                    "name": "ControllerAim",
                     "type": "Value",
-                    "id": "96f8d0dc-5c6c-4c98-8f87-f4c26011c6fe",
-                    "expectedControlType": "Vector2",
+                    "id": "bcd0c360-272b-4062-a043-f406a429939b",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -139,17 +139,6 @@
                 },
                 {
                     "name": "",
-                    "id": "e46b08a0-21d2-4e8c-9d92-4e5b10fc3d69",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KBM",
-                    "action": "MouseAim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "943c12c0-e621-45ef-8e48-0c610f9b98e7",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
@@ -167,6 +156,17 @@
                     "processors": "",
                     "groups": "KBM",
                     "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e46b08a0-21d2-4e8c-9d92-4e5b10fc3d69",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KBM",
+                    "action": "MouseAim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
