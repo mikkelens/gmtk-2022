@@ -27,7 +27,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
-    motionNodeName: 
+    motionNodeName: Armature
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
@@ -36,7 +36,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -85,8 +85,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -114,8 +114,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -155,7 +155,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
-    optimizeBones: 1
+    optimizeBones: 0
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -179,7 +179,62 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Protag(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Plane
+      parentName: Protag(Clone)
+      position: {x: -1.0587912e-22, y: 0, z: 0.00000008940697}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 99.99998, y: 99.99998, z: 99.99998}
+    - name: Armature
+      parentName: Protag(Clone)
+      position: {x: -3.4070564e-16, y: 1.5344018, z: 0.30004394}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 40.23447, y: 40.23447, z: 40.23447}
+    - name: Hips
+      parentName: Armature
+      position: {x: 4.660755e-18, y: 0.00035352423, z: -0.017397553}
+      rotation: {x: 0.74491525, y: 2.3146357e-25, z: -2.4204534e-17, w: 0.6671591}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Torso
+      parentName: Armature
+      position: {x: 4.998365e-18, y: -0.0002442451, z: -0.0071902964}
+      rotation: {x: 0.7049477, y: 1.0987183e-24, z: -1.5652982e-16, w: 0.70925933}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head
+      parentName: Armature
+      position: {x: 6.689785e-18, y: 0.000054296477, z: 0.0031102274}
+      rotation: {x: 0.64569336, y: -2.5304696e-18, z: -1.2553065e-16, w: 0.7635968}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cloak bottom
+      parentName: Armature
+      position: {x: 4.660755e-18, y: 0.0003535238, z: -0.017397553}
+      rotation: {x: -0.017086543, y: 1.0474253e-26, z: 3.793975e-18, w: 0.999854}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Thigh.l
+      parentName: Armature
+      position: {x: -0.0043402896, y: 0.000982789, z: -0.020621257}
+      rotation: {x: -0.0045365104, y: 0.70709246, z: -0.7070921, w: -0.0045319935}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Shin.l
+      parentName: Thigh.l
+      position: {x: -2.0492563e-10, y: 0.008079128, z: -5.243237e-12}
+      rotation: {x: -0.00809222, y: -0.000023248342, z: 0.009958053, w: 0.9999177}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Thigh.r
+      parentName: Armature
+      position: {x: 0.0043402896, y: 0.000982789, z: -0.020621257}
+      rotation: {x: 0.004536463, y: 0.70709246, z: -0.7070921, w: 0.0045321095}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Shin.r
+      parentName: Thigh.r
+      position: {x: 2.0492563e-10, y: 0.008079128, z: -5.243237e-12}
+      rotation: {x: -0.00809222, y: 0.000023248347, z: -0.009958053, w: 0.9999177}
+      scale: {x: 0.99999994, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -190,13 +245,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
