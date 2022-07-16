@@ -26,6 +26,7 @@ namespace Gameplay.Entities.Base
         {
             Transform = transform;
             Animator = GetComponentInChildren<Animator>();
+            if (Animator == null) Debug.LogWarning($"No animator component found on entity '{name}'");
             
             Manager = GameManager.Instance;
             

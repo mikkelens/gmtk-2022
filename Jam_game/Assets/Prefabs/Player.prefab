@@ -80,6 +80,10 @@ MonoBehaviour:
   freezeAffectsRotation: 0
   damage: 1
   knockbackStrength: 1.5
+  meleeDistance: 2.5
+  meleeAttackDelay: 0.75
+  meleeCooldown: 1.25
+  autoAttacks: 1
   aimTurnSpeedBonus: 2.5
 --- !u!65 &5837976767361439941
 BoxCollider:

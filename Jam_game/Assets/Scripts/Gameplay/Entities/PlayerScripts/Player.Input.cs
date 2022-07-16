@@ -11,8 +11,11 @@ namespace Gameplay.Entities.PlayerScripts
         private bool _holdingThrow;
         private bool _holdingMelee;
         private bool _lastAimWasController;
+        
         private bool AimCounts => _lastAimWasController || _holdingThrow;
         private bool IsAiming => AimInput.magnitude > 0.0f && AimCounts;
+
+        protected override bool WantsToAttack => _holdingMelee;
 
         private Vector2 _rawAimInput;
         private Vector2 AimInput

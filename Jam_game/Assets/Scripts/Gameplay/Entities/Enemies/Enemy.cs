@@ -27,7 +27,7 @@ namespace Gameplay.Entities.Enemies
             return (playerPos - pos).normalized;
         }
 
-        public override void OnEntityContact(Entity entity) // filter contact to only be player
+        public override void ContactWith(Entity entity) // filter contact to only be player
         {
             Player player = entity as Player;
             if (player == null) return;

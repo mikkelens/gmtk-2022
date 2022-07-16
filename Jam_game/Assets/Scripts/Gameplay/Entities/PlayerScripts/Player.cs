@@ -27,6 +27,11 @@ namespace Gameplay.Entities.PlayerScripts
             return _moveInput;
         }
 
+        public override void StartAttack()
+        {
+            TryMelee();
+        }
+
         public override float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
             float turnSpeed = base.GetTurnSpeed(currentRotation, targetRotation);
