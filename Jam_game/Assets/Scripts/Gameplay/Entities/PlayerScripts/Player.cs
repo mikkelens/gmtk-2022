@@ -1,14 +1,12 @@
 using UnityEngine;
 
-namespace Gameplay.Entities.Player
+namespace Gameplay.Entities.PlayerScripts
 {
-    public partial class PlayerController : CombatEntity // main
+    public partial class Player : CombatEntity // main
     {
         [SerializeField] private float aimTurnSpeedBonus = 2f;
-        
-        // player input is set in partial class "Player2D.Input.cs"
 
-        // movement is decided by input
+        // movement is decided by input set in "Player.Input.cs"
         public override Vector2 GetTargetLookDirection()
         {
             if (IsAiming) return _aimInput;

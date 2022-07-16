@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Gameplay.Entities.Player
+namespace Gameplay.Entities.PlayerScripts
 {
-    public partial class PlayerController // input receiving
+    public partial class Player // input receiving
     {
         private Vector2 _moveInput;
         private bool IsMoving => _moveInput.magnitude > 0.0f;
@@ -29,7 +29,7 @@ namespace Gameplay.Entities.Player
             // Debug.Log($"Move input: {input}");
         }
 
-        public void SetAimInput(Vector2 input, bool fromController = false)
+        public void SetAimInput(Vector2 input, bool fromController)
         {
             _aimInput = input;
             _lastAimWasController = fromController;

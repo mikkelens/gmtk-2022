@@ -1,11 +1,10 @@
-using System;
-using Gameplay.Entities.Player;
 using Management;
 using UnityEngine;
 
 namespace Gameplay.Entities
 {
     // Hittable (static) thing. think minecraft armor stand.
+    [RequireComponent(typeof(Collider))]
     public class Entity : MonoBehaviour
     {
         // base settings

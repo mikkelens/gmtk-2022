@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using Gameplay.Entities.Player;
+using Gameplay.Entities.PlayerScripts;
 using Management;
 using Tools;
 using UnityEngine;
@@ -21,7 +21,7 @@ namespace Input
         private GameManager _gameManager;
         
         private InputSettings _settings;
-        private PlayerController _player;
+        private Player _player;
         private Camera _camera;
 
         private void Awake()
@@ -82,10 +82,11 @@ namespace Input
         private void Aim(InputAction.CallbackContext ctx, bool controller)
         {
             // todo: get scheme and check instead of hardcoding
-            // Vector2 aimInput = ctx.ReadValue<Vector2>();
             // InputControlScheme kbm = _settings.KBMScheme;
             
-            _player.SetAimInput(ctx.ReadValue<Vector2>(), controller);
+            Vector2 aimInput = ctx.ReadValue<Vector2>();
+            if (!controller) aimInput = aimInput.ScreenToCenter();
+            _player.SetAimInput(aimInput, controller);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Gameplay.Entities.Player;
-using Sirenix.OdinInspector;
+﻿using Gameplay.Entities.PlayerScripts;
 using Tools;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ namespace Gameplay.Entities.Enemies
 {
     public class Enemy : CombatEntity
     {
-        protected PlayerController Player;
+        protected Player Player;
         
         private Vector2 _velocity;
 
@@ -25,12 +24,11 @@ namespace Gameplay.Entities.Enemies
             return (playerPos - pos).normalized;
         }
 
-        private void OnTriggerEnter(Collider other)
+        public override void OnEntityContact(Entity entity) // filter contact to only be player
         {
-            PlayerController player = other.GetComponent<PlayerController>();
+            Player player = entity as Player;
             if (player == null) return;
-            
-            player.TakeHit(damage, Vector2.zero);
+            HitOther(player);
         }
     }
 }
