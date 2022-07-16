@@ -85,7 +85,6 @@ namespace Input
             // InputControlScheme kbm = _settings.KBMScheme;
             
             Vector2 aimInput = ctx.ReadValue<Vector2>();
-            if (!controller) aimInput = aimInput.ScreenToCenter();
             _player.SetAimInput(aimInput, controller);
         }
     }
