@@ -27,6 +27,9 @@ ModelImporter:
   - first:
       74: 1742920493076204898
     second: Armature|Charge (1)
+  - first:
+      74: 2793598908781861908
+    second: Armature|WalkingLeft
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -57,11 +60,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|Charge (1)
-      takeName: Armature|Charge
+      name: Armature|WalkingLeft
+      takeName: Armature|WalkingLeft
       internalID: 0
       firstFrame: 0
-      lastFrame: 124
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
