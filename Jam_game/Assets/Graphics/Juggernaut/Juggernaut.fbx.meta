@@ -1,23 +1,23 @@
 fileFormatVersion: 2
-guid: 93a9a03cd4352b845bbe446b59df10e5
+guid: bf2eb52427d37f543ab68918775be4e4
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      74: -4027593636658614796
-    second: Armature|Bite
+      74: 4781951162920444690
+    second: Armature|ArmatureAction
+  - first:
+      74: 4723146814002874508
+    second: Armature|Attack
   - first:
       74: -982115091633673366
     second: Armature|Death
   - first:
-      74: 7339741916750824102
-    second: Armature|Hop
+      74: -2108476173976532896
+    second: Armature|Walking.001
   - first:
-      74: -784423651609411177
-    second: Armature|Death (1)
-  - first:
-      74: 4603959483039676548
-    second: Armature|Hop (1)
+      74: 1134178767066498838
+    second: Armature|Walking.001 (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -48,8 +48,37 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|Hop (1)
-      takeName: Armature|Hop
+      name: Armature|ArmatureAction
+      takeName: Armature|ArmatureAction
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Attack
+      takeName: Armature|Attack
       internalID: 0
       firstFrame: 0
       lastFrame: 30
@@ -81,7 +110,7 @@ ModelImporter:
       takeName: Armature|Death
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -106,8 +135,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Hop
-      takeName: Armature|Hop
+      name: Armature|Walking.001
+      takeName: Armature|Walking.001
       internalID: 0
       firstFrame: 0
       lastFrame: 30
