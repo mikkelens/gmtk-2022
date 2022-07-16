@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3938361412759589975}
+  - {fileID: 6788554742205905066}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4871413564851cf4da16e7f47447745f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToTurn: 0
   maxSpeed: 5
   walkAccelSpeed: 65
   stopBonus: 3
@@ -62,7 +63,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &3543602469472400316
+--- !u!1001 &6467015061969084225
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -129,11 +130,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Protag
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c65911f3c28bfb1448cfa9d50d9d54d8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f3b2d768dda6cf418dd411134ef6fd4, type: 3}
---- !u!4 &3938361412759589975 stripped
+--- !u!4 &6788554742205905066 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
     type: 3}
-  m_PrefabInstance: {fileID: 3543602469472400316}
+  m_PrefabInstance: {fileID: 6467015061969084225}
   m_PrefabAsset: {fileID: 0}
