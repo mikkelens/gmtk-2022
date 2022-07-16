@@ -1,10 +1,19 @@
+using Gameplay.Entities.Base;
 using UnityEngine;
 
 namespace Gameplay.Entities.PlayerScripts
 {
+    [Tooltip("Player: This is the player script. It also derives from entity scripts.")]
     public partial class Player : CombatEntity // main
     {
+        public static Player Instance;
+        
         [SerializeField] private float aimTurnSpeedBonus = 2f;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         // movement is decided by input set in "Player.Input.cs"
         public override Vector2 GetTargetLookDirection()

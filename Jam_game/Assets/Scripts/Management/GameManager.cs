@@ -1,16 +1,16 @@
 ﻿using System;
 using Gameplay.Entities.PlayerScripts;
 using Input;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Management
 {
+    [DefaultExecutionOrder(-10)]
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
         
-        [SerializeField, Required] public Player player; // player in scene. input needs this reference.
+        public Player player; // player in scene. input needs this reference.
 
         private InputController _inputController;
         private int _killCount;
@@ -22,6 +22,7 @@ namespace Management
 
         private void Start()
         {
+            player = Player.Instance;
             _inputController = InputController.Instance;
             if (_inputController == null) throw new Exception("InputManager is missing. Player input cannot be read.");
         }

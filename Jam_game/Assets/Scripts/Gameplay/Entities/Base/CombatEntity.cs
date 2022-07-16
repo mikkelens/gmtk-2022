@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Gameplay.Entities
+namespace Gameplay.Entities.Base
 {
-    // This can hit other entites. think minecraft mob.
+    [Tooltip("Combat Entity: This can hit other entites. Give it a trigger collder if you want it to attack.")]
     public class CombatEntity : MovableEntity
     {
         [SerializeField] protected int damage = 1;

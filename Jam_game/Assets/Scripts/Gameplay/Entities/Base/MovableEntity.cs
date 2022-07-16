@@ -2,9 +2,10 @@
 using Tools;
 using UnityEngine;
 
-namespace Gameplay.Entities
+namespace Gameplay.Entities.Base
 {
-    // This entity can move around on its own. Think minecraft villager or boat.
+    [Tooltip("Movable Entity: This entity can move around on its own. Think minecraft villager or boat.")]
+    [RequireComponent(typeof(Rigidbody))]
     public class MovableEntity : Entity
     {
         // moving

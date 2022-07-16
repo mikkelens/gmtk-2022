@@ -1,14 +1,17 @@
-﻿using Gameplay.Entities.PlayerScripts;
+﻿using Gameplay.Entities.Base;
+using Gameplay.Entities.PlayerScripts;
 using Tools;
 using UnityEngine;
 
 namespace Gameplay.Entities.Enemies
 {
+    [Tooltip("Enemy: Acts like a hostile minecraft mob, will search for player and attack.")]
     public class Enemy : CombatEntity
     {
-        protected Player Player;
+        [Tooltip("Relative to other enemies of the same wave.")]
+        [SerializeField] public float relativeSpawnChance = 1f;
         
-        private Vector2 _velocity;
+        protected Player Player;
 
         public override void Start()
         {

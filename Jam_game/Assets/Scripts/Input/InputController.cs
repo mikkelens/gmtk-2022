@@ -1,8 +1,7 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Gameplay.Entities.PlayerScripts;
 using Management;
-using Tools;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,11 +9,24 @@ namespace Input
 {
     public class InputController : MonoBehaviour
     {
+        [ShowIf("@cursorSprite == null")]
         [SerializeField] private Texture2D cursorTexture;
+        [ShowIf("@cursorTexture == null")]
+        [SerializeField] private Sprite cursorSprite;
 
         private void OnApplicationFocus(bool hasFocus)
         {
-            Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+            Texture2D cursor;
+            if (cursorTexture != null)
+            {
+                cursor = cursorTexture;
+            }
+            else if (cursorSprite.texture)
+            {
+                cursor = cursorSprite.texture;
+            }
+            else return;
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
         }
 
         public static InputController Instance;
