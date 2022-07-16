@@ -51,7 +51,7 @@ MonoBehaviour:
   maxSpeed: 7
   walkAccelSpeed: 40
   stopBonus: 0.5
-  maxTurnSpeed: 7.5
+  maxTurnSpeed: 10
   turnSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -77,7 +77,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   freezeAffectsRotation: 0
-  aimTurnSpeedBonus: 6
+  damage: 1
+  knockbackStrength: 1.5
+  aimTurnSpeedBonus: 2.5
 --- !u!65 &5837976767361439941
 BoxCollider:
   m_ObjectHideFlags: 0
