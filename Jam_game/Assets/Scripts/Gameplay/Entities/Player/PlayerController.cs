@@ -1,17 +1,16 @@
-using Tools;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Entities.Player
 {
-    public partial class Player2D : MonoBehaviour // main
+    public partial class PlayerController : Entity // main
     {
-        [SerializeField] private float turnSpeed; // in angles per second
+        [SerializeField] private float maxTurnSpeed; // in angles per second
+        [SerializeField] private AnimationCurve turnSpeedCurve; // changes the turn speed dynamically
         [SerializeField] private float maxSpeed = 5f;
         [SerializeField] private float walkAccelSpeed = 65f;
         [SerializeField] private float stopBonus = 3f;
 
         private Transform _transform;
-        private Animator _animator;
         private Vector2 _velocity; // on the topdown plane view
     
         // player input, set in partial class "Player2D.Input.cs"
@@ -19,10 +18,11 @@ namespace Gameplay
         private Vector2 _lookInput; // moveInput, but not affected by letting go of input
         private Vector2 _aimInput;
 
-        private void Start()
+        public override void Start()
         {
+            base.Start(); // entity
+            
             _transform = transform;
-            _animator = GetComponentInChildren<Animator>();
             _velocity = Vector2.zero;
             _lookInput = Vector2.down;
         }
@@ -32,5 +32,10 @@ namespace Gameplay
             UpdateMovement();
         }
 
+        public override void KillThis()
+        {
+            Debug.Log("Player was killed!");
+            _animator.SetTrigger("Death");
+        }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Tools;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Entities.Player
 {
-    public partial class Player2D // movement
+    public partial class PlayerController // movement
     {
         private void UpdateMovement()
         {
@@ -31,8 +31,12 @@ namespace Gameplay
 
         private void TurnTowardsWorldDirection(Vector3 direction)
         {
+            Quaternion currentRotation = _transform.rotation;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            _transform.rotation = Quaternion.RotateTowards(_transform.rotation, targetRotation, turnSpeed * 180 * Time.deltaTime);
+            float tFromAngle = Quaternion.Angle(currentRotation, targetRotation) / 180f; // 180 is max possible angle
+            float dynamicTurnSpeed = turnSpeedCurve.Evaluate(1f - tFromAngle) * maxTurnSpeed * 180f;
+            Quaternion newRotation = Quaternion.RotateTowards(currentRotation, targetRotation, dynamicTurnSpeed * Time.deltaTime);
+            _transform.rotation = newRotation;
         }
     }
 }

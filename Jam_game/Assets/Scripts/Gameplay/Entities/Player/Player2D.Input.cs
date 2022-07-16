@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Entities.Player
 {
-    public partial class Player2D // input receiving
+    public partial class PlayerController // input receiving
     {
 
         public void SetMoveInput(Vector2 input)

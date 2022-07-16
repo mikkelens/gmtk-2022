@@ -1,17 +1,18 @@
 ﻿using System;
+using Gameplay.Entities.Player;
 using Input;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Gameplay
+namespace Management
 {
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
         
-        [SerializeField, Required] public Player2D player; // player in scene. input needs this reference.
+        [SerializeField, Required] public PlayerController player; // player in scene. input needs this reference.
 
-        private InputManager _inputManager;
+        private InputController _inputController;
         private int _killCount;
         
         private void Awake()
@@ -21,8 +22,8 @@ namespace Gameplay
 
         private void Start()
         {
-            _inputManager = InputManager.Instance;
-            if (_inputManager == null) throw new Exception("InputManager is missing. Player input cannot be read.");
+            _inputController = InputController.Instance;
+            if (_inputController == null) throw new Exception("InputManager is missing. Player input cannot be read.");
         }
 
         private void AddKillStatistic(int number = 1)
