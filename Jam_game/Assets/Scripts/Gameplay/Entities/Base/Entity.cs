@@ -1,9 +1,9 @@
 using Management;
 using UnityEngine;
 
-namespace Gameplay.Entities
+namespace Gameplay.Entities.Base
 {
-    // Hittable (static) thing. think minecraft armor stand.
+    [Tooltip("Entity: Hittable thing. think minecraft armor stand.")]
     [RequireComponent(typeof(Collider))]
     public class Entity : MonoBehaviour
     {
@@ -19,13 +19,14 @@ namespace Gameplay.Entities
         protected Animator Animator;
 
         // health status
-        protected bool Alive => Health > 0;
+        public bool Alive => Health > 0;
         protected int Health;
         
         public virtual void Start()
         {
             Transform = transform;
             Animator = GetComponentInChildren<Animator>();
+            if (Animator == null) Debug.LogWarning($"No animator component found on entity '{name}'");
             
             Manager = GameManager.Instance;
             

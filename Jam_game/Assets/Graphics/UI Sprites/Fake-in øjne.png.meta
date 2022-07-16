@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0c4f409210fb5fb41b6c2f242d42a4cc
+guid: 13e78c34a3687b544bdf58c06e69aad7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cursors_0
+      name: "Fake-in \xF8jne_0"
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 16
-        height: 16
+        x: 0
+        y: 95
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fb689052fd39234ebb0f27158104026
-      internalID: 85372197
+      spriteID: 3a52a677786bacf4cb7f49851844f5cc
+      internalID: 1952424781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cursors_1
+      name: "Fake-in \xF8jne_1"
       rect:
         serializedVersion: 2
-        x: 18
-        y: 1
-        width: 16
-        height: 16
+        x: 0
+        y: 76
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b086721a2b87f884597c0f2494a3da77
-      internalID: 1999360085
+      spriteID: 0a96afdcbcd74f94693a1a9625a9ef51
+      internalID: 1055682423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cursors_2
+      name: "Fake-in \xF8jne_2"
       rect:
         serializedVersion: 2
-        x: 35
-        y: 1
-        width: 16
-        height: 16
+        x: 0
+        y: 57
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,8 +160,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1caf79747852a84eb04ddc8d3e6b0a1
-      internalID: -101440467
+      spriteID: fd27f8e701a5a9642872c7aea6e5e506
+      internalID: -1835230901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Fake-in \xF8jne_3"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 38
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dd74df8806655a4bb63126abf67e07f
+      internalID: -497359526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Fake-in \xF8jne_4"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 19
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d9b30fd59363a74692d4905b2e48da8
+      internalID: 169796426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Fake-in \xF8jne_5"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 524b14583224cae4a89ff63e61c15727
+      internalID: -1830297978
       vertices: []
       indices: 
       edges: []
@@ -169,7 +232,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f2b053c195238c2409410a59c018f41a
+    spriteID: fd87898b63aa6ae4384a38b0a87bdf57
     internalID: 0
     vertices: []
     indices: 
@@ -177,9 +240,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Cursors_2: -101440467
-      Cursors_0: 85372197
-      Cursors_1: 1999360085
+      "Fake-in \xF8jne_2": -1835230901
+      "Fake-in \xF8jne_4": 169796426
+      "Fake-in \xF8jne_3": -497359526
+      "Fake-in \xF8jne_1": 1055682423
+      "Fake-in \xF8jne_5": -1830297978
+      "Fake-in \xF8jne_0": 1952424781
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

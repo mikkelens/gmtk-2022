@@ -2,9 +2,10 @@
 using Tools;
 using UnityEngine;
 
-namespace Gameplay.Entities
+namespace Gameplay.Entities.Base
 {
-    // This entity can move around on its own. Think minecraft villager or boat.
+    [Tooltip("Movable Entity: This entity can move around on its own. Think minecraft villager or boat.")]
+    [RequireComponent(typeof(Rigidbody))]
     public class MovableEntity : Entity
     {
         // moving
@@ -17,23 +18,28 @@ namespace Gameplay.Entities
         [SerializeField] protected AnimationCurve turnSpeedCurve; // changes the turn speed dynamically
 
         // misc
-        [SerializeField] protected bool freezeAffectsRotation = false;
+        [SerializeField] protected bool freezeAffectsRotation;
 
-        [Button]
-        public void FreezeEntity(bool freeze)
-        {
-            IsFrozen = freeze;
-        }
-        
+        [ButtonGroup("FreezeButtons")]
+        [HideIf("@IsFrozen")]
+        [Button("Freeze")] public void FreezeEntity() => IsFrozen = true;
+        [ButtonGroup("FreezeButtons")]
+        [HideIf("@!IsFrozen")]
+        [Button("Unfreeze")] public void UnfreezeEntity() => IsFrozen = false;
+
+        protected bool Stopping;
         protected bool IsFrozen;
         protected Vector2 PreviousLookDirection;
         protected Vector2 Velocity; // on the topdown plane view
+        
+        protected bool CanMove => !IsFrozen && !Stopping;
+        protected bool CanRotate => !IsFrozen || !freezeAffectsRotation;
 
         public override void Start()
         {
             base.Start();
-            
-            PreviousLookDirection = Vector2.down;
+            Stopping = false;
+            PreviousLookDirection = Vector2.down; // looking down by default
         }
 
         public override void Update()
@@ -48,7 +54,7 @@ namespace Gameplay.Entities
             TurnTowardsLookDirection();
 
             // Update velocity from goal/player/input
-            Vector2 targetVelocity = IsFrozen ? Vector2.zero : GetTargetMoveDirection() * maxSpeed;;
+            Vector2 targetVelocity = CanMove ? GetTargetMoveDirection() * maxSpeed : Vector2.zero;
             Velocity = Vector2.MoveTowards(Velocity, targetVelocity, GetAcceleration() * Time.deltaTime);;
             MoveByWorldVelocity(Velocity.PlaneToWorld());
             
@@ -67,7 +73,7 @@ namespace Gameplay.Entities
         
         public virtual void TurnTowardsLookDirection()
         {
-            if (IsFrozen && freezeAffectsRotation) return;
+            if (!CanRotate) return;
             Vector2 direction = GetTargetLookDirection();
             if (direction.magnitude == 0f) return;
             Quaternion currentRotation = Transform.rotation; // rotations are in world space
@@ -84,8 +90,7 @@ namespace Gameplay.Entities
             float dynamicTurnSpeed = turnSpeedCurve.Evaluate(1f - tFromAngle) * 180;
             return dynamicTurnSpeed * maxTurnSpeed;
         }
-
-
+        
         public virtual float GetAcceleration()
         {
             float likeness = Vector2.Dot(Velocity.normalized, GetTargetMoveDirection().normalized);

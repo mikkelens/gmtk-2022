@@ -1,16 +1,14 @@
 ﻿using System;
 using Gameplay.Entities.PlayerScripts;
 using Input;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Management
 {
+    [DefaultExecutionOrder(-10)]
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
-        
-        [SerializeField, Required] public Player player; // player in scene. input needs this reference.
 
         private InputController _inputController;
         private int _killCount;
