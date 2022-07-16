@@ -23,7 +23,7 @@ namespace Gameplay
         
             _manager = GameManager.Instance;
             if (_manager == null) throw new UnityException("No game manager in scene.");
-            _player = _manager.player;
+            _player = Player.Instance;
             if (_player == null) throw new UnityException("No player in scene.");
         }
 

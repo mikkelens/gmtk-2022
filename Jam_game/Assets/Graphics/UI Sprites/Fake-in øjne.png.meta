@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bee912a77cf880a4bad368c0c918f281
+guid: 13e78c34a3687b544bdf58c06e69aad7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 54
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HealthSprites_0
+      name: "Fake-in \xF8jne_0"
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 28
-        height: 27
+        x: 0
+        y: 95
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf1ca41daef7a574f8245032813e7df4
-      internalID: 1044289118
+      spriteID: 3a52a677786bacf4cb7f49851844f5cc
+      internalID: 1952424781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthSprites_1
+      name: "Fake-in \xF8jne_1"
       rect:
         serializedVersion: 2
-        x: 30
-        y: 1
-        width: 28
-        height: 27
+        x: 0
+        y: 76
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e5b066a6f2c22d43a297305a3d39512
-      internalID: -1066658949
+      spriteID: 0a96afdcbcd74f94693a1a9625a9ef51
+      internalID: 1055682423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthSprites_2
+      name: "Fake-in \xF8jne_2"
       rect:
         serializedVersion: 2
-        x: 59
-        y: 1
-        width: 28
-        height: 27
+        x: 0
+        y: 57
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfd0f0e5d78a60f418d2b640f21c725c
-      internalID: -1218094672
+      spriteID: fd27f8e701a5a9642872c7aea6e5e506
+      internalID: -1835230901
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthSprites_3
+      name: "Fake-in \xF8jne_3"
       rect:
         serializedVersion: 2
-        x: 88
-        y: 1
-        width: 28
-        height: 27
+        x: 0
+        y: 38
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77fe977c49034a2499e92d97a79d5b19
-      internalID: 245185144
+      spriteID: 6dd74df8806655a4bb63126abf67e07f
+      internalID: -497359526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthSprites_4
+      name: "Fake-in \xF8jne_4"
       rect:
         serializedVersion: 2
-        x: 117
-        y: 1
-        width: 28
-        height: 27
+        x: 0
+        y: 19
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a32ae81d268e734f8e369b6a67bbfb9
-      internalID: 881597000
+      spriteID: 2d9b30fd59363a74692d4905b2e48da8
+      internalID: 169796426
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthSprites_5
+      name: "Fake-in \xF8jne_5"
       rect:
         serializedVersion: 2
-        x: 146
-        y: 1
-        width: 28
-        height: 27
+        x: 0
+        y: 0
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,113 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0811df8f3c02ec148afc6abede63b7ea
-      internalID: -583798418
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HealthSprites_6
-      rect:
-        serializedVersion: 2
-        x: 175
-        y: 1
-        width: 28
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc26d663c954f9d4886fbc11fa8bfb49
-      internalID: -1893464036
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HealthSprites_7
-      rect:
-        serializedVersion: 2
-        x: 204
-        y: 1
-        width: 28
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78485fdcd2c616845a295bd3e9787f4f
-      internalID: 1814189441
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HealthSprites_8
-      rect:
-        serializedVersion: 2
-        x: 233
-        y: 1
-        width: 28
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a9eb86f2bc695d4f805c3f8ccb5d9f2
-      internalID: -231436681
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HealthSprites_9
-      rect:
-        serializedVersion: 2
-        x: 262
-        y: 1
-        width: 28
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a98614b49f19b614588044693968e2a5
-      internalID: 310899889
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HealthSprites_10
-      rect:
-        serializedVersion: 2
-        x: 291
-        y: 1
-        width: 28
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 965472b9a88a51f4cb6500d2582028e3
-      internalID: -121514970
+      spriteID: 524b14583224cae4a89ff63e61c15727
+      internalID: -1830297978
       vertices: []
       indices: 
       edges: []
@@ -337,7 +232,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8dfef65ae18c0dd47a806b92bd55c68b
+    spriteID: fd87898b63aa6ae4384a38b0a87bdf57
     internalID: 0
     vertices: []
     indices: 
@@ -345,17 +240,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HealthSprites_4: 881597000
-      HealthSprites_5: -583798418
-      HealthSprites_1: -1066658949
-      HealthSprites_10: -121514970
-      HealthSprites_0: 1044289118
-      HealthSprites_9: 310899889
-      HealthSprites_7: 1814189441
-      HealthSprites_2: -1218094672
-      HealthSprites_6: -1893464036
-      HealthSprites_8: -231436681
-      HealthSprites_3: 245185144
+      "Fake-in \xF8jne_2": -1835230901
+      "Fake-in \xF8jne_4": 169796426
+      "Fake-in \xF8jne_3": -497359526
+      "Fake-in \xF8jne_1": 1055682423
+      "Fake-in \xF8jne_5": -1830297978
+      "Fake-in \xF8jne_0": 1952424781
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

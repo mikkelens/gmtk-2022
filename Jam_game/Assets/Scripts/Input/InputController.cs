@@ -21,7 +21,7 @@ namespace Input
             {
                 cursor = cursorTexture;
             }
-            else if (cursorSprite.texture)
+            else if (cursorSprite != null)
             {
                 cursor = cursorSprite.texture;
             }
@@ -69,7 +69,7 @@ namespace Input
 
         private void SetPlayerBinds()
         {
-            _player = _gameManager.player;
+            _player = Player.Instance;
             if (_player == null) throw new UnityException("No player on gamemanager.");
             
             // movement //

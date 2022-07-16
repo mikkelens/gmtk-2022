@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bee912a77cf880a4bad368c0c918f281
+guid: 8183707ae4f6f7044b056ce8880b0a6b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 54
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HealthSprites_0
+      name: HeartBeatingSpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 28
-        height: 27
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf1ca41daef7a574f8245032813e7df4
-      internalID: 1044289118
+      spriteID: bda144351b92d344da6a6eee09832d0a
+      internalID: 194264751
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthSprites_1
+      name: HeartBeatingSpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 30
-        y: 1
-        width: 28
-        height: 27
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e5b066a6f2c22d43a297305a3d39512
-      internalID: -1066658949
+      spriteID: 62e479f6886407c49a8810a39a1bfa84
+      internalID: -1308728078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthSprites_2
+      name: HeartBeatingSpriteSheet_2
       rect:
         serializedVersion: 2
-        x: 59
-        y: 1
-        width: 28
-        height: 27
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfd0f0e5d78a60f418d2b640f21c725c
-      internalID: -1218094672
+      spriteID: e4cd84b9004a51747b5033e3f1d77518
+      internalID: 1077555882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthSprites_3
+      name: HeartBeatingSpriteSheet_3
       rect:
         serializedVersion: 2
-        x: 88
-        y: 1
-        width: 28
-        height: 27
+        x: 96
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77fe977c49034a2499e92d97a79d5b19
-      internalID: 245185144
+      spriteID: f83298bb9bc1df541b62b211bb85e156
+      internalID: -1174979940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthSprites_4
+      name: HeartBeatingSpriteSheet_4
       rect:
         serializedVersion: 2
-        x: 117
-        y: 1
-        width: 28
-        height: 27
+        x: 128
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a32ae81d268e734f8e369b6a67bbfb9
-      internalID: 881597000
+      spriteID: 53053fee8eac8cb46a89e25d2c083ba4
+      internalID: -1449724283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthSprites_5
+      name: HeartBeatingSpriteSheet_5
       rect:
         serializedVersion: 2
-        x: 146
-        y: 1
-        width: 28
-        height: 27
+        x: 160
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,113 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0811df8f3c02ec148afc6abede63b7ea
-      internalID: -583798418
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HealthSprites_6
-      rect:
-        serializedVersion: 2
-        x: 175
-        y: 1
-        width: 28
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc26d663c954f9d4886fbc11fa8bfb49
-      internalID: -1893464036
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HealthSprites_7
-      rect:
-        serializedVersion: 2
-        x: 204
-        y: 1
-        width: 28
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78485fdcd2c616845a295bd3e9787f4f
-      internalID: 1814189441
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HealthSprites_8
-      rect:
-        serializedVersion: 2
-        x: 233
-        y: 1
-        width: 28
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a9eb86f2bc695d4f805c3f8ccb5d9f2
-      internalID: -231436681
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HealthSprites_9
-      rect:
-        serializedVersion: 2
-        x: 262
-        y: 1
-        width: 28
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a98614b49f19b614588044693968e2a5
-      internalID: 310899889
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HealthSprites_10
-      rect:
-        serializedVersion: 2
-        x: 291
-        y: 1
-        width: 28
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 965472b9a88a51f4cb6500d2582028e3
-      internalID: -121514970
+      spriteID: 89b25991c28207a409e61c9601a6f234
+      internalID: 1081230868
       vertices: []
       indices: 
       edges: []
@@ -337,7 +232,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8dfef65ae18c0dd47a806b92bd55c68b
+    spriteID: 401a9444402ae5a448cc1c4572125535
     internalID: 0
     vertices: []
     indices: 
@@ -345,17 +240,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HealthSprites_4: 881597000
-      HealthSprites_5: -583798418
-      HealthSprites_1: -1066658949
-      HealthSprites_10: -121514970
-      HealthSprites_0: 1044289118
-      HealthSprites_9: 310899889
-      HealthSprites_7: 1814189441
-      HealthSprites_2: -1218094672
-      HealthSprites_6: -1893464036
-      HealthSprites_8: -231436681
-      HealthSprites_3: 245185144
+      HeartBeatingSpriteSheet_5: 1081230868
+      HeartBeatingSpriteSheet_0: 194264751
+      HeartBeatingSpriteSheet_1: -1308728078
+      HeartBeatingSpriteSheet_2: 1077555882
+      HeartBeatingSpriteSheet_4: -1449724283
+      HeartBeatingSpriteSheet_3: -1174979940
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

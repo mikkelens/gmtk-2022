@@ -16,7 +16,7 @@ namespace Gameplay.Entities.Enemies
         public override void Start()
         {
             base.Start();
-            Player = Manager.player;
+            Player = Player.Instance;
         }
 
         public override Vector2 GetTargetMoveDirection()

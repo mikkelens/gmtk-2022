@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246dcabbb87c4a9cbed05f7e786bbb55, type: 3}
   m_Name: GenericWave
   m_EditorClassIdentifier: 
+  spawnDelay: 2
   waveTime: 30
-  enemiesToSpawn:
+  enemyPrefabsToSpawn:
   - {fileID: 0}
