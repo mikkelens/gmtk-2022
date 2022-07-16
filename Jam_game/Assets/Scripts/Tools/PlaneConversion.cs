@@ -15,5 +15,12 @@ namespace Tools
             return new Vector2(vector3.x, vector3.z);
         }
     #endregion
+
+    #region Screen/Mouse conversions
+        public static Vector2 ScreenToCenter(this Vector2 screenPos)
+        {
+            return Camera.main!.ScreenToViewportPoint(screenPos) - Vector3.one * 0.5f;
+        }
+    #endregion
     }
 }

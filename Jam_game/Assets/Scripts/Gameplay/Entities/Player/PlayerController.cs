@@ -2,40 +2,36 @@ using UnityEngine;
 
 namespace Gameplay.Entities.Player
 {
-    public partial class PlayerController : Entity // main
+    public partial class PlayerController : CombatEntity // main
     {
-        [SerializeField] private float maxTurnSpeed; // in angles per second
-        [SerializeField] private AnimationCurve turnSpeedCurve; // changes the turn speed dynamically
-        [SerializeField] private float maxSpeed = 5f;
-        [SerializeField] private float walkAccelSpeed = 65f;
-        [SerializeField] private float stopBonus = 3f;
+        [SerializeField] private float aimTurnSpeedBonus = 2f;
+        
+        // player input is set in partial class "Player2D.Input.cs"
 
-        private Transform _transform;
-        private Vector2 _velocity; // on the topdown plane view
-    
-        // player input, set in partial class "Player2D.Input.cs"
-        private Vector2 _moveInput;
-        private Vector2 _lookInput; // moveInput, but not affected by letting go of input
-        private Vector2 _aimInput;
-
-        public override void Start()
+        // movement is decided by input
+        public override Vector2 GetTargetLookDirection()
         {
-            base.Start(); // entity
-            
-            _transform = transform;
-            _velocity = Vector2.zero;
-            _lookInput = Vector2.down;
+            if (IsAiming) return _aimInput;
+            if (IsMoving) return base.GetTargetLookDirection(); // updates look direction
+            return PreviousLookDirection; // use previous look (aim) direction
+        }
+        public override Vector2 GetTargetMoveDirection()
+        {
+            return _moveInput;
         }
 
-        private void Update() // set visuals and use input here
+        public override float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
-            UpdateMovement();
+            float turnSpeed = base.GetTurnSpeed(currentRotation, targetRotation);
+            if (IsAiming) turnSpeed += turnSpeed * aimTurnSpeedBonus;
+            return turnSpeed;
         }
 
         public override void KillThis()
         {
+            base.KillThis();
+            
             Debug.Log("Player was killed!");
-            _animator.SetTrigger("Death");
         }
     }
 }

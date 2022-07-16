@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df91920b11d4b7aa0bf901f87de6b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useControllerAim: 0
+  cursorTexture: {fileID: 0}
 --- !u!4 &778994658
 Transform:
   m_ObjectHideFlags: 0
@@ -708,6 +708,16 @@ PrefabInstance:
         type: 3}
       propertyPath: timeToTurn
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878274257355413773, guid: ca43ebe7a26511a4c97a9e7cee3148d6,
+        type: 3}
+      propertyPath: maxTurnSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878274257355413773, guid: ca43ebe7a26511a4c97a9e7cee3148d6,
+        type: 3}
+      propertyPath: aimTurnSpeedBonus
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5803101248550375043, guid: ca43ebe7a26511a4c97a9e7cee3148d6,
         type: 3}

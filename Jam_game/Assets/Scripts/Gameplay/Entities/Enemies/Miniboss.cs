@@ -1,4 +1,4 @@
-﻿namespace Gameplay.Entities
+﻿namespace Gameplay.Entities.Enemies
 {
     public class Miniboss : Enemy
     {
