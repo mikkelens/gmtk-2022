@@ -614,7 +614,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee4e4a2fb8e4c0bb448226e984042b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1069557574}
 --- !u!114 &778994657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,6 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 0}
+  cursorSprite: {fileID: 0}
 --- !u!4 &778994658
 Transform:
   m_ObjectHideFlags: 0
@@ -692,18 +692,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1069557574 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4878274257355413773, guid: ca43ebe7a26511a4c97a9e7cee3148d6,
-    type: 3}
-  m_PrefabInstance: {fileID: 3543602469535511550}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4871413564851cf4da16e7f47447745f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1556673523
 GameObject:
   m_ObjectHideFlags: 0
