@@ -1,16 +1,16 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using Gameplay;
+﻿using System.Diagnostics.CodeAnalysis;
+using Gameplay.Entities.Player;
+using Management;
 using UnityEngine;
 
 namespace Input
 {
-    public class InputManager : MonoBehaviour
+    public class InputController : MonoBehaviour
     {
         // testing
         public bool useControllerAim = false;
         
-        public static InputManager Instance;
+        public static InputController Instance;
         private GameManager _gameManager;
         
         private InputSettings _settings;
@@ -44,7 +44,7 @@ namespace Input
 
         private void SetPlayerBinds()
         {
-            Player2D player = _gameManager.player;
+            PlayerController player = _gameManager.player;
             if (player == null) throw new UnityException("No player on gamemanager.");
             // movement //
             // move
