@@ -1,5 +1,5 @@
 ﻿using System;
-using Gameplay.Entities.Player;
+using Gameplay.Entities.PlayerScripts;
 using Input;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -10,7 +10,7 @@ namespace Management
     {
         public static GameManager Instance;
         
-        [SerializeField, Required] public PlayerController player; // player in scene. input needs this reference.
+        [SerializeField, Required] public Player player; // player in scene. input needs this reference.
 
         private InputController _inputController;
         private int _killCount;

@@ -1,4 +1,4 @@
-using Gameplay.Entities.Player;
+using Gameplay.Entities.PlayerScripts;
 using Management;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -13,7 +13,7 @@ namespace Gameplay
         [SerializeField] private float followSpeed = 25f;
     
         private GameManager _manager;
-        private PlayerController _player;
+        private Player _player;
     
         private Vector3 _offset;
     
