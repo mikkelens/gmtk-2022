@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Tools;
+using UnityEngine;
 
 namespace Gameplay.Entities.PlayerScripts
 {
@@ -10,11 +11,25 @@ namespace Gameplay.Entities.PlayerScripts
         private bool _holdingThrow;
         private bool _holdingMelee;
         private bool _lastAimWasController;
-        private Vector2 _aimInput;
         private bool AimCounts => _lastAimWasController || _holdingThrow;
-        private bool IsAiming => _aimInput.magnitude > 0.0f && AimCounts;
-        
-        
+        private bool IsAiming => AimInput.magnitude > 0.0f && AimCounts;
+
+        private Vector2 _rawAimInput;
+        private Vector2 AimInput
+        {
+            get
+            {
+                Vector2 aimInput = _rawAimInput;
+                if (_lastAimWasController) return aimInput; // controller
+
+                // aimInput = aimInput.ScreenToCenter();
+                Vector2 offset = Transform.position.PositionToScreenPoint();
+                aimInput = (aimInput - offset).ScreenToViewportPoint();
+                return aimInput; // mouse
+            }
+        }
+
+
         public void SetMeleeInput(bool pressingMelee)
         {
             _holdingMelee = pressingMelee;
@@ -31,7 +46,7 @@ namespace Gameplay.Entities.PlayerScripts
 
         public void SetAimInput(Vector2 input, bool fromController)
         {
-            _aimInput = input;
+            _rawAimInput = input;
             _lastAimWasController = fromController;
             // Debug.Log($"Aim input: {input}");
         }

@@ -1,9 +1,22 @@
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace Tools
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class PlaneConversion
     {
+    #region Caching
+        private static Camera _main;
+        private static Camera Main
+        {
+            get
+            {
+                if (_main == null) _main = Camera.main;
+                return _main;
+            }
+        }
+    #endregion
 
     #region 3D/2D conversions
         public static Vector3 PlaneToWorld(this Vector2 vector2)
@@ -19,7 +32,15 @@ namespace Tools
     #region Screen/Mouse conversions
         public static Vector2 ScreenToCenter(this Vector2 screenPos)
         {
-            return Camera.main.ScreenToViewportPoint(screenPos) - Vector3.one * 0.5f;
+            return Main.ScreenToViewportPoint(screenPos) - Vector3.one * 0.5f;
+        }
+        public static Vector2 PositionToScreenPoint(this Vector3 position)
+        {
+            return Main.WorldToScreenPoint(position);
+        }
+        public static Vector2 ScreenToViewportPoint(this Vector2 screenPos)
+        {
+            return Main.ScreenToViewportPoint(screenPos);
         }
     #endregion
     }
