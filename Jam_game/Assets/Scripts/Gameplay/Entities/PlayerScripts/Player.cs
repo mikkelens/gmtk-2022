@@ -26,13 +26,13 @@ namespace Gameplay.Entities.PlayerScripts
 
         protected override Vector2 GetTargetMoveDirection()
         {
-            return _moveInput;
+            return _moveInput.normalized;
         }
 
         protected override float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
             float turnSpeed = base.GetTurnSpeed(currentRotation, targetRotation);
-            if (IsAiming) turnSpeed += turnSpeed * myStats.aimTurnSpeedBonus;
+            if (IsAiming) turnSpeed += turnSpeed * stats.aimTurnSpeedBonus;
             return turnSpeed;
         }
 

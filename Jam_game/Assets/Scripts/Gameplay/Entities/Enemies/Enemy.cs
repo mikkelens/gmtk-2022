@@ -16,9 +16,9 @@ namespace Gameplay.Entities.Enemies
         // protected ;
         private float _lastStunTime;
 
-        protected override bool WantsToAttack => Physics.Raycast(AttackRay, myStats.meleeDistance, targetLayerMask);
+        protected override bool WantsToAttack => Physics.Raycast(AttackRay, stats.minAttackAttemptDistance, targetLayerMask);
         protected override bool CanMove => base.CanMove && !IsStunned;
-        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= myStats.stunDuration;
+        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= stats.stunDuration;
         public void SetSpawnOrigin(CombatEvent origin)
         {
             SpawnOrigin = origin;
@@ -38,18 +38,19 @@ namespace Gameplay.Entities.Enemies
             return (playerPos - pos).normalized;
         }
         
-        protected override void StartMelee() // On enemies, attacks are slow animations
+        protected override void StartMelee(Attack attack) // On enemies, attacks are slow animations
         {
-            StartCoroutine(MeleeRoutine());
+            StartCoroutine(MeleeRoutine(attack));
         }
         
-        private IEnumerator MeleeRoutine() // Think dark soulds attack with long chargeup
+        private IEnumerator MeleeRoutine(Attack attack) // Think dark soulds attack with long chargeup
         {
-            Animator.SetBool("Walking", false);
             Stopping = true;
-            yield return new WaitForSeconds(myStats.meleeAttackDelay);
-            TryMelee();
+            Animator.SetBool("Walking", false);
+            yield return new WaitForSeconds(stats.attackChargeTime);
+            TryMelee(attack);
             Animator.SetBool("Walking", true);
+            Stopping = false;
         }
 
         protected virtual void OnCollisionEnter(Collision collision)
@@ -57,26 +58,22 @@ namespace Gameplay.Entities.Enemies
             GameObject other = collision.gameObject;
             
             Entity entity = other.GetComponent<Entity>();
-            if (entity != null) ContactWith(entity);
-        }
-
-        private void ContactWith(Entity entity) // filter contact to only be player
-        {
-            Player player = entity as Player;
-            if (player != null) HitOther(player);
+            if (entity == null) return;
+        
+            Player player = entity as Player; // filter contact to only be player
+            if (player == null) return;
+            player.TakeHit(stats.collisionDamage, -collision.impulse.WorldToPlane() * stats.collisionKnockback);
         }
 
         protected override void ApplyKnockback(Vector2 force)
         {
             base.ApplyKnockback(force);
-            ApplyStun();
+            ApplyEnemyStun();
         }
-
-        private void ApplyStun()
+        private void ApplyEnemyStun()
         {
             _lastStunTime = Time.time;
         }
-
         public override void KillThis()
         {
             base.KillThis();

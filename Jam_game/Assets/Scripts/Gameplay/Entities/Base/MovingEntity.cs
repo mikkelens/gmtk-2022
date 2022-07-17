@@ -6,7 +6,7 @@ namespace Gameplay.Entities.Base
 {
     [Tooltip("Movable Entity: This entity can move around on its own. Think minecraft villager or boat.")]
     [RequireComponent(typeof(Rigidbody))]
-    public class MovableEntity : Entity
+    public class MovingEntity : Entity
     {
         [ButtonGroup("FreezeButtons")]
         [HideIf("@IsFrozen")]
@@ -23,7 +23,7 @@ namespace Gameplay.Entities.Base
         protected Vector2 Velocity; // on the topdown plane view
         
         protected virtual bool CanMove => !IsFrozen && !Stopping;
-        protected virtual bool CanRotate => (!IsFrozen || !myStats.freezingAffectsRotation) && (!Stopping || !myStats.stoppingAffectsRotation);
+        protected virtual bool CanRotate => (!IsFrozen || !stats.freezingAffectsRotation) && (!Stopping || !stats.stoppingAffectsRotation);
 
         protected override void Start()
         {
@@ -48,7 +48,7 @@ namespace Gameplay.Entities.Base
 
             // Update velocity from goal/player/input
             // Debug.Log($"MyStats maxSpeed: {myStats.maxSpeed}");
-            Vector2 targetVelocity = CanMove ? GetTargetMoveDirection() * myStats.maxSpeed : Vector2.zero;
+            Vector2 targetVelocity = CanMove ? GetTargetMoveDirection() * stats.maxSpeed : Vector2.zero;
             Velocity = Vector2.MoveTowards(Rb.velocity.WorldToPlane(), targetVelocity, GetAcceleration() * Time.deltaTime);
             Rb.velocity = Velocity.PlaneToWorld();
             // MoveByWorldVelocity(Velocity.PlaneToWorld());
@@ -80,15 +80,21 @@ namespace Gameplay.Entities.Base
         protected virtual float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
             float tFromAngle = Quaternion.Angle(currentRotation, targetRotation) / 180f; // 180 is max possible angle
-            float dynamicTurnSpeed = myStats.turnSpeedCurve.Evaluate(1f - tFromAngle) * 180;
-            return dynamicTurnSpeed * myStats.maxTurnSpeed;
+            float dynamicTurnSpeed = stats.turnSpeedCurve.Evaluate(1f - tFromAngle) * 180;
+            return dynamicTurnSpeed * stats.maxTurnSpeed;
         }
         private float GetAcceleration()
         {
-            float likeness = Vector2.Dot(Velocity.normalized, GetTargetMoveDirection().normalized);
-            float stopFactor = (1f - likeness) / 2f; // from (-1 to 1) to (0 to 1), and in reverse
-            float accel = myStats.walkAccelSpeed;
-            accel += myStats.walkAccelSpeed * myStats.stopBonus * stopFactor;
+            float accel = stats.walkAccelSpeed;
+            float stopBonus;
+            if (Stopping) stopBonus = stats.maxStopBonus;
+            else
+            {
+                float likeness = Vector2.Dot(Velocity.normalized, GetTargetMoveDirection().normalized);
+                float stopFactor = (1f - likeness) / 2f; // from (-1 to 1) to (0 to 1), and in reverse
+                stopBonus = stats.maxStopBonus * stopFactor;
+            }
+            accel += stats.walkAccelSpeed * stopBonus;
             return accel;
         }
 
