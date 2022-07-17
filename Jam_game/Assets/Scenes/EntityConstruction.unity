@@ -651,78 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4871413564851cf4da16e7f47447745f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingStats:
-    godMode: 0
-    maxHealth: 1
-    maxSpeed: 5
-    walkAccelSpeed: 65
-    stopBonus: 3
-    maxTurnSpeed: 10
-    turnSpeedCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    freezingAffectsRotation: 0
-    stoppingAffectsRotation: 1
-    autoAttacks: 1
-    basicDamage: 1
-    meleeDamage: 1
-    meleeDistance: 2.5
-    meleeCooldown: 1.25
-    basicKnockbackStrength: 10
-    meleeKnockbackBonus: 2
-    alternateMeleeDamage: 2
-    aimTurnSpeedBonus: 2
-    relativeSpawnChance: 1
-    meleeAttackDelay: 0.75
-    stunDuration: 0.5
-  myStats:
-    godMode: 0
-    maxHealth: 1
-    maxSpeed: 5
-    walkAccelSpeed: 65
-    stopBonus: 3
-    maxTurnSpeed: 10
-    turnSpeedCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    freezingAffectsRotation: 0
-    stoppingAffectsRotation: 1
-    autoAttacks: 1
-    basicDamage: 1
-    meleeDamage: 1
-    meleeDistance: 2.5
-    meleeCooldown: 1.25
-    basicKnockbackStrength: 10
-    meleeKnockbackBonus: 2
-    alternateMeleeDamage: 2
-    aimTurnSpeedBonus: 2
-    relativeSpawnChance: 1
-    meleeAttackDelay: 0.75
-    stunDuration: 0.5
+  startingStats: {fileID: 0}
+  myStats: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 0

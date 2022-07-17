@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Gameplay.Entities
 {
-    [Serializable]
     [CreateAssetMenu(fileName = "NewStatsAsset", menuName = "Entities/StatsAsset")]
     public class EntityStats : ScriptableObject, ICloneable
     {
