@@ -10,11 +10,23 @@ ModelImporter:
       74: -8945691123924629249
     second: Armature|Idle
   - first:
+      74: -78964142871221633
+    second: Armature|Knockback
+  - first:
+      74: 826936077688318670
+    second: Armature|SpearStab
+  - first:
+      74: 5779147162789963668
+    second: Armature|SpearStabDefinitive
+  - first:
+      74: -6846498795078718583
+    second: Armature|SwordswingLeft
+  - first:
+      74: 5831826479240532069
+    second: Armature|SwordswingRight
+  - first:
       74: 8349542763059015795
     second: Armature|Walk
-  - first:
-      74: 3800721468275536773
-    second: Armature|Walk (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -27,7 +39,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
-    motionNodeName: Armature
+    motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
@@ -36,101 +48,14 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Armature|Death
-      takeName: Armature|Death
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 26
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Armature|Idle
-      takeName: Armature|Idle
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 30
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Armature|Walk
-      takeName: Armature|Walk
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 30
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -155,7 +80,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
-    optimizeBones: 0
+    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -179,62 +104,7 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton:
-    - name: Protag(Clone)
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Plane
-      parentName: Protag(Clone)
-      position: {x: -1.0587912e-22, y: 0, z: 0.00000008940697}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 99.99998, y: 99.99998, z: 99.99998}
-    - name: Armature
-      parentName: Protag(Clone)
-      position: {x: -3.4070564e-16, y: 1.5344018, z: 0.30004394}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 40.23447, y: 40.23447, z: 40.23447}
-    - name: Hips
-      parentName: Armature
-      position: {x: 4.660755e-18, y: 0.00035352423, z: -0.017397553}
-      rotation: {x: 0.74491525, y: 2.3146357e-25, z: -2.4204534e-17, w: 0.6671591}
-      scale: {x: 1, y: 0.99999994, z: 0.99999994}
-    - name: Torso
-      parentName: Armature
-      position: {x: 4.998365e-18, y: -0.0002442451, z: -0.0071902964}
-      rotation: {x: 0.7049477, y: 1.0987183e-24, z: -1.5652982e-16, w: 0.70925933}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Head
-      parentName: Armature
-      position: {x: 6.689785e-18, y: 0.000054296477, z: 0.0031102274}
-      rotation: {x: 0.64569336, y: -2.5304696e-18, z: -1.2553065e-16, w: 0.7635968}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Cloak bottom
-      parentName: Armature
-      position: {x: 4.660755e-18, y: 0.0003535238, z: -0.017397553}
-      rotation: {x: -0.017086543, y: 1.0474253e-26, z: 3.793975e-18, w: 0.999854}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Thigh.l
-      parentName: Armature
-      position: {x: -0.0043402896, y: 0.000982789, z: -0.020621257}
-      rotation: {x: -0.0045365104, y: 0.70709246, z: -0.7070921, w: -0.0045319935}
-      scale: {x: 1.0000001, y: 1.0000001, z: 1}
-    - name: Shin.l
-      parentName: Thigh.l
-      position: {x: -2.0492563e-10, y: 0.008079128, z: -5.243237e-12}
-      rotation: {x: -0.00809222, y: -0.000023248342, z: 0.009958053, w: 0.9999177}
-      scale: {x: 0.99999994, y: 1, z: 1}
-    - name: Thigh.r
-      parentName: Armature
-      position: {x: 0.0043402896, y: 0.000982789, z: -0.020621257}
-      rotation: {x: 0.004536463, y: 0.70709246, z: -0.7070921, w: 0.0045321095}
-      scale: {x: 1.0000001, y: 1.0000001, z: 1}
-    - name: Shin.r
-      parentName: Thigh.r
-      position: {x: 2.0492563e-10, y: 0.008079128, z: -5.243237e-12}
-      rotation: {x: -0.00809222, y: 0.000023248347, z: -0.009958053, w: 0.9999177}
-      scale: {x: 0.99999994, y: 1, z: 1}
+    skeleton: []
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -245,13 +115,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
