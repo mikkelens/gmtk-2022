@@ -1,8 +1,8 @@
-﻿namespace Tools
-{
-    using System;
-    using UnityEngine;
+﻿using System;
+using UnityEngine;
 
+namespace Tools
+{
     [Serializable]
     public struct Optional<T>
     {
@@ -14,7 +14,12 @@
 
         public Optional(T initialValue)
         {
-            enabled = true;
+            enabled = false; // opt-in, disabled by default
+            value = initialValue;
+        }
+        public Optional(T initialValue, bool initialEnabled)
+        {
+            enabled = initialEnabled;
             value = initialValue;
         }
     }

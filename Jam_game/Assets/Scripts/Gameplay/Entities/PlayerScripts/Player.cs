@@ -1,7 +1,5 @@
 using Gameplay.Entities.Base;
-using Gameplay.Entities.StatsAssets;
 using Gameplay.Level;
-using Gameplay.Upgrades;
 using Tools;
 using UnityEngine;
 
@@ -11,19 +9,10 @@ namespace Gameplay.Entities.PlayerScripts
     public sealed partial class Player : CombatEntity // main
     {
         public static Player Instance;
-        
-        [SerializeField] private float aimTurnSpeedBonus = 2f;
 
-        public PlayerStats PlayerStats;
-        
         private void Awake()
         {
             Instance = this;
-
-            PlayerStats = new()
-            {
-                // todo: add stats here
-            };
         }
 
         // movement is decided by input set in "Player.Input.cs"
@@ -42,7 +31,7 @@ namespace Gameplay.Entities.PlayerScripts
         protected override float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
             float turnSpeed = base.GetTurnSpeed(currentRotation, targetRotation);
-            if (IsAiming) turnSpeed += turnSpeed * aimTurnSpeedBonus;
+            if (IsAiming) turnSpeed += turnSpeed * Stats.aimTurnSpeedBonus;
             return turnSpeed;
         }
 

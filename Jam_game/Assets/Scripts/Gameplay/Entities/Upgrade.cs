@@ -1,17 +1,15 @@
-﻿using Gameplay.Entities.StatsAssets;
-using Tools;
+﻿using Tools;
 using UnityEngine;
 
-namespace Gameplay.Upgrades
+namespace Gameplay.Entities
 {
     [CreateAssetMenu(fileName = "New Upgrade", menuName = "Upgrades/Upgrade")]
     public class Upgrade : ScriptableObject
     {
         // base
-        
-        // combat
+        public Optional<int> maxHealthBuff = new Optional<int>(1);
 
-        // player
+        // combat
         public Optional<float> basicKnockbackStrengthBuff;
         public Optional<float> meleeKnockbackBonusBuff;
         public Optional<float> meleeDistanceBuff;
@@ -19,18 +17,21 @@ namespace Gameplay.Upgrades
         public Optional<bool> autoAttacksBuff; // should be false on player
         public Optional<int> meleeDamageBuff;
 
+        // player
+        public Optional<int> alternateMeleeDamageBuff = new Optional<int>(1);
+
         public void UpgradeStats(Stats stats)
         {
             // base
             
             
             // combat
-            if (stats is not CombatStats combatStats) return;
+            if (basicKnockbackStrengthBuff.Enabled)
+                stats.basicKnockbackStrength += basicKnockbackStrengthBuff.Value;
             if (meleeDamageBuff.Enabled)
-                combatStats.meleeDamage += meleeDamageBuff.Value;
+                stats.meleeDamage += meleeDamageBuff.Value;
 
             // player
-            if (stats is not PlayerStats playerStats) return;
         }
     }
 }

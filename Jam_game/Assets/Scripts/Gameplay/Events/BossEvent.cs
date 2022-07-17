@@ -7,7 +7,7 @@ namespace Gameplay.Events
 {
     public class BossEvent : CombatEvent
     {
-        [SerializeField] private Boss bossPrefabToSpawn;
+        [SerializeField] private Enemy bossPrefabToSpawn;
         [SerializeField] private float lootValue;
         
         private bool _bossAlive;

@@ -48,7 +48,7 @@ namespace Gameplay.Events
             {
                 // previous -> previous + spawnchance
                 rangeStartList.Add(lastEnd);
-                float spawnChance = enemy.relativeSpawnChance;
+                float spawnChance = enemy.Stats.relativeSpawnChance;
                 lastEnd += spawnChance;
             }
             float randomValue = Random.Range(0, lastEnd);

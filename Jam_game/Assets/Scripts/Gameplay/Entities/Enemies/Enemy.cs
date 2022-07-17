@@ -10,20 +10,15 @@ namespace Gameplay.Entities.Enemies
     [Tooltip("Enemy: Acts like a hostile minecraft mob, will search for player and attack.")]
     public class Enemy : CombatEntity
     {
-        [Tooltip("Relative to other enemies of the same wave.")]
-        [SerializeField] public float relativeSpawnChance = 1f;
-        [SerializeField] protected float meleeAttackDelay = 0.75f; // could be automated using animation time info maybe actually but i dont wanna do it
-        [SerializeField] protected float stunDuration = 0.5f; // applied when taking damage
-        
         protected CombatEvent SpawnOrigin;
         protected Player Player;
         
         // protected ;
         private float _lastStunTime;
 
-        protected override bool WantsToAttack => Physics.Raycast(AttackRay, meleeDistance, TargetLayerMask);
+        protected override bool WantsToAttack => Physics.Raycast(AttackRay, Stats.meleeDistance, TargetLayerMask);
         protected override bool CanMove => base.CanMove && !IsStunned;
-        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= stunDuration;
+        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= Stats.stunDuration;
 
         public void SetSpawnOrigin(CombatEvent origin)
         {
@@ -53,7 +48,7 @@ namespace Gameplay.Entities.Enemies
         {
             Animator.SetBool("Walking", false);
             Stopping = true;
-            yield return new WaitForSeconds(meleeAttackDelay);
+            yield return new WaitForSeconds(Stats.meleeAttackDelay);
             TryMelee();
             Animator.SetBool("Walking", true);
         }

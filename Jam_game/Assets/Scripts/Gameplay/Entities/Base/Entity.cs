@@ -1,6 +1,4 @@
 using System;
-using Gameplay.Entities.StatsAssets;
-using Gameplay.Upgrades;
 using Management;
 using UnityEngine;
 
@@ -12,10 +10,8 @@ namespace Gameplay.Entities.Base
     public class Entity : MonoBehaviour
     {
         [SerializeField] protected Stats startingStats;
-        
-        // base settings
-        private Stats _stats; // lowest tier
-        protected Stats Stats => _stats;
+
+        public Stats Stats { get; set; }
 
         // outside components
         protected GameManager Manager;
@@ -27,18 +23,18 @@ namespace Gameplay.Entities.Base
         // health status
         private int _health;
 
-        protected virtual void Start()
+        private void Awake()
         {
             Stats = startingStats;
             Transform = transform;
             Animator = GetComponentInChildren<Animator>();
             if (Animator == null) Debug.LogWarning($"No animator component found on entity '{name}'");
-            
-            Manager = GameManager.Instance;
-            
-            _health = startingHealth;
         }
 
+        protected virtual void Start()
+        {
+            Manager = GameManager.Instance;
+        }
         protected virtual void Update()
         {
             // idk base thing here
@@ -49,10 +45,9 @@ namespace Gameplay.Entities.Base
             ApplyDamage(damage);
             ApplyKnockback(knockbackForce);
         }
-        
         private void ApplyDamage(int damage)
         {
-            if (godMode) return;
+            if (Stats.godMode) return;
             _health -= damage;
             if (_health <= 0) KillThis();
 
@@ -68,6 +63,19 @@ namespace Gameplay.Entities.Base
         {
             Debug.Log($"Entity '{name}' was killed.");
             Animator.SetTrigger("Death");
+        }
+
+        public void HealToFull()
+        {
+            SetHealth(Stats.maxHealth);
+        }
+        private void SetHealth(int health)
+        {
+            _health = health;
+        }
+        private void ApplyHealing(int healing)
+        {
+            _health += healing;
         }
     }
 }
