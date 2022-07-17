@@ -15,10 +15,10 @@ MonoBehaviour:
   godMode: 0
   maxHealth: 1
   health: 1
-  maxSpeed: 5
+  maxSpeed: 7
   walkAccelSpeed: 65
   maxStopBonus: 3
-  maxTurnSpeed: 0.2
+  maxTurnSpeed: 0.4
   turnSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -49,9 +49,9 @@ MonoBehaviour:
   mainMeleeAttack:
     animationName: Attack
     damage: 1
-    maxDistance: 2.5
+    maxDistance: 7
     cooldown: 1.25
-    targetKnockbackStrength: 10
+    targetKnockbackStrength: 5
     selfKnockbackStrength: 5
   autoAttacks: 1
   collisionDamage: 1
@@ -66,6 +66,6 @@ MonoBehaviour:
   aimTurnSpeedBonus: 2
   relativeSpawnChance: 1
   attackChargeTime: 0.75
-  minAttackAttemptDistance: 2.5
+  minAttackAttemptDistance: 4
   stunDuration: 0.5
   headTurnAngle: 25

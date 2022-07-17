@@ -48,7 +48,7 @@ MonoBehaviour:
   stoppingAffectsRotation: 1
   mainMeleeAttack:
     animationName: Attack
-    damage: 1
+    damage: 2
     maxDistance: 3.5
     cooldown: 1
     targetKnockbackStrength: 2

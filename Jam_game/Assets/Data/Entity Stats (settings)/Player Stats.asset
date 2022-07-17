@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   godMode: 0
   maxHealth: 5
-  health: 1
-  maxSpeed: 8
+  health: 5
+  maxSpeed: 7
   walkAccelSpeed: 75
   maxStopBonus: 2
   maxTurnSpeed: 5
@@ -43,6 +43,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  turningAffectsMoveDirection: 0
   freezingAffectsRotation: 1
   stoppingAffectsRotation: 1
   mainMeleeAttack:
