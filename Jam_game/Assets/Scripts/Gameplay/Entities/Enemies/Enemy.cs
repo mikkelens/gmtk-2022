@@ -30,6 +30,12 @@ namespace Gameplay.Entities.Enemies
             Player = Player.Instance;
         }
 
+        protected override Vector2 GetMoveDirection()
+        {
+            if (stats.turningAffectsMoveDirection)
+                return Transform.forward.WorldToPlane();
+            return GetTargetMoveDirection();
+        }
         protected override Vector2 GetTargetMoveDirection()
         {
             // walk towards player

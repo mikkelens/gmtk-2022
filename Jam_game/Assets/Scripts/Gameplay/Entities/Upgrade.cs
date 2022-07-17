@@ -6,6 +6,8 @@ namespace Gameplay.Entities
     [CreateAssetMenu(fileName = "New Upgrade Asset", menuName = "Stats/Upgrade Asset")]
     public class Upgrade : ScriptableObject
     {
+        public string upgradeName = "Unnamed Upgrade";
+        
         public Optional<int> maxHealthBuff = new Optional<int>(1);
         
         public Optional<int> meleeDamageBuff = new Optional<int>(1);

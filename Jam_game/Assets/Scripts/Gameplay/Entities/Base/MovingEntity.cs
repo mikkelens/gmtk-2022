@@ -20,6 +20,7 @@ namespace Gameplay.Entities.Base
         protected bool Stopping;
         protected bool IsFrozen;
         protected Vector2 PreviousLookDirection;
+        [ShowInInspector]
         protected Vector2 Velocity; // on the topdown plane view
         
         protected virtual bool CanMove => !IsFrozen && !Stopping;
@@ -44,11 +45,11 @@ namespace Gameplay.Entities.Base
         private void UpdateMovement()
         {
             // Look towards goal in some way
-            TurnTowardsLookDirection(GetTargetLookDirection());
+            TurnTowardsLookDirection(GetLookDirection());
 
             // Update velocity from goal/player/input
             // Debug.Log($"MyStats maxSpeed: {myStats.maxSpeed}");
-            Vector2 targetVelocity = CanMove ? GetTargetMoveDirection() * stats.maxSpeed : Vector2.zero;
+            Vector2 targetVelocity = CanMove ? GetMoveDirection() * stats.maxSpeed : Vector2.zero;
             Velocity = Vector2.MoveTowards(Rb.velocity.WorldToPlane(), targetVelocity, GetAcceleration() * Time.deltaTime);
             Rb.velocity = Velocity.PlaneToWorld();
             // MoveByWorldVelocity(Velocity.PlaneToWorld());
@@ -57,7 +58,11 @@ namespace Gameplay.Entities.Base
             Animator.SetBool("Walking", isMoving);
         }
 
-        protected virtual Vector2 GetTargetLookDirection()
+        protected virtual Vector2 GetLookDirection()
+        {
+            return GetTargetMoveDirection();
+        }
+        protected virtual Vector2 GetMoveDirection()
         {
             return GetTargetMoveDirection();
         }
@@ -65,6 +70,7 @@ namespace Gameplay.Entities.Base
         {
             return Vector2.down; // default move direction in case nothing is used..?
         }
+
 
         protected virtual void TurnTowardsLookDirection(Vector2 targetDirection)
         {
@@ -83,19 +89,16 @@ namespace Gameplay.Entities.Base
             float dynamicTurnSpeed = stats.turnSpeedCurve.Evaluate(1f - tFromAngle) * 180;
             return dynamicTurnSpeed * stats.maxTurnSpeed;
         }
+        
         private float GetAcceleration()
         {
             float accel = stats.walkAccelSpeed;
-            float stopBonus;
-            if (Stopping) stopBonus = stats.maxStopBonus;
-            else
-            {
-                float likeness = Vector2.Dot(Velocity.normalized, GetTargetMoveDirection().normalized);
-                float stopFactor = (1f - likeness) / 2f; // from (-1 to 1) to (0 to 1), and in reverse
-                stopBonus = stats.maxStopBonus * stopFactor;
-            }
-            accel += stats.walkAccelSpeed * stopBonus;
-            return accel;
+            if (Stopping) return accel * stats.maxStopBonus;
+            
+            float likeness = Vector2.Dot(Velocity.normalized, GetTargetMoveDirection().normalized);
+            float stopFactor = (1 - likeness) / 2f; // from (-1 to 1) to (0 to 1), and in reverse
+            float stopBonus = stats.maxStopBonus * stopFactor;
+            return accel * (1 + stopBonus);
         }
 
         protected override void ApplyKnockback(Vector2 force)

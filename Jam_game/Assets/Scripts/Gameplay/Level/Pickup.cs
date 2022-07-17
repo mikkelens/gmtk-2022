@@ -7,14 +7,15 @@ namespace Gameplay.Level
     [RequireComponent(typeof(Collider))]
     public class Pickup : MonoBehaviour
     {
-        [SerializeField] Upgrade upgradeData;
+        [SerializeField] private Upgrade data;
 
         private void OnTriggerEnter(Collider other)
         {
             Player player = other.GetComponent<Player>();
             if (player == null) return;
             
-            upgradeData.UpgradeStats(player.stats);
+            data.UpgradeStats(player.stats);
+            Debug.Log("Pickup: " + data.upgradeName);
             // todo: add graphics?
             Despawn();
         }

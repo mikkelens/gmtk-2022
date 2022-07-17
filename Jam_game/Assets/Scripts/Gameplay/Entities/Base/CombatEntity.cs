@@ -49,7 +49,7 @@ namespace Gameplay.Entities.Base
 
         protected void HitOther(Entity entity, Attack attack)
         {
-            Vector2 lookDirection = GetTargetLookDirection();
+            Vector2 lookDirection = GetLookDirection();
             entity.TakeHit(attack.damage, lookDirection * attack.targetKnockbackStrength);
             ApplyKnockback(-lookDirection * attack.selfKnockbackStrength); // apply knockback to self
         }

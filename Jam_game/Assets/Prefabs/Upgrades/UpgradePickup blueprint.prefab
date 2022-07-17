@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6017693799189530561}
   - component: {fileID: 6017693799189530562}
   m_Layer: 0
-  m_Name: UpgradePickup
+  m_Name: UpgradePickup blueprint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
