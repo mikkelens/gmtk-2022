@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 246dcabbb87c4a9cbed05f7e786bbb55, type: 3}
-  m_Name: GenericWave
+  m_Name: Wave test
   m_EditorClassIdentifier: 
   spawnDelay: 2
   waveTime: 30
   enemyPrefabsToSpawn:
-  - {fileID: 0}
+  - {fileID: 2576323305460356730, guid: 501afbb10693fba48b05f2f5e99a79c9, type: 3}

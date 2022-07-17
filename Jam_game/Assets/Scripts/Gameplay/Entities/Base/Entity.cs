@@ -1,4 +1,3 @@
-using System;
 using Management;
 using UnityEngine;
 
@@ -9,9 +8,10 @@ namespace Gameplay.Entities.Base
     [SelectionBase]
     public class Entity : MonoBehaviour
     {
-        [SerializeField] protected Stats startingStats;
+        [SerializeField] private EntityStats startingStats;
 
-        public Stats Stats { get; set; }
+        [HideInInspector]
+        public EntityStats myStats;
 
         // outside components
         protected GameManager Manager;
@@ -21,14 +21,17 @@ namespace Gameplay.Entities.Base
         protected Animator Animator;
 
         // health status
-        private int _health;
+        private int _currentHealth;
 
-        private void Awake()
+        protected virtual void Awake()
         {
-            Stats = startingStats;
             Transform = transform;
+            if (Transform == null) Debug.Log("Transform is null???");
+            
             Animator = GetComponentInChildren<Animator>();
-            if (Animator == null) Debug.LogWarning($"No animator component found on entity '{name}'");
+            if (Animator == null) Debug.Log($"No animator component found on entity '{name}'.");
+            
+            myStats = startingStats.Clone() as EntityStats;
         }
 
         protected virtual void Start()
@@ -47,9 +50,9 @@ namespace Gameplay.Entities.Base
         }
         private void ApplyDamage(int damage)
         {
-            if (Stats.godMode) return;
-            _health -= damage;
-            if (_health <= 0) KillThis();
+            if (myStats.godMode) return;
+            _currentHealth -= damage;
+            if (_currentHealth <= 0) KillThis();
 
             // todo: damage animation etc?
         }
@@ -67,15 +70,15 @@ namespace Gameplay.Entities.Base
 
         public void HealToFull()
         {
-            SetHealth(Stats.maxHealth);
+            SetHealth(myStats.maxHealth);
         }
         private void SetHealth(int health)
         {
-            _health = health;
+            _currentHealth = health;
         }
         private void ApplyHealing(int healing)
         {
-            _health += healing;
+            _currentHealth += healing;
         }
     }
 }

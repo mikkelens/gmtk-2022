@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Gameplay.Entities.Enemies;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Gameplay.Spawning
+namespace Gameplay.Events
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "New Wave", menuName = "Spawning/Wave")]
+    [CreateAssetMenu(fileName = "New Wave Asset", menuName = "Spawning/Wave Event Asset")]
     public class WaveEvent : CombatEvent
     {
         public float spawnDelay = 2f;
         public float waveTime = 30f;
         [AssetsOnly]
-        public List<Enemy> enemyPrefabsToSpawn;
+        public List<Enemy> enemyPrefabsToSpawn = new List<Enemy>();
         
-        private List<Enemy> _spawnedEnemies;
+        private List<Enemy> _spawnedEnemies = new List<Enemy>();
 
         public override IEnumerator RunEvent()
         {
@@ -39,30 +40,17 @@ namespace Gameplay.Spawning
             }
         }
 
-        private Enemy SelectEnemyAsset(List<Enemy> allEnemies)
+        private Enemy SelectEnemyAsset(IReadOnlyCollection<Enemy> allEnemies)
         {
             // count up spawn chances as a range, then generate a number within the range. Enemy with lowest number but above generated number will be chosen.
-            List<float> rangeStartList = new List<float>();
-            float lastEnd = 0; // start at zero
-            foreach (Enemy enemy in allEnemies)
+            float totalSpawnRange = allEnemies.Sum(enemy => enemy.myStats.relativeSpawnChance);
+            float random = Random.Range(0, totalSpawnRange);
+            float last = 0f;
+            return allEnemies.First(enemy =>
             {
-                // previous -> previous + spawnchance
-                rangeStartList.Add(lastEnd);
-                float spawnChance = enemy.Stats.relativeSpawnChance;
-                lastEnd += spawnChance;
-            }
-            float randomValue = Random.Range(0, lastEnd);
-            int chosenIndex = 0;
-            for (int i = 0; i < allEnemies.Count; i++)
-            {
-                float thisRange = rangeStartList[i];
-                if (thisRange >= randomValue)
-                {
-                    chosenIndex = i;
-                    break;
-                }
-            }
-            return allEnemies[chosenIndex];
+                last += enemy.myStats.relativeSpawnChance;
+                return last >= random;
+            });
         }
 
         public override void DespawnEnemy(Enemy enemyToDespawn)

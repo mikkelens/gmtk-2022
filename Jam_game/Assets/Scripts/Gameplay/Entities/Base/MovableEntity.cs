@@ -23,7 +23,7 @@ namespace Gameplay.Entities.Base
         protected Vector2 Velocity; // on the topdown plane view
         
         protected virtual bool CanMove => !IsFrozen && !Stopping;
-        protected virtual bool CanRotate => !IsFrozen || !Stats.freezeAffectsRotation;
+        protected virtual bool CanRotate => (!IsFrozen || !myStats.freezingAffectsRotation) && (!Stopping || !myStats.stoppingAffectsRotation);
 
         protected override void Start()
         {
@@ -32,7 +32,7 @@ namespace Gameplay.Entities.Base
             if (Rb == null) Debug.LogError($"No rigidbody on movable entity {name}.");
                 
             Stopping = false;
-            PreviousLookDirection = Vector2.down; // looking down by default
+            // PreviousLookDirection = Vector2.down; // looking down by default
         }
 
         protected override void Update()
@@ -41,13 +41,14 @@ namespace Gameplay.Entities.Base
             UpdateMovement();
         }
 
-        public virtual void UpdateMovement()
+        private void UpdateMovement()
         {
             // Look towards goal in some way
             TurnTowardsLookDirection(GetTargetLookDirection());
 
             // Update velocity from goal/player/input
-            Vector2 targetVelocity = CanMove ? GetTargetMoveDirection() * Stats.maxSpeed : Vector2.zero;
+            // Debug.Log($"MyStats maxSpeed: {myStats.maxSpeed}");
+            Vector2 targetVelocity = CanMove ? GetTargetMoveDirection() * myStats.maxSpeed : Vector2.zero;
             Velocity = Vector2.MoveTowards(Rb.velocity.WorldToPlane(), targetVelocity, GetAcceleration() * Time.deltaTime);
             Rb.velocity = Velocity.PlaneToWorld();
             // MoveByWorldVelocity(Velocity.PlaneToWorld());
@@ -62,7 +63,7 @@ namespace Gameplay.Entities.Base
         }
         protected virtual Vector2 GetTargetMoveDirection()
         {
-            return Vector2.zero; // default move direction in case nothing is used..?
+            return Vector2.down; // default move direction in case nothing is used..?
         }
 
         protected virtual void TurnTowardsLookDirection(Vector2 targetDirection)
@@ -79,15 +80,15 @@ namespace Gameplay.Entities.Base
         protected virtual float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
             float tFromAngle = Quaternion.Angle(currentRotation, targetRotation) / 180f; // 180 is max possible angle
-            float dynamicTurnSpeed = Stats.turnSpeedCurve.Evaluate(1f - tFromAngle) * 180;
-            return dynamicTurnSpeed * Stats.maxTurnSpeed;
+            float dynamicTurnSpeed = myStats.turnSpeedCurve.Evaluate(1f - tFromAngle) * 180;
+            return dynamicTurnSpeed * myStats.maxTurnSpeed;
         }
         private float GetAcceleration()
         {
             float likeness = Vector2.Dot(Velocity.normalized, GetTargetMoveDirection().normalized);
             float stopFactor = (1f - likeness) / 2f; // from (-1 to 1) to (0 to 1), and in reverse
-            float accel = Stats.walkAccelSpeed;
-            accel += Stats.walkAccelSpeed * Stats.stopBonus * stopFactor;
+            float accel = myStats.walkAccelSpeed;
+            accel += myStats.walkAccelSpeed * myStats.stopBonus * stopFactor;
             return accel;
         }
 

@@ -16,10 +16,9 @@ namespace Gameplay.Entities.Enemies
         // protected ;
         private float _lastStunTime;
 
-        protected override bool WantsToAttack => Physics.Raycast(AttackRay, Stats.meleeDistance, TargetLayerMask);
+        protected override bool WantsToAttack => Physics.Raycast(AttackRay, myStats.meleeDistance, targetLayerMask);
         protected override bool CanMove => base.CanMove && !IsStunned;
-        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= Stats.stunDuration;
-
+        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= myStats.stunDuration;
         public void SetSpawnOrigin(CombatEvent origin)
         {
             SpawnOrigin = origin;
@@ -48,7 +47,7 @@ namespace Gameplay.Entities.Enemies
         {
             Animator.SetBool("Walking", false);
             Stopping = true;
-            yield return new WaitForSeconds(Stats.meleeAttackDelay);
+            yield return new WaitForSeconds(myStats.meleeAttackDelay);
             TryMelee();
             Animator.SetBool("Walking", true);
         }
