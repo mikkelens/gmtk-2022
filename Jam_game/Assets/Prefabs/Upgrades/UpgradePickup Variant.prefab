@@ -7,10 +7,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6017693799189530561, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530563, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
       propertyPath: m_Name
-      value: UpgradePickup Variant
+      value: UpgradePickup
       objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
@@ -20,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.47097513
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
@@ -30,7 +35,7 @@ PrefabInstance:
     - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.500905
+      value: 6.47
       objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
