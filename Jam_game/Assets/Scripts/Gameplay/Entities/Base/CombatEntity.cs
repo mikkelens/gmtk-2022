@@ -7,6 +7,10 @@ using UnityEngine;
 
 namespace Gameplay.Entities.Base
 {
+    /// <summary>
+    ///  reeeeeee
+    /// </summary>
+    
     [Tooltip("Combat Entity: This can hit other entites.")]
     public class CombatEntity : MovableEntity
     {
