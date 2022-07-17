@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7804618059053159353}
     m_Modifications:
+    - target: {fileID: -8886976107396880845, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
         type: 3}
       propertyPath: m_RootOrder
@@ -62,10 +67,80 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -7029948723529949830, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -4591257533182965117, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 827075974287967996, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
         type: 3}
       propertyPath: m_Name
       value: Protag
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1468551188479771725, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875559163138296157, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530290120027180833, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948510664218724797, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148817236446094103, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5207381400571151209, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7368002659860420144, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924663758154277250, guid: 5f3b2d768dda6cf418dd411134ef6fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f3b2d768dda6cf418dd411134ef6fd4, type: 3}
@@ -162,6 +237,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6121795126706553913, guid: 1a1613ff0ed8f1c4bb6b17c943013247,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a1613ff0ed8f1c4bb6b17c943013247, type: 3}
 --- !u!1 &7804618059053159352 stripped
@@ -183,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingStats: {fileID: 11400000, guid: be0059c9e34bf41418db3aad13dd1be2, type: 2}
-  myStats: {fileID: 0}
+  stats: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
