@@ -6,21 +6,24 @@ namespace Gameplay.Entities
     [CreateAssetMenu(fileName = "New Upgrade Asset", menuName = "Stats/Upgrade Asset")]
     public class Upgrade : ScriptableObject
     {
-        // base
         public Optional<int> maxHealthBuff = new Optional<int>(1);
-
-        // combat
+        
         public Optional<int> meleeDamageBuff = new Optional<int>(1);
         public Optional<float> meleeDistanceBuff = new Optional<float>(1.2f);
         public Optional<float> meleeCooldownBuff = new Optional<float>(0.8f);
         public Optional<float> meleeKnockbackBuff = new Optional<float>(1.5f);
+        
         public Optional<float> collisionKnockbackStrengthBuff = new Optional<float>(2f);
-
-        // player
-        public Optional<int> alternateMeleeDamageBuff = new Optional<int>(1);
+        
+        // public Optional<int> alternateMeleeDamageBuff = new Optional<int>(1);
 
         public void UpgradeStats(EntityStats stats)
         {
+            if (maxHealthBuff.Enabled)
+            {
+                stats.health += maxHealthBuff.Value;
+                stats.maxHealth += maxHealthBuff.Value;
+            }
             if (meleeDamageBuff.Enabled)
                 stats.mainMeleeAttack.damage += meleeDamageBuff.Value;
             if (meleeDistanceBuff.Enabled)

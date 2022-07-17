@@ -14,6 +14,7 @@ namespace Gameplay.Entities
         [Header("Base Entity stats")]
         public bool godMode = false;
         public int maxHealth = 1; // should be higher for player
+        public int health = 1;
         
         [Header("Movable Entity stats")]
         public float maxSpeed = 5f;

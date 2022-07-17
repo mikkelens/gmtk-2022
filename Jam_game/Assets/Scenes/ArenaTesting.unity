@@ -93448,78 +93448,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21695ef0acd6c0a478a947031830c920, type: 3}
---- !u!1001 &6017693799162580875
+--- !u!1001 &5321719292138478285
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
-        type: 3}
-      propertyPath: upgradeData
-      value: 
-      objectReference: {fileID: 11400000, guid: bf41decbccaa9f549bc538a94a003f7a,
-        type: 2}
-    - target: {fileID: 6017693799189530563, guid: ea31902e08b331343a28071372fbda1a,
-        type: 3}
-      propertyPath: m_Name
-      value: UpgradePickup
-      objectReference: {fileID: 0}
-    - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
+    - target: {fileID: 5321719292162118272, guid: 08060b86a0170f242aa06e1bfe4bb588,
         type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
+    - target: {fileID: 5321719292162118272, guid: 08060b86a0170f242aa06e1bfe4bb588,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.47097513
+      value: -9.47
       objectReference: {fileID: 0}
-    - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
+    - target: {fileID: 5321719292162118272, guid: 08060b86a0170f242aa06e1bfe4bb588,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.20485206
       objectReference: {fileID: 0}
-    - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
+    - target: {fileID: 5321719292162118272, guid: 08060b86a0170f242aa06e1bfe4bb588,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.500905
+      value: 11.02
       objectReference: {fileID: 0}
-    - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
+    - target: {fileID: 5321719292162118272, guid: 08060b86a0170f242aa06e1bfe4bb588,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
+    - target: {fileID: 5321719292162118272, guid: 08060b86a0170f242aa06e1bfe4bb588,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
+    - target: {fileID: 5321719292162118272, guid: 08060b86a0170f242aa06e1bfe4bb588,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
+    - target: {fileID: 5321719292162118272, guid: 08060b86a0170f242aa06e1bfe4bb588,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
+    - target: {fileID: 5321719292162118272, guid: 08060b86a0170f242aa06e1bfe4bb588,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
+    - target: {fileID: 5321719292162118272, guid: 08060b86a0170f242aa06e1bfe4bb588,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
+    - target: {fileID: 5321719292162118272, guid: 08060b86a0170f242aa06e1bfe4bb588,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5321719292162118277, guid: 08060b86a0170f242aa06e1bfe4bb588,
+        type: 3}
+      propertyPath: m_Name
+      value: UpgradePickup
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ea31902e08b331343a28071372fbda1a, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 08060b86a0170f242aa06e1bfe4bb588, type: 3}
