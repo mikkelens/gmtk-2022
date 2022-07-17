@@ -43,18 +43,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  turningAffectsMoveDirection: 0
   freezingAffectsRotation: 0
   stoppingAffectsRotation: 1
-  autoAttacks: 1
-  collisionDamage: 0
-  collisionKnockback: 1
   mainMeleeAttack:
     animationName: Attack
     damage: 2
     maxDistance: 3
     cooldown: 1.25
     targetKnockbackStrength: 15
-    selfKnockbackStrength: 5
+    selfKnockbackStrength: 0
+  autoAttacks: 1
+  collisionDamage: 0
+  collisionKnockback: 1
   altMeleeAttack:
     animationName: Attack
     damage: 1

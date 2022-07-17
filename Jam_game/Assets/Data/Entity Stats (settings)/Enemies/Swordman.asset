@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   godMode: 0
   maxHealth: 1
+  health: 1
   maxSpeed: 5
   walkAccelSpeed: 65
-  stopBonus: 3
-  maxTurnSpeed: 0.4
+  maxStopBonus: 3
+  maxTurnSpeed: 1
   turnSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -42,18 +43,29 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  turningAffectsMoveDirection: 0
   freezingAffectsRotation: 0
   stoppingAffectsRotation: 1
+  mainMeleeAttack:
+    animationName: Attack
+    damage: 1
+    maxDistance: 3.5
+    cooldown: 1
+    targetKnockbackStrength: 2
+    selfKnockbackStrength: 1
   autoAttacks: 1
-  basicDamage: 1
-  meleeDamage: 1
-  meleeDistance: 2.5
-  meleeCooldown: 1.25
-  basicKnockbackStrength: 10
-  meleeKnockbackBonus: 2
-  alternateMeleeDamage: 2
+  collisionDamage: 0
+  collisionKnockback: 1
+  altMeleeAttack:
+    animationName: Attack
+    damage: 1
+    maxDistance: 2.5
+    cooldown: 1.25
+    targetKnockbackStrength: 10
+    selfKnockbackStrength: 5
   aimTurnSpeedBonus: 2
   relativeSpawnChance: 1
-  meleeAttackDelay: 0.75
-  stunDuration: 0.5
+  attackChargeTime: 0.7
+  minAttackAttemptDistance: 2
+  stunDuration: 1
   headTurnAngle: 25
