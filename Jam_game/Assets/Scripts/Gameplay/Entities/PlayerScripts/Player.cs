@@ -17,10 +17,10 @@ namespace Gameplay.Entities.PlayerScripts
         }
 
         // movement is decided by input set in "Player.Input.cs"
-        protected override Vector2 GetTargetLookDirection()
+        protected override Vector2 GetLookDirection()
         {
             if (IsAiming) return LookDirection();
-            if (IsMoving) return base.GetTargetLookDirection(); // updates look direction
+            if (IsMoving) return base.GetLookDirection(); // updates look direction
             return PreviousLookDirection; // use previous look (aim) direction
         }
 

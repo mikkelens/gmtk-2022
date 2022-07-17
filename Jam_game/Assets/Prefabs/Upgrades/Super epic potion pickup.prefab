@@ -1,21 +1,16 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1898741272846914886
+--- !u!1001 &7683906296362910701
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6017693799189530561, guid: ea31902e08b331343a28071372fbda1a,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530563, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
       propertyPath: m_Name
-      value: UpgradePickup
+      value: UpgradePickup blueprint
       objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
@@ -25,17 +20,17 @@ PrefabInstance:
     - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.20485206
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}

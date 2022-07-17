@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   godMode: 0
   maxHealth: 5
-  maxSpeed: 7.5
-  walkAccelSpeed: 65
-  maxStopBonus: 3
-  maxTurnSpeed: 10
+  health: 1
+  maxSpeed: 8
+  walkAccelSpeed: 75
+  maxStopBonus: 2
+  maxTurnSpeed: 5
   turnSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -32,7 +33,7 @@ MonoBehaviour:
       outWeight: 0.49795082
     - serializedVersion: 3
       time: 1
-      value: 0.5
+      value: 0.5999985
       inSlope: -0.0017211437
       outSlope: -0.0017211437
       tangentMode: 0
@@ -44,9 +45,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   freezingAffectsRotation: 1
   stoppingAffectsRotation: 1
-  autoAttacks: 1
-  collisionDamage: 1
-  collisionKnockback: 1
   mainMeleeAttack:
     animationName: Attack
     damage: 1
@@ -54,6 +52,9 @@ MonoBehaviour:
     cooldown: 1.25
     targetKnockbackStrength: 10
     selfKnockbackStrength: 5
+  autoAttacks: 1
+  collisionDamage: 1
+  collisionKnockback: 5
   altMeleeAttack:
     animationName: Attack
     damage: 1

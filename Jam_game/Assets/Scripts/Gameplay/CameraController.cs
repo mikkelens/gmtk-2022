@@ -28,7 +28,7 @@ namespace Gameplay
             if (_player == null) throw new UnityException("No player in scene.");
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             Vector3 playerPos = _player.transform.position;
             Vector3 target = playerPos + _offset;
