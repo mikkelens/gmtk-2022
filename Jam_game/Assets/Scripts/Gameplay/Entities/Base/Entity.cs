@@ -5,11 +5,12 @@ namespace Gameplay.Entities.Base
 {
     [Tooltip("Entity: Hittable thing. think minecraft armor stand.")]
     [RequireComponent(typeof(Collider))]
+    [SelectionBase]
     public class Entity : MonoBehaviour
     {
         // base settings
         [SerializeField] protected int startingHealth = 10;
-        [SerializeField] private bool godMode = false;
+        [SerializeField] private bool godMode;
         
         // outside components
         protected GameManager Manager;
@@ -19,10 +20,9 @@ namespace Gameplay.Entities.Base
         protected Animator Animator;
 
         // health status
-        public bool Alive => Health > 0;
-        protected int Health;
-        
-        public virtual void Start()
+        private int _health;
+
+        protected virtual void Start()
         {
             Transform = transform;
             Animator = GetComponentInChildren<Animator>();
@@ -30,40 +30,38 @@ namespace Gameplay.Entities.Base
             
             Manager = GameManager.Instance;
             
-            Health = startingHealth;
+            _health = startingHealth;
         }
 
-        public virtual void Update()
+        protected virtual void Update()
         {
-            
+            // idk base thing here
         }
 
-        public virtual void TakeHit(int damage, Vector2 knockbackForce)
+        public void TakeHit(int damage, Vector2 knockbackForce) // Main way of getting hit
         {
-            // damage
-            TakeDamage(damage);
-            // knockback
-            Knockback(knockbackForce);
+            ApplyDamage(damage);
+            ApplyKnockback(knockbackForce);
         }
         
-        protected virtual void TakeDamage(int damage)
+        private void ApplyDamage(int damage)
         {
             if (godMode) return;
-            Health -= damage;
-            if (!Alive) KillThis();
+            _health -= damage;
+            if (_health <= 0) KillThis();
 
             // todo: damage animation etc?
         }
 
-        protected virtual void Knockback(Vector2 force)
+        protected virtual void ApplyKnockback(Vector2 force)
         {
-            
+            // idk
         }
 
         public virtual void KillThis()
         {
-            Animator.SetTrigger("Death");
             Debug.Log($"Entity '{name}' was killed.");
+            Animator.SetTrigger("Death");
         }
     }
 }

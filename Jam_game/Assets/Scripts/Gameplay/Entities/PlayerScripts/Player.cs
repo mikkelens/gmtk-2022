@@ -1,10 +1,12 @@
 using Gameplay.Entities.Base;
+using Gameplay.Level;
+using Tools;
 using UnityEngine;
 
 namespace Gameplay.Entities.PlayerScripts
 {
     [Tooltip("Player: This is the player script. It also derives from entity scripts.")]
-    public partial class Player : CombatEntity // main
+    public sealed partial class Player : CombatEntity // main
     {
         public static Player Instance;
         
@@ -16,27 +18,35 @@ namespace Gameplay.Entities.PlayerScripts
         }
 
         // movement is decided by input set in "Player.Input.cs"
-        public override Vector2 GetTargetLookDirection()
+        protected override Vector2 GetTargetLookDirection()
         {
             if (IsAiming) return AimInput;
             if (IsMoving) return base.GetTargetLookDirection(); // updates look direction
             return PreviousLookDirection; // use previous look (aim) direction
         }
-        public override Vector2 GetTargetMoveDirection()
+
+        protected override Vector2 GetTargetMoveDirection()
         {
             return _moveInput;
         }
 
-        public override void StartAttack()
-        {
-            TryMelee();
-        }
-
-        public override float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
+        protected override float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
             float turnSpeed = base.GetTurnSpeed(currentRotation, targetRotation);
             if (IsAiming) turnSpeed += turnSpeed * aimTurnSpeedBonus;
             return turnSpeed;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            GameObject other = collision.gameObject;
+            
+            Hazard hazard = other.GetComponent<Hazard>();
+            if (hazard != null)
+            {
+                Vector2 direction = collision.impulse.WorldToPlane().normalized;
+                TakeHit(hazard.Damage, direction * hazard.Knockback);
+            }
         }
 
         public override void KillThis()

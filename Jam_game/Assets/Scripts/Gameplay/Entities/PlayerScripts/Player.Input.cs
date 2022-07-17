@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Gameplay.Entities.PlayerScripts
 {
-    public partial class Player // input receiving
+    public sealed partial class Player // input receiving
     {
         private Vector2 _moveInput;
         private bool IsMoving => _moveInput.magnitude > 0.0f;

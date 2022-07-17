@@ -27,22 +27,27 @@ namespace Gameplay.Entities.Base
         [HideIf("@!IsFrozen")]
         [Button("Unfreeze")] public void UnfreezeEntity() => IsFrozen = false;
 
+        protected Rigidbody Rb;
+        
         protected bool Stopping;
         protected bool IsFrozen;
         protected Vector2 PreviousLookDirection;
         protected Vector2 Velocity; // on the topdown plane view
         
-        protected bool CanMove => !IsFrozen && !Stopping;
-        protected bool CanRotate => !IsFrozen || !freezeAffectsRotation;
+        protected virtual bool CanMove => !IsFrozen && !Stopping;
+        protected virtual bool CanRotate => !IsFrozen || !freezeAffectsRotation;
 
-        public override void Start()
+        protected override void Start()
         {
             base.Start();
+            Rb = GetComponent<Rigidbody>();
+            if (Rb == null) Debug.LogError($"No rigidbody on movable entity {name}.");
+                
             Stopping = false;
             PreviousLookDirection = Vector2.down; // looking down by default
         }
 
-        public override void Update()
+        protected override void Update()
         {
             base.Update();
             UpdateMovement();
@@ -55,23 +60,24 @@ namespace Gameplay.Entities.Base
 
             // Update velocity from goal/player/input
             Vector2 targetVelocity = CanMove ? GetTargetMoveDirection() * maxSpeed : Vector2.zero;
-            Velocity = Vector2.MoveTowards(Velocity, targetVelocity, GetAcceleration() * Time.deltaTime);;
-            MoveByWorldVelocity(Velocity.PlaneToWorld());
+            Velocity = Vector2.MoveTowards(Rb.velocity.WorldToPlane(), targetVelocity, GetAcceleration() * Time.deltaTime);
+            Rb.velocity = Velocity.PlaneToWorld();
+            // MoveByWorldVelocity(Velocity.PlaneToWorld());
             
-            bool isMoving = Velocity.magnitude > 0.01f;
+            bool isMoving = Velocity.magnitude > 0.0f;
             Animator.SetBool("Walking", isMoving);
         }
-        
-        public virtual Vector2 GetTargetLookDirection()
+
+        protected virtual Vector2 GetTargetLookDirection()
         {
             return GetTargetMoveDirection();
         }
-        public virtual Vector2 GetTargetMoveDirection()
+        protected virtual Vector2 GetTargetMoveDirection()
         {
             return Vector2.zero; // default move direction in case nothing is used..?
         }
-        
-        public virtual void TurnTowardsLookDirection()
+
+        private void TurnTowardsLookDirection()
         {
             if (!CanRotate) return;
             Vector2 direction = GetTargetLookDirection();
@@ -83,15 +89,13 @@ namespace Gameplay.Entities.Base
             Transform.rotation = newRotation;
             PreviousLookDirection = direction;
         }
-
-        public virtual float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
+        protected virtual float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
             float tFromAngle = Quaternion.Angle(currentRotation, targetRotation) / 180f; // 180 is max possible angle
             float dynamicTurnSpeed = turnSpeedCurve.Evaluate(1f - tFromAngle) * 180;
             return dynamicTurnSpeed * maxTurnSpeed;
         }
-        
-        public virtual float GetAcceleration()
+        private float GetAcceleration()
         {
             float likeness = Vector2.Dot(Velocity.normalized, GetTargetMoveDirection().normalized);
             float stopFactor = (1f - likeness) / 2f; // from (-1 to 1) to (0 to 1), and in reverse
@@ -99,17 +103,11 @@ namespace Gameplay.Entities.Base
             accel += walkAccelSpeed * stopBonus * stopFactor;
             return accel;
         }
-        
-        public virtual void MoveByWorldVelocity(Vector3 worldVelocity)
-        {
-            Transform.Translate(worldVelocity * Time.deltaTime, Space.World); // space.world is important, else it is relative to player rotation
-        }
 
-        protected override void Knockback(Vector2 force)
+        protected override void ApplyKnockback(Vector2 force)
         {
-            base.Knockback(force);
-
-            Velocity += force;
+            base.ApplyKnockback(force);
+            Rb.velocity += force.PlaneToWorld();
         }
     }
 }

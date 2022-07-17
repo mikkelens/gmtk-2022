@@ -7,11 +7,11 @@ using Tools;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Management.Spawning
+namespace Gameplay.Spawning
 {
     [Serializable]
     [CreateAssetMenu(fileName = "New Wave", menuName = "Spawning/Wave")]
-    public class WaveCombatEvent : CombatEvent
+    public class WaveEvent : CombatEvent
     {
         public float spawnDelay = 2f;
         public float waveTime = 30f;
@@ -63,6 +63,12 @@ namespace Management.Spawning
                 }
             }
             return allEnemies[chosenIndex];
+        }
+
+        public override void DespawnEnemy(Enemy enemyToDespawn)
+        {
+            _spawnedEnemies.Remove(enemyToDespawn);
+            base.DespawnEnemy(enemyToDespawn);
         }
     }
 }
