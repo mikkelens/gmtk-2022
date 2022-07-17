@@ -22,14 +22,17 @@ namespace Gameplay.Entities
         public float maxStopBonus = 3f;
         public float maxTurnSpeed = 10f; // in angles per second
         public AnimationCurve turnSpeedCurve = new AnimationCurve(); // changes the turn speed dynamically
+        public bool turningAffectsMoveDirection = false;
         public bool freezingAffectsRotation = false;
         public bool stoppingAffectsRotation = true;
 
         [Header("Combat Entity stats")]
+        public Attack mainMeleeAttack;
+
+        [Header("Enemy Entity stats")]
         public bool autoAttacks = true; // should be false on player
         public int collisionDamage = 1;
         public float collisionKnockback = 1f;
-        public Attack mainMeleeAttack;
 
         [Header("Player Entity stats")]
         public Attack altMeleeAttack;
