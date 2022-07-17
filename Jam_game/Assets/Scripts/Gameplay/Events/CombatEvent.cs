@@ -42,7 +42,7 @@ namespace Gameplay.Events
 
         public virtual void DespawnEnemy(Enemy enemyToDespawn)
         {
-            Destroy(enemyToDespawn);
+            Destroy(enemyToDespawn.gameObject);
         }
 
     }

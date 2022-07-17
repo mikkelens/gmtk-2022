@@ -19,13 +19,10 @@ namespace Gameplay.Entities.PlayerScripts
         private Vector2 _rawAimInput;
         private Vector2 LookDirection()
         {
-            Vector2 aimInput = _rawAimInput;
-            if (_lastAimWasController)
-            {
-                Vector3 worldPosition = Transform.position;
-                Vector2 offset = worldPosition.PositionToScreenPoint();
-                aimInput = (_rawAimInput - offset).ScreenToViewportPoint();
-            }
+            if (_lastAimWasController) return _rawAimInput;
+            Vector3 worldPosition = Transform.position;
+            Vector2 offset = worldPosition.PositionToScreenPoint();
+            Vector2 aimInput = (_rawAimInput - offset).ScreenToViewportPoint();
             return aimInput; // mouse
         }
         
@@ -49,6 +46,5 @@ namespace Gameplay.Entities.PlayerScripts
             _lastAimWasController = fromController;
             // Debug.Log($"Aim input: {input}");
         }
-
     }
 }
