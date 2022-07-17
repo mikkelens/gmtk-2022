@@ -2,7 +2,7 @@
 using Gameplay.Entities.Enemies;
 using UnityEngine;
 
-namespace Management.Spawning
+namespace Gameplay.Spawning
 {
     public class CombatEvent : ScriptableObject
     {
@@ -21,9 +21,14 @@ namespace Management.Spawning
         }
 
         // spawn enemy from enemy asset/prefab, return reference (in scene)
-        public Enemy SpawnEnemy(Enemy enemyPrefab, Transform enemyParent)
+        protected Enemy SpawnEnemy(Enemy enemyPrefab, Transform enemyParent)
         {
             return Instantiate(enemyPrefab, enemyParent).GetComponent<Enemy>();
+        }
+
+        public virtual void DespawnEnemy(Enemy enemyToDespawn)
+        {
+            Destroy(enemyToDespawn);
         }
     }
 }

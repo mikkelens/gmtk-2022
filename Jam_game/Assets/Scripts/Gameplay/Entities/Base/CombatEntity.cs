@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Gameplay.Entities.Enemies;
 using Tools;
 using UnityEngine;
@@ -10,78 +9,62 @@ namespace Gameplay.Entities.Base
     public class CombatEntity : MovableEntity
     {
         [SerializeField] protected int damage = 1;
-        [SerializeField] protected float knockbackStrength = 1.5f;
+        [SerializeField] protected float basicKnockbackStrength = 10f;
+        [SerializeField] protected float meleeKnockbackBonus = 2f;
         [SerializeField] protected float meleeDistance = 2.5f;
-        [SerializeField] protected float meleeAttackDelay = 0.75f; // could be automated using animation time info maybe actually but i dont wanna do it
         [SerializeField] protected float meleeCooldown = 1.25f;
         [SerializeField] protected bool autoAttacks = true; // should be false on player
 
-        protected int targetLayerMask;
+        protected int TargetLayerMask;
         protected float LastAttackTime;
-
+        
         protected virtual bool WantsToAttack => autoAttacks;
-        protected virtual bool CanAttack => LastAttackTime.TimeSince() >= meleeCooldown;
+        protected bool CanAttack => LastAttackTime.TimeSince() >= meleeCooldown;
+        protected Ray AttackRay => new Ray(Transform.position, Transform.forward);
 
         private void Awake()
         {
             string target = GetType() == typeof(Enemy) ? "Player" : "Enemy";
-            targetLayerMask = LayerMask.GetMask(target);
+            TargetLayerMask = LayerMask.GetMask(target);
         }
 
-        public override void Update()
+        protected override void Update()
         {
             base.Update();
             
             // See thing in attack box
             if (WantsToAttack && CanAttack)
             {
-                LastAttackTime = Time.time;
                 StartAttack();
             }
         }
 
-        public virtual void StartAttack()
+        private void StartAttack()
         {
-            StartCoroutine(MeleeAttack());
+            LastAttackTime = Time.time;
+            Animator.SetTrigger("Attack");
+            StartMelee();
         }
 
-        private IEnumerator MeleeAttack()
+        protected virtual void StartMelee()
         {
-            Animator.SetBool("Walking", false);
-            Stopping = true;
-            yield return new WaitForSeconds(meleeAttackDelay);
             TryMelee();
-            Animator.SetBool("Walking", true);
         }
-
+        
         protected void TryMelee()
         {
             // Raycast for hit
-            // Within distance?
-            Ray ray = new Ray(Transform.position, Transform.forward);
-            if (Physics.Raycast(ray, out RaycastHit hitData, meleeDistance, targetLayerMask))
-            {
+            if (Physics.Raycast(AttackRay, out RaycastHit hitData, meleeDistance, TargetLayerMask)) // Within distance?
                 HitOther(hitData.transform.GetComponent<Entity>());
-            }
             Stopping = false;
+            Animator.ResetTrigger("Attack");
         }
 
-        public virtual void OnCollisionEnter(Collision collision)
+        protected void HitOther(Entity entity)
         {
-            GameObject other = collision.gameObject;
-            
-            Entity entity = other.GetComponent<Entity>();
-            if (entity != null) ContactWith(entity);
-        }
-        
-        public virtual void ContactWith(Entity entity)
-        {
-            HitOther(entity);
-        }
-        public virtual void HitOther(Entity entity)
-        {
-            Vector2 knockbackDirection = GetTargetLookDirection() * knockbackStrength;
-            entity.TakeHit(damage, knockbackDirection);
+            Vector2 knockback = GetTargetLookDirection() * basicKnockbackStrength;
+            ApplyKnockback(-knockback); // apply knockback to self
+            entity.TakeHit(damage, knockback);
         }
     }
 }

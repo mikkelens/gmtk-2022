@@ -1,6 +1,5 @@
 ﻿using System;
-using Gameplay.Entities.PlayerScripts;
-using Input;
+using Gameplay.Input;
 using UnityEngine;
 
 namespace Management
@@ -24,10 +23,21 @@ namespace Management
             if (_inputController == null) throw new Exception("InputManager is missing. Player input cannot be read.");
         }
 
-        private void AddKillStatistic(int number = 1)
+        public void IncreaseKillcount()
         {
-            _killCount += number;
+            _killCount++;
             // todo: update ui
+        }
+
+
+        public void SpawnUpgrade()
+        {
+            
+        }
+        
+        private void GetNextUpgrade()
+        {
+            throw new NotImplementedException();
         }
     }
 }
