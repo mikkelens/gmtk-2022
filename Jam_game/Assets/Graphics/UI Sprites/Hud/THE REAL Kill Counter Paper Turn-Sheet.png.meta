@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e33176e27edc0c348b9848b6b1812ae0
+guid: 602d19be519e54e48ba8b120de5c2ac3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_0
+      name: THE REAL Kill Counter Paper Turn-Sheet_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 24
-        height: 34
+        x: 0
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28f77ca409ea3834a9073ac69bb623b9
-      internalID: 198439297
+      spriteID: a12ec91a8c0e444409d6dd0cb36bb583
+      internalID: -1281199775
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_1
+      name: THE REAL Kill Counter Paper Turn-Sheet_1
       rect:
         serializedVersion: 2
         x: 28
-        y: 2
-        width: 24
-        height: 34
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a68dc1bfbf2f9744d8b00c422b0d3e4c
-      internalID: -885600614
+      spriteID: c9d29878d2ef1744281291dfc5a70b4c
+      internalID: -1368875681
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_2
+      name: THE REAL Kill Counter Paper Turn-Sheet_2
       rect:
         serializedVersion: 2
-        x: 54
-        y: 2
-        width: 24
-        height: 41
+        x: 56
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc8c8f4e14e1efc499cae1bfd35e26b8
-      internalID: 377804896
+      spriteID: 40f6d9497b1b85346962efa0bc5ca5c4
+      internalID: -416991562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_3
+      name: THE REAL Kill Counter Paper Turn-Sheet_3
       rect:
         serializedVersion: 2
-        x: 80
-        y: 2
-        width: 26
-        height: 50
+        x: 84
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbf2e07a793ebab469044aae0b060c08
-      internalID: -735418480
+      spriteID: 74e28ca6bc59ec344a4528e966336354
+      internalID: -1529156414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_4
+      name: THE REAL Kill Counter Paper Turn-Sheet_4
       rect:
         serializedVersion: 2
-        x: 108
-        y: 2
-        width: 26
-        height: 52
+        x: 112
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fc4aa0abd33d91489d195ed3cb632c1
-      internalID: 1357016166
+      spriteID: 7a64ff88862ea854cae03e0bfb1c32da
+      internalID: 17733024
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_5
+      name: THE REAL Kill Counter Paper Turn-Sheet_5
       rect:
         serializedVersion: 2
-        x: 136
-        y: 2
-        width: 26
-        height: 45
+        x: 140
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,20 +223,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f427039e0c41fe24c9fec8f3c29e4c75
-      internalID: -979984493
+      spriteID: 384815c3661c4c84983670275173e5e3
+      internalID: 1745553761
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_6
+      name: THE REAL Kill Counter Paper Turn-Sheet_6
       rect:
         serializedVersion: 2
-        x: 164
-        y: 2
-        width: 26
-        height: 34
+        x: 168
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,20 +244,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ea62b55bac3dbd4a8ba5f9902831e2a
-      internalID: 2090651915
+      spriteID: 6b15d2142b0ad744dafd7b70d37658ba
+      internalID: -4303296
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_7
+      name: THE REAL Kill Counter Paper Turn-Sheet_7
       rect:
         serializedVersion: 2
-        x: 192
-        y: 2
-        width: 26
-        height: 34
+        x: 196
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,20 +265,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44c6a9729d7a3f041bb56796ec04db00
-      internalID: 231627094
+      spriteID: 6dfc8aa935854f54686003d0afc2205e
+      internalID: -1281359335
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_8
+      name: THE REAL Kill Counter Paper Turn-Sheet_8
       rect:
         serializedVersion: 2
-        x: 220
-        y: 2
-        width: 24
-        height: 34
+        x: 224
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,20 +286,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4120bbee21703fe4381ec52c9e35a7ad
-      internalID: 2041469840
+      spriteID: 06150ac06d650df449914c9eefd10bfd
+      internalID: -469896740
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_9
+      name: THE REAL Kill Counter Paper Turn-Sheet_9
       rect:
         serializedVersion: 2
-        x: 246
-        y: 3
-        width: 24
-        height: 33
+        x: 252
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,20 +307,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2ce59f0f0acf2840a84c082f148ee86
-      internalID: 1706523059
+      spriteID: 516f4d6a7ac023343907928024ae5363
+      internalID: -96746357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_10
+      name: THE REAL Kill Counter Paper Turn-Sheet_10
       rect:
         serializedVersion: 2
-        x: 272
-        y: 3
-        width: 24
-        height: 33
+        x: 280
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,20 +328,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85775917e46b8d34e9eab6c17acf725d
-      internalID: 1121713927
+      spriteID: 46063902ca683ae49bcad50b932ee857
+      internalID: 752782548
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_11
+      name: THE REAL Kill Counter Paper Turn-Sheet_11
       rect:
         serializedVersion: 2
-        x: 298
-        y: 2
-        width: 24
-        height: 34
+        x: 308
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -349,20 +349,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02d14be660d018a45843f0d848556360
-      internalID: 1534935531
+      spriteID: 60f6fc0284f65ee4cbcb2da9afb41d4c
+      internalID: -1519970128
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_12
+      name: THE REAL Kill Counter Paper Turn-Sheet_12
       rect:
         serializedVersion: 2
-        x: 324
-        y: 2
-        width: 24
-        height: 34
+        x: 336
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -370,20 +370,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 892094216d6f2344e9ccc4e490f71dc0
-      internalID: 330959457
+      spriteID: 0518082cf6660bb46abc2f7e1d687ba0
+      internalID: -1601718016
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_13
+      name: THE REAL Kill Counter Paper Turn-Sheet_13
       rect:
         serializedVersion: 2
-        x: 350
-        y: 3
-        width: 26
-        height: 33
+        x: 364
+        y: 0
+        width: 28
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -391,29 +391,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2c1e067c09951c4b88b99b493879b4c
-      internalID: -275394564
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kill Counter Sprite Sheet_14
-      rect:
-        serializedVersion: 2
-        x: 378
-        y: 2
-        width: 26
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f2e8da7a1281a444890df63e5f364486
-      internalID: -1805972561
+      spriteID: 072f16416b01b6044ae1f2b21709a26a
+      internalID: 2096131219
       vertices: []
       indices: 
       edges: []
@@ -421,7 +400,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e97cde4267caee34faf915131cbc3dfe
+    spriteID: f988244db4c4868498162accc8179d51
     internalID: 0
     vertices: []
     indices: 
@@ -429,21 +408,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Kill Counter Sprite Sheet_8: 2041469840
-      Kill Counter Sprite Sheet_10: 1121713927
-      Kill Counter Sprite Sheet_12: 330959457
-      Kill Counter Sprite Sheet_14: -1805972561
-      Kill Counter Sprite Sheet_0: 198439297
-      Kill Counter Sprite Sheet_1: -885600614
-      Kill Counter Sprite Sheet_5: -979984493
-      Kill Counter Sprite Sheet_11: 1534935531
-      Kill Counter Sprite Sheet_3: -735418480
-      Kill Counter Sprite Sheet_9: 1706523059
-      Kill Counter Sprite Sheet_13: -275394564
-      Kill Counter Sprite Sheet_4: 1357016166
-      Kill Counter Sprite Sheet_6: 2090651915
-      Kill Counter Sprite Sheet_2: 377804896
-      Kill Counter Sprite Sheet_7: 231627094
+      THE REAL Kill Counter Paper Turn-Sheet_11: -1519970128
+      THE REAL Kill Counter Paper Turn-Sheet_5: 1745553761
+      THE REAL Kill Counter Paper Turn-Sheet_13: 2096131219
+      THE REAL Kill Counter Paper Turn-Sheet_7: -1281359335
+      THE REAL Kill Counter Paper Turn-Sheet_0: -1281199775
+      THE REAL Kill Counter Paper Turn-Sheet_1: -1368875681
+      THE REAL Kill Counter Paper Turn-Sheet_8: -469896740
+      THE REAL Kill Counter Paper Turn-Sheet_4: 17733024
+      THE REAL Kill Counter Paper Turn-Sheet_2: -416991562
+      THE REAL Kill Counter Paper Turn-Sheet_3: -1529156414
+      THE REAL Kill Counter Paper Turn-Sheet_6: -4303296
+      THE REAL Kill Counter Paper Turn-Sheet_10: 752782548
+      THE REAL Kill Counter Paper Turn-Sheet_12: -1601718016
+      THE REAL Kill Counter Paper Turn-Sheet_9: -96746357
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

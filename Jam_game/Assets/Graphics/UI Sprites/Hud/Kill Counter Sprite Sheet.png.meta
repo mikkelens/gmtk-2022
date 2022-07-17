@@ -107,10 +107,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 24
-        height: 34
+        x: 0
+        y: 1
+        width: 26
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,10 +128,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_1
       rect:
         serializedVersion: 2
-        x: 28
-        y: 2
-        width: 24
-        height: 34
+        x: 26
+        y: 1
+        width: 26
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,10 +149,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_2
       rect:
         serializedVersion: 2
-        x: 54
-        y: 2
-        width: 24
-        height: 41
+        x: 52
+        y: 1
+        width: 26
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -170,10 +170,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_3
       rect:
         serializedVersion: 2
-        x: 80
-        y: 2
+        x: 78
+        y: 1
         width: 26
-        height: 50
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,10 +191,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_4
       rect:
         serializedVersion: 2
-        x: 108
-        y: 2
+        x: 104
+        y: 1
         width: 26
-        height: 52
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,10 +212,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_5
       rect:
         serializedVersion: 2
-        x: 136
-        y: 2
+        x: 130
+        y: 1
         width: 26
-        height: 45
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -233,10 +233,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_6
       rect:
         serializedVersion: 2
-        x: 164
-        y: 2
+        x: 156
+        y: 1
         width: 26
-        height: 34
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -254,10 +254,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_7
       rect:
         serializedVersion: 2
-        x: 192
-        y: 2
+        x: 182
+        y: 1
         width: 26
-        height: 34
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,10 +275,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_8
       rect:
         serializedVersion: 2
-        x: 220
-        y: 2
-        width: 24
-        height: 34
+        x: 208
+        y: 1
+        width: 26
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -296,10 +296,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_9
       rect:
         serializedVersion: 2
-        x: 246
-        y: 3
-        width: 24
-        height: 33
+        x: 234
+        y: 1
+        width: 26
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -317,10 +317,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_10
       rect:
         serializedVersion: 2
-        x: 272
-        y: 3
-        width: 24
-        height: 33
+        x: 260
+        y: 1
+        width: 26
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,10 +338,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_11
       rect:
         serializedVersion: 2
-        x: 298
-        y: 2
-        width: 24
-        height: 34
+        x: 286
+        y: 1
+        width: 26
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -359,10 +359,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_12
       rect:
         serializedVersion: 2
-        x: 324
-        y: 2
-        width: 24
-        height: 34
+        x: 312
+        y: 1
+        width: 26
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -380,10 +380,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_13
       rect:
         serializedVersion: 2
-        x: 350
-        y: 3
+        x: 338
+        y: 1
         width: 26
-        height: 33
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -401,10 +401,10 @@ TextureImporter:
       name: Kill Counter Sprite Sheet_14
       rect:
         serializedVersion: 2
-        x: 378
-        y: 2
+        x: 364
+        y: 1
         width: 26
-        height: 34
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
