@@ -17,10 +17,12 @@ MonoBehaviour:
   maxSpeed: 5
   walkAccelSpeed: 65
   stopBonus: 3
-  maxTurnSpeed: 0
+  maxTurnSpeed: 8
   turnSpeedCurve:
+    serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 3
+      time: 0
       value: 1
       inSlope: 0
       outSlope: 0
@@ -28,7 +30,8 @@ MonoBehaviour:
       weightedMode: 3
       inWeight: 0
       outWeight: 0.49795082
-    - time: 1
+    - serializedVersion: 3
+      time: 1
       value: 0.5
       inSlope: -0.0017211437
       outSlope: -0.0017211437
