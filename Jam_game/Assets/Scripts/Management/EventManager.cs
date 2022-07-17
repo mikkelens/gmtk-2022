@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Gameplay.Entities.Enemies;
+using Gameplay.Events;
 using UnityEngine;
 
-namespace Gameplay.Spawning
+namespace Management
 {
     public class SpawnManager : MonoBehaviour
     {
@@ -12,8 +11,6 @@ namespace Gameplay.Spawning
         
         [SerializeField] private Transform rootEnemyParent;
         [SerializeField] private List<CombatEvent> combatEvents = new List<CombatEvent>();
-
-        private CombatEvent _currentCombatEvent;
 
         private void Awake()
         {
@@ -31,7 +28,6 @@ namespace Gameplay.Spawning
             // Run each event
             foreach (CombatEvent combatEvent in combatEvents)
             {
-                _currentCombatEvent = combatEvent;
                 combatEvent.SetSpawningParent(rootEnemyParent);
                 // Run this event
                 yield return combatEvent.RunEvent();

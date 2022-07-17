@@ -1,5 +1,7 @@
 using Gameplay.Entities.Base;
+using Gameplay.Entities.StatsAssets;
 using Gameplay.Level;
+using Gameplay.Upgrades;
 using Tools;
 using UnityEngine;
 
@@ -12,9 +14,16 @@ namespace Gameplay.Entities.PlayerScripts
         
         [SerializeField] private float aimTurnSpeedBonus = 2f;
 
+        public PlayerStats PlayerStats;
+        
         private void Awake()
         {
             Instance = this;
+
+            PlayerStats = new()
+            {
+                // todo: add stats here
+            };
         }
 
         // movement is decided by input set in "Player.Input.cs"

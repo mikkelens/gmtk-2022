@@ -1,3 +1,6 @@
+using System;
+using Gameplay.Entities.StatsAssets;
+using Gameplay.Upgrades;
 using Management;
 using UnityEngine;
 
@@ -8,10 +11,12 @@ namespace Gameplay.Entities.Base
     [SelectionBase]
     public class Entity : MonoBehaviour
     {
-        // base settings
-        [SerializeField] protected int startingHealth = 10;
-        [SerializeField] private bool godMode;
+        [SerializeField] protected Stats startingStats;
         
+        // base settings
+        private Stats _stats; // lowest tier
+        protected Stats Stats => _stats;
+
         // outside components
         protected GameManager Manager;
 
@@ -24,6 +29,7 @@ namespace Gameplay.Entities.Base
 
         protected virtual void Start()
         {
+            Stats = startingStats;
             Transform = transform;
             Animator = GetComponentInChildren<Animator>();
             if (Animator == null) Debug.LogWarning($"No animator component found on entity '{name}'");

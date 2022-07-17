@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4871413564851cf4da16e7f47447745f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 10
+  startingHealth: 5
   godMode: 0
   maxSpeed: 7
   walkAccelSpeed: 40

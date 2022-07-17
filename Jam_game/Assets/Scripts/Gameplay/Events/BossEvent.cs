@@ -3,7 +3,7 @@ using Gameplay.Entities.Enemies;
 using Management;
 using UnityEngine;
 
-namespace Gameplay.Spawning
+namespace Gameplay.Events
 {
     public class BossEvent : CombatEvent
     {
@@ -22,6 +22,12 @@ namespace Gameplay.Spawning
             yield return new WaitUntil(() => !_bossAlive);
             
             GameManager.Instance.SpawnUpgrade();
+        }
+
+        protected override Enemy SpawnEnemy(Enemy enemyPrefab, Transform enemyParent)
+        {
+            _bossAlive = true;
+            return base.SpawnEnemy(enemyPrefab, enemyParent);
         }
 
         public override void DespawnEnemy(Enemy enemyToDespawn)
