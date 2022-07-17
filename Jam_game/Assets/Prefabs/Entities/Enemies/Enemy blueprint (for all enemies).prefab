@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 6121795126706553913, guid: 1a1613ff0ed8f1c4bb6b17c943013247,
         type: 3}
       propertyPath: m_Name
-      value: Enemy blueprint
+      value: Enemy blueprint (for all enemies)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a1613ff0ed8f1c4bb6b17c943013247, type: 3}
@@ -87,8 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf116f99f4e4719a44bc80a9d7fbe56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingStats: {fileID: 0}
-  myStats: {fileID: 0}
+  startingStats: {fileID: 11400000, guid: 8001e69821194a240acd4c6966b5be4a, type: 2}
+  stats: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
