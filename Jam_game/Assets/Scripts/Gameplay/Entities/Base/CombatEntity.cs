@@ -5,21 +5,18 @@ using UnityEngine;
 
 namespace Gameplay.Entities.Base
 {
+    /// <summary>
+    ///  reeeeeee
+    /// </summary>
+    
     [Tooltip("Combat Entity: This can hit other entites.")]
     public class CombatEntity : MovableEntity
     {
-        [SerializeField] protected int damage = 1;
-        [SerializeField] protected float basicKnockbackStrength = 10f;
-        [SerializeField] protected float meleeKnockbackBonus = 2f;
-        [SerializeField] protected float meleeDistance = 2.5f;
-        [SerializeField] protected float meleeCooldown = 1.25f;
-        [SerializeField] protected bool autoAttacks = true; // should be false on player
-
         protected int TargetLayerMask;
         protected float LastAttackTime;
         
-        protected virtual bool WantsToAttack => autoAttacks;
-        protected bool CanAttack => LastAttackTime.TimeSince() >= meleeCooldown;
+        protected virtual bool WantsToAttack => Stats.autoAttacks;
+        protected bool CanAttack => LastAttackTime.TimeSince() >= Stats.meleeCooldown;
         protected Ray AttackRay => new Ray(Transform.position, Transform.forward);
 
         private void Awake()
@@ -54,7 +51,7 @@ namespace Gameplay.Entities.Base
         protected void TryMelee()
         {
             // Raycast for hit
-            if (Physics.Raycast(AttackRay, out RaycastHit hitData, meleeDistance, TargetLayerMask)) // Within distance?
+            if (Physics.Raycast(AttackRay, out RaycastHit hitData, Stats.meleeDistance, TargetLayerMask)) // Within distance?
                 HitOther(hitData.transform.GetComponent<Entity>());
             Stopping = false;
             Animator.ResetTrigger("Attack");
@@ -62,9 +59,9 @@ namespace Gameplay.Entities.Base
 
         protected void HitOther(Entity entity)
         {
-            Vector2 knockback = GetTargetLookDirection() * basicKnockbackStrength;
+            Vector2 knockback = GetTargetLookDirection() * Stats.basicKnockbackStrength;
             ApplyKnockback(-knockback); // apply knockback to self
-            entity.TakeHit(damage, knockback);
+            entity.TakeHit(Stats.meleeDamage, knockback);
         }
     }
 }

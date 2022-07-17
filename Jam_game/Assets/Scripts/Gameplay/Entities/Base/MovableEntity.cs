@@ -8,18 +8,6 @@ namespace Gameplay.Entities.Base
     [RequireComponent(typeof(Rigidbody))]
     public class MovableEntity : Entity
     {
-        // moving
-        [SerializeField] protected float maxSpeed = 5f;
-        [SerializeField] protected float walkAccelSpeed = 65f;
-        [SerializeField] protected float stopBonus = 3f;
-        
-        // turning
-        [SerializeField] protected float maxTurnSpeed; // in angles per second
-        [SerializeField] protected AnimationCurve turnSpeedCurve; // changes the turn speed dynamically
-
-        // misc
-        [SerializeField] protected bool freezeAffectsRotation;
-
         [ButtonGroup("FreezeButtons")]
         [HideIf("@IsFrozen")]
         [Button("Freeze")] public void FreezeEntity() => IsFrozen = true;
@@ -35,7 +23,7 @@ namespace Gameplay.Entities.Base
         protected Vector2 Velocity; // on the topdown plane view
         
         protected virtual bool CanMove => !IsFrozen && !Stopping;
-        protected virtual bool CanRotate => !IsFrozen || !freezeAffectsRotation;
+        protected virtual bool CanRotate => !IsFrozen || !Stats.freezeAffectsRotation;
 
         protected override void Start()
         {
@@ -56,10 +44,10 @@ namespace Gameplay.Entities.Base
         public virtual void UpdateMovement()
         {
             // Look towards goal in some way
-            TurnTowardsLookDirection();
+            TurnTowardsLookDirection(GetTargetLookDirection());
 
             // Update velocity from goal/player/input
-            Vector2 targetVelocity = CanMove ? GetTargetMoveDirection() * maxSpeed : Vector2.zero;
+            Vector2 targetVelocity = CanMove ? GetTargetMoveDirection() * Stats.maxSpeed : Vector2.zero;
             Velocity = Vector2.MoveTowards(Rb.velocity.WorldToPlane(), targetVelocity, GetAcceleration() * Time.deltaTime);
             Rb.velocity = Velocity.PlaneToWorld();
             // MoveByWorldVelocity(Velocity.PlaneToWorld());
@@ -77,30 +65,29 @@ namespace Gameplay.Entities.Base
             return Vector2.zero; // default move direction in case nothing is used..?
         }
 
-        private void TurnTowardsLookDirection()
+        protected virtual void TurnTowardsLookDirection(Vector2 targetDirection)
         {
             if (!CanRotate) return;
-            Vector2 direction = GetTargetLookDirection();
-            if (direction.magnitude == 0f) return;
+            if (targetDirection.magnitude == 0f) return;
             Quaternion currentRotation = Transform.rotation; // rotations are in world space
-            Quaternion targetRotation = Quaternion.LookRotation(direction.PlaneToWorld());
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection.PlaneToWorld());
             float turnSpeed = GetTurnSpeed(currentRotation, targetRotation);
             Quaternion newRotation = Quaternion.RotateTowards(currentRotation, targetRotation, turnSpeed * Time.deltaTime);
             Transform.rotation = newRotation;
-            PreviousLookDirection = direction;
+            PreviousLookDirection = targetDirection;
         }
         protected virtual float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
             float tFromAngle = Quaternion.Angle(currentRotation, targetRotation) / 180f; // 180 is max possible angle
-            float dynamicTurnSpeed = turnSpeedCurve.Evaluate(1f - tFromAngle) * 180;
-            return dynamicTurnSpeed * maxTurnSpeed;
+            float dynamicTurnSpeed = Stats.turnSpeedCurve.Evaluate(1f - tFromAngle) * 180;
+            return dynamicTurnSpeed * Stats.maxTurnSpeed;
         }
         private float GetAcceleration()
         {
             float likeness = Vector2.Dot(Velocity.normalized, GetTargetMoveDirection().normalized);
             float stopFactor = (1f - likeness) / 2f; // from (-1 to 1) to (0 to 1), and in reverse
-            float accel = walkAccelSpeed;
-            accel += walkAccelSpeed * stopBonus * stopFactor;
+            float accel = Stats.walkAccelSpeed;
+            accel += Stats.walkAccelSpeed * Stats.stopBonus * stopFactor;
             return accel;
         }
 
