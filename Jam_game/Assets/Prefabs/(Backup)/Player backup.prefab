@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5058529303807555040}
   - component: {fileID: 5736735974964753125}
   m_Layer: 7
-  m_Name: Player
+  m_Name: Player backup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

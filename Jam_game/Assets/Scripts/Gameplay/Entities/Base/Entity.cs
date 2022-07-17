@@ -11,7 +11,7 @@ namespace Gameplay.Entities.Base
         [SerializeField] private EntityStats startingStats;
 
         [HideInInspector]
-        public EntityStats myStats;
+        public EntityStats stats;
 
         // outside components
         protected GameManager Manager;
@@ -31,11 +31,12 @@ namespace Gameplay.Entities.Base
             Animator = GetComponentInChildren<Animator>();
             if (Animator == null) Debug.Log($"No animator component found on entity '{name}'.");
             
-            myStats = startingStats.Clone() as EntityStats;
+            stats = startingStats.Clone() as EntityStats;
         }
 
         protected virtual void Start()
         {
+            SetHealth(stats.maxHealth);
             Manager = GameManager.Instance;
         }
         protected virtual void Update()
@@ -50,7 +51,7 @@ namespace Gameplay.Entities.Base
         }
         private void ApplyDamage(int damage)
         {
-            if (myStats.godMode) return;
+            if (stats.godMode) return;
             _currentHealth -= damage;
             if (_currentHealth <= 0) KillThis();
 
@@ -70,7 +71,7 @@ namespace Gameplay.Entities.Base
 
         public void HealToFull()
         {
-            SetHealth(myStats.maxHealth);
+            SetHealth(stats.maxHealth);
         }
         private void SetHealth(int health)
         {

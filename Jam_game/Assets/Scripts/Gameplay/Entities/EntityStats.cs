@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Gameplay.Entities
 {
-    [CreateAssetMenu(fileName = "NewStatsAsset", menuName = "Entities/StatsAsset")]
+    [CreateAssetMenu(fileName = "NewStatsAsset", menuName = "Stats/StatsAsset")]
     public class EntityStats : ScriptableObject, ICloneable
     {
         public object Clone()
@@ -18,7 +18,7 @@ namespace Gameplay.Entities
         [Header("Movable Entity stats")]
         public float maxSpeed = 5f;
         public float walkAccelSpeed = 65f;
-        public float stopBonus = 3f;
+        public float maxStopBonus = 3f;
         public float maxTurnSpeed = 10f; // in angles per second
         public AnimationCurve turnSpeedCurve = new AnimationCurve(); // changes the turn speed dynamically
         public bool freezingAffectsRotation = false;
@@ -26,22 +26,23 @@ namespace Gameplay.Entities
 
         [Header("Combat Entity stats")]
         public bool autoAttacks = true; // should be false on player
-        public int basicDamage = 1;
-        public int meleeDamage = 1;
-        public float meleeDistance = 2.5f;
-        public float meleeCooldown = 1.25f;
-        public float basicKnockbackStrength = 10f;
-        public float meleeKnockbackBonus = 2f;
-        
+        public int collisionDamage = 1;
+        public float collisionKnockback = 1f;
+        public Attack mainMeleeAttack;
+
         [Header("Player Entity stats")]
-        public int alternateMeleeDamage = 2;
+        public Attack altMeleeAttack;
         public float aimTurnSpeedBonus = 2f;
         
         [Header("Enemy Entity stats")]
         [Tooltip("Relative to other enemies of the same wave.")]
         public float relativeSpawnChance = 1f;
-        public float meleeAttackDelay = 0.75f; // could be automated using animation time info maybe actually but i dont wanna do it
+        public float attackChargeTime = 0.75f; // could be automated using animation time info maybe actually but i dont wanna do it
+        public float minAttackAttemptDistance = 2.5f;
         public float stunDuration = 0.5f; // applied when taking damage
+        
+        [Header("Reptile Entity Stats")]
+        public float headTurnAngle = 1f; // in degrees
         
         // todo: add more stats
     }

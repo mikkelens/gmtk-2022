@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6121795126706553912}
-  - component: {fileID: 5791818687959597750}
   - component: {fileID: 3497333121765313740}
   - component: {fileID: 5496849764746132951}
   m_Layer: 6
-  m_Name: Enemy_BLUEPRINT
+  m_Name: Entity blueprint (base)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,58 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5791818687959597750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6121795126706553913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caf116f99f4e4719a44bc80a9d7fbe56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 10
-  godMode: 0
-  maxSpeed: 5
-  walkAccelSpeed: 65
-  stopBonus: 1
-  maxTurnSpeed: 0.85
-  turnSpeedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0.0016193996
-      outSlope: 0.0016193996
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0
-      outWeight: 0.4956381
-    - serializedVersion: 3
-      time: 1
-      value: 0.5
-      inSlope: -0.0023728684
-      outSlope: -0.0023728684
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.4960547
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  freezeAffectsRotation: 0
-  damage: 1
-  basicKnockbackStrength: 10
-  meleeKnockbackBonus: 2
-  meleeDistance: 2
-  meleeAttackDelay: 0.75
-  meleeCooldown: 1.5
-  autoAttacks: 1
-  relativeSpawnChance: 1
-  stunDuration: 0.8
 --- !u!135 &3497333121765313740
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -109,7 +56,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1

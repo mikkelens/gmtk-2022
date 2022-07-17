@@ -5,14 +5,15 @@ using UnityEngine;
 namespace Gameplay.Entities.Base
 {
     [Tooltip("Combat Entity: This can hit other entites.")]
-    public class CombatEntity : MovableEntity
+    public class CombatEntity : MovingEntity
     {
         [SerializeField] protected LayerMask targetLayerMask;
         
         protected float LastAttackTime;
+        protected float LastAttackCooldown;
         
-        protected virtual bool WantsToAttack => myStats.autoAttacks;
-        protected virtual bool CanAttack => LastAttackTime.TimeSince() >= myStats.meleeCooldown;
+        protected virtual bool WantsToAttack => stats.autoAttacks;
+        protected virtual bool CanAttack => LastAttackTime.TimeSince() >= LastAttackCooldown;
         protected virtual Ray AttackRay => new Ray(Transform.position, Transform.forward);
         
         protected override void Update()
@@ -22,36 +23,35 @@ namespace Gameplay.Entities.Base
             // See thing in attack box
             if (WantsToAttack && CanAttack)
             {
-                StartAttack();
+                StartAttack(stats.mainMeleeAttack);
             }
         }
 
-        private void StartAttack()
+        private void StartAttack(Attack attack)
         {
             LastAttackTime = Time.time;
             Animator.SetTrigger("Attack");
-            StartMelee();
+            StartMelee(attack);
         }
 
-        protected virtual void StartMelee()
+        protected virtual void StartMelee(Attack attack)
         {
-            TryMelee();
+            TryMelee(attack);
         }
         
-        protected void TryMelee()
+        protected void TryMelee(Attack attack)
         {
             // Raycast for hit
-            if (Physics.Raycast(AttackRay, out RaycastHit hitData, myStats.meleeDistance, targetLayerMask.value)) // Within distance?
-                HitOther(hitData.transform.GetComponent<Entity>());
-            Stopping = false;
+            if (Physics.Raycast(AttackRay, out RaycastHit hitData, attack.maxDistance, targetLayerMask.value)) // Within distance?
+                HitOther(hitData.transform.GetComponent<Entity>(), attack);
             Animator.ResetTrigger("Attack");
         }
 
-        protected void HitOther(Entity entity)
+        protected void HitOther(Entity entity, Attack attack)
         {
-            Vector2 knockback = GetTargetLookDirection() * myStats.basicKnockbackStrength;
-            ApplyKnockback(-knockback); // apply knockback to self
-            entity.TakeHit(myStats.meleeDamage, knockback);
+            Vector2 lookDirection = GetTargetLookDirection();
+            entity.TakeHit(attack.damage, lookDirection * attack.targetKnockbackStrength);
+            ApplyKnockback(-lookDirection * attack.selfKnockbackStrength); // apply knockback to self
         }
     }
 }

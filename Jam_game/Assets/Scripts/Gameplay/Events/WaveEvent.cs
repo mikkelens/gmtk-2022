@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 namespace Gameplay.Events
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "New Wave Asset", menuName = "Spawning/Wave Event Asset")]
+    [CreateAssetMenu(fileName = "New Wave Asset", menuName = "CombatEvents/Wave Event Asset")]
     public class WaveEvent : CombatEvent
     {
         public float spawnDelay = 2f;
@@ -43,12 +43,12 @@ namespace Gameplay.Events
         private Enemy SelectEnemyAsset(IReadOnlyCollection<Enemy> allEnemies)
         {
             // count up spawn chances as a range, then generate a number within the range. Enemy with lowest number but above generated number will be chosen.
-            float totalSpawnRange = allEnemies.Sum(enemy => enemy.myStats.relativeSpawnChance);
+            float totalSpawnRange = allEnemies.Sum(enemy => enemy.stats.relativeSpawnChance);
             float random = Random.Range(0, totalSpawnRange);
             float last = 0f;
             return allEnemies.First(enemy =>
             {
-                last += enemy.myStats.relativeSpawnChance;
+                last += enemy.stats.relativeSpawnChance;
                 return last >= random;
             });
         }

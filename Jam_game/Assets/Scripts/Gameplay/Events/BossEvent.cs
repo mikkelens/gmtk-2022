@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Gameplay.Events
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "New Boss Event Asset", menuName = "Spawning/Boss Event Asset")]
+    [CreateAssetMenu(fileName = "New Boss Event Asset", menuName = "CombatEvents/Boss Event Asset")]
     public class BossEvent : CombatEvent
     {
         [SerializeField] private Enemy bossPrefabToSpawn;
