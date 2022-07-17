@@ -9,8 +9,6 @@ namespace Gameplay.Entities.PlayerScripts
     public sealed partial class Player : CombatEntity // main
     {
         public static Player Instance;
-        
-        [SerializeField] private float aimTurnSpeedBonus = 2f;
 
         private void Awake()
         {
@@ -33,7 +31,7 @@ namespace Gameplay.Entities.PlayerScripts
         protected override float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
             float turnSpeed = base.GetTurnSpeed(currentRotation, targetRotation);
-            if (IsAiming) turnSpeed += turnSpeed * aimTurnSpeedBonus;
+            if (IsAiming) turnSpeed += turnSpeed * Stats.aimTurnSpeedBonus;
             return turnSpeed;
         }
 
