@@ -23,7 +23,7 @@ namespace Gameplay.Level
 
         private void Despawn()
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }
