@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dc76fcabe9648f64cbf30cad4ddf648c
+guid: cef4e89b564dc2a4ebc7093af7c07131
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lights Spritesheet_0
+      name: THE REALLight-Sheet_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 21
-        height: 21
+        x: 0
+        y: 0
+        width: 23
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16b432f1b2f8adb4680232cfbcb5d0bc
-      internalID: 2096527779
+      spriteID: 8030d431e63d688429e8173f1515147b
+      internalID: 237650301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lights Spritesheet_1
+      name: THE REALLight-Sheet_1
       rect:
         serializedVersion: 2
         x: 23
-        y: 3
-        width: 17
-        height: 17
+        y: 0
+        width: 23
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c08325aa09a669747b30e411a974047c
-      internalID: 314791989
+      spriteID: 48f742d3661859c4a9e8a554b7ca43ca
+      internalID: -697645301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lights Spritesheet_2
+      name: THE REALLight-Sheet_2
       rect:
         serializedVersion: 2
-        x: 41
-        y: 6
-        width: 11
-        height: 11
+        x: 46
+        y: 0
+        width: 23
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd4675e1f5741344fa76fc89061b6de6
-      internalID: -1327336723
+      spriteID: af7085b9a3e6a8843b55a7d3dbbf797c
+      internalID: -176897118
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lights Spritesheet_3
+      name: THE REALLight-Sheet_3
       rect:
         serializedVersion: 2
-        x: 53
-        y: 7
-        width: 9
-        height: 9
+        x: 69
+        y: 0
+        width: 23
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 169fbf946c76cc54c9328fa1cb23a3d1
-      internalID: -1555824341
+      spriteID: a34d2646b16200e408b0926fa47c2372
+      internalID: -839805413
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lights Spritesheet_4
+      name: THE REALLight-Sheet_4
       rect:
         serializedVersion: 2
-        x: 63
-        y: 6
-        width: 11
-        height: 11
+        x: 92
+        y: 0
+        width: 23
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3bbe56b3cba08043985eff58d6b6fa2
-      internalID: -1969018795
+      spriteID: 07ce76e42ed63db4db29ec4bed0381c9
+      internalID: -444471307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lights Spritesheet_5
+      name: THE REALLight-Sheet_5
       rect:
         serializedVersion: 2
-        x: 75
-        y: 4
-        width: 15
-        height: 15
+        x: 115
+        y: 0
+        width: 23
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,29 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8e9a35c209968f4e9f993241e774592
-      internalID: 189552342
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lights Spritesheet_6
-      rect:
-        serializedVersion: 2
-        x: 91
-        y: 1
-        width: 21
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 58601271dcdcc884dac4823b20401eab
-      internalID: -873365377
+      spriteID: 52671db50a21ffc40963293e6833c61a
+      internalID: 1821178687
       vertices: []
       indices: 
       edges: []
@@ -253,7 +232,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 6ee2407e9b948e0469a54e2e5fc99452
+    spriteID: cfb479a127c246a4ca2283681fc3fe66
     internalID: 0
     vertices: []
     indices: 
@@ -261,13 +240,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Lights Spritesheet_6: -873365377
-      Lights Spritesheet_1: 314791989
-      Lights Spritesheet_3: -1555824341
-      Lights Spritesheet_2: -1327336723
-      Lights Spritesheet_5: 189552342
-      Lights Spritesheet_0: 2096527779
-      Lights Spritesheet_4: -1969018795
+      THE REALLight-Sheet_0: 237650301
+      THE REALLight-Sheet_3: -839805413
+      THE REALLight-Sheet_5: 1821178687
+      THE REALLight-Sheet_1: -697645301
+      THE REALLight-Sheet_4: -444471307
+      THE REALLight-Sheet_2: -176897118
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
