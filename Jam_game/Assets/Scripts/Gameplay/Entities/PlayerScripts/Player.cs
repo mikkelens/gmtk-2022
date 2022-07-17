@@ -6,19 +6,20 @@ using UnityEngine;
 namespace Gameplay.Entities.PlayerScripts
 {
     [Tooltip("Player: This is the player script. It also derives from entity scripts.")]
-    public sealed partial class Player : CombatEntity // main
+    public partial class Player : CombatEntity // main
     {
         public static Player Instance;
 
-        private void Awake()
+        protected override void Awake()
         {
             Instance = this;
+            base.Awake();
         }
 
         // movement is decided by input set in "Player.Input.cs"
         protected override Vector2 GetTargetLookDirection()
         {
-            if (IsAiming) return AimInput;
+            if (IsAiming) return LookDirection();
             if (IsMoving) return base.GetTargetLookDirection(); // updates look direction
             return PreviousLookDirection; // use previous look (aim) direction
         }
@@ -31,7 +32,7 @@ namespace Gameplay.Entities.PlayerScripts
         protected override float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
             float turnSpeed = base.GetTurnSpeed(currentRotation, targetRotation);
-            if (IsAiming) turnSpeed += turnSpeed * Stats.aimTurnSpeedBonus;
+            if (IsAiming) turnSpeed += turnSpeed * myStats.aimTurnSpeedBonus;
             return turnSpeed;
         }
 

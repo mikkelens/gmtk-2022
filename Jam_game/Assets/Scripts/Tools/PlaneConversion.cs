@@ -1,9 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace Tools
 {
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    // [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class PlaneConversion
     {
     #region Caching
@@ -13,6 +12,7 @@ namespace Tools
             get
             {
                 if (_main == null) _main = Camera.main;
+                if (_main == null) Debug.LogWarning("No main camera found.");
                 return _main;
             }
         }

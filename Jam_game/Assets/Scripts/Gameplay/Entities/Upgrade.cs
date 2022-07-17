@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Gameplay.Entities
 {
-    [CreateAssetMenu(fileName = "New Upgrade", menuName = "Upgrades/Upgrade")]
+    [CreateAssetMenu(fileName = "New Upgrade Asset", menuName = "Entities/Upgrade Asset")]
     public class Upgrade : ScriptableObject
     {
         // base
@@ -20,10 +20,9 @@ namespace Gameplay.Entities
         // player
         public Optional<int> alternateMeleeDamageBuff = new Optional<int>(1);
 
-        public void UpgradeStats(Stats stats)
+        public void UpgradeStats(EntityStats stats)
         {
             // base
-            
             
             // combat
             if (basicKnockbackStrengthBuff.Enabled)

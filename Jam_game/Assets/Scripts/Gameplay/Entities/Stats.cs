@@ -4,9 +4,14 @@ using UnityEngine;
 namespace Gameplay.Entities
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "New Upgrade", menuName = "Stats/BaseStats")]
-    public class Stats : ScriptableObject
+    [CreateAssetMenu(fileName = "NewStatsAsset", menuName = "Entities/StatsAsset")]
+    public class EntityStats : ScriptableObject, ICloneable
     {
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
+        
         [Header("Base Entity stats")]
         public bool godMode = false;
         public int maxHealth = 1; // should be higher for player
@@ -15,10 +20,10 @@ namespace Gameplay.Entities
         public float maxSpeed = 5f;
         public float walkAccelSpeed = 65f;
         public float stopBonus = 3f;
-        public float maxTurnSpeed; // in angles per second
+        public float maxTurnSpeed = 10f; // in angles per second
         public AnimationCurve turnSpeedCurve = new AnimationCurve(); // changes the turn speed dynamically
-        public bool freezeAffectsRotation = false;
-        public bool attackStopsRotation = true;
+        public bool freezingAffectsRotation = false;
+        public bool stoppingAffectsRotation = true;
 
         [Header("Combat Entity stats")]
         public bool autoAttacks = true; // should be false on player
@@ -38,7 +43,6 @@ namespace Gameplay.Entities
         public float relativeSpawnChance = 1f;
         public float meleeAttackDelay = 0.75f; // could be automated using animation time info maybe actually but i dont wanna do it
         public float stunDuration = 0.5f; // applied when taking damage
-
         
         // todo: add more stats
     }

@@ -47,44 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4871413564851cf4da16e7f47447745f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 10
-  godMode: 0
-  maxSpeed: 7
-  walkAccelSpeed: 40
-  stopBonus: 0.5
-  maxTurnSpeed: 10
-  turnSpeedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0.0016193996
-      outSlope: 0.0016193996
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0
-      outWeight: 0.4956381
-    - serializedVersion: 3
-      time: 1
-      value: 0.5
-      inSlope: -0.0023728684
-      outSlope: -0.0023728684
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.4960547
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  freezeAffectsRotation: 0
-  damage: 1
-  basicKnockbackStrength: 10
-  meleeKnockbackBonus: 2
-  meleeDistance: 2.5
-  meleeCooldown: 1.25
-  autoAttacks: 0
-  aimTurnSpeedBonus: 2.5
+  startingStats: {fileID: 11400000, guid: be0059c9e34bf41418db3aad13dd1be2, type: 2}
 --- !u!135 &5058529303807555040
 SphereCollider:
   m_ObjectHideFlags: 0

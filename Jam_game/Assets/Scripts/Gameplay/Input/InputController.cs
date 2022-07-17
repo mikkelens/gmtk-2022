@@ -52,17 +52,16 @@ namespace Gameplay.Input
         {
             _settings.Disable();
         }
-
-        [SuppressMessage("ReSharper", "HeapView.ClosureAllocation")]
+        
         private void Start()
         {
             // game manager
             _gameManager = GameManager.Instance;
-            if (_gameManager == null) throw new UnityException("No game manager in scene.");
+            if (_gameManager == null) Debug.LogWarning("No game manager in scene.");
             
             // camera
             _camera = Camera.main;
-            if (_camera == null) throw new UnityException("No main camera in scene.");
+            if (_camera == null) Debug.LogWarning("No main camera in scene.");
 
             SetPlayerBinds();
         }
@@ -70,7 +69,7 @@ namespace Gameplay.Input
         private void SetPlayerBinds()
         {
             _player = Player.Instance;
-            if (_player == null) throw new UnityException("No player on gamemanager.");
+            if (_player == null) Debug.LogWarning("No player on gamemanager.");
             
             // movement //
             // move

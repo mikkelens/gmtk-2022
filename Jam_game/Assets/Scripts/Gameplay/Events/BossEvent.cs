@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Gameplay.Entities.Enemies;
 using Management;
 using UnityEngine;
 
-namespace Gameplay.Spawning
+namespace Gameplay.Events
 {
+    [Serializable]
+    [CreateAssetMenu(fileName = "New Boss Event Asset", menuName = "Spawning/Boss Event Asset")]
     public class BossEvent : CombatEvent
     {
         [SerializeField] private Enemy bossPrefabToSpawn;

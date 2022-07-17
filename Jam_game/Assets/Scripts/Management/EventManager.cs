@@ -1,24 +1,27 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Gameplay.Entities.Enemies;
+using System.Linq;
+using Gameplay.Events;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Gameplay.Spawning
+namespace Management
 {
-    public class SpawnManager : MonoBehaviour
+    public class EventManager : MonoBehaviour
     {
-        public static SpawnManager Instance;
-        
+        public static EventManager Instance;
+
+        [SerializeField] private float minSpawnDistance = 10f;
         [SerializeField] private Transform rootEnemyParent;
         [SerializeField] private List<CombatEvent> combatEvents = new List<CombatEvent>();
-
-        private CombatEvent _currentCombatEvent;
 
         private void Awake()
         {
             Instance = this;
         }
+
+        [ShowInInspector]
+        private float TotalWaveTime => combatEvents.OfType<WaveEvent>().Sum(wave => wave.waveTime);
 
         public void Start()
         {
@@ -31,8 +34,8 @@ namespace Gameplay.Spawning
             // Run each event
             foreach (CombatEvent combatEvent in combatEvents)
             {
-                _currentCombatEvent = combatEvent;
                 combatEvent.SetSpawningParent(rootEnemyParent);
+                combatEvent.SetMinSpawnDistance(minSpawnDistance);
                 // Run this event
                 yield return combatEvent.RunEvent();
                 Debug.Log($"Ended event: {combatEvent.name}");
