@@ -7,7 +7,7 @@ using Tools;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Gameplay.Events
+namespace Gameplay.Spawning
 {
     [Serializable]
     [CreateAssetMenu(fileName = "New Wave", menuName = "Spawning/Wave")]
@@ -18,7 +18,7 @@ namespace Gameplay.Events
         [AssetsOnly]
         public List<Enemy> enemyPrefabsToSpawn;
         
-        private List<Enemy> _spawnedEnemies = new List<Enemy>();
+        private List<Enemy> _spawnedEnemies;
 
         public override IEnumerator RunEvent()
         {
