@@ -8,7 +8,7 @@ namespace Tools.Editor
     {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            var valueProperty = property.FindPropertyRelative("value");
+            SerializedProperty valueProperty = property.FindPropertyRelative("value");
             return EditorGUI.GetPropertyHeight(valueProperty);
         }
 
@@ -18,8 +18,8 @@ namespace Tools.Editor
             GUIContent label
         )
         {
-            var valueProperty = property.FindPropertyRelative("value");
-            var enabledProperty = property.FindPropertyRelative("enabled");
+            SerializedProperty valueProperty = property.FindPropertyRelative("value");
+            SerializedProperty enabledProperty = property.FindPropertyRelative("enabled");
 
             EditorGUI.BeginProperty(position, label, property);
             position.width -= 24;

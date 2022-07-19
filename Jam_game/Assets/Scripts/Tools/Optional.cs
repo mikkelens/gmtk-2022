@@ -11,13 +11,8 @@ namespace Tools
 
         public bool Enabled => enabled;
         public T Value => value;
-
-        public Optional(T initialValue)
-        {
-            enabled = false; // opt-in, disabled by default
-            value = initialValue;
-        }
-        public Optional(T initialValue, bool initialEnabled)
+        
+        public Optional(T initialValue, bool initialEnabled = false)
         {
             enabled = initialEnabled;
             value = initialValue;
