@@ -1,4 +1,5 @@
-﻿using Tools;
+﻿using Sirenix.OdinInspector;
+using Tools;
 using UnityEngine;
 
 namespace Gameplay.Entities.Stats
@@ -9,13 +10,21 @@ namespace Gameplay.Entities.Stats
     {
         public string upgradeName = "Unnamed Upgrade";
         
+        [FoldoutGroup("Health")]
         public Optional<int> maxHealthBuff = new Optional<int>(1);
         
-        public Optional<int> meleeDamageBuff = new Optional<int>(1);
-        public Optional<float> meleeDistanceBuff = new Optional<float>(1.2f);
-        public Optional<float> meleeCooldownBuff = new Optional<float>(0.8f);
-        public Optional<float> meleeKnockbackBuff = new Optional<float>(1.5f);
+        [FoldoutGroup("Attack")]
+        public Optional<int> attackDamageBuff = new Optional<int>(1);
+        [FoldoutGroup("Attack")]
+        public Optional<float> attackDistanceBuff = new Optional<float>(1.2f);
+        [FoldoutGroup("Attack")]
+        public Optional<float> attackCooldownBuff = new Optional<float>(0.8f);
+        [FoldoutGroup("Attack")]
+        public Optional<float> attackKnockbackBuff = new Optional<float>(1.5f);
         
+        [FoldoutGroup("Alternate Attack")]
+        public Optional<int> alternateAttackDamageBuff = new Optional<int>(1);
+
         public Optional<float> collisionKnockbackStrengthBuff = new Optional<float>(2f);
         
         // public Optional<int> alternateMeleeDamageBuff = new Optional<int>(1);
@@ -27,14 +36,14 @@ namespace Gameplay.Entities.Stats
                 stats.health += maxHealthBuff.Value;
                 stats.maxHealth += maxHealthBuff.Value;
             }
-            if (meleeDamageBuff.Enabled)
-                stats.mainMeleeAttack.damage += meleeDamageBuff.Value;
-            if (meleeDistanceBuff.Enabled)
-                stats.mainMeleeAttack.maxDistance *= meleeDistanceBuff.Value;
-            if (meleeCooldownBuff.Enabled)
-                stats.mainMeleeAttack.cooldown *= meleeCooldownBuff.Value;
-            if (meleeKnockbackBuff.Enabled)
-                stats.mainMeleeAttack.targetKnockbackStrength *= meleeKnockbackBuff.Value;
+            if (attackDamageBuff.Enabled)
+                stats.mainMeleeAttack.damage += attackDamageBuff.Value;
+            if (attackDistanceBuff.Enabled)
+                stats.mainMeleeAttack.maxDistance *= attackDistanceBuff.Value;
+            if (attackCooldownBuff.Enabled)
+                stats.mainMeleeAttack.cooldown *= attackCooldownBuff.Value;
+            if (attackKnockbackBuff.Enabled)
+                stats.mainMeleeAttack.targetKnockbackStrength *= attackKnockbackBuff.Value;
             if (collisionKnockbackStrengthBuff.Enabled)
                 stats.collisionKnockback *= collisionKnockbackStrengthBuff.Value;
         }

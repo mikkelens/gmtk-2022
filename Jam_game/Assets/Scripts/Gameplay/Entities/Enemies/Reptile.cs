@@ -9,8 +9,8 @@ namespace Gameplay.Entities.Enemies
         {
             Vector2 forwards = Transform.forward.WorldToPlane();
             float angle = Vector2.SignedAngle(forwards, targetDirection);
-            Animator.SetBool("Walking Left", angle > stats.headTurnAngle);
-            Animator.SetBool("Walking Right", angle < -stats.headTurnAngle);
+            Animator.SetBool("Looking Left", angle > stats.headTurnAngle);
+            Animator.SetBool("Looking Right", angle < -stats.headTurnAngle);
             // make head turn
             base.TurnTowardsLookDirection(targetDirection);
         }
