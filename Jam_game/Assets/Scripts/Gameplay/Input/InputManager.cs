@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Gameplay.Entities.PlayerScripts;
+﻿using Gameplay.Entities.PlayerScripts;
 using Management;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -7,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace Gameplay.Input
 {
-    public class InputController : MonoBehaviour
+    public class InputManager : MonoBehaviour
     {
         [ShowIf("@cursorSprite == null")]
         [SerializeField] private Texture2D cursorTexture;
@@ -29,7 +28,7 @@ namespace Gameplay.Input
             Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
         }
 
-        public static InputController Instance;
+        public static InputManager Instance;
         private GameManager _gameManager;
         
         private InputSettings _settings;

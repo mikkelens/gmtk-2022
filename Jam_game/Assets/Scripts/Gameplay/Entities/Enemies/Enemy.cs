@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Gameplay.Entities.Base;
 using Gameplay.Entities.PlayerScripts;
+using Gameplay.Entities.Stats;
 using Gameplay.Events;
 using Tools;
 using UnityEngine;
@@ -54,7 +55,7 @@ namespace Gameplay.Entities.Enemies
             Stopping = true;
             Animator.SetBool("Walking", false);
             yield return new WaitForSeconds(stats.attackChargeTime);
-            TryMelee(attack);
+            TryHitWithAttack(attack);
             Animator.SetBool("Walking", true);
             Stopping = false;
         }

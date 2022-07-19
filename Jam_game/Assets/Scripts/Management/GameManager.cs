@@ -9,7 +9,7 @@ namespace Management
     {
         public static GameManager Instance;
 
-        private InputController _inputController;
+        private InputManager _inputManager;
         private int _killCount;
         
         private void Awake()
@@ -19,8 +19,8 @@ namespace Management
 
         private void Start()
         {
-            _inputController = InputController.Instance;
-            if (_inputController == null) throw new Exception("InputManager is missing. Player input cannot be read.");
+            _inputManager = InputManager.Instance;
+            if (_inputManager == null) throw new Exception("InputManager is missing. Player input cannot be read.");
         }
 
         public void IncreaseKillcount()

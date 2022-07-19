@@ -1,5 +1,6 @@
 ﻿using Gameplay.Entities;
 using Gameplay.Entities.PlayerScripts;
+using Gameplay.Entities.Stats;
 using UnityEngine;
 
 namespace Gameplay.Level

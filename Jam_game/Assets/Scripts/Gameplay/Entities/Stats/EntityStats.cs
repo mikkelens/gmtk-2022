@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Gameplay.Entities
+namespace Gameplay.Entities.Stats
 {
     [CreateAssetMenu(fileName = "NewStatsAsset", menuName = "Stats/StatsAsset")]
     public class EntityStats : ScriptableObject, ICloneable

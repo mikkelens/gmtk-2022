@@ -15,26 +15,8 @@ namespace Gameplay.Entities.PlayerScripts
             Instance = this;
             base.Awake();
         }
-
+        
         // movement is decided by input set in "Player.Input.cs"
-        protected override Vector2 GetLookDirection()
-        {
-            if (IsAiming) return LookDirection();
-            if (IsMoving) return base.GetLookDirection(); // updates look direction
-            return PreviousLookDirection; // use previous look (aim) direction
-        }
-
-        protected override Vector2 GetTargetMoveDirection()
-        {
-            return _moveInput.normalized;
-        }
-
-        protected override float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
-        {
-            float turnSpeed = base.GetTurnSpeed(currentRotation, targetRotation);
-            if (IsAiming) turnSpeed += turnSpeed * stats.aimTurnSpeedBonus;
-            return turnSpeed;
-        }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -46,13 +28,6 @@ namespace Gameplay.Entities.PlayerScripts
                 Vector2 direction = collision.impulse.WorldToPlane().normalized;
                 TakeHit(hazard.Damage, direction * hazard.Knockback);
             }
-        }
-
-        public override void KillThis()
-        {
-            base.KillThis();
-            
-            Debug.Log("Player was killed!");
         }
     }
 }
