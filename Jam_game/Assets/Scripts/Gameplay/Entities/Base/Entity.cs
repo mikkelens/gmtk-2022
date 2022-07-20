@@ -1,4 +1,4 @@
-using Gameplay.Entities.Stats;
+using Gameplay.Entities.OLD_Stats;
 using Management;
 using UnityEngine;
 

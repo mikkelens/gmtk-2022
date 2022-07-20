@@ -1,5 +1,4 @@
-﻿using Gameplay.Entities.Stats;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Gameplay.Entities.PlayerScripts
 {

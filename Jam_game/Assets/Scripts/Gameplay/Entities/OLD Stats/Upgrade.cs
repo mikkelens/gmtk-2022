@@ -2,7 +2,7 @@
 using Tools;
 using UnityEngine;
 
-namespace Gameplay.Entities.Stats
+namespace Gameplay.Entities.OLD_Stats
 {
     // Data object that is stored in Pickup components.
     [CreateAssetMenu(fileName = "New Upgrade Asset", menuName = "Stats/Upgrade Asset")]

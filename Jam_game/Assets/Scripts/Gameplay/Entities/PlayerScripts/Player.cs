@@ -1,3 +1,4 @@
+using Gameplay.CustomStatsSystem;
 using Gameplay.Entities.Base;
 using Gameplay.Level;
 using Tools;
@@ -10,6 +11,9 @@ namespace Gameplay.Entities.PlayerScripts
     {
         public static Player Instance;
 
+        [SerializeField] private Stat testHealth;
+        [SerializeField] private Upgrade testUpgrade;
+        
         protected override void Awake()
         {
             Instance = this;

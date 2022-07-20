@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using Gameplay.Entities.Base;
+using Gameplay.Entities.OLD_Stats;
 using Gameplay.Entities.PlayerScripts;
-using Gameplay.Entities.Stats;
 using Gameplay.Events;
 using Tools;
 using UnityEngine;

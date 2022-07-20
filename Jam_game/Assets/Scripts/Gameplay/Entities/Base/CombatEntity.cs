@@ -1,5 +1,5 @@
 ﻿using Gameplay.Entities.Enemies;
-using Gameplay.Entities.Stats;
+using Gameplay.Entities.OLD_Stats;
 using Tools;
 using UnityEngine;
 
