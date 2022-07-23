@@ -1,9 +1,7 @@
-﻿using System;
-using System.Reflection;
-using Gameplay.StatSystem;
+﻿using Gameplay.Stats;
+using Gameplay.Stats.DataTypes;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Tools.Editor
 {

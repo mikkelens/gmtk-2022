@@ -12,27 +12,30 @@ namespace Tools.Editor
             return EditorGUI.GetPropertyHeight(valueProperty);
         }
 
-        public override void OnGUI(
-            Rect position,
-            SerializedProperty property,
-            GUIContent label
-        )
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             SerializedProperty valueProperty = property.FindPropertyRelative("value");
             SerializedProperty enabledProperty = property.FindPropertyRelative("enabled");
 
+            Rect valueRect = position, enabledRect = position;
+            
+            enabledRect.height = enabledRect.width = EditorGUI.GetPropertyHeight(enabledProperty);
+            valueRect.width = position.width - enabledRect.width;
+            
+            enabledRect.x = valueRect.width;
+            
             EditorGUI.BeginProperty(position, label, property);
-            position.width -= 24;
-            EditorGUI.BeginDisabledGroup(!enabledProperty.boolValue);
-            EditorGUI.PropertyField(position, valueProperty, label, true);
+            int indent = EditorGUI.indentLevel;
+            
+            // value field
+            EditorGUI.BeginDisabledGroup(!enabledProperty.boolValue); // greyed out if not enabled
+            EditorGUI.PropertyField(valueRect, valueProperty, label, true);
             EditorGUI.EndDisabledGroup();
 
-            int indent = EditorGUI.indentLevel;
+            // enabled checkbox
             EditorGUI.indentLevel = 0;
-            position.x += position.width + 24;
-            position.width = position.height = EditorGUI.GetPropertyHeight(enabledProperty);
-            position.x -= position.width;
-            EditorGUI.PropertyField(position, enabledProperty, GUIContent.none);
+            EditorGUI.PropertyField(enabledRect, enabledProperty, GUIContent.none);
+            
             EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();
         }
