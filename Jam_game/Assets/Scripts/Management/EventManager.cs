@@ -15,10 +15,7 @@ namespace Management
         [SerializeField] private Transform rootEnemyParent;
         [SerializeField] private List<CombatEvent> combatEvents = new List<CombatEvent>();
 
-        private void Awake()
-        {
-            Instance = this;
-        }
+        private void Awake() => Instance = this;
 
         [ShowInInspector]
         private float TotalWaveTime => combatEvents.OfType<WaveEvent>().Sum(wave => wave.waveTime);

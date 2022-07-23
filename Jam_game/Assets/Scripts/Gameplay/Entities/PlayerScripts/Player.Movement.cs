@@ -19,7 +19,7 @@ namespace Gameplay.Entities.PlayerScripts
         protected override float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
             float turnSpeed = base.GetTurnSpeed(currentRotation, targetRotation);
-            if (IsAiming) turnSpeed += turnSpeed * stats.aimTurnSpeedBonus;
+            if (IsAiming) turnSpeed += turnSpeed * aimTurnSpeedBonus;
             return turnSpeed;
         }
     }

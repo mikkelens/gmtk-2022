@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using Gameplay.Entities.Base;
-using Gameplay.Entities.OLD_Stats;
 using Gameplay.Entities.PlayerScripts;
 using Gameplay.Events;
+using Gameplay.StatSystem;
+using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
@@ -14,12 +15,28 @@ namespace Gameplay.Entities.Enemies
         protected CombatEvent SpawnOrigin;
         protected Player Player;
         
-        // protected ;
-        private float _lastStunTime;
+        [Header("Enemy Specific")]
+        [FoldoutGroup("Quirks")]
+        [SerializeField] public float relativeSpawnChance;
+        [FoldoutGroup("Quirks")]
+        [SerializeField] private bool turningAffectsMoveDirection;
+        [FoldoutGroup("Quirks")]
+        [SerializeField] private float minAttackAttemptDistance;
+        [FoldoutGroup("Quirks")]
+        [SerializeField] private float attackChargeTime;
+        
+        [Header("Enemy Specific")]
+        [FoldoutGroup("Stats")]
+        [SerializeField] private FloatStat stunDuration;
+        [FoldoutGroup("Stats")]
+        [SerializeField] private IntStat collisionDamage;
+        [FoldoutGroup("Stats")]
+        [SerializeField] private FloatStat collisionKnockback;
 
-        protected override bool WantsToAttack => Physics.Raycast(AttackRay, stats.minAttackAttemptDistance, targetLayerMask);
+        private float _lastStunTime;
+        protected override bool WantsToAttack => Physics.Raycast(AttackRay, minAttackAttemptDistance, targetLayerMask);
         protected override bool CanMove => base.CanMove && !IsStunned;
-        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= stats.stunDuration;
+        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= stunDuration;
         public void SetSpawnOrigin(CombatEvent origin)
         {
             SpawnOrigin = origin;
@@ -33,7 +50,7 @@ namespace Gameplay.Entities.Enemies
 
         protected override Vector2 GetMoveDirection()
         {
-            if (stats.turningAffectsMoveDirection)
+            if (turningAffectsMoveDirection)
                 return Transform.forward.WorldToPlane();
             return GetTargetMoveDirection();
         }
@@ -54,7 +71,7 @@ namespace Gameplay.Entities.Enemies
         {
             Stopping = true;
             Animator.SetBool("Walking", false);
-            yield return new WaitForSeconds(stats.attackChargeTime);
+            yield return new WaitForSeconds(attackChargeTime);
             TryHitWithAttack(attack);
             Animator.SetBool("Walking", true);
             Stopping = false;
@@ -69,7 +86,7 @@ namespace Gameplay.Entities.Enemies
         
             Player player = entity as Player; // filter contact to only be player
             if (player == null) return;
-            player.TakeHit(stats.collisionDamage, -collision.impulse.WorldToPlane() * stats.collisionKnockback);
+            player.TakeHit(collisionDamage, -collision.impulse.WorldToPlane() * collisionKnockback);
         }
 
         protected override void ApplyKnockback(Vector2 force)

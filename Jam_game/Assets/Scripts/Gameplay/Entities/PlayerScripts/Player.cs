@@ -1,6 +1,6 @@
-using Gameplay.CustomStatsSystem;
 using Gameplay.Entities.Base;
 using Gameplay.Level;
+using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
@@ -11,9 +11,10 @@ namespace Gameplay.Entities.PlayerScripts
     {
         public static Player Instance;
 
-        [SerializeField] private Stat testHealth;
-        [SerializeField] private Upgrade testUpgrade;
-        
+        [FoldoutGroup(QuirkCategory)]
+        [Header("Player Specific")]
+        [SerializeField] private float aimTurnSpeedBonus;
+
         protected override void Awake()
         {
             Instance = this;

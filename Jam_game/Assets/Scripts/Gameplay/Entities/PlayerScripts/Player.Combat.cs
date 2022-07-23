@@ -4,8 +4,6 @@ namespace Gameplay.Entities.PlayerScripts
 {
     public partial class Player
     {
-        
-
         public override void KillThis()
         {
             base.KillThis();

@@ -1,6 +1,7 @@
-﻿using Gameplay.Entities;
-using Gameplay.Entities.OLD_Stats;
+﻿using System.Collections.Generic;
 using Gameplay.Entities.PlayerScripts;
+using Gameplay.StatSystem;
+using Management;
 using UnityEngine;
 
 namespace Gameplay.Level
@@ -8,20 +9,22 @@ namespace Gameplay.Level
     [RequireComponent(typeof(Collider))]
     public class Pickup : MonoBehaviour
     {
-        [SerializeField] private Upgrade data;
+        [SerializeField] private List<StatModifier> modifiers = new List<StatModifier>();
 
         private void OnTriggerEnter(Collider other)
         {
             Player player = other.GetComponent<Player>();
             if (player == null) return;
             
-            data.UpgradeStats(player.stats);
-            Debug.Log("Pickup: " + data.upgradeName);
-            // todo: add graphics?
+            ApplyUpgrades();
+            // todo: add graphical effect on pickup
             Despawn();
         }
-        
-        
+
+        private void ApplyUpgrades()
+        {
+            UpgradeManager.Instance.ApplyUpgradesToPlayer(modifiers);
+        }
 
         private void Despawn()
         {

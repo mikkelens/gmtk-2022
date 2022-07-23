@@ -1,5 +1,7 @@
 ﻿using Gameplay.Entities.Enemies;
-using Gameplay.Entities.OLD_Stats;
+using Gameplay.Entities.PlayerScripts;
+using JetBrains.Annotations;
+using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
@@ -8,25 +10,33 @@ namespace Gameplay.Entities.Base
     [Tooltip("Combat Entity: This can hit other entites.")]
     public class CombatEntity : MovingEntity
     {
+        [FoldoutGroup(QuirkCategory)]
         [SerializeField] protected LayerMask targetLayerMask;
+        [FoldoutGroup(QuirkCategory)]
+        [ShowIf("Headless")] // this should only be visible to designer if this entity is a dummy
+        [SerializeField] private bool autoAttacks;
+        [UsedImplicitly] private bool Headless => this as Player == null && this as Enemy == null;
+     
+        [FoldoutGroup(StatCategory)]
+        [SerializeField] private Attack mainMeleeAttack; // class instance with stats in it
         
         protected Attack LastAttack;
         protected float LastAttackTime;
-        
+
         private static string AttackAnimationDirectionString(Attack attack) => attack.animationName + "Direction";
-        protected virtual bool WantsToAttack => stats.autoAttacks;
+        protected virtual bool WantsToAttack => autoAttacks; // will only use "autoAttacks" field if WantsToAttack is not overridden
         protected virtual bool CanAttack => LastAttackTime.TimeSince() >= LastAttack.cooldown;
         protected virtual Ray AttackRay => new Ray(Transform.position, Transform.forward);
         
         
-        protected override void Update()
+        protected override void EntityUpdate()
         {
-            base.Update();
-            
+            base.EntityUpdate();
+
             // See thing in attack box
             if (WantsToAttack && CanAttack)
             {
-                StartAttack(stats.mainMeleeAttack);
+                StartAttack(mainMeleeAttack);
             }
         }
 

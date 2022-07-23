@@ -9,24 +9,43 @@ namespace Management
     {
         public static GameManager Instance;
 
-        private InputManager _inputManager;
-        private int _killCount;
-        
-        private void Awake()
+        public enum GameState
         {
-            Instance = this;
+            Playing,
+            Paused
         }
+
+        private InputManager _inputManager;
+        private EventManager _eventManager;
+        private UpgradeManager _upgradeManager;
+        private UIManager _uiManager;
+
+        public GameState State { get; private set; }
+
+        private int _killCount;
+
+        private void Awake() => Instance = this;
 
         private void Start()
         {
             _inputManager = InputManager.Instance;
-            if (_inputManager == null) throw new Exception("InputManager is missing. Player input cannot be read.");
+            if (_inputManager == null) Debug.LogError("InputManager is missing. Player input cannot be read.");
+            
+            _eventManager = EventManager.Instance;
+            if (_eventManager == null) Debug.LogWarning("EventManager is missing. Events will not start.");
+            
+            _uiManager = UIManager.Instance;
+            if (_uiManager == null) Debug.LogWarning("UIManager is missing. UI will not respond to game.");
+            
+            _upgradeManager = UpgradeManager.Instance;
+
+            State = GameState.Playing;
         }
 
         public void IncreaseKillcount()
         {
             _killCount++;
-            // todo: update ui
+            _uiManager.UpdateKillCount(_killCount);
         }
 
 

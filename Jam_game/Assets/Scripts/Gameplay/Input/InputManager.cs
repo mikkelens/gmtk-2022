@@ -38,7 +38,6 @@ namespace Gameplay.Input
         private void Awake()
         {
             Instance = this;
-            
             _settings = new InputSettings();
         }
 

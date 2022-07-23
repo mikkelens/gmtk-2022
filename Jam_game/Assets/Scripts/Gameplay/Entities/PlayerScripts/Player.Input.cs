@@ -17,6 +17,7 @@ namespace Gameplay.Entities.PlayerScripts
         protected override bool WantsToAttack => _holdingMelee;
 
         private Vector2 _rawAimInput;
+
         private Vector2 LookDirection()
         {
             if (_lastAimWasController) return _rawAimInput;

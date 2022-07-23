@@ -1,5 +1,6 @@
-using Gameplay.Entities.OLD_Stats;
+using Gameplay.StatSystem;
 using Management;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Gameplay.Entities.Base
@@ -9,10 +10,16 @@ namespace Gameplay.Entities.Base
     [SelectionBase]
     public class Entity : MonoBehaviour
     {
-        [SerializeField] private EntityStats startingStats;
-
-        [HideInInspector]
-        public EntityStats stats;
+        // foldout group titling & ease
+        protected const string QuirkCategory = "Quirks";
+        protected const string StatCategory = "Stats";
+        
+        [FoldoutGroup(QuirkCategory)]
+        [SerializeField] protected bool godMode = false;
+        
+        [FoldoutGroup(StatCategory)]
+        [HideIf("godMode")]
+        [SerializeField] protected IntStat maxHealth;
 
         // outside components
         protected GameManager Manager;
@@ -23,6 +30,7 @@ namespace Gameplay.Entities.Base
 
         // health status
         private int _currentHealth;
+        protected bool Alive => _currentHealth > 0;
 
         protected virtual void Awake()
         {
@@ -31,34 +39,37 @@ namespace Gameplay.Entities.Base
             
             Animator = GetComponentInChildren<Animator>();
             if (Animator == null) Debug.Log($"No animator component found on entity '{name}'.");
-            
-            stats = startingStats.Clone() as EntityStats;
         }
 
         protected virtual void Start()
         {
-            SetHealth(stats.maxHealth);
+            SetHealth(maxHealth.CurrentValue);
             Manager = GameManager.Instance;
+            
         }
-        protected virtual void Update()
+
+        protected void Update()
         {
-            // idk base thing here
+            if (Alive) EntityUpdate();
+        }
+        protected virtual void EntityUpdate() // Update, but only ran if entity is alive
+        {
+            
         }
 
         public void TakeHit(int damage, Vector2 knockbackForce) // Main way of getting hit
         {
-            ApplyDamage(damage);
             ApplyKnockback(knockbackForce);
+            if (!Alive) return;
+            ApplyDamage(damage);
         }
+
         private void ApplyDamage(int damage)
         {
-            if (stats.godMode) return;
+            if (godMode) return;
             _currentHealth -= damage;
             if (_currentHealth <= 0) KillThis();
-
-            // todo: damage animation etc?
         }
-
         protected virtual void ApplyKnockback(Vector2 force)
         {
             // idk
@@ -72,7 +83,7 @@ namespace Gameplay.Entities.Base
 
         public void HealToFull()
         {
-            SetHealth(stats.maxHealth);
+            SetHealth(maxHealth);
         }
         private void SetHealth(int health)
         {

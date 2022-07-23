@@ -43,12 +43,12 @@ namespace Gameplay.Events
         private Enemy SelectEnemyAsset(IReadOnlyCollection<Enemy> allEnemies)
         {
             // count up spawn chances as a range, then generate a number within the range. Enemy with lowest number but above generated number will be chosen.
-            float totalSpawnRange = allEnemies.Sum(enemy => enemy.stats.relativeSpawnChance);
+            float totalSpawnRange = allEnemies.Sum(enemy => enemy.relativeSpawnChance);
             float random = Random.Range(0, totalSpawnRange);
             float last = 0f;
             return allEnemies.First(enemy =>
             {
-                last += enemy.stats.relativeSpawnChance;
+                last += enemy.relativeSpawnChance;
                 return last >= random;
             });
         }
