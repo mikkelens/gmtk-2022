@@ -1,8 +1,7 @@
 ﻿using System;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Gameplay.StatSystem
+namespace Gameplay.Stats.DataTypes
 {
     // [CreateAssetMenu(fileName = "New Float Stat", menuName = "Stat System/Float Stat")]
     [Serializable]

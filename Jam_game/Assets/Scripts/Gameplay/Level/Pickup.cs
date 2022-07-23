@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Entities.PlayerScripts;
-using Gameplay.StatSystem;
+using Gameplay.Stats;
 using Management;
 using UnityEngine;
 

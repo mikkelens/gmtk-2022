@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gameplay.StatSystem
+namespace Gameplay.Stats.DataTypes
 {
     [Serializable]
     public enum ModificationTypes

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Gameplay.Entities.PlayerScripts;
-using Gameplay.StatSystem;
+using Gameplay.Stats;
+using Gameplay.Stats.DataTypes;
 using UnityEngine;
 
 namespace Management
@@ -20,15 +22,18 @@ namespace Management
 
         public void ApplyUpgradesToPlayer(List<StatModifier> upgrades)
         {
-            List<GenericStat> allStats = typeof(Player).GetFields().ToList().ConvertAll(fieldInfo => fieldInfo.GetValue(_player) as GenericStat);
+            // Get all stats on player
+            List<GenericStat> allStats = StatSystem.FindAllStatsOnObject(_player);
+
+            // upgrade appropriate stats
             foreach (StatModifier upgrade in upgrades)
             {
-                foreach (GenericStat stat in allStats)
+                foreach (GenericStat stat in allStats.Where(stat => stat.type == upgrade.targetStatType))
                 {
-                    if (stat.type != upgrade.targetStatType) continue;
                     stat.AddModifier(upgrade);
                 }
             }
         }
+
     }
 }

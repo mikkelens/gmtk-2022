@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Gameplay.StatSystem
+namespace Gameplay.Stats.DataTypes
 {
     // can be float or int
     [Serializable]

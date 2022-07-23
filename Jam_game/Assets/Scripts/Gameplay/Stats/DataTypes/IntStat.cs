@@ -1,9 +1,7 @@
 ﻿using System;
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using UnityEngine;
 
-namespace Gameplay.StatSystem
+namespace Gameplay.Stats.DataTypes
 {
     // [CreateAssetMenu(fileName = "New Int Stat", menuName = "Stat System/Int Stat")]
     [Serializable]

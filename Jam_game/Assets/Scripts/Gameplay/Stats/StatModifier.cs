@@ -1,6 +1,7 @@
 ﻿using System;
+using Gameplay.Stats.DataTypes;
 
-namespace Gameplay.StatSystem
+namespace Gameplay.Stats
 {
     [Serializable]
     public class StatModifier

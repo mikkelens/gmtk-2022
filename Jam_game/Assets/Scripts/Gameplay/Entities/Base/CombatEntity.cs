@@ -18,14 +18,14 @@ namespace Gameplay.Entities.Base
         [UsedImplicitly] private bool Headless => this as Player == null && this as Enemy == null;
      
         [FoldoutGroup(StatCategory)]
-        [SerializeField] private Attack mainMeleeAttack; // class instance with stats in it
+        [SerializeField] private AttackStats mainMeleeAttackStats; // class instance with stats in it
         
-        protected Attack LastAttack;
+        protected AttackStats LastAttackStats;
         protected float LastAttackTime;
 
-        private static string AttackAnimationDirectionString(Attack attack) => attack.animationName + "Direction";
+        private static string AttackAnimationDirectionString(AttackStats attack) => attack.animationName + "Direction";
         protected virtual bool WantsToAttack => autoAttacks; // will only use "autoAttacks" field if WantsToAttack is not overridden
-        protected virtual bool CanAttack => LastAttackTime.TimeSince() >= LastAttack.cooldown;
+        protected virtual bool CanAttack => LastAttackTime.TimeSince() >= LastAttackStats.cooldown;
         protected virtual Ray AttackRay => new Ray(Transform.position, Transform.forward);
         
         
@@ -36,11 +36,11 @@ namespace Gameplay.Entities.Base
             // See thing in attack box
             if (WantsToAttack && CanAttack)
             {
-                StartAttack(mainMeleeAttack);
+                StartAttack(mainMeleeAttackStats);
             }
         }
 
-        protected virtual void StartAttack(Attack attack)
+        protected virtual void StartAttack(AttackStats attack)
         {
             if (attack.hasDirectionalAnimation)
             {
@@ -48,17 +48,17 @@ namespace Gameplay.Entities.Base
                 Animator.SetBool(directionString, Animator.GetBool(directionString));
             }
             Animator.SetTrigger(attack.animationName);
-            LastAttack = attack;
+            LastAttackStats = attack;
             LastAttackTime = Time.time;
             StartMelee(attack);
         }
 
-        protected virtual void StartMelee(Attack attack)
+        protected virtual void StartMelee(AttackStats attack)
         {
             TryHitWithAttack(attack);
         }
         
-        protected void TryHitWithAttack(Attack attack)
+        protected void TryHitWithAttack(AttackStats attack)
         {
             // Raycast for hit
             if (Physics.Raycast(AttackRay, out RaycastHit hitData, attack.maxDistance, targetLayerMask.value)) // Within distance?
@@ -66,15 +66,15 @@ namespace Gameplay.Entities.Base
             EndAttack(attack);
         }
 
-        protected void EndAttack(Attack attack)
+        protected void EndAttack(AttackStats attack)
         {
             Animator.ResetTrigger(attack.animationName);
         }
 
-        private void HitOther(Entity entity, Attack attack)
+        private void HitOther(Entity entity, AttackStats attack)
         {
             Vector2 lookDirection = GetLookDirection();
-            entity.TakeHit(attack.damage, lookDirection * attack.targetKnockbackStrength);
+            entity.TakeHit(attack.hit, lookDirection);
             ApplyKnockback(-lookDirection * attack.selfKnockbackStrength); // apply knockback to self
         }
     }

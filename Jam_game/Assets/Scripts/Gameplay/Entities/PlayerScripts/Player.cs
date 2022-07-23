@@ -26,13 +26,12 @@ namespace Gameplay.Entities.PlayerScripts
         private void OnCollisionEnter(Collision collision)
         {
             GameObject other = collision.gameObject;
-            
             Hazard hazard = other.GetComponent<Hazard>();
-            if (hazard != null)
-            {
-                Vector2 direction = collision.impulse.WorldToPlane().normalized;
-                TakeHit(hazard.Damage, direction * hazard.Knockback);
-            }
+            if (hazard == null) return;
+            
+            HitStats hazardHit = new HitStats(hazard.Damage, hazard.Knockback);
+            Vector2 direction = collision.impulse.WorldToPlane().normalized;
+            TakeHit(hazardHit, direction); // hit itself/player
         }
     }
 }

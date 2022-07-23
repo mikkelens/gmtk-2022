@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Tools;
+using UnityEngine;
 
 namespace Gameplay.Level
 {
@@ -6,10 +7,10 @@ namespace Gameplay.Level
     [RequireComponent(typeof(Collider))]
     public class Hazard : MonoBehaviour
     {
-        [SerializeField] private int damage;
-        [SerializeField] private float knockback;
+        [SerializeField] private Optional<int> damage;
+        [SerializeField] private Optional<float> knockback;
         
-        public int Damage => damage;
-        public float Knockback => knockback;
+        public Optional<int> Damage => damage;
+        public Optional<float> Knockback => knockback;
     }
 }

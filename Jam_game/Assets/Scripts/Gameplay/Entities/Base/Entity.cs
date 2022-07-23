@@ -1,6 +1,8 @@
-using Gameplay.StatSystem;
+using Gameplay.Stats;
+using Gameplay.Stats.DataTypes;
 using Management;
 using Sirenix.OdinInspector;
+using Tools;
 using UnityEngine;
 
 namespace Gameplay.Entities.Base
@@ -57,11 +59,11 @@ namespace Gameplay.Entities.Base
             
         }
 
-        public void TakeHit(int damage, Vector2 knockbackForce) // Main way of getting hit
+        public void TakeHit(HitStats hit, Vector2 knockbackDirection) // Main way of getting hit
         {
-            ApplyKnockback(knockbackForce);
+            if (hit.knockback.Enabled) ApplyKnockback(knockbackDirection * hit.knockback.Value);
             if (!Alive) return;
-            ApplyDamage(damage);
+            if (hit.damage.Enabled) ApplyDamage(hit.damage.Value);
         }
 
         private void ApplyDamage(int damage)
