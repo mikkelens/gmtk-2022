@@ -65907,6 +65907,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
+      propertyPath: maxHealth.value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
+      propertyPath: maxSpeed.baseValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
+      propertyPath: maxHealth.baseValue
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7804618059053159352, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
       propertyPath: m_Name
