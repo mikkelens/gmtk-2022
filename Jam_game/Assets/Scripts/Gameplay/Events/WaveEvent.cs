@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Entities.Enemies;
@@ -10,8 +9,8 @@ using Random = UnityEngine.Random;
 
 namespace Gameplay.Events
 {
-    [Serializable]
-    [CreateAssetMenu(fileName = "New Wave Asset", menuName = "CombatEvents/Wave Event Asset")]
+    [CreateAssetMenu(fileName = "New Wave", menuName = "Events/Wave Event")]
+    [TypeInfoBox("Event where a wave of enemies spawn for a while.")]
     public class WaveEvent : CombatEvent
     {
         public float spawnDelay = 2f;

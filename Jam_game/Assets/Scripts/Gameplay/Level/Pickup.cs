@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Gameplay.Entities.PlayerScripts;
-using Gameplay.StatSystem;
+using Gameplay.Entities.Players;
+using Gameplay.Stats;
 using Management;
 using UnityEngine;
 
@@ -23,7 +23,7 @@ namespace Gameplay.Level
 
         private void ApplyUpgrades()
         {
-            UpgradeManager.Instance.ApplyUpgradesToPlayer(modifiers);
+            GameManager.Instance.ApplyUpgradesToPlayer(modifiers);
         }
 
         private void Despawn()

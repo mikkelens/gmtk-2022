@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Gameplay.Events
 {
-    public class CombatEvent : ScriptableObject
+    public abstract class CombatEvent : ScriptableObject
     {
         protected float StartTime;
         protected Transform SpawningParent;

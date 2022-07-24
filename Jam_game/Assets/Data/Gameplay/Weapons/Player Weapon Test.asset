@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ccd2758183c4362b1df20198b8051ca, type: 3}
+  m_Name: Player Weapon Test
+  m_EditorClassIdentifier: 
+  allAttacks:
+  - name: Melee
+    hasDirectionalAnimation: 0
+    hit:
+      testFloat:
+        enabled: 0
+        value: 0
+      damage:
+        enabled: 0
+        value:
+          type: {fileID: 0}
+          baseValue: 0
+          value: 0
+      knockback:
+        enabled: 0
+        value:
+          type: {fileID: 0}
+          baseValue: 0
+          value: 0
+    maxDistance:
+      type: {fileID: 0}
+      baseValue: 3
+      value: 3
+    cooldown:
+      type: {fileID: 11400000, guid: 9db277f80f4e12943bfc03201a88e010, type: 2}
+      baseValue: 5
+      value: 5
+    selfKnockbackStrength:
+      type: {fileID: 0}
+      baseValue: 5
+      value: 5

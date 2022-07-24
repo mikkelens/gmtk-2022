@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1488532003811833285}
   - component: {fileID: 1488532003811833286}
   - component: {fileID: 1488532003811833287}
-  - component: {fileID: 1488532003811833284}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -60,16 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee4e4a2fb8e4c0bb448226e984042b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
---- !u!114 &1488532003811833284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1488532003811833336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71726402f09b46e4a82aecd18c5bf5bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  minSpawnDistance: 10
+  rootEnemyParent: {fileID: 0}
+  combatEvents: []
+  killScoreText: {fileID: 0}
+  pauseMenuElements: []

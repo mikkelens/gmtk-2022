@@ -1,4 +1,4 @@
-﻿using Gameplay.StatSystem;
+﻿using Gameplay.Stats.DataTypes;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;

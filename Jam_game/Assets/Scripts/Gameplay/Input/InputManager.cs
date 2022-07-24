@@ -1,4 +1,4 @@
-﻿using Gameplay.Entities.PlayerScripts;
+﻿using Gameplay.Entities.Players;
 using Management;
 using Sirenix.OdinInspector;
 using UnityEngine;
