@@ -16,13 +16,16 @@ namespace Tools.Editor
             foldoutRect.width = EditorGUIUtility.labelWidth;
             contentRect.width -= foldoutRect.width + EditorGUIUtility.standardVerticalSpacing;
             contentRect.x += foldoutRect.width + EditorGUIUtility.standardVerticalSpacing;
-
+            
             // Draw foldout header
-            if (property.objectReferenceValue == null) return;
-            property.isExpanded = EditorGUI.BeginFoldoutHeaderGroup(foldoutRect, property.isExpanded, label);
+            if (property.objectReferenceValue != null)
+            {
+                property.isExpanded = EditorGUI.BeginFoldoutHeaderGroup(foldoutRect, property.isExpanded, label);
+                EditorGUI.EndFoldoutHeaderGroup();
+            }
+            
             // Draw label
             EditorGUI.PropertyField(contentRect, property, GUIContent.none, true);
-            EditorGUI.EndFoldoutHeaderGroup();
 
             // Draw foldout properties
             if (property.isExpanded)
@@ -40,4 +43,5 @@ namespace Tools.Editor
             }
         }
     }
+
 }

@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using UnityEditor;
 
@@ -10,7 +12,7 @@ namespace Tools.Editor
     #region Serialized property family
         public static SerializedProperty GetParent(this SerializedProperty aProperty)
         {
-            var path = aProperty.propertyPath;
+            string path = aProperty.propertyPath;
             int i = path.LastIndexOf('.');
             if (i < 0)
                 return null;
@@ -18,7 +20,7 @@ namespace Tools.Editor
         }
         public static SerializedProperty FindSiblingProperty(this SerializedProperty aProperty, string aPath)
         {
-            var parent = aProperty.GetParent();
+            SerializedProperty parent = aProperty.GetParent();
             if (parent == null)
                 return aProperty.serializedObject.FindProperty(aPath);
             return parent.FindPropertyRelative(aPath);
@@ -29,21 +31,21 @@ namespace Tools.Editor
         /// <summary>
         /// Gets the object the property represents.
         /// </summary>
-        /// <param name="prop"></param>
+        /// <param name="property"></param>
         /// <returns></returns>
-        public static object GetTargetObjectOfProperty(SerializedProperty prop)
+        public static object GetTargetObjectOfProperty(this SerializedProperty property)
         {
-            if (prop == null) return null;
+            if (property == null) return null;
 
-            var path = prop.propertyPath.Replace(".Array.data[", "[");
-            object obj = prop.serializedObject.targetObject;
-            var elements = path.Split('.');
-            foreach (var element in elements)
+            string path = property.propertyPath.Replace(".Array.data[", "[");
+            object obj = property.serializedObject.targetObject;
+            string[] elements = path.Split('.');
+            foreach (string element in elements)
             {
                 if (element.Contains("["))
                 {
-                    var elementName = element.Substring(0, element.IndexOf("["));
-                    var index = System.Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
+                    string elementName = element.Substring(0, element.IndexOf("["));
+                    int index = System.Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
                     obj = GetValue_Imp(obj, elementName, index);
                 }
                 else
@@ -57,15 +59,15 @@ namespace Tools.Editor
         {
             if (source == null)
                 return null;
-            var type = source.GetType();
+            Type type = source.GetType();
 
             while (type != null)
             {
-                var f = type.GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                FieldInfo f = type.GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
                 if (f != null)
                     return f.GetValue(source);
 
-                var p = type.GetProperty(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                PropertyInfo p = type.GetProperty(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
                 if (p != null)
                     return p.GetValue(source, null);
 
@@ -75,9 +77,8 @@ namespace Tools.Editor
         }
         private static object GetValue_Imp(object source, string name, int index)
         {
-            var enumerable = GetValue_Imp(source, name) as System.Collections.IEnumerable;
-            if (enumerable == null) return null;
-            var enm = enumerable.GetEnumerator();
+            if (GetValue_Imp(source, name) is not IEnumerable enumerable) return null;
+            IEnumerator enm = enumerable.GetEnumerator();
             //while (index-- >= 0)
             //    enm.MoveNext();
             //return enm.Current;

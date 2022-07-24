@@ -14,14 +14,14 @@ namespace Gameplay.Entities.Base
         [FoldoutGroup(QuirkCategory)]
         [SerializeField] protected bool stoppingAffectsRotation;
         [FoldoutGroup(QuirkCategory)]
-        [SerializeField] protected float maxTurnSpeed;
-        [FoldoutGroup(QuirkCategory)]
-        [SerializeField] protected AnimationCurve turnSpeedCurve;
+        [SerializeField] protected AnimationCurve turnSpeedCurve = new AnimationCurve();
         
         [FoldoutGroup(StatCategory)]
         [SerializeField] protected FloatStat maxSpeed;
         [FoldoutGroup(StatCategory)]
         [SerializeField] protected FloatStat walkAccelSpeed;
+        [FoldoutGroup(StatCategory)]
+        [SerializeField] protected FloatStat maxTurnSpeed;
         [FoldoutGroup(StatCategory)]
         [SerializeField] protected FloatStat maxStoppingBonus;
         
