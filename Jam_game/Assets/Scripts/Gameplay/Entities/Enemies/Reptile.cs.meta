@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - weapon: {fileID: 11400000, guid: ad0e4c58a495c104f99613425d3df4ca, type: 2}
   executionOrder: 0
-  icon: {fileID: 2800000, guid: 9453fe4253054974fb49c4c0ec7503ad, type: 3}
+  icon: {fileID: 2800000, guid: f17ed3125a220fb48933eb0c427d8efd, type: 3}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

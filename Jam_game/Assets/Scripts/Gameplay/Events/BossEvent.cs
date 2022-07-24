@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Gameplay.Entities.Enemies;
+using Gameplay.Entities.Base;
 using Gameplay.Level;
 using Management;
 using Sirenix.OdinInspector;
@@ -12,7 +12,7 @@ namespace Gameplay.Events
     [TypeInfoBox("Event where a boss is spawned.")]
     public class BossEvent : CombatEvent
     {
-        [SerializeField] private Enemy bossPrefabToSpawn;
+        [SerializeField] private Entity bossPrefabToSpawn;
         [SerializeField, AssetsOnly] private Pickup pickupToDrop;
         
         private bool _bossAlive;
@@ -21,16 +21,16 @@ namespace Gameplay.Events
         {
             yield return base.RunEvent();
 
-            SpawnEnemy(bossPrefabToSpawn, SpawningParent); // dont need reference, boss will call overridden despawn method
+            SpawnEntity(bossPrefabToSpawn, SpawningParent); // dont need reference, boss will call overridden despawn method
             _bossAlive = true;
             
             yield return new WaitUntil(() => !_bossAlive);
         }
 
-        public override void DespawnEnemy(Enemy enemyToDespawn)
+        public override void DespawnEntity(Entity entity)
         {
-            GameManager.Instance.SpawnUpgrade(pickupToDrop, enemyToDespawn.transform.position.WorldToPlane());
-            base.DespawnEnemy(enemyToDespawn);
+            GameManager.Instance.SpawnUpgrade(pickupToDrop, entity.transform.position.WorldToPlane());
+            base.DespawnEntity(entity);
             _bossAlive = false;
         }
     }

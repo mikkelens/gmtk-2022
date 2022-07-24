@@ -1,15 +1,20 @@
-﻿using System.Collections.Generic;
-using Gameplay.Stats;
-using Sirenix.OdinInspector;
+﻿using Gameplay.Stats.DataTypes;
 using Tools;
 using UnityEngine;
 
-namespace Gameplay.Attacks
+namespace Gameplay.Stats.Attacks
 {
     [CreateAssetMenu(fileName = "New Weapon", menuName = "Stats/Weapon")]
-    [TypeInfoBox("'Weapons' encompass all types of attacks. They can have multiple attacks using one weapon.")]
     public class Weapon : ExpandableScriptableObject, IStatCollection
     {
-        public List<AttackStats> allAttacks = new List<AttackStats>();
+        public Optional<HitStats> attackHit;
+        public Optional<FloatStat> maxDistance;
+        public Optional<FloatStat> cooldown;
+        public Optional<FloatStat> selfKnockbackStrength;
+        
+        [Tooltip("This *has* to match the name of the animation. alternatives: 'Charge', 'MeleeAlternate'")]
+        public string animationName = "Melee";
+        [Tooltip("Should be true for attacks that can be directional")]
+        public bool hasDirectionalAnimation = false;
     }
 }

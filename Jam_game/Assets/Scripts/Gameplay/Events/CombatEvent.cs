@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Gameplay.Entities.Enemies;
+using Gameplay.Entities.Base;
 using Tools;
 using UnityEngine;
 
@@ -33,16 +33,16 @@ namespace Gameplay.Events
         }
         
         // spawn enemy from enemy asset/prefab, return reference (in scene)
-        protected Enemy SpawnEnemy(Enemy enemyPrefab, Transform enemyParent)
+        protected Entity SpawnEntity(Entity enemyPrefab, Transform enemyParent)
         {
-            Enemy spawnedEnemy = Instantiate(enemyPrefab, GetRandomSpawnLocation().PlaneToWorld(), GetRandomSpawnRotation(), enemyParent).GetComponent<Enemy>();
-            spawnedEnemy.SetSpawnOrigin(this);
-            return spawnedEnemy;
+            Entity spawnedEntity = Instantiate(enemyPrefab, GetRandomSpawnLocation().PlaneToWorld(), GetRandomSpawnRotation(), enemyParent);
+            spawnedEntity.SetSpawnOrigin(this);
+            return spawnedEntity;
         }
 
-        public virtual void DespawnEnemy(Enemy enemyToDespawn)
+        public virtual void DespawnEntity(Entity entity)
         {
-            Destroy(enemyToDespawn.gameObject);
+            Destroy(entity.gameObject);
         }
 
     }

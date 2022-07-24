@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using Gameplay.Attacks;
-using Gameplay.Entities.Enemies;
+﻿using Gameplay.Entities.Enemies;
 using Gameplay.Entities.Players;
+using Gameplay.Stats.Attacks;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Tools;
@@ -16,18 +15,18 @@ namespace Gameplay.Entities.Base
         [SerializeField] protected LayerMask targetLayerMask;
         [FoldoutGroup(QuirkCategory)]
         [ShowIf("Headless")] // this should only be visible to designer if this entity is a dummy
-        [SerializeField] private bool autoAttacks;
-        [UsedImplicitly] private bool Headless => this as Player == null && this as Enemy == null;
+        [SerializeField] protected bool autoAttacks;
+        [UsedImplicitly] protected bool Headless => this as Player == null && this as Enemy == null;
      
         [FoldoutGroup(StatCategory)]
-        [SerializeField, Required] private Weapon weapon; // class instance with stats in it
+        [SerializeField, Required] protected Weapon activeWeapon; // class instance with stats in it
         
-        protected AttackStats LastAttackStats;
+        protected Weapon LastWeapon;
         protected float LastAttackTime;
 
-        private static string AttackAnimationDirectionString(AttackStats attack) => attack.animationName + "Direction";
+        protected static string AttackAnimationDirectionString(Weapon attack) => attack.animationName + "Direction";
         protected virtual bool WantsToAttack => autoAttacks; // will only use "autoAttacks" field if WantsToAttack is not overridden
-        protected virtual bool CanAttack => LastAttackStats is not { cooldown: { Enabled: true } } || LastAttackTime.TimeSince() >= LastAttackStats.cooldown.Value;
+        protected virtual bool CanAttack => LastWeapon is not { cooldown: { Enabled: true } } || LastAttackTime.TimeSince() >= LastWeapon.cooldown.Value;
         protected virtual Ray AttackRay => new Ray(Transform.position, Transform.forward);
         
         
@@ -38,34 +37,29 @@ namespace Gameplay.Entities.Base
             // See if thing in attack box
             if (WantsToAttack && CanAttack)
             {
-                StartAttack(GetAttack()); // first attack. should probably be picked somehow
+                StartAttack(activeWeapon); // first attack. should probably be picked somehow
             }
         }
 
-        protected virtual AttackStats GetAttack()
+        protected virtual void StartAttack(Weapon weapon)
         {
-            return weapon.allAttacks.First();
-        }
-
-        protected virtual void StartAttack(AttackStats attack)
-        {
-            if (attack.hasDirectionalAnimation)
+            if (weapon.hasDirectionalAnimation)
             {
-                string directionString = AttackAnimationDirectionString(attack);
+                string directionString = AttackAnimationDirectionString(weapon);
                 Animator.SetBool(directionString, Animator.GetBool(directionString));
             }
-            Animator.SetTrigger(attack.animationName);
-            LastAttackStats = attack;
+            Animator.SetTrigger(weapon.animationName);
+            LastWeapon = weapon;
             LastAttackTime = Time.time;
-            StartMelee(attack);
+            StartUseWeapon(weapon);
         }
 
-        protected virtual void StartMelee(AttackStats attack)
+        protected virtual void StartUseWeapon(Weapon attack)
         {
-            TryHitWithAttack(attack);
+            TryHitWithWeapon(attack);
         }
         
-        protected void TryHitWithAttack(AttackStats attack)
+        protected void TryHitWithWeapon(Weapon attack)
         {
             // Raycast for hit
             float maxdistance = attack.maxDistance.Enabled ? attack.maxDistance.Value : float.MaxValue;
@@ -74,15 +68,15 @@ namespace Gameplay.Entities.Base
             EndAttack(attack);
         }
 
-        protected void EndAttack(AttackStats attack)
+        protected void EndAttack(Weapon attack)
         {
             Animator.ResetTrigger(attack.animationName);
         }
 
-        private void HitOther(Entity entity, AttackStats attack)
+        private void HitOther(Entity entity, Weapon attack)
         {
             Vector2 lookDirection = GetLookDirection();
-            if (attack.hit.Enabled) entity.TakeHit(attack.hit.Value, lookDirection);
+            if (attack.attackHit.Enabled) entity.TakeHit(attack.attackHit.Value, lookDirection);
             if (attack.selfKnockbackStrength.Enabled) ApplyKnockback(-lookDirection * attack.selfKnockbackStrength.Value); // apply knockback to self
         }
     }
