@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Entities.Players;
-using Gameplay.Stats;
+using Gameplay.Stats.DataTypes;
 using Management;
 using UnityEngine;
 
@@ -16,14 +16,9 @@ namespace Gameplay.Level
             Player player = other.GetComponent<Player>();
             if (player == null) return;
             
-            ApplyUpgrades();
+            player.FindAllStatsOnObject().ApplyModifiers(modifiers);
             // todo: add graphical effect on pickup
             Despawn();
-        }
-
-        private void ApplyUpgrades()
-        {
-            GameManager.Instance.ApplyUpgradesToPlayer(modifiers);
         }
 
         private void Despawn()

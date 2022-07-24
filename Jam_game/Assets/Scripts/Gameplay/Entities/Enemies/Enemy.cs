@@ -29,6 +29,7 @@ namespace Gameplay.Entities.Enemies
         [SerializeField] protected HitStats collisionHit;
 
         private float _lastStunTime;
+        protected override bool Headless => false;
         protected override bool WantsToAttack => Physics.Raycast(AttackRay, minAttackAttemptDistance, targetLayerMask);
         protected override bool CanMove => base.CanMove && !IsStunned;
         protected virtual bool IsStunned => _lastStunTime.TimeSince() <= stunDuration.Value;

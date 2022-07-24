@@ -1,10 +1,9 @@
-using Gameplay.Entities.Players;
 using Management;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Entities.Players
 {
     public class CameraController : MonoBehaviour
     {

@@ -6,7 +6,7 @@ namespace Gameplay.Stats
 {
     [CreateAssetMenu(fileName = "New Stat Type Collection", menuName = "Stats/Stat Type Collection")]
     [TypeInfoBox("A collection of multiple stat types.")]
-    public class StatTypeCollection : ScriptableObject
+    public class StatTypeCollection : StatTypeBase
     {
         public List<StatType> statTypes = new List<StatType>();
     }

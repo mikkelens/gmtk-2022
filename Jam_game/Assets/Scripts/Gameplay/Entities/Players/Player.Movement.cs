@@ -6,8 +6,8 @@ namespace Gameplay.Entities.Players
     {
         protected override Vector2 GetLookDirection()
         {
-            if (IsAiming) return LookDirection();
-            if (IsMoving) return base.GetLookDirection(); // updates look direction
+            if (IsAiming) return UpdatedLookDirection;
+            if (IsMoving) return GetTargetMoveDirection(); // updates look direction
             return PreviousLookDirection; // use previous look (aim) direction
         }
 
