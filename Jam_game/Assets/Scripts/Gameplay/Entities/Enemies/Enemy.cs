@@ -1,6 +1,7 @@
 ﻿using System.Collections;
+using Gameplay.Entities.Attacks;
 using Gameplay.Entities.Base;
-using Gameplay.Entities.PlayerScripts;
+using Gameplay.Entities.Players;
 using Gameplay.Events;
 using Gameplay.Stats;
 using Gameplay.Stats.DataTypes;
@@ -28,15 +29,14 @@ namespace Gameplay.Entities.Enemies
         
         [Header("Enemy Specific")]
         [FoldoutGroup("Stats")]
-        [SerializeField] private FloatStat stunDuration;
-
+        [SerializeField] private Optional<FloatStat> stunDuration;
         [FoldoutGroup("Stats")]
         [SerializeField] private HitStats collisionHit;
 
         private float _lastStunTime;
         protected override bool WantsToAttack => Physics.Raycast(AttackRay, minAttackAttemptDistance, targetLayerMask);
         protected override bool CanMove => base.CanMove && !IsStunned;
-        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= stunDuration;
+        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= stunDuration.Value;
         public void SetSpawnOrigin(CombatEvent origin)
         {
             SpawnOrigin = origin;

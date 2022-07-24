@@ -1,3 +1,4 @@
+using Gameplay.Entities.Attacks;
 using Gameplay.Stats;
 using Gameplay.Stats.DataTypes;
 using Management;
@@ -22,6 +23,7 @@ namespace Gameplay.Entities.Base
         [FoldoutGroup(StatCategory)]
         [HideIf("godMode")]
         [SerializeField] protected IntStat maxHealth;
+
 
         // outside components
         protected GameManager Manager;

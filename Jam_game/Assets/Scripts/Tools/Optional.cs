@@ -26,8 +26,10 @@ namespace Tools
             value = initialValue;
         }
 
-        // from value to optional value implcitly
+        // construction from value to optional value implcitly
         public static implicit operator Optional<T>(T value) => new Optional<T>(value, true);
+        // alternative way of getting value
+        public static explicit operator T(Optional<T> optional) => optional.Value;
     }
 
 }

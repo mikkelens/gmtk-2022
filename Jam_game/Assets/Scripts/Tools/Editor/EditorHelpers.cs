@@ -1,10 +1,31 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using UnityEditor;
 
 namespace Tools.Editor
 {
-    public class EditorHelpers
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    public static class EditorHelpers
     {
+    #region Serialized property family
+        public static SerializedProperty GetParent(this SerializedProperty aProperty)
+        {
+            var path = aProperty.propertyPath;
+            int i = path.LastIndexOf('.');
+            if (i < 0)
+                return null;
+            return aProperty.serializedObject.FindProperty(path.Substring(0, i));
+        }
+        public static SerializedProperty FindSiblingProperty(this SerializedProperty aProperty, string aPath)
+        {
+            var parent = aProperty.GetParent();
+            if (parent == null)
+                return aProperty.serializedObject.FindProperty(aPath);
+            return parent.FindPropertyRelative(aPath);
+        }
+    #endregion
+        
+    #region To object from serialized property
         /// <summary>
         /// Gets the object the property represents.
         /// </summary>
@@ -32,7 +53,6 @@ namespace Tools.Editor
             }
             return obj;
         }
-
         private static object GetValue_Imp(object source, string name)
         {
             if (source == null)
@@ -53,7 +73,6 @@ namespace Tools.Editor
             }
             return null;
         }
-
         private static object GetValue_Imp(object source, string name, int index)
         {
             var enumerable = GetValue_Imp(source, name) as System.Collections.IEnumerable;
@@ -69,5 +88,6 @@ namespace Tools.Editor
             }
             return enm.Current;
         }
+    #endregion
     }
 }

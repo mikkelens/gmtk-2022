@@ -1,5 +1,7 @@
-﻿using Gameplay.Entities.Enemies;
-using Gameplay.Entities.PlayerScripts;
+﻿using System.Collections.Generic;
+using Gameplay.Entities.Attacks;
+using Gameplay.Entities.Enemies;
+using Gameplay.Entities.Players;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Tools;
@@ -18,7 +20,7 @@ namespace Gameplay.Entities.Base
         [UsedImplicitly] private bool Headless => this as Player == null && this as Enemy == null;
      
         [FoldoutGroup(StatCategory)]
-        [SerializeField] private AttackStats mainMeleeAttackStats; // class instance with stats in it
+        [SerializeField] private Weapon weapon; // class instance with stats in it
         
         protected AttackStats LastAttackStats;
         protected float LastAttackTime;
@@ -33,11 +35,16 @@ namespace Gameplay.Entities.Base
         {
             base.EntityUpdate();
 
-            // See thing in attack box
+            // See if thing in attack box
             if (WantsToAttack && CanAttack)
             {
-                StartAttack(mainMeleeAttackStats);
+                StartAttack(GetAttack()); // first attack. should probably be picked somehow
             }
+        }
+
+        protected virtual AttackStats GetAttack()
+        {
+            return weapon.allAttacks[0];
         }
 
         protected virtual void StartAttack(AttackStats attack)

@@ -1,4 +1,6 @@
-﻿using Gameplay.Stats;
+﻿using System;
+using System.Linq;
+using Gameplay.Stats;
 using Gameplay.Stats.DataTypes;
 using UnityEditor;
 using UnityEngine;
@@ -6,7 +8,7 @@ using UnityEngine;
 namespace Tools.Editor
 {
     [CustomPropertyDrawer(typeof(FloatStat)), CustomPropertyDrawer(typeof(IntStat))]
-    public class StatDrawer : PropertyDrawer
+    public class StatPropertyDrawer : PropertyDrawer
     {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
@@ -24,20 +26,38 @@ namespace Tools.Editor
             SerializedProperty currentValueProperty = property.FindPropertyRelative("value");
             SerializedProperty statTypeProperty = property.FindPropertyRelative("type");
             bool showCurrentValue = statTypeProperty.objectReferenceValue != null;
-            
+
             Rect baseRect = totalRect, currentRect = totalRect, statTypeRect = totalRect;
 
             float spacing = EditorGUIUtility.standardVerticalSpacing;
             float totalWidth = totalRect.width - EditorGUIUtility.labelWidth;
+            
+            // compensation for optional variables
+            float optionalCompensation = 0;
+            SerializedProperty parentProperty = property.GetParent();
+            Type type = EditorHelpers.GetTargetObjectOfProperty(parentProperty)?.GetType();
+            if (type is { IsGenericType: true } && type.GetGenericTypeDefinition() == typeof(Optional<>))
+            {
+                optionalCompensation = EditorGUI.GetPropertyHeight(parentProperty.FindPropertyRelative("enabled"));
+                Debug.Log($"Compensation: {optionalCompensation}");
+            }
 
             // relative width
-            baseRect.width = (totalWidth / 4f);
-            currentRect.width = showCurrentValue ? totalWidth / 8f : 0f;
-            statTypeRect.width = totalWidth - (baseRect.width + currentRect.width);
+            
+            const float baseValueDivision = 4f;
+            const float currentValueDivision = 8f;
+
+            totalWidth += optionalCompensation;
+            
+            baseRect.width = totalWidth / baseValueDivision;
+            currentRect.width = showCurrentValue ? (totalWidth - optionalCompensation) / currentValueDivision : 0f;
+            statTypeRect.width = totalWidth - (optionalCompensation + baseRect.width + currentRect.width);
+            
             // position (from left)
             baseRect.width += EditorGUIUtility.labelWidth;
-            currentRect.x += baseRect.width + statTypeRect.width;
             statTypeRect.x += baseRect.width;
+            currentRect.x += baseRect.width + statTypeRect.width;
+            
             // width with spacing
             baseRect.width -= spacing;
             if (showCurrentValue) statTypeRect.width -= spacing;
@@ -50,7 +70,6 @@ namespace Tools.Editor
             EditorGUI.PropertyField(statTypeRect, statTypeProperty, GUIContent.none); // stat type
             if (showCurrentValue)
             {
-                
                 EditorGUI.indentLevel = 0;
                 EditorGUI.BeginDisabledGroup(true);
                 EditorGUI.PropertyField(currentRect, currentValueProperty, GUIContent.none); // current value

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Gameplay.Stats.DataTypes;
 
@@ -6,6 +7,11 @@ namespace Gameplay.Stats
 {
     public static class StatSystem
     {
+        public static bool IsStat(object objectToIdentify)
+        {
+            return objectToIdentify is IntStat or FloatStat;
+        }
+        
         public static List<GenericStat> FindAllStatsOnObject(object target)
         {
             List<GenericStat> foundStats = new List<GenericStat>();

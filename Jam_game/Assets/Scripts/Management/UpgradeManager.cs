@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Gameplay.Entities.PlayerScripts;
+using Gameplay.Entities.Players;
 using Gameplay.Stats;
 using Gameplay.Stats.DataTypes;
 using UnityEngine;

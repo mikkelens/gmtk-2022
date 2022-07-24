@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Gameplay.Entities.PlayerScripts;
+using Gameplay.Entities.Players;
 using Gameplay.Stats;
 using Management;
 using UnityEngine;

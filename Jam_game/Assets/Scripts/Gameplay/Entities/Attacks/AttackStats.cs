@@ -1,9 +1,9 @@
 ﻿using System;
-using Gameplay.Stats;
 using Gameplay.Stats.DataTypes;
+using Tools;
 using UnityEngine;
 
-namespace Gameplay.Entities
+namespace Gameplay.Entities.Attacks
 {
     [Serializable]
     public class AttackStats : StatCollection
@@ -13,6 +13,7 @@ namespace Gameplay.Entities
         [Tooltip("Should be true for attacks that can be directional")]
         public bool hasDirectionalAnimation = false;
 
+        public Optional<float> testFloat;
         public HitStats hit;
         public FloatStat maxDistance;
         public FloatStat cooldown;

@@ -2,12 +2,13 @@
 using System.Collections;
 using Gameplay.Entities.Enemies;
 using Management;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Gameplay.Events
 {
-    [Serializable]
-    [CreateAssetMenu(fileName = "New Boss Event Asset", menuName = "CombatEvents/Boss Event Asset")]
+    [CreateAssetMenu(fileName = "New Boss Event", menuName = "Events/Boss Event")]
+    [TypeInfoBox("Event where a boss is spawned.")]
     public class BossEvent : CombatEvent
     {
         [SerializeField] private Enemy bossPrefabToSpawn;

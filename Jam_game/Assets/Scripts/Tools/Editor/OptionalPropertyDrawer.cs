@@ -9,7 +9,7 @@ namespace Tools.Editor
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             SerializedProperty valueProperty = property.FindPropertyRelative("value");
-            return EditorGUI.GetPropertyHeight(valueProperty);
+            return EditorGUI.GetPropertyHeight(valueProperty, true);
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -18,14 +18,17 @@ namespace Tools.Editor
             SerializedProperty enabledProperty = property.FindPropertyRelative("enabled");
 
             Rect valueRect = position, enabledRect = position;
-            
-            enabledRect.height = enabledRect.width = EditorGUI.GetPropertyHeight(enabledProperty);
+            float spacing = EditorGUIUtility.standardVerticalSpacing;
+
+            enabledRect.width = enabledRect.height = EditorGUI.GetPropertyHeight(enabledProperty, false);
             valueRect.width = position.width - enabledRect.width;
-            
-            enabledRect.x = valueRect.width;
+            enabledRect.x += valueRect.width + spacing; // fixing centering issue
+            valueRect.width -= spacing;
+            // Debug.Log($"positionWidth: {position.width}, positionX: {position.x};" +
+            //           $"\nspacing: {spacing}; \nvalueWidth: {valueRect.width}, valueX: {valueRect.x};" +
+            //           $"\nenabledWidth: {enabledRect.width}, enabledX: {enabledRect.x}\n");
             
             EditorGUI.BeginProperty(position, label, property);
-            int indent = EditorGUI.indentLevel;
             
             // value field
             EditorGUI.BeginDisabledGroup(!enabledProperty.boolValue); // greyed out if not enabled
@@ -33,11 +36,12 @@ namespace Tools.Editor
             EditorGUI.EndDisabledGroup();
 
             // enabled checkbox
+            int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
             EditorGUI.PropertyField(enabledRect, enabledProperty, GUIContent.none);
             
-            EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();
+            EditorGUI.indentLevel = indent;
         }
     }
 }

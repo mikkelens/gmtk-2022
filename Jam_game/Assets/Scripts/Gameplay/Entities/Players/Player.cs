@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
-namespace Gameplay.Entities.PlayerScripts
+namespace Gameplay.Entities.Players
 {
     [Tooltip("Player: This is the player script. It also derives from entity scripts.")]
     public partial class Player : CombatEntity // main
@@ -29,9 +29,8 @@ namespace Gameplay.Entities.PlayerScripts
             Hazard hazard = other.GetComponent<Hazard>();
             if (hazard == null) return;
             
-            HitStats hazardHit = new HitStats(hazard.Damage, hazard.Knockback);
             Vector2 direction = collision.impulse.WorldToPlane().normalized;
-            TakeHit(hazardHit, direction); // hit itself/player
+            TakeHit(hazard.Hit, direction); // hit itself/player
         }
     }
 }
