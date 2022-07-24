@@ -1,5 +1,5 @@
 ﻿using Gameplay.Entities;
-using Gameplay.Entities.Attacks;
+using Gameplay.Stats.Attacks;
 using Tools;
 using UnityEngine;
 

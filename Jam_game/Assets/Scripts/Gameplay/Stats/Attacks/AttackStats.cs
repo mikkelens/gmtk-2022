@@ -3,7 +3,7 @@ using Gameplay.Stats.DataTypes;
 using Tools;
 using UnityEngine;
 
-namespace Gameplay.Entities.Attacks
+namespace Gameplay.Stats.Attacks
 {
     [Serializable]
     public class AttackStats : StatCollection
