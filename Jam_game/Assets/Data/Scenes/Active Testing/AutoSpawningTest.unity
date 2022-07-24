@@ -2932,6 +2932,24 @@ Transform:
   m_Father: {fileID: 1240916828}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 52.88, z: 0}
+--- !u!1 &67285986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1934767789084735915, guid: 9468432de95882841981415c93f4198e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1934767789314616428}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &67285993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67285986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d658ff576197d44b0f9841ea6d5750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &68310458
 GameObject:
   m_ObjectHideFlags: 0
@@ -65740,7 +65758,7 @@ PrefabInstance:
     - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
       propertyPath: turnSpeedCurve.m_Curve.Array.data[0].inSlope
-      value: 0.0070702173
+      value: -0.20423931
       objectReference: {fileID: 0}
     - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
@@ -65750,7 +65768,7 @@ PrefabInstance:
     - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
       propertyPath: turnSpeedCurve.m_Curve.Array.data[0].outSlope
-      value: 0.0070702173
+      value: -0.20423931
       objectReference: {fileID: 0}
     - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
@@ -65765,7 +65783,7 @@ PrefabInstance:
     - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
       propertyPath: turnSpeedCurve.m_Curve.Array.data[0].outWeight
-      value: 0.5029398
+      value: 0.50574994
       objectReference: {fileID: 0}
     - target: {fileID: 7804618059053159352, guid: 94691372665626847aa961e06a42ea72,
         type: 3}

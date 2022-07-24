@@ -27,6 +27,15 @@ MonoBehaviour:
           type: {fileID: 0}
           baseValue: 20
           value: 20
+      effect:
+        enabled: 1
+        value:
+          typeTarget: {fileID: 0}
+          value: 0.5
+          modificationType: 200
+          timer:
+            enabled: 0
+            value: 0
   maxDistance:
     enabled: 1
     value:
