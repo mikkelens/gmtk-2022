@@ -10,7 +10,7 @@ namespace Management
         public void ApplyUpgradesToPlayer(List<StatModifier> upgrades)
         {
             // Get all stats on player
-            List<GenericStat> allStats = StatSystem.FindAllStatsOnObject(_player);
+            IEnumerable<GenericStat> allStats = StatSystem.FindAllStatsOnObject(_player);
 
             // upgrade appropriate stats
             foreach (GenericStat stat in allStats.Where(stat => stat.type != null))

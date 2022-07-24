@@ -27,7 +27,7 @@ namespace Gameplay.Entities.Base
 
         private static string AttackAnimationDirectionString(AttackStats attack) => attack.animationName + "Direction";
         protected virtual bool WantsToAttack => autoAttacks; // will only use "autoAttacks" field if WantsToAttack is not overridden
-        protected virtual bool CanAttack => LastAttackStats == null || LastAttackTime.TimeSince() >= LastAttackStats.cooldown;
+        protected virtual bool CanAttack => LastAttackStats is not { cooldown: { Enabled: true } } || LastAttackTime.TimeSince() >= LastAttackStats.cooldown.Value;
         protected virtual Ray AttackRay => new Ray(Transform.position, Transform.forward);
         
         
@@ -68,7 +68,8 @@ namespace Gameplay.Entities.Base
         protected void TryHitWithAttack(AttackStats attack)
         {
             // Raycast for hit
-            if (Physics.Raycast(AttackRay, out RaycastHit hitData, attack.maxDistance, targetLayerMask.value)) // Within distance?
+            float maxdistance = attack.maxDistance.Enabled ? attack.maxDistance.Value : float.MaxValue;
+            if (Physics.Raycast(AttackRay, out RaycastHit hitData, maxdistance, targetLayerMask.value)) // Within distance?
                 HitOther(hitData.transform.GetComponent<Entity>(), attack);
             EndAttack(attack);
         }
@@ -81,8 +82,8 @@ namespace Gameplay.Entities.Base
         private void HitOther(Entity entity, AttackStats attack)
         {
             Vector2 lookDirection = GetLookDirection();
-            entity.TakeHit(attack.hit, lookDirection);
-            ApplyKnockback(-lookDirection * attack.selfKnockbackStrength); // apply knockback to self
+            if (attack.hit.Enabled) entity.TakeHit(attack.hit.Value, lookDirection);
+            if (attack.selfKnockbackStrength.Enabled) ApplyKnockback(-lookDirection * attack.selfKnockbackStrength.Value); // apply knockback to self
         }
     }
 }

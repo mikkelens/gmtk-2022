@@ -1,10 +1,12 @@
 ﻿using System;
+using Gameplay.Stats;
 using Gameplay.Stats.DataTypes;
 using Tools;
 
 namespace Gameplay.Attacks
 {
-    public class HitStats : StatCollection
+    [Serializable]
+    public class HitStats : IStatCollection
     {
         public Optional<IntStat> damage;
         public Optional<FloatStat> knockback;

@@ -11,18 +11,28 @@ namespace Gameplay.Stats
             return objectToIdentify is IntStat or FloatStat;
         }
         
-        public static List<GenericStat> FindAllStatsOnObject(object target)
+        public static IEnumerable<GenericStat> FindAllStatsOnObject(object target)
         {
             List<GenericStat> foundStats = new List<GenericStat>();
 
             foreach (FieldInfo field in foundStats.GetType().GetFields())
             {
-                if (field.GetValue(target) is GenericStat stat)
-                // add found stat to list
-                    foundStats.Add(stat);
-                else if (field.GetValue(target) is StatCollection statCollection)
-                // go down a level to find stats and pass them back up, recursively
-                    foundStats.AddRange(FindAllStatsOnObject(statCollection));
+                object value = field.GetValue(target);
+                switch (value)
+                {
+                    case GenericStat stat:
+                        // add found stat to list
+                        foundStats.Add(stat);
+                        break;
+                    case IStatCollection statCollection:
+                        // go down a level to find stats and pass them back up recursively
+                        foundStats.AddRange(FindAllStatsOnObject(statCollection));
+                        break;
+                    case List<IStatCollection> statCollections:
+                        // go down multiple ways to find stats and pass them back up recursively
+                        statCollections.ForEach(collection => foundStats.AddRange(FindAllStatsOnObject(collection)));
+                        break;
+                }
             }
             return foundStats;
         }
