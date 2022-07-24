@@ -9,11 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1488532003811833285}
-  - component: {fileID: 1488532003811833287}
-  - component: {fileID: 9220049574191574164}
   - component: {fileID: 1488532003811833286}
-  - component: {fileID: 1488532003811833284}
-  - component: {fileID: 9112776903165279808}
+  - component: {fileID: 1488532003811833287}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -36,32 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1488532003811833287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1488532003811833336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aee4e4a2fb8e4c0bb448226e984042b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9220049574191574164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1488532003811833336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 787e174ff64b46e99ed751439b5d1d73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  killScoreText: {fileID: 0}
-  pauseMenuElements: []
 --- !u!114 &1488532003811833286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 0}
   cursorSprite: {fileID: 0}
---- !u!114 &1488532003811833284
+--- !u!114 &1488532003811833287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,21 +56,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1488532003811833336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71726402f09b46e4a82aecd18c5bf5bb, type: 3}
+  m_Script: {fileID: 11500000, guid: aee4e4a2fb8e4c0bb448226e984042b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minSpawnDistance: 10
   rootEnemyParent: {fileID: 0}
   combatEvents: []
---- !u!114 &9112776903165279808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1488532003811833336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 764768c26fe04a5e802a8af826f3ca01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  killScoreText: {fileID: 0}
+  pauseMenuElements: []

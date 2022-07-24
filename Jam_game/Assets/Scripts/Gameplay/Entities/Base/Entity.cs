@@ -1,9 +1,7 @@
-using Gameplay.Stats;
-using Gameplay.Stats.Attacks;
+using Gameplay.Entities.Attacks;
 using Gameplay.Stats.DataTypes;
 using Management;
 using Sirenix.OdinInspector;
-using Tools;
 using UnityEngine;
 
 namespace Gameplay.Entities.Base

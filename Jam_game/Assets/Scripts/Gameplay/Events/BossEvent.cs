@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Gameplay.Entities.Enemies;
 using Management;
 using Sirenix.OdinInspector;

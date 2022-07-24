@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Gameplay.Entities.Attacks;
 using Gameplay.Entities.Enemies;
 using Gameplay.Entities.Players;
-using Gameplay.Stats.Attacks;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Tools;

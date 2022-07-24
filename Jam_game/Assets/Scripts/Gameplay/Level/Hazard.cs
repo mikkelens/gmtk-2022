@@ -1,6 +1,4 @@
-﻿using Gameplay.Entities;
-using Gameplay.Stats.Attacks;
-using Tools;
+﻿using Gameplay.Entities.Attacks;
 using UnityEngine;
 
 namespace Gameplay.Level

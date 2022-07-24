@@ -7,24 +7,18 @@ using UnityEngine;
 
 namespace Management
 {
-    public class EventManager : MonoBehaviour
+    public partial class GameManager
     {
-        public static EventManager Instance;
-
+        [FoldoutGroup("Events")]
         [SerializeField] private float minSpawnDistance = 10f;
+        [FoldoutGroup("Events")]
         [SerializeField] private Transform rootEnemyParent;
+        [FoldoutGroup("Events")]
         [SerializeField] private List<CombatEvent> combatEvents = new List<CombatEvent>();
 
-        private void Awake() => Instance = this;
-
+        [FoldoutGroup("Events")]
         [ShowInInspector]
         private float TotalWaveTime => combatEvents.OfType<WaveEvent>().Sum(wave => wave.waveTime);
-
-        public void Start()
-        {
-            // start of game, start combat
-            StartCoroutine(CombatEventLoop());
-        }
 
         private IEnumerator CombatEventLoop()
         {

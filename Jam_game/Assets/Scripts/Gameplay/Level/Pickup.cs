@@ -23,7 +23,7 @@ namespace Gameplay.Level
 
         private void ApplyUpgrades()
         {
-            UpgradeManager.Instance.ApplyUpgradesToPlayer(modifiers);
+            GameManager.Instance.ApplyUpgradesToPlayer(modifiers);
         }
 
         private void Despawn()

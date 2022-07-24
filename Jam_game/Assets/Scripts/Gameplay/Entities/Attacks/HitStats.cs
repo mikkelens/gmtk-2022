@@ -2,7 +2,7 @@
 using Gameplay.Stats.DataTypes;
 using Tools;
 
-namespace Gameplay.Stats.Attacks
+namespace Gameplay.Entities.Attacks
 {
     [Serializable]
     public class HitStats : StatCollection

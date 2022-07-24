@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
 namespace Management
 {
-    public class UIManager : MonoBehaviour
+    public partial class GameManager
     {
-        public static UIManager Instance;
-        private void Awake() => Instance = this;
-        
+        [FoldoutGroup("UI")]
         [SerializeField] private TextMeshProUGUI killScoreText;
+        [FoldoutGroup("UI")]
         [SerializeField] private List<RectTransform> pauseMenuElements = new List<RectTransform>();
         
         public void TogglePauseMenu(bool show)
@@ -17,6 +17,12 @@ namespace Management
             pauseMenuElements.ForEach(element => element.gameObject.SetActive(show));
         }
 
+        public void IncreaseKillcount()
+        {
+            _killCount++;
+            UpdateKillCount(_killCount);
+        }
+        
         public void UpdateKillCount(int killCount)
         {
             if (killScoreText == null) return;
