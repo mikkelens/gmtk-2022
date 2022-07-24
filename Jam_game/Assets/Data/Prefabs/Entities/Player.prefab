@@ -205,17 +205,17 @@ PrefabInstance:
     - target: {fileID: 6121795126706553912, guid: 1a1613ff0ed8f1c4bb6b17c943013247,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6121795126706553912, guid: 1a1613ff0ed8f1c4bb6b17c943013247,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6121795126706553912, guid: 1a1613ff0ed8f1c4bb6b17c943013247,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6121795126706553912, guid: 1a1613ff0ed8f1c4bb6b17c943013247,
         type: 3}
@@ -262,11 +262,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4871413564851cf4da16e7f47447745f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingStats: {fileID: 11400000, guid: be0059c9e34bf41418db3aad13dd1be2, type: 2}
-  stats: {fileID: 0}
+  godMode: 0
+  maxHealth:
+    type: {fileID: 11400000, guid: 5b3b6e70f71fd4247acc80e09d2b17ba, type: 2}
+    baseValue: 5
+    value: 5
+  freezingAffectsRotation: 1
+  stoppingAffectsRotation: 0
+  maxTurnSpeed: 0
+  turnSpeedCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxSpeed:
+    type: {fileID: 11400000, guid: f28495898b4de4f49b15f438e4e32f51, type: 2}
+    baseValue: 5
+    value: 5
+  walkAccelSpeed:
+    type: {fileID: 11400000, guid: 1d68ee0697ceb5747a383b0d125b37e2, type: 2}
+    baseValue: 50
+    value: 50
+  maxStoppingBonus:
+    type: {fileID: 11400000, guid: 149112c66e89fa544993342bd7d8a20c, type: 2}
+    baseValue: 2.5
+    value: 2.5
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  autoAttacks: 0
+  weapon: {fileID: 11400000, guid: ad0e4c58a495c104f99613425d3df4ca, type: 2}
+  aimTurnSpeedBonus: 0
 --- !u!4 &7804618059053159353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6121795126706553912, guid: 1a1613ff0ed8f1c4bb6b17c943013247,

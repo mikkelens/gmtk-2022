@@ -1,8 +1,8 @@
 ﻿using System.Collections;
+using Gameplay.Attacks;
 using Gameplay.Entities.Base;
 using Gameplay.Entities.Players;
 using Gameplay.Events;
-using Gameplay.Stats.Attacks;
 using Gameplay.Stats.DataTypes;
 using Sirenix.OdinInspector;
 using Tools;

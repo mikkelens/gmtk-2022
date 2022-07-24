@@ -1,11 +1,10 @@
 ﻿using System;
+using Gameplay.Stats;
 using Gameplay.Stats.DataTypes;
-using Tools;
 using UnityEngine;
 
-namespace Gameplay.Stats.Attacks
+namespace Gameplay.Attacks
 {
-    [Serializable]
     public class AttackStats : StatCollection
     {
         [Tooltip("This *has* to match the name of the animation. alternatives: 'Charge', 'MeleeAlternate'")]

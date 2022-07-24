@@ -1,8 +1,5 @@
-﻿using System;
-using Gameplay.Entities.Players;
+﻿using Gameplay.Entities.Players;
 using Gameplay.Input;
-using Gameplay.Level;
-using Tools;
 using UnityEngine;
 
 namespace Management

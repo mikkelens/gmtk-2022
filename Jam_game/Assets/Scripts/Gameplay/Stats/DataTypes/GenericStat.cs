@@ -5,7 +5,7 @@ namespace Gameplay.Stats.DataTypes
 {
     // can be float or int
     [Serializable]
-    public class GenericStat
+    public abstract class GenericStat
     {
         public StatType type;
         

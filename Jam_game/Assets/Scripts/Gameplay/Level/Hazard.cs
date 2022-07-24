@@ -1,4 +1,4 @@
-﻿using Gameplay.Stats.Attacks;
+﻿using Gameplay.Attacks;
 using UnityEngine;
 
 namespace Gameplay.Level

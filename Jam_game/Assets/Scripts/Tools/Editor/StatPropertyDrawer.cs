@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using Gameplay.Stats;
 using Gameplay.Stats.DataTypes;
 using UnityEditor;
 using UnityEngine;

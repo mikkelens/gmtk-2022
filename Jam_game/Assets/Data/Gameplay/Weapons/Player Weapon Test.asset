@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player Weapon Test
   m_EditorClassIdentifier: 
   allAttacks:
-  - animationName: Melee
+  - name: Melee
     hasDirectionalAnimation: 0
     hit:
       testFloat:
@@ -33,13 +33,13 @@ MonoBehaviour:
           value: 0
     maxDistance:
       type: {fileID: 0}
-      baseValue: 0
-      value: 0
+      baseValue: 3
+      value: 3
     cooldown:
-      type: {fileID: 0}
+      type: {fileID: 11400000, guid: 9db277f80f4e12943bfc03201a88e010, type: 2}
       baseValue: 5
       value: 5
     selfKnockbackStrength:
       type: {fileID: 0}
-      baseValue: 0
-      value: 0
+      baseValue: 5
+      value: 5

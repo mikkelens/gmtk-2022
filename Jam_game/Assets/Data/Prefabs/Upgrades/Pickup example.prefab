@@ -7,10 +7,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
+      propertyPath: modifiers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
+      propertyPath: modifiers.Array.data[0].name
+      value: MaxHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
+      propertyPath: modifiers.Array.data[0].targetStatType
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b3b6e70f71fd4247acc80e09d2b17ba,
+        type: 2}
+    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
+      propertyPath: modifiers.Array.data[1].modificationType
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530563, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
       propertyPath: m_Name
-      value: UpgradePickup blueprint
+      value: Pickup example
       objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530566, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}

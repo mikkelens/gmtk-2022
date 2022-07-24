@@ -1,4 +1,4 @@
-using Gameplay.Stats.Attacks;
+using Gameplay.Attacks;
 using Gameplay.Stats.DataTypes;
 using Management;
 using Sirenix.OdinInspector;

@@ -1,6 +1,9 @@
-﻿namespace Gameplay.Stats.DataTypes
+﻿using UnityEngine;
+
+namespace Gameplay.Stats.DataTypes
 {
-    public class StatCollection // for knowing what classes are made for stats
+    // for knowing what classes are made for stats
+    public abstract class StatCollection : ScriptableObject
     {
         
     }

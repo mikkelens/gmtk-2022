@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Gameplay.Entities.Players;
-using Gameplay.Input;
 using Gameplay.Stats;
 using Gameplay.Stats.DataTypes;
-using UnityEngine;
 
 namespace Management
 {
@@ -16,11 +13,20 @@ namespace Management
             List<GenericStat> allStats = StatSystem.FindAllStatsOnObject(_player);
 
             // upgrade appropriate stats
-            foreach (StatModifier upgrade in upgrades)
+            foreach (GenericStat stat in allStats.Where(stat => stat.type != null))
             {
-                foreach (GenericStat stat in allStats.Where(stat => stat.type == upgrade.targetStatType))
+                foreach (StatModifier upgrade in upgrades)
                 {
-                    stat.AddModifier(upgrade);
+                    if (upgrade.targetStatType != null)
+                    {
+                        if (upgrade.targetStatType == stat.type) stat.AddModifier(upgrade);
+                    }
+                    else if (upgrade.targetStatTypeCollection != null)
+                    {
+                        StatTypeCollection upgradeTypes = upgrade.targetStatTypeCollection;
+                        if (upgradeTypes.statTypes == null) continue;
+                        if (upgradeTypes.statTypes.Contains(stat.type)) stat.AddModifier(upgrade);
+                    }
                 }
             }
         }

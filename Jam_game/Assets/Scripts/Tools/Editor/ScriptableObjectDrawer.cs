@@ -1,25 +1,35 @@
-﻿using UnityEditor;
+﻿using Gameplay.Attacks;
+using UnityEditor;
 using UnityEngine;
 
 namespace Tools.Editor
 {
-    [CustomPropertyDrawer(typeof(ScriptableObject), true)]
+    [CustomPropertyDrawer(typeof(Weapon), true)]
     public class ScriptableObjectDrawer : PropertyDrawer
     {
         // Cached scriptable object editor
         private UnityEditor.Editor _editor;
-     
+
+        // private static readonly Type[] BannedTypes = {
+        //     typeof(StatType),
+        //     typeof(StatTypeCollection),
+        // };
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            // Draw label
-            EditorGUI.PropertyField(position, property, label, true);
-         
+            bool expandable = property.objectReferenceValue != null /*&& !BannedTypes.Contains(property.objectReferenceValue.GetType())*/;
+            
             // Draw foldout arrow
-            if (property.objectReferenceValue != null)
+            if (expandable)
             {
                 property.isExpanded = EditorGUI.Foldout(position, property.isExpanded, GUIContent.none);
             }
-     
+            
+            // Draw label
+            if (expandable) EditorGUI.indentLevel++;
+            EditorGUI.PropertyField(position, property, label, true);
+            if (expandable) EditorGUI.indentLevel--;
+            
             // Draw foldout properties
             if (property.isExpanded)
             {
