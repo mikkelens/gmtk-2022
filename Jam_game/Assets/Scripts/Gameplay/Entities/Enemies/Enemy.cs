@@ -1,7 +1,10 @@
 ﻿using System.Collections;
+using Gameplay.Attacks;
 using Gameplay.Entities.Base;
-using Gameplay.Entities.PlayerScripts;
+using Gameplay.Entities.Players;
 using Gameplay.Events;
+using Gameplay.Stats.DataTypes;
+using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
@@ -13,12 +16,26 @@ namespace Gameplay.Entities.Enemies
         protected CombatEvent SpawnOrigin;
         protected Player Player;
         
-        // protected ;
-        private float _lastStunTime;
+        [Header("Enemy Specific")]
+        [FoldoutGroup("Quirks")]
+        [SerializeField] public float relativeSpawnChance;
+        [FoldoutGroup("Quirks")]
+        [SerializeField] private bool turningAffectsMoveDirection;
+        [FoldoutGroup("Quirks")]
+        [SerializeField] private float minAttackAttemptDistance;
+        [FoldoutGroup("Quirks")]
+        [SerializeField] private float attackChargeTime;
+        
+        [Header("Enemy Specific")]
+        [FoldoutGroup("Stats")]
+        [SerializeField] private Optional<FloatStat> stunDuration;
+        [FoldoutGroup("Stats")]
+        [SerializeField] private HitStats collisionHit;
 
-        protected override bool WantsToAttack => Physics.Raycast(AttackRay, stats.minAttackAttemptDistance, targetLayerMask);
+        private float _lastStunTime;
+        protected override bool WantsToAttack => Physics.Raycast(AttackRay, minAttackAttemptDistance, targetLayerMask);
         protected override bool CanMove => base.CanMove && !IsStunned;
-        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= stats.stunDuration;
+        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= stunDuration.Value;
         public void SetSpawnOrigin(CombatEvent origin)
         {
             SpawnOrigin = origin;
@@ -32,7 +49,7 @@ namespace Gameplay.Entities.Enemies
 
         protected override Vector2 GetMoveDirection()
         {
-            if (stats.turningAffectsMoveDirection)
+            if (turningAffectsMoveDirection)
                 return Transform.forward.WorldToPlane();
             return GetTargetMoveDirection();
         }
@@ -44,17 +61,17 @@ namespace Gameplay.Entities.Enemies
             return (playerPos - pos).normalized;
         }
         
-        protected override void StartMelee(Attack attack) // On enemies, attacks are slow animations
+        protected override void StartMelee(AttackStats attack) // On enemies, attacks are slow animations
         {
             StartCoroutine(MeleeRoutine(attack));
         }
         
-        private IEnumerator MeleeRoutine(Attack attack) // Think dark soulds attack with long chargeup
+        private IEnumerator MeleeRoutine(AttackStats attack) // Think dark soulds attack with long chargeup
         {
             Stopping = true;
             Animator.SetBool("Walking", false);
-            yield return new WaitForSeconds(stats.attackChargeTime);
-            TryMelee(attack);
+            yield return new WaitForSeconds(attackChargeTime);
+            TryHitWithAttack(attack);
             Animator.SetBool("Walking", true);
             Stopping = false;
         }
@@ -68,7 +85,9 @@ namespace Gameplay.Entities.Enemies
         
             Player player = entity as Player; // filter contact to only be player
             if (player == null) return;
-            player.TakeHit(stats.collisionDamage, -collision.impulse.WorldToPlane() * stats.collisionKnockback);
+
+            Vector2 collisionDirection = -collision.impulse.WorldToPlane().normalized;
+            player.TakeHit(collisionHit, collisionDirection);
         }
 
         protected override void ApplyKnockback(Vector2 force)

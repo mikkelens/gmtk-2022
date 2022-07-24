@@ -9,19 +9,27 @@ namespace Tools
         [SerializeField] private bool enabled;
         [SerializeField] private T value;
 
-        public bool Enabled => enabled;
-        public T Value => value;
-
-        public Optional(T initialValue)
+        public bool Enabled
         {
-            enabled = false; // opt-in, disabled by default
-            value = initialValue;
+            get => enabled;
+            set => enabled = value;
         }
-        public Optional(T initialValue, bool initialEnabled)
+        public T Value
+        {
+            get => value;
+            set => this.value = value;
+        }
+
+        public Optional(T initialValue = default, bool initialEnabled = false) // false is default setting for optional variables
         {
             enabled = initialEnabled;
             value = initialValue;
         }
+
+        // construction from value to optional value implcitly
+        public static implicit operator Optional<T>(T value) => new Optional<T>(value, true);
+        // alternative way of getting value
+        public static explicit operator T(Optional<T> optional) => optional.Value;
     }
 
 }

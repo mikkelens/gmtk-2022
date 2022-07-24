@@ -1,4 +1,4 @@
-using Gameplay.Entities.PlayerScripts;
+using Gameplay.Entities.Players;
 using Management;
 using Sirenix.OdinInspector;
 using Tools;
@@ -55,7 +55,7 @@ namespace Gameplay
             // get speed
             float distance = Vector2.Distance(currentPos, targetPos);
             float speed = followSpeed / (1 - Mathf.Min(0.95f, distance / maxDistance));
-            Debug.Log($"Distance {distance}, Speed: {speed}");
+            // Debug.Log($"Distance {distance}, Speed: {speed}");
             
             float increment = Mathf.Min(distance, speed * Time.deltaTime);
             Vector2 move = direction * increment;
