@@ -35,10 +35,5 @@ namespace Management
             }
             // game end?
         }
-
-        public void SpawnUpgrade(Pickup pickup, Vector2 location)
-        {
-            Instantiate(pickup, location.PlaneToWorld(), Quaternion.identity, rootEnemyParent);
-        }
     }
 }

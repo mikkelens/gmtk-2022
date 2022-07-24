@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Entities.Base;
+using Gameplay.Level;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
@@ -17,7 +18,8 @@ namespace Gameplay.Events
         public float waveTime = 30f;
         [AssetsOnly]
         public List<EntityData> entitiesToSpawn = new List<EntityData>();
-        
+        public Optional<Pickup> pickupToSpawn;
+
         // ReSharper disable once CollectionNeverQueried.Local
         private List<Entity> _spawnedEntities;
 
@@ -40,6 +42,7 @@ namespace Gameplay.Events
                 // wait
                 yield return new WaitForSeconds(spawnDelay);
             }
+            if (pickupToSpawn.Enabled) SpawnPickup(pickupToSpawn.Value, GetRandomSpawnLocation());
         }
 
         private Entity SelectEntityAsset(IReadOnlyCollection<EntityData> allEnemies)

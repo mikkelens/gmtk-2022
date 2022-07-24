@@ -1,13 +1,11 @@
 {
-    "name": "Editor",
+    "name": "Stats",
     "rootNamespace": "",
     "references": [
-        "GUID:9e95facd419d42242985b794a1d6a5c2",
-        "GUID:dba28c1df30157949baee82706bc8de9"
+        "GUID:dba28c1df30157949baee82706bc8de9",
+        "GUID:9e95facd419d42242985b794a1d6a5c2"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

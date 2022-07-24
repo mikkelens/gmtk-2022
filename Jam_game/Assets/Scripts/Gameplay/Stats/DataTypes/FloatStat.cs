@@ -5,7 +5,7 @@ namespace Gameplay.Stats.DataTypes
 {
     // [CreateAssetMenu(fileName = "New Float Stat", menuName = "Stat System/Float Stat")]
     [Serializable]
-    public class FloatStat : GenericStat
+    public class FloatStat : Stat
     {
         [SerializeField] public float baseValue;
         

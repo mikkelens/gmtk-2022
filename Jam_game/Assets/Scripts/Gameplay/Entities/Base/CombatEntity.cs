@@ -1,6 +1,4 @@
-﻿using Gameplay.Entities.Enemies;
-using Gameplay.Entities.Players;
-using Gameplay.Stats.Attacks;
+﻿using Gameplay.Stats.Attacks;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Tools;
@@ -16,7 +14,7 @@ namespace Gameplay.Entities.Base
         [FoldoutGroup(QuirkCategory)]
         [ShowIf("Headless")] // this should only be visible to designer if this entity is a dummy
         [SerializeField] protected bool autoAttacks;
-        [UsedImplicitly] protected bool Headless => this as Player == null && this as Enemy == null;
+        [UsedImplicitly] protected virtual bool Headless => true;
      
         [FoldoutGroup(StatCategory)]
         [SerializeField, Required] protected Weapon activeWeapon; // class instance with stats in it

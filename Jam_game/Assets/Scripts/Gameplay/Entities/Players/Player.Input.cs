@@ -11,20 +11,24 @@ namespace Gameplay.Entities.Players
         private bool _lastAimWasController;
         
         private bool IsMoving => _moveInput.magnitude > 0.0f;
-        private bool AimCounts => _lastAimWasController || _holdingThrow;
-        private bool IsAiming => /*LookDirection() != Vector2.zero &&*/ AimCounts;
+        private bool IsAiming => (UpdatedLookDirection != Vector2.zero && _lastAimWasController) || _holdingThrow;
 
         protected override bool WantsToAttack => _holdingMelee;
 
+        private bool _aimIsDirty;
         private Vector2 _rawAimInput;
-
-        private Vector2 LookDirection()
+        private Vector2 _lookDirection;
+        private Vector2 UpdatedLookDirection
         {
-            if (_lastAimWasController) return _rawAimInput;
-            Vector3 worldPosition = Transform.position;
-            Vector2 offset = worldPosition.PositionToScreenPoint();
-            Vector2 aimInput = (_rawAimInput - offset).ScreenToViewportPoint();
-            return aimInput; // mouse
+            get
+            {
+                if (!_aimIsDirty) return _lookDirection;
+                _aimIsDirty = false;
+                if (_lastAimWasController) return _lookDirection = _rawAimInput;
+                Vector3 worldPosition = Transform.position;
+                Vector2 offset = worldPosition.PositionToScreenPoint();
+                return _lookDirection = (_rawAimInput - offset).ScreenToViewportPoint(); // mouse
+            }
         }
         
         public void SetMeleeInput(bool pressingMelee)
@@ -45,7 +49,7 @@ namespace Gameplay.Entities.Players
         {
             _rawAimInput = input;
             _lastAimWasController = fromController;
-            // Debug.Log($"Aim input: {input}");
+            _aimIsDirty = true;
         }
     }
 }

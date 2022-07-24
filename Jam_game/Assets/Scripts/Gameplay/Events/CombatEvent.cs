@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Gameplay.Entities.Base;
+using Gameplay.Level;
 using Tools;
 using UnityEngine;
 
@@ -26,10 +27,14 @@ namespace Gameplay.Events
             float randomValue = Random.Range(0, MinSpawnDistance);
             return new Vector2(randomX ? randomValue : MinSpawnDistance, randomX ? MinSpawnDistance : randomValue);
         }
-        
         protected Quaternion GetRandomSpawnRotation() // Rotation around the z axis
         {
             return Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+        }
+
+        protected void SpawnPickup(Pickup pickup, Vector2 location)
+        {
+            Instantiate(pickup, location.PlaneToWorld(), Quaternion.identity, SpawningParent);
         }
         
         // spawn enemy from enemy asset/prefab, return reference (in scene)
@@ -44,6 +49,5 @@ namespace Gameplay.Events
         {
             Destroy(entity.gameObject);
         }
-
     }
 }

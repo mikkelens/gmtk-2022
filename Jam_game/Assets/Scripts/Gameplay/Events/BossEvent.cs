@@ -13,7 +13,7 @@ namespace Gameplay.Events
     public class BossEvent : CombatEvent
     {
         [SerializeField] private Entity bossPrefabToSpawn;
-        [SerializeField, AssetsOnly] private Pickup pickupToDrop;
+        [SerializeField] private Optional<Pickup> pickupToDrop;
         
         private bool _bossAlive;
 
@@ -21,7 +21,7 @@ namespace Gameplay.Events
         {
             yield return base.RunEvent();
 
-            SpawnEntity(bossPrefabToSpawn, SpawningParent); // dont need reference, boss will call overridden despawn method
+            Entity boss = SpawnEntity(bossPrefabToSpawn, SpawningParent); // dont need reference, boss will call overridden despawn method
             _bossAlive = true;
             
             yield return new WaitUntil(() => !_bossAlive);
@@ -29,9 +29,9 @@ namespace Gameplay.Events
 
         public override void DespawnEntity(Entity entity)
         {
-            GameManager.Instance.SpawnUpgrade(pickupToDrop, entity.transform.position.WorldToPlane());
-            base.DespawnEntity(entity);
             _bossAlive = false;
+            if (pickupToDrop.Enabled) SpawnPickup(pickupToDrop.Value, entity.transform.position.WorldToPlane());
+            base.DespawnEntity(entity);
         }
     }
 }

@@ -9,12 +9,7 @@ namespace Gameplay.Stats.Attacks
     {
         public Optional<IntStat> damage;
         public Optional<FloatStat> knockback;
+        public Optional<StatModifier> effect;
         // todo: add some effect that can be triggered on hit
-
-        public HitStats(Optional<IntStat> optionalDamage = default, Optional<FloatStat> optionalKnockback = default) // full constructor
-        {
-            damage = optionalDamage;
-            knockback = optionalKnockback;
-        }
     }
 }
