@@ -8,7 +8,7 @@ namespace Gameplay.Stats
     public class StatModifier
     {
         public float value = 0;
-        public ModificationTypes modificationType = ModificationTypes.Flat;
+        public ModificationTypes modificationType = ModificationTypes.Add;
         
         // [InfoBox("You need to assign some form of stat type in order for this to work.", InfoMessageType.Warning, VisibleIf = "@BothNull")]
         

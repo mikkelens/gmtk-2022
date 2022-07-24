@@ -8,7 +8,7 @@ namespace Gameplay.Entities.Enemies
     {
         [Header("Reptile Specific")]
         [FoldoutGroup("Quirks")]
-        [SerializeField] private float angleBeforeHeadTurn;
+        [SerializeField] protected float angleBeforeHeadTurn;
 
         protected override void TurnTowardsLookDirection(Vector2 targetDirection)
         {

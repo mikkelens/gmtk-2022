@@ -1,9 +1,8 @@
 ﻿using System;
-using Gameplay.Stats;
 using Gameplay.Stats.DataTypes;
 using Tools;
 
-namespace Gameplay.Attacks
+namespace Gameplay.Stats.Attacks
 {
     [Serializable]
     public class HitStats : IStatCollection

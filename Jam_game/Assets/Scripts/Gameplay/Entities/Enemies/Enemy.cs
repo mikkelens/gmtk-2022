@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using Gameplay.Attacks;
 using Gameplay.Entities.Base;
 using Gameplay.Entities.Players;
-using Gameplay.Events;
+using Gameplay.Stats.Attacks;
 using Gameplay.Stats.DataTypes;
 using Sirenix.OdinInspector;
 using Tools;
@@ -13,34 +12,27 @@ namespace Gameplay.Entities.Enemies
     [Tooltip("Enemy: Acts like a hostile minecraft mob, will search for player and attack.")]
     public class Enemy : CombatEntity
     {
-        protected CombatEvent SpawnOrigin;
         protected Player Player;
         
         [Header("Enemy Specific")]
         [FoldoutGroup("Quirks")]
-        [SerializeField] public float relativeSpawnChance;
+        [SerializeField] protected bool turningAffectsMoveDirection;
         [FoldoutGroup("Quirks")]
-        [SerializeField] private bool turningAffectsMoveDirection;
+        [SerializeField] protected float minAttackAttemptDistance;
         [FoldoutGroup("Quirks")]
-        [SerializeField] private float minAttackAttemptDistance;
-        [FoldoutGroup("Quirks")]
-        [SerializeField] private float attackChargeTime;
+        [SerializeField] protected float attackChargeTime;
         
         [Header("Enemy Specific")]
         [FoldoutGroup("Stats")]
-        [SerializeField] private Optional<FloatStat> stunDuration;
+        [SerializeField] protected Optional<FloatStat> stunDuration;
         [FoldoutGroup("Stats")]
-        [SerializeField] private HitStats collisionHit;
+        [SerializeField] protected HitStats collisionHit;
 
         private float _lastStunTime;
         protected override bool WantsToAttack => Physics.Raycast(AttackRay, minAttackAttemptDistance, targetLayerMask);
         protected override bool CanMove => base.CanMove && !IsStunned;
         protected virtual bool IsStunned => _lastStunTime.TimeSince() <= stunDuration.Value;
-        public void SetSpawnOrigin(CombatEvent origin)
-        {
-            SpawnOrigin = origin;
-        }
-        
+
         protected override void Start()
         {
             base.Start();
@@ -61,17 +53,17 @@ namespace Gameplay.Entities.Enemies
             return (playerPos - pos).normalized;
         }
         
-        protected override void StartMelee(AttackStats attack) // On enemies, attacks are slow animations
+        protected override void StartUseWeapon(Weapon weapon) // On enemies, attacks are slow animations
         {
-            StartCoroutine(MeleeRoutine(attack));
+            StartCoroutine(MeleeRoutine(weapon));
         }
         
-        private IEnumerator MeleeRoutine(AttackStats attack) // Think dark soulds attack with long chargeup
+        private IEnumerator MeleeRoutine(Weapon weapon) // Think dark soulds attack with long chargeup
         {
             Stopping = true;
             Animator.SetBool("Walking", false);
             yield return new WaitForSeconds(attackChargeTime);
-            TryHitWithAttack(attack);
+            TryHitWithWeapon(weapon);
             Animator.SetBool("Walking", true);
             Stopping = false;
         }
@@ -103,7 +95,6 @@ namespace Gameplay.Entities.Enemies
         {
             base.KillThis();
             Manager.IncreaseKillcount();
-            SpawnOrigin.DespawnEnemy(this);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Gameplay.Entities.Enemies;
+using Gameplay.Entities.Base;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
@@ -16,9 +16,10 @@ namespace Gameplay.Events
         public float spawnDelay = 2f;
         public float waveTime = 30f;
         [AssetsOnly]
-        public List<Enemy> enemyPrefabsToSpawn = new List<Enemy>();
+        public List<EntityData> entitiesToSpawn = new List<EntityData>();
         
-        private List<Enemy> _spawnedEnemies = new List<Enemy>();
+        // ReSharper disable once CollectionNeverQueried.Local
+        private List<Entity> _spawnedEntities;
 
         public override IEnumerator RunEvent()
         {
@@ -26,36 +27,39 @@ namespace Gameplay.Events
 
             // Create wave parent
             Transform waveParent = Instantiate(new GameObject("Parent: Wave"), SpawningParent).transform;
+
+            _spawnedEntities = new List<Entity>();
             
             // continuosly run wave
             while (StartTime.TimeSince() <= waveTime)
             {
                 // spawn enemies
-                Enemy enemyAsset = SelectEnemyAsset(enemyPrefabsToSpawn);
-                _spawnedEnemies.Add(SpawnEnemy(enemyAsset, waveParent));
+                Entity asset = SelectEntityAsset(entitiesToSpawn);
+                _spawnedEntities.Add(SpawnEntity(asset, waveParent));
                 
                 // wait
                 yield return new WaitForSeconds(spawnDelay);
             }
         }
 
-        private Enemy SelectEnemyAsset(IReadOnlyCollection<Enemy> allEnemies)
+        private Entity SelectEntityAsset(IReadOnlyCollection<EntityData> allEnemies)
         {
             // count up spawn chances as a range, then generate a number within the range. Enemy with lowest number but above generated number will be chosen.
             float totalSpawnRange = allEnemies.Sum(enemy => enemy.relativeSpawnChance);
             float random = Random.Range(0, totalSpawnRange);
             float last = 0f;
-            return allEnemies.First(enemy =>
+            EntityData selectedEnemy = allEnemies.First(enemy =>
             {
                 last += enemy.relativeSpawnChance;
                 return last >= random;
             });
+            return selectedEnemy.prefab;
         }
 
-        public override void DespawnEnemy(Enemy enemyToDespawn)
+        public override void DespawnEntity(Entity entity)
         {
-            _spawnedEnemies.Remove(enemyToDespawn);
-            base.DespawnEnemy(enemyToDespawn);
+            _spawnedEntities.Remove(entity);
+            base.DespawnEntity(entity);
         }
     }
 }

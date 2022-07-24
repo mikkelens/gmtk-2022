@@ -9,28 +9,26 @@ namespace Gameplay.Entities.Base
     [RequireComponent(typeof(Rigidbody))]
     public class MovingEntity : Entity
     {
+        private string FreezeButtonText => IsFrozen ? "Unfreeze" : "Freeze";
+        [FoldoutGroup(QuirkCategory)]
+        [PropertyOrder(-5)]
+        [Button("$FreezeButtonText")] private void ToggleFreezeEntity() => IsFrozen = !IsFrozen;
         [FoldoutGroup(QuirkCategory)]
         [SerializeField] protected bool freezingAffectsRotation = true;
         [FoldoutGroup(QuirkCategory)]
         [SerializeField] protected bool stoppingAffectsRotation;
         [FoldoutGroup(QuirkCategory)]
-        [SerializeField] protected float maxTurnSpeed;
-        [FoldoutGroup(QuirkCategory)]
-        [SerializeField] protected AnimationCurve turnSpeedCurve;
+        [SerializeField] protected AnimationCurve turnSpeedCurve = new AnimationCurve();
         
         [FoldoutGroup(StatCategory)]
         [SerializeField] protected FloatStat maxSpeed;
         [FoldoutGroup(StatCategory)]
         [SerializeField] protected FloatStat walkAccelSpeed;
         [FoldoutGroup(StatCategory)]
+        [SerializeField] protected FloatStat maxTurnSpeed;
+        [FoldoutGroup(StatCategory)]
         [SerializeField] protected FloatStat maxStoppingBonus;
         
-        [ButtonGroup("FreezeButtons")]
-        [HideIf("@IsFrozen")]
-        [Button("Freeze")] public void FreezeEntity() => IsFrozen = true;
-        [ButtonGroup("FreezeButtons")]
-        [HideIf("@!IsFrozen")]
-        [Button("Unfreeze")] public void UnfreezeEntity() => IsFrozen = false;
 
         private Rigidbody _rb;
         
@@ -67,12 +65,10 @@ namespace Gameplay.Entities.Base
             TurnTowardsLookDirection(GetLookDirection());
 
             // Update velocity from goal/player/input
-            // Debug.Log($"MyStats maxSpeed: {myStats.maxSpeed}");
             Vector2 targetVelocity = CanMove ? GetMoveDirection() * maxSpeed : Vector2.zero;
             _velocity = Vector2.MoveTowards(_rb.velocity.WorldToPlane(), targetVelocity, GetAcceleration() * Time.deltaTime);
             _rb.velocity = _velocity.PlaneToWorld();
-            // MoveByWorldVelocity(Velocity.PlaneToWorld());
-            
+
             bool isMoving = _velocity.magnitude > 0.0f;
             Animator.SetBool("Walking", isMoving);
         }
@@ -113,11 +109,12 @@ namespace Gameplay.Entities.Base
         {
             float accel = walkAccelSpeed;
             if (Stopping) return accel * maxStoppingBonus;
-            
+
             float likeness = Vector2.Dot(_velocity.normalized, GetTargetMoveDirection().normalized);
             float stopFactor = (1 - likeness) / 2f; // from (-1 to 1) to (0 to 1), and in reverse
             float stopBonus = maxStoppingBonus * stopFactor;
-            return accel * (1 + stopBonus);
+            accel *= 1 + stopBonus;
+            return accel;
         }
 
         protected override void ApplyKnockback(Vector2 force)

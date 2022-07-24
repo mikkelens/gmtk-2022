@@ -19,13 +19,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
+      propertyPath: modifiers.Array.data[0].value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
+      propertyPath: modifiers.Array.data[1].value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
+      propertyPath: modifiers.Array.data[2].value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
       propertyPath: modifiers.Array.data[0].targetStatType
+      value: 
+      objectReference: {fileID: 11400000, guid: f28495898b4de4f49b15f438e4e32f51,
+        type: 2}
+    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
+      propertyPath: modifiers.Array.data[1].targetStatType
       value: 
       objectReference: {fileID: 11400000, guid: 5b3b6e70f71fd4247acc80e09d2b17ba,
         type: 2}
     - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
         type: 3}
+      propertyPath: modifiers.Array.data[2].targetStatType
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b3b6e70f71fd4247acc80e09d2b17ba,
+        type: 2}
+    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
+      propertyPath: modifiers.Array.data[0].modificationType
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
       propertyPath: modifiers.Array.data[1].modificationType
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017693799189530562, guid: ea31902e08b331343a28071372fbda1a,
+        type: 3}
+      propertyPath: modifiers.Array.data[2].modificationType
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6017693799189530563, guid: ea31902e08b331343a28071372fbda1a,

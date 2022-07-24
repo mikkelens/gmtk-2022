@@ -1,4 +1,5 @@
-using Gameplay.Attacks;
+using Gameplay.Events;
+using Gameplay.Stats.Attacks;
 using Gameplay.Stats.DataTypes;
 using Management;
 using Sirenix.OdinInspector;
@@ -25,6 +26,7 @@ namespace Gameplay.Entities.Base
 
         // outside components
         protected GameManager Manager;
+        protected CombatEvent SpawnOrigin;
 
         // components with this entity
         protected Transform Transform;
@@ -48,6 +50,10 @@ namespace Gameplay.Entities.Base
             SetHealth(maxHealth.CurrentValue);
             Manager = GameManager.Instance;
             
+        }
+        public void SetSpawnOrigin(CombatEvent origin)
+        {
+            SpawnOrigin = origin;
         }
 
         protected void Update()
@@ -81,6 +87,7 @@ namespace Gameplay.Entities.Base
         {
             Debug.Log($"Entity '{name}' was killed.");
             Animator.SetTrigger("Death");
+            SpawnOrigin.DespawnEntity(this);
         }
 
         public void HealToFull()
@@ -95,5 +102,6 @@ namespace Gameplay.Entities.Base
         {
             _currentHealth += healing;
         }
+
     }
 }

@@ -41,21 +41,21 @@ namespace Gameplay.Stats.DataTypes
             for (int i = 0; i < ModifierList.Count; i++)
             {
                 StatModifier statModifier = ModifierList[i];
-                if (statModifier.modificationType == ModificationTypes.Flat)
+                if (statModifier.modificationType == ModificationTypes.Add)
                 {
                     finalValue += statModifier.value;
                 }
-                else if (statModifier.modificationType == ModificationTypes.PercentAdd)
+                else if (statModifier.modificationType == ModificationTypes.MultiplyAdd)
                 {
                     sumPercentAdd += statModifier.value;
                     // relying on our sorted list...
-                    if (i + 1 >= ModifierList.Count || ModifierList[i + 1].modificationType != ModificationTypes.PercentAdd)
+                    if (i + 1 >= ModifierList.Count || ModifierList[i + 1].modificationType != ModificationTypes.MultiplyAdd)
                     {
                         finalValue *= 1 + sumPercentAdd;
                         sumPercentAdd = 0;
                     }
                 }
-                else if (statModifier.modificationType == ModificationTypes.PercentMultiply)
+                else if (statModifier.modificationType == ModificationTypes.MultiplyExponential)
                 {
                     finalValue *= 1 + statModifier.value;
                 }
