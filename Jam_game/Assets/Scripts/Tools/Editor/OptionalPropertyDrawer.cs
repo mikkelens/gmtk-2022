@@ -23,11 +23,8 @@ namespace Tools.Editor
             enabledRect.width = enabledRect.height = EditorGUI.GetPropertyHeight(enabledProperty, false);
             valueRect.width = position.width - enabledRect.width;
             enabledRect.x += valueRect.width + spacing; // fixing centering issue
-            valueRect.width -= spacing;
-            // Debug.Log($"positionWidth: {position.width}, positionX: {position.x};" +
-            //           $"\nspacing: {spacing}; \nvalueWidth: {valueRect.width}, valueX: {valueRect.x};" +
-            //           $"\nenabledWidth: {enabledRect.width}, enabledX: {enabledRect.x}\n");
-            
+            valueRect.width -= spacing * 2f;
+
             EditorGUI.BeginProperty(position, label, property);
             
             // value field

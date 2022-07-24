@@ -1,6 +1,7 @@
-﻿using Gameplay.Entities.Attacks;
+﻿using System.Linq;
 using Gameplay.Entities.Enemies;
 using Gameplay.Entities.Players;
+using Gameplay.Stats.Attacks;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Tools;
@@ -19,14 +20,14 @@ namespace Gameplay.Entities.Base
         [UsedImplicitly] private bool Headless => this as Player == null && this as Enemy == null;
      
         [FoldoutGroup(StatCategory)]
-        [SerializeField] private Weapon weapon; // class instance with stats in it
+        [SerializeField, Required] private Weapon weapon; // class instance with stats in it
         
         protected AttackStats LastAttackStats;
         protected float LastAttackTime;
 
         private static string AttackAnimationDirectionString(AttackStats attack) => attack.animationName + "Direction";
         protected virtual bool WantsToAttack => autoAttacks; // will only use "autoAttacks" field if WantsToAttack is not overridden
-        protected virtual bool CanAttack => LastAttackTime.TimeSince() >= LastAttackStats.cooldown;
+        protected virtual bool CanAttack => LastAttackStats == null || LastAttackTime.TimeSince() >= LastAttackStats.cooldown;
         protected virtual Ray AttackRay => new Ray(Transform.position, Transform.forward);
         
         
@@ -43,7 +44,7 @@ namespace Gameplay.Entities.Base
 
         protected virtual AttackStats GetAttack()
         {
-            return weapon.allAttacks[0];
+            return weapon.allAttacks.First();
         }
 
         protected virtual void StartAttack(AttackStats attack)

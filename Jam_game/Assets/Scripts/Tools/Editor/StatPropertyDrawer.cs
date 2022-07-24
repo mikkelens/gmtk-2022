@@ -25,55 +25,60 @@ namespace Tools.Editor
             SerializedProperty baseValueProperty = property.FindPropertyRelative("baseValue");
             SerializedProperty currentValueProperty = property.FindPropertyRelative("value");
             SerializedProperty statTypeProperty = property.FindPropertyRelative("type");
-            bool showCurrentValue = statTypeProperty.objectReferenceValue != null;
 
             Rect baseRect = totalRect, currentRect = totalRect, statTypeRect = totalRect;
-
-            float spacing = EditorGUIUtility.standardVerticalSpacing;
-            float totalWidth = totalRect.width - EditorGUIUtility.labelWidth;
             
             // compensation for optional variables
-            float optionalCompensation = 0;
+            bool showDetails = true;
             SerializedProperty parentProperty = property.GetParent();
             Type type = EditorHelpers.GetTargetObjectOfProperty(parentProperty)?.GetType();
             if (type is { IsGenericType: true } && type.GetGenericTypeDefinition() == typeof(Optional<>))
             {
-                optionalCompensation = EditorGUI.GetPropertyHeight(parentProperty.FindPropertyRelative("enabled"));
-                Debug.Log($"Compensation: {optionalCompensation}");
+                if (!parentProperty.FindPropertyRelative("enabled").boolValue) showDetails = false;
             }
+            bool showCurrentValue = showDetails && statTypeProperty.objectReferenceValue != null;
 
-            // relative width
-            
-            const float baseValueDivision = 4f;
-            const float currentValueDivision = 8f;
+            float spacing = EditorGUIUtility.standardVerticalSpacing;
+            float totalWidth = totalRect.width - EditorGUIUtility.labelWidth;
 
-            totalWidth += optionalCompensation;
+            // relative widths
+            float baseValueShare = 0.40f;
+            float currentValueShare = 0.10f;
             
-            baseRect.width = totalWidth / baseValueDivision;
-            currentRect.width = showCurrentValue ? (totalWidth - optionalCompensation) / currentValueDivision : 0f;
-            statTypeRect.width = totalWidth - (optionalCompensation + baseRect.width + currentRect.width);
+            // shrink stat type field if nothing is assigned
+            if (!showDetails)
+                baseValueShare = 1f;
+            else if (!showCurrentValue)
+                baseValueShare += currentValueShare;
+
+            baseRect.width = totalWidth * baseValueShare;
+            currentRect.width = showCurrentValue ? totalWidth * currentValueShare : 0f;
+            statTypeRect.width = totalWidth - (baseRect.width + currentRect.width);
             
             // position (from left)
             baseRect.width += EditorGUIUtility.labelWidth;
-            statTypeRect.x += baseRect.width;
-            currentRect.x += baseRect.width + statTypeRect.width;
+            currentRect.x += baseRect.width;
+            statTypeRect.x += baseRect.width + currentRect.width;
             
             // width with spacing
-            baseRect.width -= spacing;
-            if (showCurrentValue) statTypeRect.width -= spacing;
+            if (showDetails) baseRect.width -= spacing;
+            if (showCurrentValue) currentRect.width -= spacing;
             
             int indent = EditorGUI.indentLevel;
             EditorGUI.BeginProperty(totalRect, label, property);
             EditorGUI.PropertyField(baseRect, baseValueProperty, label, true); // base value
 
-            EditorGUI.indentLevel = 0;
-            EditorGUI.PropertyField(statTypeRect, statTypeProperty, GUIContent.none); // stat type
-            if (showCurrentValue)
+            if (showDetails)
             {
+                if (showCurrentValue)
+                {
+                    EditorGUI.indentLevel = 0;
+                    EditorGUI.BeginDisabledGroup(true);
+                    EditorGUI.PropertyField(currentRect, currentValueProperty, GUIContent.none); // current value
+                    EditorGUI.EndDisabledGroup();
+                }
                 EditorGUI.indentLevel = 0;
-                EditorGUI.BeginDisabledGroup(true);
-                EditorGUI.PropertyField(currentRect, currentValueProperty, GUIContent.none); // current value
-                EditorGUI.EndDisabledGroup();
+                EditorGUI.PropertyField(statTypeRect, statTypeProperty, GUIContent.none); // stat type
             }
             EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();

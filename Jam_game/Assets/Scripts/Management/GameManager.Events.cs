@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Events;
+using Gameplay.Level;
 using Sirenix.OdinInspector;
+using Tools;
 using UnityEngine;
 
 namespace Management
@@ -32,6 +34,11 @@ namespace Management
                 Debug.Log($"Ended event: {combatEvent.name}");
             }
             // game end?
+        }
+
+        public void SpawnUpgrade(Pickup pickup, Vector2 location)
+        {
+            Instantiate(pickup, location.PlaneToWorld(), Quaternion.identity, rootEnemyParent);
         }
     }
 }

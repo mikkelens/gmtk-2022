@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using Gameplay.Entities.Enemies;
+using Gameplay.Level;
 using Management;
 using Sirenix.OdinInspector;
+using Tools;
 using UnityEngine;
 
 namespace Gameplay.Events
@@ -11,7 +13,7 @@ namespace Gameplay.Events
     public class BossEvent : CombatEvent
     {
         [SerializeField] private Enemy bossPrefabToSpawn;
-        [SerializeField] private float lootValue;
+        [SerializeField, AssetsOnly] private Pickup pickupToDrop;
         
         private bool _bossAlive;
 
@@ -23,12 +25,11 @@ namespace Gameplay.Events
             _bossAlive = true;
             
             yield return new WaitUntil(() => !_bossAlive);
-            
-            GameManager.Instance.SpawnUpgrade();
         }
 
         public override void DespawnEnemy(Enemy enemyToDespawn)
         {
+            GameManager.Instance.SpawnUpgrade(pickupToDrop, enemyToDespawn.transform.position.WorldToPlane());
             base.DespawnEnemy(enemyToDespawn);
             _bossAlive = false;
         }
