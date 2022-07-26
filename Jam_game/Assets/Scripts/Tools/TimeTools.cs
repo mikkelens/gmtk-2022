@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics.CodeAnalysis;
+using UnityEngine;
 
 namespace Tools
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class TimeTools
     {
-        // math
+    #region math
+        // floats
         public static float TimeSince(this float time)
         {
             return Time.time - time;
@@ -13,8 +16,18 @@ namespace Tools
         {
             return time - Time.time;
         }
-        
-        // bools
+        // doubles
+        public static double TimeSince(this double time)
+        {
+            return Time.timeAsDouble - time;
+        }
+        public static double TimeUntill(this double time)
+        {
+            return time - Time.timeAsDouble;
+        }
+    #endregion
+    #region bools
+        // floats
         public static bool HasPassed(this float time)
         {
             return Time.time >= time;
@@ -23,5 +36,15 @@ namespace Tools
         {
             return Time.time < time;
         }
+        // doubles
+        public static bool HasPassed(this double time)
+        {
+            return Time.timeAsDouble >= time;
+        }
+        public static bool HasNotPassed(this double time)
+        {
+            return Time.timeAsDouble < time;
+        }
+    #endregion
     }
 }

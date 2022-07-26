@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Gameplay.Events;
-using Gameplay.Level;
+using Events;
 using Sirenix.OdinInspector;
-using Tools;
 using UnityEngine;
 
 namespace Management

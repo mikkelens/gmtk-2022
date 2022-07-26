@@ -1,8 +1,8 @@
 ﻿using System.Collections;
+using Gameplay.Attacks;
 using Gameplay.Entities.Base;
 using Gameplay.Entities.Players;
-using Gameplay.Stats.Attacks;
-using Gameplay.Stats.DataTypes;
+using Gameplay.Stats.Stat.Variants;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
@@ -10,29 +10,33 @@ using UnityEngine;
 namespace Gameplay.Entities.Enemies
 {
     [Tooltip("Enemy: Acts like a hostile minecraft mob, will search for player and attack.")]
-    public class Enemy : CombatEntity
+    public class Enemy : AnimatedCombatEntity
     {
         protected Player Player;
         
         [Header("Enemy Specific")]
         [FoldoutGroup("Quirks")]
-        [SerializeField] protected bool turningAffectsMoveDirection;
+        [SerializeField] protected bool rotationAffectsMoveDirection; // todo: this should only apply to an extent
         [FoldoutGroup("Quirks")]
-        [SerializeField] protected float minAttackAttemptDistance;
+        [SerializeField] protected float minAttackAttemptDistance; // todo: should be weapon specific
         [FoldoutGroup("Quirks")]
-        [SerializeField] protected float attackChargeTime;
+        [SerializeField] protected Optional<Transform> customTargetingOrigin; // todo: should be weapon specific
         
         [Header("Enemy Specific")]
         [FoldoutGroup("Stats")]
-        [SerializeField] protected Optional<FloatStat> stunDuration;
-        [FoldoutGroup("Stats")]
-        [SerializeField] protected HitStats collisionHit;
+        [SerializeField] protected Optional<ImpactData> collisionImpact;
 
-        private float _lastStunTime;
         protected override bool Headless => false;
-        protected override bool WantsToAttack => Physics.Raycast(AttackRay, minAttackAttemptDistance, targetLayerMask);
-        protected override bool CanMove => base.CanMove && !IsStunned;
-        protected virtual bool IsStunned => _lastStunTime.TimeSince() <= stunDuration.Value;
+        protected Ray TargetRay
+        {
+            get
+            {
+                Transform originTransform = customTargetingOrigin.Enabled ? customTargetingOrigin.Value : transform;
+                return new Ray(originTransform.position, transform.forward);
+            }
+        }
+        protected override bool WantsToAttack => Physics.Raycast(TargetRay, minAttackAttemptDistance, targetLayerMask);
+        protected override bool CanMove => base.CanMove && !stunned;
 
         protected override void Start()
         {
@@ -42,9 +46,7 @@ namespace Gameplay.Entities.Enemies
 
         protected override Vector2 GetMoveDirection()
         {
-            if (turningAffectsMoveDirection)
-                return Transform.forward.WorldToPlane();
-            return GetTargetMoveDirection();
+            return rotationAffectsMoveDirection ? Transform.forward.WorldToPlane() : GetTargetMoveDirection();
         }
         protected override Vector2 GetTargetMoveDirection()
         {
@@ -54,16 +56,17 @@ namespace Gameplay.Entities.Enemies
             return (playerPos - pos).normalized;
         }
         
-        protected override void StartUseWeapon(Weapon weapon) // On enemies, attacks are slow animations
+        protected override void UseWeapon(Weapon weapon) // On enemies, attacks are slow animations
         {
             StartCoroutine(MeleeRoutine(weapon));
         }
         
         private IEnumerator MeleeRoutine(Weapon weapon) // Think dark soulds attack with long chargeup
         {
+            if (!weapon.chargeTime.Enabled) yield break;
             Stopping = true;
             Animator.SetBool("Walking", false);
-            yield return new WaitForSeconds(attackChargeTime);
+            yield return new WaitForSeconds(weapon.chargeTime.Value);
             TryHitWithWeapon(weapon);
             Animator.SetBool("Walking", true);
             Stopping = false;
@@ -71,27 +74,18 @@ namespace Gameplay.Entities.Enemies
 
         protected virtual void OnCollisionEnter(Collision collision)
         {
-            GameObject other = collision.gameObject;
+            if (!collisionImpact.Enabled) return;
             
-            Entity entity = other.GetComponent<Entity>();
+            Entity entity = collision.gameObject.GetComponent<Entity>();
             if (entity == null) return;
         
             Player player = entity as Player; // filter contact to only be player
             if (player == null) return;
 
             Vector2 collisionDirection = -collision.impulse.WorldToPlane().normalized;
-            player.TakeHit(collisionHit, collisionDirection);
+            player.TakeHit(collisionImpact.Value, collisionDirection);
         }
 
-        protected override void ApplyKnockback(Vector2 force)
-        {
-            base.ApplyKnockback(force);
-            ApplyEnemyStun();
-        }
-        private void ApplyEnemyStun()
-        {
-            _lastStunTime = Time.time;
-        }
         public override void KillThis()
         {
             base.KillThis();

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Gameplay.Entities.Players
 {
     [Tooltip("Player: This is the player script. It also derives from entity scripts.")]
-    public partial class Player : CombatEntity // main
+    public partial class Player : AnimatedCombatEntity // main
     {
         public static Player Instance;
 
@@ -30,7 +30,7 @@ namespace Gameplay.Entities.Players
             if (hazard == null) return;
             
             Vector2 direction = collision.impulse.WorldToPlane().normalized;
-            TakeHit(hazard.Hit, direction); // hit itself/player
+            TakeHit(hazard.Impact, direction); // hit itself/player
         }
     }
 }

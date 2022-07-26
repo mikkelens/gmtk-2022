@@ -1,4 +1,4 @@
-﻿using Gameplay.Stats.Attacks;
+﻿using Gameplay.Attacks;
 using UnityEngine;
 
 namespace Gameplay.Level
@@ -7,8 +7,8 @@ namespace Gameplay.Level
     [RequireComponent(typeof(Collider))]
     public class Hazard : MonoBehaviour
     {
-        [SerializeField] private HitStats hitEffect;
+        [SerializeField] private ImpactData impactEffect;
 
-        public HitStats Hit => hitEffect;
+        public ImpactData Impact => impactEffect;
     }
 }

@@ -1,4 +1,4 @@
-﻿using Gameplay.Stats.Attacks;
+﻿using Gameplay.Attacks;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Tools;
@@ -17,65 +17,52 @@ namespace Gameplay.Entities.Base
         [UsedImplicitly] protected virtual bool Headless => true;
      
         [FoldoutGroup(StatCategory)]
-        [SerializeField, Required] protected Weapon activeWeapon; // class instance with stats in it
+        [SerializeField, Required] protected Weapon entityWeapon; // class instance with stats in it
         
         protected Weapon LastWeapon;
         protected float LastAttackTime;
 
-        protected static string AttackAnimationDirectionString(Weapon attack) => attack.animationName + "Direction";
+        // todo: maybe make animation handled in child class?
         protected virtual bool WantsToAttack => autoAttacks; // will only use "autoAttacks" field if WantsToAttack is not overridden
         protected virtual bool CanAttack => LastWeapon is not { cooldown: { Enabled: true } } || LastAttackTime.TimeSince() >= LastWeapon.cooldown.Value;
-        protected virtual Ray AttackRay => new Ray(Transform.position, Transform.forward);
-        
-        
+
+
         protected override void EntityUpdate()
         {
             base.EntityUpdate();
 
             // See if thing in attack box
-            if (WantsToAttack && CanAttack)
+            if (entityWeapon != null && WantsToAttack && CanAttack)
             {
-                StartAttack(activeWeapon); // first attack. should probably be picked somehow
+                StartAttack(entityWeapon); // first attack. should probably be picked somehow
             }
         }
 
-        protected virtual void StartAttack(Weapon weapon)
+        protected virtual void StartAttack(Weapon weapon) // overridden to add animation
         {
-            if (weapon.hasDirectionalAnimation)
-            {
-                string directionString = AttackAnimationDirectionString(weapon);
-                Animator.SetBool(directionString, Animator.GetBool(directionString));
-            }
-            Animator.SetTrigger(weapon.animationName);
             LastWeapon = weapon;
             LastAttackTime = Time.time;
-            StartUseWeapon(weapon);
+            UseWeapon(weapon);
         }
 
-        protected virtual void StartUseWeapon(Weapon attack)
+        // seperates player and enemy logic, this is overriden in Enemy.cs
+        protected virtual void UseWeapon(Weapon weapon)
         {
-            TryHitWithWeapon(attack);
+            TryHitWithWeapon(weapon);
         }
         
-        protected void TryHitWithWeapon(Weapon attack)
+        protected void TryHitWithWeapon(Weapon weapon)
         {
-            // Raycast for hit
-            float maxdistance = attack.maxDistance.Enabled ? attack.maxDistance.Value : float.MaxValue;
-            if (Physics.Raycast(AttackRay, out RaycastHit hitData, maxdistance, targetLayerMask.value)) // Within distance?
-                HitOther(hitData.transform.GetComponent<Entity>(), attack);
-            EndAttack(attack);
+            Vector2 origin = transform.position.WorldToPlane();
+            Vector2 lookDirection = transform.forward.WorldToPlane();
+            bool hit = weapon.TryHitEntity(this, lookDirection, targetLayerMask);
+            if (weapon.selfKnockbackStrength.Enabled) ApplyKnockback(-lookDirection * weapon.selfKnockbackStrength.Value); // apply knockback to self
+            EndAttack(weapon);
         }
 
-        protected void EndAttack(Weapon attack)
+        protected virtual void EndAttack(Weapon weapon)
         {
-            Animator.ResetTrigger(attack.animationName);
-        }
-
-        private void HitOther(Entity entity, Weapon attack)
-        {
-            Vector2 lookDirection = GetLookDirection();
-            if (attack.attackHit.Enabled) entity.TakeHit(attack.attackHit.Value, lookDirection);
-            if (attack.selfKnockbackStrength.Enabled) ApplyKnockback(-lookDirection * attack.selfKnockbackStrength.Value); // apply knockback to self
+            // just for animation (?)
         }
     }
 }

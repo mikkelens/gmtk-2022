@@ -115,7 +115,7 @@ PrefabInstance:
     - target: {fileID: 6248691945203294663, guid: 97462b41dbc863f40828a702f7b639b3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.14
       objectReference: {fileID: 0}
     - target: {fileID: 6248691945203294663, guid: 97462b41dbc863f40828a702f7b639b3,
         type: 3}
@@ -125,7 +125,7 @@ PrefabInstance:
     - target: {fileID: 6248691945203294663, guid: 97462b41dbc863f40828a702f7b639b3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -9.12
       objectReference: {fileID: 0}
     - target: {fileID: 6248691945203294663, guid: 97462b41dbc863f40828a702f7b639b3,
         type: 3}
@@ -192,31 +192,30 @@ MonoBehaviour:
   godMode: 0
   maxHealth:
     type: {fileID: 0}
-    baseValue: 0
-    value: 0
+    baseValue: 3
+    value: 3
   freezingAffectsRotation: 1
   stoppingAffectsRotation: 1
-  maxTurnSpeed: 10
   turnSpeedCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
+      inSlope: 0.00000024038897
+      outSlope: 0.00000024038897
+      tangentMode: 0
+      weightedMode: 3
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.49590164
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
+      value: 0.2000122
+      inSlope: -0.037024986
+      outSlope: -0.037024986
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.5020492
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -227,53 +226,50 @@ MonoBehaviour:
     value: 5
   walkAccelSpeed:
     type: {fileID: 0}
-    baseValue: 0
-    value: 0
+    baseValue: 20
+    value: 20
+  maxTurnSpeed:
+    type: {fileID: 0}
+    baseValue: 0.4
+    value: 0.4
   maxStoppingBonus:
     type: {fileID: 0}
-    baseValue: 0
-    value: 0
+    baseValue: 2
+    value: 2
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
   autoAttacks: 1
-  mainMeleeAttack:
-    animationName: Melee
-    hasDirectionalAnimation: 0
-    damage:
-      type: {fileID: 11400000, guid: 193a6ed3ded5a5149bdc31a931e6b669, type: 2}
-      baseValue: 3
-      value: 3
-    maxDistance:
-      type: {fileID: 0}
-      baseValue: 0
-      value: 0
-    cooldown:
-      type: {fileID: 0}
-      baseValue: 0
-      value: 0
-    targetKnockbackStrength:
-      type: {fileID: 0}
-      baseValue: 0
-      value: 0
-    selfKnockbackStrength:
-      type: {fileID: 0}
-      baseValue: 0
-      value: 0
-  relativeSpawnChance: 0.2
+  activeWeapon: {fileID: 11400000, guid: 5846177c9074da94a872ef8154ea1778, type: 2}
   turningAffectsMoveDirection: 1
-  minAttackAttemptDistance: 0
-  attackChargeTime: 0
+  minAttackAttemptDistance: 7
+  attackChargeTime: 2
   stunDuration:
-    type: {fileID: 0}
-    baseValue: 0
-    value: 0
-  collisionDamage:
-    type: {fileID: 0}
-    baseValue: 0
-    value: 0
-  collisionKnockback:
-    type: {fileID: 0}
-    baseValue: 0
-    value: 0
-  angleBeforeHeadTurn: 0
+    enabled: 1
+    value:
+      type: {fileID: 0}
+      baseValue: 0
+      value: 0
+  collisionHit:
+    damage:
+      enabled: 1
+      value:
+        type: {fileID: 11400000, guid: 193a6ed3ded5a5149bdc31a931e6b669, type: 2}
+        baseValue: 1
+        value: 1
+    knockback:
+      enabled: 1
+      value:
+        type: {fileID: 0}
+        baseValue: 10
+        value: 10
+    effect:
+      enabled: 0
+      value:
+        typeTarget: {fileID: 0}
+        value: 0
+        modificationType: 200
+        timer:
+          enabled: 0
+          value: 0
+  angleBeforeHeadTurn: 10

@@ -1,5 +1,5 @@
 ﻿using Gameplay.Entities.Players;
-using Gameplay.Inputs;
+using Management.Inputs;
 using UnityEngine;
 
 namespace Management

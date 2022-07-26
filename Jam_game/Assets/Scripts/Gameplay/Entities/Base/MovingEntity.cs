@@ -1,4 +1,4 @@
-﻿using Gameplay.Stats.DataTypes;
+﻿using Gameplay.Stats.Stat.Variants;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
@@ -28,6 +28,12 @@ namespace Gameplay.Entities.Base
         [SerializeField] protected FloatStat maxTurnSpeed;
         [FoldoutGroup(StatCategory)]
         [SerializeField] protected FloatStat maxStoppingBonus;
+
+        [FoldoutGroup(StatCategory)]
+        [SerializeField] protected FloatStat accelerationWhenStunned = 5f;
+
+        [FoldoutGroup(StatCategory)]
+        [SerializeField] protected BoolStat stunned; // cannot accelerate
         
 
         private Rigidbody _rb;
@@ -86,7 +92,6 @@ namespace Gameplay.Entities.Base
             return Vector2.down; // default move direction in case nothing is used..?
         }
 
-
         protected virtual void TurnTowardsLookDirection(Vector2 targetDirection)
         {
             if (!CanRotate) return;
@@ -107,6 +112,7 @@ namespace Gameplay.Entities.Base
         
         private float GetAcceleration()
         {
+            if (stunned) return 0;
             float accel = walkAccelSpeed;
             if (Stopping) return accel * maxStoppingBonus;
 
