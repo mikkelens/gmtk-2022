@@ -85347,13 +85347,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d658ff576197d44b0f9841ea6d5750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  averageFPS: -2147483648
-  highestFPS: -2147483648
-  lowestFPS: -2147483648
-  averageFrameTime: 0
-  lastFrameTime: 0
-  cullDelay: 1
-  frameCount: 1
+  cullDelay: 0.5
+  averageFPS: 0
+  averageDeltaTime: 0
+  lowestDeltaTime: 0
+  highestDeltaTime: 0
+  newestDeltaTime: 0
+  frames: []
 --- !u!4 &1920884851
 Transform:
   m_ObjectHideFlags: 0

@@ -1,74 +1,75 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Sirenix.OdinInspector;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 using UnityEngine;
 
 namespace Gameplay
 {
-    [SuppressMessage("ReSharper", "NotAccessedField.Local")]
+    // [SuppressMessage("ReSharper", "NotAccessedField.Local")]
     public class FPSRateScript : MonoBehaviour
     {
+        [BoxGroup("Settings")]
+        [SerializeField] private double cullDelay = 1.0;
+        
         [BoxGroup("Data")]
         [SerializeField] private int averageFPS;
         [BoxGroup("Data")]
-        [SerializeField] private int highestFPS;
+        [SerializeField] private double averageDeltaTime;
         [BoxGroup("Data")]
-        [SerializeField] private int lowestFPS;
+        [SerializeField] private double lowestDeltaTime;
         [BoxGroup("Data")]
-        [SerializeField] private double averageFrameTime;
+        [SerializeField] private double highestDeltaTime;
         [BoxGroup("Data")]
-        [SerializeField] private double lastFrameTime;
+        [SerializeField] private double newestDeltaTime;
         
-        [BoxGroup("Settings")]
-        [HorizontalGroup("Settings/CullGroup")]
-        [SerializeField] private double cullDelay = 1.0;
-        [HorizontalGroup("Settings/CullGroup")]
-        [SerializeField] private int frameCount;
+        [SerializeField] private List<Frame> frames = new List<Frame>();
         
-        private double _lastTime;
-        private double _newestTime;
-        private List<double> _times;
-
-        private void Start()
+        private Frame _newestFrame;
+        
+        [Serializable]
+        private struct Frame
         {
-            _times = new List<double>();
-        }
+            public double time;
+            public double deltaTime;
 
+            public Frame(double newTime, double newDeltaTime)
+            {
+                time = newTime;
+                deltaTime = newDeltaTime;
+            }
+        }
+        
         private void Update()
         {
-            double newTime = GetNewTime();
-            CullOldTimes(newTime);
-            lastFrameTime = newTime - _lastTime;
-            _times.Add(newTime);
-            UpdateInfo(newTime);
-        }
-        private void UpdateInfo(double newTime)
-        {
-            double totalDeltaTime = _times.Sum(time => newTime - time);
-            double highestDeltatime = _times.Max(time => newTime - time);
-            double lowestDeltatime = _times.Min(time => newTime - time);
-            averageFrameTime = totalDeltaTime / _times.Count;
-            averageFPS = Mathf.RoundToInt((float)(1.0f / averageFrameTime));
-            highestFPS = Mathf.RoundToInt((float)(1.0f / lowestDeltatime)); // lower frame time is higher fps
-            lowestFPS = Mathf.RoundToInt((float)(1.0f / highestDeltatime)); // and vice versa
-            frameCount = _times.Count;
-        }
-        private void CullOldTimes(double newTime)
-        {
-            _times.RemoveAll(time => time < newTime - cullDelay);
+            UpdateNewestFrame();
+            CullOldTimes(); // cull times too old compared to current (new) time
+            if (frames.Count > 0)
+            {
+                UpdateInfo(); // display previous times' relation to current (new) time
+            }
         }
         
-        private double GetNewTime()
+        private void UpdateInfo()
         {
-            double newTime = Time.timeAsDouble;
-            if (_newestTime !< newTime) return _newestTime;
-            _lastTime = _newestTime;
-            return _newestTime = newTime;
+            newestDeltaTime = _newestFrame.deltaTime;
+            averageDeltaTime = frames.Average(frame => frame.deltaTime);
+            highestDeltaTime = frames.Max(frame => frame.deltaTime);
+            lowestDeltaTime = frames.Min(frame => frame.deltaTime);
+            averageFPS = Mathf.RoundToInt((float)(1.0f / averageDeltaTime));
+            UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
+        }
+
+        private void UpdateNewestFrame()
+        {
+            _newestFrame = new Frame(Time.unscaledTimeAsDouble, Time.unscaledDeltaTime);
+            frames.Add(_newestFrame); // add current (new) time to list of times to be compared
+        }
+        
+        private void CullOldTimes()
+        {
+            frames.RemoveAll(frame => frame.time + cullDelay < _newestFrame.time);
         }
     }
 }
