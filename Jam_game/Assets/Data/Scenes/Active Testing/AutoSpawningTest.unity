@@ -65676,111 +65676,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: maxHealth.type
-      value: 
-      objectReference: {fileID: 11400000, guid: 5b3b6e70f71fd4247acc80e09d2b17ba,
-        type: 2}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: aimTurnSpeedBonus
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: maxTurnSpeed.type
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: maxTurnSpeed.value
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: walkAccelSpeed.value
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: maxStoppingBonus.value
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: maxTurnSpeed.baseValue
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: walkAccelSpeed.baseValue
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: maxStoppingBonus.baseValue
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[1].value
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[0].inSlope
-      value: -0.20423931
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[1].inSlope
-      value: -0.51167244
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[0].outSlope
-      value: -0.20423931
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[1].inWeight
-      value: 0.5020492
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[1].outSlope
-      value: -0.51167244
-      objectReference: {fileID: 0}
-    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: turnSpeedCurve.m_Curve.Array.data[0].outWeight
-      value: 0.50574994
-      objectReference: {fileID: 0}
     - target: {fileID: 7804618059053159352, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7804618059053159352, guid: 94691372665626847aa961e06a42ea72,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7804618059053159353, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
@@ -85448,13 +85347,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d658ff576197d44b0f9841ea6d5750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  averageFPS: 71
-  highestFPS: 110
-  lowestFPS: 27
-  averageFrameTime: 0.014080069230772891
-  lastFrameTime: 0.013153700000657409
-  cullDelay: 2
-  frameCount: 143
+  averageFPS: -2147483648
+  highestFPS: -2147483648
+  lowestFPS: -2147483648
+  averageFrameTime: 0
+  lastFrameTime: 0
+  cullDelay: 1
+  frameCount: 1
 --- !u!4 &1920884851
 Transform:
   m_ObjectHideFlags: 0
@@ -90589,62 +90488,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Reptile
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162464805822492651, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-        type: 3}
-      propertyPath: entityWeapon
-      value: 
-      objectReference: {fileID: 11400000, guid: 6b6c25c2763700b40a56fa4b21a9fe66,
-        type: 2}
-    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-        type: 3}
-      propertyPath: maxSpeed.value
-      value: 3.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-        type: 3}
-      propertyPath: maxSpeed.baseValue
-      value: 3.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-        type: 3}
-      propertyPath: maxTurnSpeed.value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-        type: 3}
-      propertyPath: walkAccelSpeed.value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-        type: 3}
-      propertyPath: maxStoppingBonus.value
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-        type: 3}
-      propertyPath: maxTurnSpeed.baseValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-        type: 3}
-      propertyPath: minAttackAttemptDistance
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-        type: 3}
-      propertyPath: walkAccelSpeed.baseValue
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-        type: 3}
-      propertyPath: maxStoppingBonus.baseValue
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de07590e2bd6b6842a5b022ba3cf05e0, type: 3}

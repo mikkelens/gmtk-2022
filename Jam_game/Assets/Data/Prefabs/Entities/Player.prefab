@@ -264,9 +264,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   godMode: 0
   maxHealth:
-    type: {fileID: 11400000, guid: 5b3b6e70f71fd4247acc80e09d2b17ba, type: 2}
     baseValue: 5
     value: 5
+    type: {fileID: 11400000, guid: 5b3b6e70f71fd4247acc80e09d2b17ba, type: 2}
   freezingAffectsRotation: 0
   stoppingAffectsRotation: 0
   turnSpeedCurve:
@@ -275,46 +275,54 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.20423931
+      outSlope: -0.20423931
       tangentMode: 0
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0.50574994
     - serializedVersion: 3
       time: 1
-      value: 0.6499939
-      inSlope: 0
-      outSlope: 0
+      value: 0.5
+      inSlope: -0.51167244
+      outSlope: -0.51167244
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.33333334
+      inWeight: 0.5020492
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   maxSpeed:
-    type: {fileID: 11400000, guid: f28495898b4de4f49b15f438e4e32f51, type: 2}
     baseValue: 10
     value: 10
-  walkAccelSpeed:
-    type: {fileID: 11400000, guid: 1d68ee0697ceb5747a383b0d125b37e2, type: 2}
-    baseValue: 45
-    value: 45
-  maxTurnSpeed:
     type: {fileID: 0}
-    baseValue: 3.5
-    value: 3.5
+  walkAccelSpeed:
+    baseValue: 30
+    value: 30
+    type: {fileID: 0}
+  maxTurnSpeed:
+    baseValue: 4.5
+    value: 4.5
+    type: {fileID: 0}
   maxStoppingBonus:
-    type: {fileID: 11400000, guid: 149112c66e89fa544993342bd7d8a20c, type: 2}
-    baseValue: 10
-    value: 10
+    baseValue: 5
+    value: 5
+    type: {fileID: 0}
+  accelerationWhenStunned:
+    baseValue: 5
+    value: 0
+    type: {fileID: 0}
+  stunned:
+    baseValue: 0
+    value: 0
+    type: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 64
   autoAttacks: 0
-  activeWeapon: {fileID: 11400000, guid: ad0e4c58a495c104f99613425d3df4ca, type: 2}
-  aimTurnSpeedBonus: 2
+  entityWeapon: {fileID: 0}
+  aimTurnSpeedBonus: 1.5
 --- !u!4 &7804618059053159353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6121795126706553912, guid: 1a1613ff0ed8f1c4bb6b17c943013247,

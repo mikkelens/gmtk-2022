@@ -191,9 +191,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   godMode: 0
   maxHealth:
-    type: {fileID: 0}
     baseValue: 3
     value: 3
+    type: {fileID: 0}
   freezingAffectsRotation: 1
   stoppingAffectsRotation: 1
   turnSpeedCurve:
@@ -221,55 +221,61 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   maxSpeed:
+    baseValue: 3.95
+    value: 3.95
     type: {fileID: 11400000, guid: f28495898b4de4f49b15f438e4e32f51, type: 2}
-    baseValue: 5
-    value: 5
   walkAccelSpeed:
+    baseValue: 12
+    value: 1
     type: {fileID: 0}
-    baseValue: 20
-    value: 20
   maxTurnSpeed:
+    baseValue: 1
+    value: 1
     type: {fileID: 0}
-    baseValue: 0.4
-    value: 0.4
   maxStoppingBonus:
+    baseValue: 1.5
+    value: 1.5
     type: {fileID: 0}
-    baseValue: 2
-    value: 2
+  accelerationWhenStunned:
+    baseValue: 5
+    value: 0
+    type: {fileID: 0}
+  stunned:
+    baseValue: 0
+    value: 0
+    type: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
   autoAttacks: 1
-  activeWeapon: {fileID: 11400000, guid: 5846177c9074da94a872ef8154ea1778, type: 2}
-  turningAffectsMoveDirection: 1
-  minAttackAttemptDistance: 7
-  attackChargeTime: 2
-  stunDuration:
-    enabled: 1
+  entityWeapon: {fileID: 11400000, guid: 6b6c25c2763700b40a56fa4b21a9fe66, type: 2}
+  rotationAffectsMoveDirection: 0
+  minAttackAttemptDistance: 6.5
+  customTargetingOrigin:
+    enabled: 0
+    value: {fileID: 0}
+  collisionImpact:
+    enabled: 0
     value:
-      type: {fileID: 0}
-      baseValue: 0
-      value: 0
-  collisionHit:
-    damage:
-      enabled: 1
-      value:
-        type: {fileID: 11400000, guid: 193a6ed3ded5a5149bdc31a931e6b669, type: 2}
-        baseValue: 1
-        value: 1
-    knockback:
-      enabled: 1
-      value:
-        type: {fileID: 0}
-        baseValue: 10
-        value: 10
-    effect:
-      enabled: 0
-      value:
-        typeTarget: {fileID: 0}
-        value: 0
-        modificationType: 200
-        timer:
-          enabled: 0
+      damage:
+        enabled: 0
+        value:
+          baseValue: 0
           value: 0
+          type: {fileID: 0}
+      knockback:
+        enabled: 0
+        value:
+          baseValue: 0
+          value: 0
+          type: {fileID: 0}
+      floatEffects:
+        enabled: 0
+        value: []
+      intEffects:
+        enabled: 0
+        value: []
+      boolEffects:
+        enabled: 0
+        value: []
   angleBeforeHeadTurn: 10

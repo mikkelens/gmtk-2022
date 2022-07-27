@@ -10,7 +10,6 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    [ExecuteInEditMode]
     [SuppressMessage("ReSharper", "NotAccessedField.Local")]
     public class FPSRateScript : MonoBehaviour
     {
@@ -27,66 +26,49 @@ namespace Gameplay
         
         [BoxGroup("Settings")]
         [HorizontalGroup("Settings/CullGroup")]
-        [SerializeField] private float cullDelay = 1.0f;
+        [SerializeField] private double cullDelay = 1.0;
         [HorizontalGroup("Settings/CullGroup")]
         [SerializeField] private int frameCount;
         
-        private struct FrameInfo
+        private double _lastTime;
+        private double _newestTime;
+        private List<double> _times;
+
+        private void Start()
         {
-            public readonly double Time;
-            public readonly double DeltaTime;
-            public FrameInfo(double time, double deltaTime)
-            {
-                Time = time;
-                DeltaTime = deltaTime;
-            }
+            _times = new List<double>();
         }
-        private readonly List<FrameInfo> _frames = new List<FrameInfo>();
 
         private void Update()
         {
-            CullOldDeltaTimes();
-            FrameInfo newFrame = GetNewestFrame();
-            lastFrameTime = newFrame.DeltaTime;
-            _frames.Add(newFrame);
-            UpdateInfo();
+            double newTime = GetNewTime();
+            CullOldTimes(newTime);
+            lastFrameTime = newTime - _lastTime;
+            _times.Add(newTime);
+            UpdateInfo(newTime);
         }
-        
-        private FrameInfo _lastFrame;
-        private FrameInfo GetNewestFrame()
+        private void UpdateInfo(double newTime)
         {
-            if (Math.Abs(_lastFrame.Time - GetTime()) < 0.0000000001) return _lastFrame;
-            // calculate new frame inf
-            double time = GetTime();
-            double deltaTime = time - _lastFrame.Time;
-            _lastFrame = new FrameInfo(time, deltaTime);
-            return _lastFrame;
-        }
-        
-        private static double GetTime() // overwritten in editor class
-        {
-        #if UNITY_EDITOR
-            return EditorApplication.timeSinceStartup;
-        #else
-            return Time.timeAsDouble;
-        #endif
-        }
-
-        private void UpdateInfo()
-        {
-            double totalTime = _frames.Sum(frame => frame.DeltaTime);
-            double highestDeltatime = _frames.Max(frame => frame.DeltaTime);
-            double lowestDeltatime = _frames.Min(frame => frame.DeltaTime);
-            averageFrameTime = totalTime / _frames.Count;
+            double totalDeltaTime = _times.Sum(time => newTime - time);
+            double highestDeltatime = _times.Max(time => newTime - time);
+            double lowestDeltatime = _times.Min(time => newTime - time);
+            averageFrameTime = totalDeltaTime / _times.Count;
             averageFPS = Mathf.RoundToInt((float)(1.0f / averageFrameTime));
             highestFPS = Mathf.RoundToInt((float)(1.0f / lowestDeltatime)); // lower frame time is higher fps
             lowestFPS = Mathf.RoundToInt((float)(1.0f / highestDeltatime)); // and vice versa
-            frameCount = _frames.Count;
+            frameCount = _times.Count;
         }
-
-        private void CullOldDeltaTimes()
+        private void CullOldTimes(double newTime)
         {
-            _frames.RemoveAll(frame => frame.Time + cullDelay < GetTime());
+            _times.RemoveAll(time => time < newTime - cullDelay);
+        }
+        
+        private double GetNewTime()
+        {
+            double newTime = Time.timeAsDouble;
+            if (_newestTime !< newTime) return _newestTime;
+            _lastTime = _newestTime;
+            return _newestTime = newTime;
         }
     }
 }
