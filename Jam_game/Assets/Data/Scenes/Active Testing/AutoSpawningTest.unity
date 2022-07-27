@@ -85353,7 +85353,6 @@ MonoBehaviour:
   lowestDeltaTime: 0
   highestDeltaTime: 0
   newestDeltaTime: 0
-  frames: []
 --- !u!4 &1920884851
 Transform:
   m_ObjectHideFlags: 0

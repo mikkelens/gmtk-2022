@@ -302,7 +302,7 @@ MonoBehaviour:
     value: 30
     type: {fileID: 0}
   maxTurnSpeed:
-    baseValue: 4.5
+    baseValue: 6.5
     value: 4.5
     type: {fileID: 0}
   maxStoppingBonus:
@@ -322,7 +322,7 @@ MonoBehaviour:
     m_Bits: 64
   autoAttacks: 0
   entityWeapon: {fileID: 0}
-  aimTurnSpeedBonus: 1.5
+  aimTurnSpeedBonus: 1.45
 --- !u!4 &7804618059053159353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6121795126706553912, guid: 1a1613ff0ed8f1c4bb6b17c943013247,

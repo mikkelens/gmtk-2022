@@ -1,6 +1,8 @@
-﻿using Gameplay.Entities.Base;
+﻿using System.Reflection;
+using Gameplay.Entities.Base;
 using Gameplay.Stats.Stat.Variants;
 using Tools;
+using UnityEditor;
 using UnityEngine;
 
 namespace Gameplay.Attacks
@@ -26,6 +28,22 @@ namespace Gameplay.Attacks
                 return hitData.transform.GetComponent<Entity>();
             }
             return null;
+        }
+
+        [MenuItem("Assets/Convert/To other weapon (WIP)")]
+        public static void ConvertToOtherWeapon(MenuCommand menuCommand)
+        {
+            
+        }
+
+        public static RaycastWeapon ConvertToRaycast(Weapon weapon) // todo: make generic/handle all objects
+        {
+            RaycastWeapon raycastWeapon = CreateInstance(typeof(RaycastWeapon)) as RaycastWeapon;
+            foreach (FieldInfo field in typeof(Weapon).GetFields())
+            {
+                field.SetValue(raycastWeapon, field.GetValue(weapon));
+            }
+            return raycastWeapon;
         }
     }
 }
