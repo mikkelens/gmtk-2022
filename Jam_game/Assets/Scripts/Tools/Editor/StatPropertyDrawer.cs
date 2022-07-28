@@ -58,8 +58,8 @@ namespace Tools.Editor
             statTypeRect.x += baseRect.width + currentRect.width;
             
             // width with spacing
-            // if (showDetails) baseRect.width -= spacing;
-            if (showCurrentValue) currentRect.width -= spacing;
+            baseRect.width -= spacing;
+            currentRect.width -= spacing;
             
             int indent = EditorGUI.indentLevel;
             EditorGUI.BeginProperty(totalRect, label, property);

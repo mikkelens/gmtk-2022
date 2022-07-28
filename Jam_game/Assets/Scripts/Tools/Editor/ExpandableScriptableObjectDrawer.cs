@@ -1,8 +1,10 @@
-﻿using UnityEditor;
+﻿using Attacks;
+using UnityEditor;
 using UnityEngine;
 
 namespace Tools.Editor
 {
+    [CustomPropertyDrawer(typeof(ImpactData))]
     [CustomPropertyDrawer(typeof(ExpandableScriptableObject), true)]
     public class ExpandableScriptableObjectDrawer : PropertyDrawer
     {

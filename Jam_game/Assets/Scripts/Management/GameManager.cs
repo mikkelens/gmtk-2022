@@ -1,4 +1,4 @@
-﻿using Gameplay.Entities.Players;
+﻿using Entities.Players;
 using Management.Inputs;
 using UnityEngine;
 

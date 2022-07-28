@@ -14,16 +14,16 @@ namespace Management
         [FoldoutGroup("Events")]
         [SerializeField] private Transform rootEnemyParent;
         [FoldoutGroup("Events")]
-        [SerializeField] private List<CombatEvent> combatEvents = new List<CombatEvent>();
+        [SerializeField] private List<SpawnEvent> spawnEvents = new List<SpawnEvent>();
 
         [FoldoutGroup("Events")]
         [ShowInInspector]
-        private float TotalWaveTime => combatEvents.OfType<WaveEvent>().Sum(wave => wave.waveTime);
+        private float TotalWaveTime => spawnEvents.OfType<WaveEvent>().Sum(wave => wave.waveTime);
 
         private IEnumerator CombatEventLoop()
         {
             // Run each event
-            foreach (CombatEvent combatEvent in combatEvents)
+            foreach (SpawnEvent combatEvent in spawnEvents)
             {
                 combatEvent.SetSpawningParent(rootEnemyParent);
                 combatEvent.SetMinSpawnDistance(minSpawnDistance);

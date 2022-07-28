@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using Gameplay.Entities.Base;
-using Gameplay.Level;
+using Entities.Base;
+using Level;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
@@ -9,7 +9,7 @@ namespace Events
 {
     [CreateAssetMenu(fileName = "New Boss Event", menuName = "Events/Boss Event")]
     [TypeInfoBox("Event where a boss is spawned.")]
-    public class BossEvent : CombatEvent
+    public class BossEvent : SpawnEvent
     {
         [SerializeField] private Entity bossPrefabToSpawn;
         [SerializeField] private Optional<Pickup> pickupToDrop;

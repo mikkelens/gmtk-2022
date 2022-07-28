@@ -1,5 +1,5 @@
 ﻿using System;
-using Gameplay.Entities.Base;
+using Entities.Base;
 using Sirenix.OdinInspector;
 
 namespace Events

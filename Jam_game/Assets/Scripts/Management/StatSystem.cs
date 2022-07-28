@@ -4,7 +4,7 @@ using System.Reflection;
 using Gameplay.Stats.Stat;
 using Gameplay.Stats.Stat.Modifier;
 using Gameplay.Stats.Stat.Variants;
-using Gameplay.Stats.Type;
+using Stats.Type;
 using UnityEngine;
 
 namespace Management

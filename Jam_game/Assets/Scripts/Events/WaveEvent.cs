@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Gameplay.Entities.Base;
-using Gameplay.Level;
+using Entities.Base;
+using Level;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
@@ -12,7 +12,7 @@ namespace Events
 {
     [CreateAssetMenu(fileName = "New Wave", menuName = "Events/Wave Event")]
     [TypeInfoBox("Event where a wave of enemies spawn for a while.")]
-    public class WaveEvent : CombatEvent
+    public class WaveEvent : SpawnEvent
     {
         public float spawnDelay = 2f;
         public float waveTime = 30f;
@@ -45,7 +45,7 @@ namespace Events
             if (pickupToSpawn.Enabled) SpawnPickup(pickupToSpawn.Value, GetRandomSpawnLocation());
         }
 
-        private Entity SelectEntityAsset(IReadOnlyCollection<EntityData> allEnemies)
+        private static Entity SelectEntityAsset(IReadOnlyCollection<EntityData> allEnemies)
         {
             // count up spawn chances as a range, then generate a number within the range. Enemy with lowest number but above generated number will be chosen.
             float totalSpawnRange = allEnemies.Sum(enemy => enemy.relativeSpawnChance);
