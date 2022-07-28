@@ -1,7 +1,11 @@
-﻿using Gameplay.Entities.Base;
+﻿using System.Reflection;
+using Gameplay.Entities.Base;
 using Gameplay.Stats.Stat;
 using Gameplay.Stats.Stat.Variants;
 using Tools;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Gameplay.Attacks
@@ -29,5 +33,26 @@ namespace Gameplay.Attacks
         }
         // overriden in raycastweapon etc.
         protected abstract Entity CastForEntity(CombatEntity source, Vector2 direction, LayerMask targetLayerMask);
+
+
+    #if UNITY_EDITOR
+        [ContextMenu("Convert/To other weapon")]
+        public void ConvertToOtherWeapon()
+        {
+            Weapon target = Selection.GetFiltered<Weapon>(SelectionMode.Assets)[0];
+            string path = AssetDatabase.GetAssetPath(target).PathWithoutAsset();
+            
+            // create new prefab
+            RaycastWeapon raycastWeapon = CreateInstance(typeof(RaycastWeapon)) as RaycastWeapon;
+            Debug.Log($"Path: {path}");
+            AssetDatabase.CreateAsset(raycastWeapon, path);
+            
+            // copy data over
+            foreach (FieldInfo field in typeof(Weapon).GetFields())
+            {
+                field.SetValue(raycastWeapon, field.GetValue(target));
+            }
+        }
+    #endif
     }
 }
