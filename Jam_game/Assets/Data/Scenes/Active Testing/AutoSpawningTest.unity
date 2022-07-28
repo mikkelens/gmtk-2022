@@ -65676,6 +65676,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
+      propertyPath: entityWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: a8614f1d2942eb44e88390242c1f53c9,
+        type: 2}
     - target: {fileID: 7804618059053159352, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
       propertyPath: m_Name
@@ -90487,6 +90493,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Reptile
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
+        type: 3}
+      propertyPath: maxSpeed.baseValue
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
+        type: 3}
+      propertyPath: angleBeforeHeadTurn
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
+        type: 3}
+      propertyPath: maxTurnSpeed.baseValue
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
+        type: 3}
+      propertyPath: minAttackAttemptDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
+        type: 3}
+      propertyPath: walkAccelSpeed.baseValue
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
+        type: 3}
+      propertyPath: rotationAffectsMoveDirection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de07590e2bd6b6842a5b022ba3cf05e0, type: 3}

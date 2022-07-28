@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Gameplay.Entities.Base;
 using Gameplay.Stats.Stat.Variants;
 using Tools;
@@ -15,19 +17,14 @@ namespace Gameplay.Attacks
         public Optional<FloatStat> maxDistance;
 
         // Will be different for weapons that are not raycast weapons
-        protected override Entity CastForEntity(CombatEntity source, Vector2 direction, LayerMask targetLayerMask)
+        protected override Collider[] CastForEntity(CombatEntity source, Vector2 direction, LayerMask targetLayerMask)
         {
-            Vector2 origin = attackPoint.Enabled
-                ? attackPoint.Value.position.WorldToPlane()
-                : source.transform.position.WorldToPlane();
-            
-            Ray ray = new Ray(origin.PlaneToWorld(), direction.PlaneToWorld());
+            Vector3 origin = attackPoint.Enabled
+                ? attackPoint.Value.position
+                : source.transform.position;
+            Ray ray = new Ray(origin, direction.PlaneToWorld());
             float maxdistance = maxDistance.Enabled ? maxDistance.Value : float.MaxValue;
-            if (Physics.Raycast(ray, out RaycastHit hitData, maxdistance, targetLayerMask.value))
-            {
-                return hitData.transform.GetComponent<Entity>();
-            }
-            return null;
+            return Physics.RaycastAll(ray, maxdistance, ~targetLayerMask.value).Select(hit => hit.collider).ToArray();
         }
 
     }

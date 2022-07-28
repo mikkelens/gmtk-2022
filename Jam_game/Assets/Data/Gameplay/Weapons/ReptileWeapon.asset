@@ -16,15 +16,15 @@ MonoBehaviour:
     enabled: 1
     value:
       damage:
-        enabled: 0
+        enabled: 1
         value:
-          baseValue: 0
+          baseValue: 1
           value: 0
           type: {fileID: 0}
       knockback:
-        enabled: 0
+        enabled: 1
         value:
-          baseValue: 0
+          baseValue: 15
           value: 0
           type: {fileID: 0}
       floatEffects:
@@ -47,24 +47,30 @@ MonoBehaviour:
       baseValue: 0
       value: 0
       type: {fileID: 0}
-  cooldown:
-    enabled: 0
+  maxEntitiesHit:
+    enabled: 1
     value:
-      baseValue: 0
+      baseValue: 1
+      value: 0
+      type: {fileID: 0}
+  cooldown:
+    enabled: 1
+    value:
+      baseValue: 1
       value: 0
       type: {fileID: 0}
   selfKnockbackStrength:
-    enabled: 0
+    enabled: 1
     value:
-      baseValue: 0
+      baseValue: 0.25
       value: 0
       type: {fileID: 0}
   attackPoint:
     enabled: 0
     value: {fileID: 0}
   maxDistance:
-    enabled: 0
+    enabled: 1
     value:
-      baseValue: 0
+      baseValue: 8
       value: 0
       type: {fileID: 0}

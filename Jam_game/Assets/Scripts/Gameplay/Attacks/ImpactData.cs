@@ -10,8 +10,8 @@ namespace Gameplay.Attacks
     [Serializable]
     public class ImpactData : IStatCollection
     {
-        public Optional<IntStat> damage;
-        public Optional<FloatStat> knockback;
+        public Optional<IntStat> damage = (IntStat)1;
+        public Optional<FloatStat> knockback = (FloatStat)5f;
         
         public Optional<List<Modifier<float>>> floatEffects; // stun etc
         public Optional<List<Modifier<int>>> intEffects; // health etc

@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: PlayerWeapon
   m_EditorClassIdentifier: 
   impact:
-    enabled: 0
+    enabled: 1
     value:
       damage:
-        enabled: 0
+        enabled: 1
         value:
-          baseValue: 0
+          baseValue: 1
           value: 0
           type: {fileID: 0}
       knockback:
-        enabled: 0
+        enabled: 1
         value:
-          baseValue: 0
+          baseValue: 5
           value: 0
           type: {fileID: 0}
       floatEffects:
@@ -45,6 +45,12 @@ MonoBehaviour:
     enabled: 0
     value:
       baseValue: 0
+      value: 0
+      type: {fileID: 0}
+  maxEntitiesHit:
+    enabled: 1
+    value:
+      baseValue: 1
       value: 0
       type: {fileID: 0}
   cooldown:
