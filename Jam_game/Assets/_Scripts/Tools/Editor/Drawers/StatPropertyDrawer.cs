@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace Tools.Editor
 {
-    [CustomPropertyDrawer(typeof(FloatStat))]
-    [CustomPropertyDrawer(typeof(IntStat))]
     [CustomPropertyDrawer(typeof(BoolStat))]
+    [CustomPropertyDrawer(typeof(IntStat))]
+    [CustomPropertyDrawer(typeof(FloatStat))]
+    [CustomPropertyDrawer(typeof(ColorStat))]
     public class StatPropertyDrawer : PropertyDrawer
     {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

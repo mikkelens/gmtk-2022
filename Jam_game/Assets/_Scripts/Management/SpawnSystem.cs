@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Entities;
-using Entities.Base;
 using Entities.Players;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace Management
 {
 	public static class SpawnSystem
 	{
-		public static Entity SelectEntityAsset(IReadOnlyCollection<EntityData> allEnemies)
+		public static EntityData SelectEntityAsset(this IReadOnlyCollection<EntityData> allEnemies)
 		{
 			if (allEnemies.Count == 0) return null;
             
@@ -22,7 +21,7 @@ namespace Management
 				last += enemy.relativeSpawnChance;
 				return last >= random;
 			});
-			return selectedEnemy.prefab;
+			return selectedEnemy;
 		}
 
 		public static Vector2 GetRandomLocationOutsideCamBounds(float minDistance) // Location outside of viewable area

@@ -12,6 +12,7 @@ namespace Entities.Base
             if (!ability.usageAnimation.Value.isDirectional) return;
             string directionString = AttackAnimationDirectionString(ability);
             Animator.SetBool(directionString, Animator.GetBool(directionString));
+            
             base.StartAbilityUse(ability);
         }
 

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using Abilities.Base;
-using Abilities.Data;
+﻿using Abilities.Data;
 using Entities.Base;
 using Entities.Players;
 using Management;
@@ -28,7 +26,7 @@ namespace Entities.Enemies
         [SerializeField] protected Optional<ImpactData> collisionImpact;
 
         protected override bool Headless => false;
-        protected Ray TargetRay
+        private Ray TargetRay
         {
             get
             {
@@ -36,7 +34,7 @@ namespace Entities.Enemies
                 return new Ray(originTransform.position, transform.forward);
             }
         }
-        protected override bool WantsToAttack => Physics.Raycast(TargetRay, minAttackAttemptDistance, targetLayerMask);
+        protected override bool WantsToUseAbility => Physics.Raycast(TargetRay, minAttackAttemptDistance, targetLayerMask);
         protected override bool CanMove => base.CanMove && !stunned;
 
         protected override void Start()
@@ -55,22 +53,6 @@ namespace Entities.Enemies
             Vector2 pos = Transform.position.WorldToPlane();
             Vector2 playerPos = Player.transform.position.WorldToPlane();
             return (playerPos - pos).normalized;
-        }
-        
-        protected override void UseAbility(Ability ability) // On enemies, attacks are slow animations
-        {
-            StartCoroutine(MeleeRoutine(ability));
-        }
-        
-        private IEnumerator MeleeRoutine(Ability ability) // Think dark soulds attack with long chargeup
-        {
-            if (!ability.activationDelay.Enabled) yield break;
-            Stopping = true;
-            Animator.SetBool("Walking", false);
-            yield return new WaitForSeconds(ability.activationDelay.Value);
-            TryHitWithAbility(ability);
-            Animator.SetBool("Walking", true);
-            Stopping = false;
         }
 
         protected virtual void OnCollisionEnter(Collision collision)

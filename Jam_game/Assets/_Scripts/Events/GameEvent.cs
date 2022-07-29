@@ -10,10 +10,12 @@ namespace Events
 	[Serializable]
 	public class GameEvent : ExpandableScriptableObject
 	{
-		[PropertyOrder(5)]
 		public Optional<float> eventTime = 10f;
-		protected float StartTime;
+		public Optional<float> extraStartDelay;
 
+		public EventsManager Manager { protected get; set; }
+		protected float StartTime;
+		
 		protected bool GameIsPaused => GameManager.Instance.State == GameState.PausedDuringPlay;
 		protected float TimeCompletion => eventTime.Enabled && eventTime.Value != 0f
 			? StartTime.TimeSince() / eventTime.Value : 0f;
@@ -22,11 +24,12 @@ namespace Events
 
 		public virtual IEnumerator RunEvent() // base as setup
 		{
+			if (extraStartDelay.Enabled) yield return new WaitForSeconds(extraStartDelay.Value);
 			StartTime = Time.time;
-			yield break;
+			yield return Manager.StartCoroutine(PausingPoint());
 		}
 
-		protected virtual IEnumerator PausingPoint()
+		protected IEnumerator PausingPoint()
 		{
 			if (GameIsPaused) yield return new WaitUntil(() => !GameIsPaused);
 		}

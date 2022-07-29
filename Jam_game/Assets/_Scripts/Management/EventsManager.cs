@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Events;
 using Sirenix.OdinInspector;
+using Tools;
 using UnityEngine;
 
 namespace Management
@@ -14,6 +15,7 @@ namespace Management
         [SerializeField] private float minSpawnDistance = 10f;
         [SerializeField] private Transform rootEnemyParent;
         [SerializeField] private List<GameEvent> gameEvents = new List<GameEvent>();
+        [SerializeField] private Optional<float> standardEventDelay = 1f;
 
         [ShowInInspector]
         private float MinSpawnEventTime => gameEvents.OfType<SpawnEvent>()
@@ -37,13 +39,15 @@ namespace Management
         {
             foreach (GameEvent gameEvent in gameEvents) // run each event
             {
+                if (standardEventDelay.Enabled) yield return new WaitForSeconds(standardEventDelay.Value);
 			    Debug.Log($"Started event: {gameEvent.name}");
                 if (gameEvent is SpawnEvent spawnEvent)
                 {
-                    spawnEvent.SetSpawningParent(rootEnemyParent);
-                    spawnEvent.SetMinSpawnDistance(minSpawnDistance);
+                    spawnEvent.SpawningParent = rootEnemyParent;
+                    spawnEvent.MinSpawnDistance = minSpawnDistance;
                 }
-                yield return gameEvent.RunEvent(); // run this event
+                gameEvent.Manager = this;
+                yield return StartCoroutine(gameEvent.RunEvent()); // run this event
                 Debug.Log($"Ended event: {gameEvent.name}");
             }
             Debug.Log("Game ended.");

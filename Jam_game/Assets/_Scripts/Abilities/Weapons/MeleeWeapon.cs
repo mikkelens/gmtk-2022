@@ -25,6 +25,7 @@ namespace Abilities.Weapons
 
         protected override void Use()
         {
+            base.Use();
             TryHitEntity(SourceEntity, targetMask.Value);
         }
         public void TryHitEntity(CombatEntity source, LayerMask targetLayerMask)

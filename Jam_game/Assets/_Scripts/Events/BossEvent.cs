@@ -20,7 +20,7 @@ namespace Events
 
         public override IEnumerator RunEvent()
         {
-            yield return base.RunEvent();
+            yield return Manager.StartCoroutine(base.RunEvent());
             
             _boss = SpawnEntity(bossPrefabToSpawn, SpawningParent); // dont need reference, boss will call overridden despawn method
             _bossAlive = true;

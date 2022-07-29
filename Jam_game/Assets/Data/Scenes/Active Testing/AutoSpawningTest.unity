@@ -65686,8 +65686,7 @@ PrefabInstance:
         type: 3}
       propertyPath: defaultWeapon.value
       value: 
-      objectReference: {fileID: 11400000, guid: a8614f1d2942eb44e88390242c1f53c9,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
       propertyPath: defaultWeapon.enabled
@@ -90504,6 +90503,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Reptile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162464805822492651, guid: de07590e2bd6b6842a5b022ba3cf05e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
         type: 3}

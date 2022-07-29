@@ -14,13 +14,9 @@ namespace Events
 	{
 		[PropertyOrder(10)]
 		public Optional<Pickup> pickupToSpawnOnEnd;
-		[PropertyOrder(10)]
-		public bool requireAllKilledToContinue = true;
 
 		public Transform SpawningParent { get; set; }
-		protected float MinSpawnDistance;
-		
-		public void SetMinSpawnDistance(float minSpawnDistance) => MinSpawnDistance = minSpawnDistance;
+		public float MinSpawnDistance { get; set; }
 
 		private Vector2? _pickupSpawnLocation;
 		protected Vector2 PickupSpawnLocation
@@ -37,10 +33,8 @@ namespace Events
 
 		public override IEnumerator RunEvent()
 		{
-			yield return PausingPoint();
-			yield return base.RunEvent();
+			yield return Manager.StartCoroutine(base.RunEvent());
 			if (pickupToSpawnOnEnd.Enabled) SpawnPickup(pickupToSpawnOnEnd.Value);
-			if (requireAllKilledToContinue) yield return new WaitUntil(() => AllKilled);
 		}
 
 		protected Entity SpawnEntity(Entity enemyPrefab, Transform enemyParent)

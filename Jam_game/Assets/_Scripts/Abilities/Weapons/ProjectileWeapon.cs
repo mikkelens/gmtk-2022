@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Abilities.Weapons
 {
+	[CreateAssetMenu(fileName = "New Projectile Weapon", menuName = "Abilities/Projectile Weapon")]
 	public class ProjectileWeapon : Weapon
 	{
 		public FloatStat fireDelay = 0.8f;
@@ -27,6 +28,7 @@ namespace Abilities.Weapons
 		protected override void Use()
 		{
 			if (_lastFireTime.TimeSince() < fireDelay) return;
+			Use();
 			FireProjectile();
 		}
 

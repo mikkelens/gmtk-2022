@@ -3,28 +3,34 @@ using System.Collections.Generic;
 using Entities;
 using Entities.Base;
 using Management;
+using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
+using UnityEngine.tvOS;
 
 namespace Events
 {
     [CreateAssetMenu(fileName = "New Wave Event", menuName = "Events/Wave Event")]
     public class WaveEvent : SpawnEvent
     {
+        [Required]
         public List<EntityData> entitiesToSpawn = new List<EntityData>();
         public float spawnDelay = 2f;
         public Optional<AnimationCurve> spawnDelayCurve;
-        [Min(1)]
-        public Optional<uint> endOnSpawnCount;
-        [Min(1)]
-        public Optional<uint> maxEnemiesSimultaneously = 5;
-        [Min(1)]
-        public Optional<uint> endOnKillCount;
+        // [Min(1)]
+        public Optional<int> endOnSpawnCount;
+        // [Min(1)]
+        public Optional<int> maxEnemiesSimultaneously = 5;
+        // [Min(1)]
+        public Optional<int> endOnKillCount;
 
         private List<Entity> _spawnedEntities;
-        private uint _spawnCount;
-        private uint _killCount;
-        
+        private int _spawnCount;
+        private int _killCount;
+
+        [PropertyOrder(10)]
+        public bool requireAllKilledToContinue = true;
+
         private float CurrentSpawnDelay => spawnDelayCurve.Enabled && spawnDelayCurve.Value != null
             ? spawnDelayCurve.Value.Evaluate(EventCompletion) * spawnDelay
             : spawnDelay;
@@ -37,14 +43,18 @@ namespace Events
 
         public override IEnumerator RunEvent()
         {
-            yield return base.RunEvent();
+            yield return Manager.StartCoroutine(base.RunEvent());
+            if (entitiesToSpawn.Count == 0)
+            {
+                Debug.LogWarning($"There are no entities attached to wave event: {name}");
+                yield break;
+            }
 
             // Create wave parent
             Transform waveParent = Instantiate(new GameObject("Parent: Wave"), SpawningParent).transform;
-
             _spawnedEntities = new List<Entity>();
             
-            // continuosly run wave
+            // continuosly spawn entities
             while (!EndEvent)
             {
                 // wait
@@ -54,12 +64,15 @@ namespace Events
                 if (!maxEnemiesSimultaneously.Enabled || _spawnedEntities.Count < maxEnemiesSimultaneously.Value)
                 {
                     // select and spawn enemy
-                    Entity asset = SpawnSystem.SelectEntityAsset(entitiesToSpawn);
+                    Entity asset = entitiesToSpawn.SelectEntityAsset().prefab;
                     if (asset == null) continue;
                     _spawnedEntities.Add(SpawnEntity(asset, waveParent));
                     _spawnCount++;
+                    Debug.Log($"Spawned Entity: {asset.name}");
                 }
             }
+            // done spawning, maybe wait for entities to die
+            if (requireAllKilledToContinue) yield return new WaitUntil(() => AllKilled);
         }
 
         public override void DespawnEntity(Entity entity)

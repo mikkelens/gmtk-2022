@@ -6,14 +6,24 @@ namespace Entities.Players
     public partial class Player // input receiving
     {
         private Vector2 _moveInput;
-        private bool _holdingThrow;
         private bool _holdingMelee;
+        private bool _holdingThrow;
         private bool _lastAimWasController;
         
         private bool IsMoving => _moveInput.magnitude > 0.0f;
         private bool IsAiming => (UpdatedLookDirection != Vector2.zero && _lastAimWasController) || _holdingThrow;
 
-        protected override bool WantsToAttack => _holdingMelee;
+        private bool hasPressedMeleeSinceLastRead;
+        protected bool ReadMelee
+        {
+            get
+            {
+                if (!hasPressedMeleeSinceLastRead) return false;
+                hasPressedMeleeSinceLastRead = false;
+                return true;
+            }
+        }
+        protected override bool WantsToUseAbility => ReadMelee;
 
         private bool _aimIsDirty;
         private Vector2 _rawAimInput;
@@ -33,6 +43,7 @@ namespace Entities.Players
         
         public void SetMeleeInput(bool pressingMelee)
         {
+            if (pressingMelee) hasPressedMeleeSinceLastRead = true;
             _holdingMelee = pressingMelee;
         }
         public void SetThrowInput(bool holdingThrow)
