@@ -1,8 +1,8 @@
 using Attacks;
 using Events;
-using Gameplay.Stats.Stat.Variants;
 using Management;
 using Sirenix.OdinInspector;
+using Stats.Stat.Variants;
 using UnityEngine;
 
 namespace Entities.Base

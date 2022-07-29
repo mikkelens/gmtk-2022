@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gameplay.Stats.Stat.Modifier;
+using Stats.Stat.Modifier;
 using UnityEngine;
 
-namespace Gameplay.Stats.Stat.Variants
+namespace Stats.Stat.Variants
 {
     // [CreateAssetMenu(fileName = "New Int Stat", menuName = "Stat System/Int Stat")]
     [Serializable]
@@ -14,32 +14,36 @@ namespace Gameplay.Stats.Stat.Variants
         
         private List<Modifier<int>> _modifiers = new List<Modifier<int>>();
         protected override List<Modifier<int>> Modifiers => _modifiers;
-        protected override int ModifiedValue(int startingValue)
+        protected override int ModifiedValue()
         {
-            int finalValue = 0;
+            int modifiedValue = baseValue;
             float sumMultiplierAdd = 0;
             for (int i = 0; i < Modifiers.Count; i++)
             {
                 Modifier<int> modifier = Modifiers[i];
-                if (modifier.ModificationType == ModificationTypes.Add)
+                if (modifier.Type == ModificationTypes.Replace)
                 {
-                    finalValue += Mathf.CeilToInt(modifier.Value);
+                    modifiedValue = modifier.Value;
                 }
-                else if (modifier.ModificationType == ModificationTypes.AddMultiply)
+                else if (modifier.Type == ModificationTypes.Add)
+                {
+                    modifiedValue += Mathf.CeilToInt(modifier.Value);
+                }
+                else if (modifier.Type == ModificationTypes.AddMultiply)
                 {
                     sumMultiplierAdd += modifier.Value;
-                    if (i + 1 >= Modifiers.Count || Modifiers[i + 1].ModificationType != ModificationTypes.AddMultiply)
+                    if (i + 1 >= Modifiers.Count || Modifiers[i + 1].Type != ModificationTypes.AddMultiply)
                     {   // relying on our sorted list...
-                        finalValue = Mathf.CeilToInt(finalValue * sumMultiplierAdd);
+                        modifiedValue = Mathf.CeilToInt(modifiedValue * sumMultiplierAdd);
                         sumMultiplierAdd = 0;
                     }
                 }
-                else if (modifier.ModificationType == ModificationTypes.TrueMultiply)
+                else if (modifier.Type == ModificationTypes.TrueMultiply)
                 {
-                    finalValue = Mathf.CeilToInt(finalValue * modifier.Value);
+                    modifiedValue = Mathf.CeilToInt(modifiedValue * modifier.Value);
                 }
             }
-            return finalValue;
+            return modifiedValue;
         }
 
         public static implicit operator IntStat(int value) => new IntStat(value);

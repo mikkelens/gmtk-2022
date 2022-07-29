@@ -94482,16 +94482,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1488532003811833284, guid: 2754f9f08060da64395577d5c4dccb46,
-        type: 3}
-      propertyPath: rootEnemyParent
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1488532003811833284, guid: 2754f9f08060da64395577d5c4dccb46,
-        type: 3}
-      propertyPath: combatEvents.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1488532003811833285, guid: 2754f9f08060da64395577d5c4dccb46,
         type: 3}
       propertyPath: m_RootOrder
@@ -94547,43 +94537,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1488532003811833287, guid: 2754f9f08060da64395577d5c4dccb46,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1488532003811833287, guid: 2754f9f08060da64395577d5c4dccb46,
-        type: 3}
-      propertyPath: spawnEvents.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1488532003811833287, guid: 2754f9f08060da64395577d5c4dccb46,
-        type: 3}
-      propertyPath: spawnEvents.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: b8db81284c8cba54ebdf872fe7f85109,
-        type: 2}
-    - target: {fileID: 1488532003811833287, guid: 2754f9f08060da64395577d5c4dccb46,
-        type: 3}
-      propertyPath: spawnEvents.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: c23aa60905a276f4f90aa114758a0632,
-        type: 2}
-    - target: {fileID: 1488532003811833287, guid: 2754f9f08060da64395577d5c4dccb46,
-        type: 3}
-      propertyPath: spawnEvents.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 63d7f0690c1bf584d9ff2c721a966cf2,
-        type: 2}
     - target: {fileID: 1488532003811833336, guid: 2754f9f08060da64395577d5c4dccb46,
         type: 3}
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 9112776903165279808, guid: 2754f9f08060da64395577d5c4dccb46, type: 3}
-    - {fileID: 9220049574191574164, guid: 2754f9f08060da64395577d5c4dccb46, type: 3}
-    - {fileID: 1488532003811833284, guid: 2754f9f08060da64395577d5c4dccb46, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2754f9f08060da64395577d5c4dccb46, type: 3}
 --- !u!1001 &1872111293377880707
 PrefabInstance:

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gameplay.Stats.Stat;
-using Gameplay.Stats.Stat.Modifier;
-using Gameplay.Stats.Stat.Variants;
+using Stats.Stat;
+using Stats.Stat.Modifier;
+using Stats.Stat.Variants;
 using Tools;
 
 namespace Attacks

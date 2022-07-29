@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gameplay.Stats.Stat.Modifier;
-using UnityEngine;
+using Stats.Stat.Modifier;
 
-namespace Gameplay.Stats.Stat.Variants
+namespace Stats.Stat.Variants
 {
-    // [CreateAssetMenu(fileName = "New Float Stat", menuName = "Stat System/Float Stat")]
     [Serializable]
     public class FloatStat : Stat<float>
     {
@@ -14,32 +12,36 @@ namespace Gameplay.Stats.Stat.Variants
         
         private List<Modifier<float>> _modifiers = new List<Modifier<float>>();
         protected override List<Modifier<float>> Modifiers => _modifiers;
-        protected override float ModifiedValue(float startingValue)
+        protected override float ModifiedValue()
         {
-            float finalValue = 0;
+            float modifierValue = baseValue;
             float sumPercentAdd = 0;
             for (int i = 0; i < Modifiers.Count; i++)
             {
                 Modifier<float> modifier = Modifiers[i];
-                if (modifier.ModificationType == ModificationTypes.Add)
-                {
-                    finalValue += modifier.Value;
+                if (modifier.Type == ModificationTypes.Replace)
+                {   // relying on our sorted list...
+                    modifierValue = modifier.Value;
                 }
-                else if (modifier.ModificationType == ModificationTypes.AddMultiply)
+                else if (modifier.Type == ModificationTypes.Add)
+                {
+                    modifierValue += modifier.Value;
+                }
+                else if (modifier.Type == ModificationTypes.AddMultiply)
                 {
                     sumPercentAdd += modifier.Value;
-                    if (i + 1 >= Modifiers.Count || Modifiers[i + 1].ModificationType != ModificationTypes.AddMultiply)
+                    if (i + 1 >= Modifiers.Count || Modifiers[i + 1].Type != ModificationTypes.AddMultiply)
                     {   // relying on our sorted list...
-                        finalValue *= 1 + sumPercentAdd;
+                        modifierValue *= 1 + sumPercentAdd;
                         sumPercentAdd = 0;
                     }
                 }
-                else if (modifier.ModificationType == ModificationTypes.TrueMultiply)
+                else if (modifier.Type == ModificationTypes.TrueMultiply)
                 {
-                    finalValue *= 1 + modifier.Value;
+                    modifierValue *= 1 + modifier.Value;
                 }
             }
-            return (float)Math.Round(finalValue);
+            return modifierValue;
         }
         
         public static implicit operator FloatStat(float value) => new FloatStat(value);

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Entities.Base;
-using Gameplay.Stats.Stat.Variants;
+using Stats.Stat.Variants;
 using Tools;
 using UnityEngine;
 

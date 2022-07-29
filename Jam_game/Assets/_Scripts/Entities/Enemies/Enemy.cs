@@ -2,6 +2,7 @@
 using Attacks;
 using Entities.Base;
 using Entities.Players;
+using Management;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
@@ -88,7 +89,7 @@ namespace Entities.Enemies
         public override void KillThis()
         {
             base.KillThis();
-            Manager.IncreaseKillcount();
+            GameManager.Instance.IncreaseKillcount();
         }
     }
 }

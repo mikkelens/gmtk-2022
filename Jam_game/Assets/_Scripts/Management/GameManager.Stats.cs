@@ -1,10 +1,18 @@
-﻿using Gameplay.Stats.Stat;
-using Gameplay.Stats.Stat.Modifier;
+﻿using Stats.Stat;
+using Stats.Stat.Modifier;
 
 namespace Management
 {
     public partial class GameManager
     {
+        private int _killCount;
+       
+        public void IncreaseKillcount()
+        {
+        	_killCount++;
+        	UI.UpdateKillCount(_killCount);
+        }
+
         public void AddModifierToStat<T>(Modifier<T> modifier, Stat<T> stat)
         {
             if (modifier.Timer.Enabled)

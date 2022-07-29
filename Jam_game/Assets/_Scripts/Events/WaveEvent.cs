@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using Entities.Base;
-using Level;
-using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Events
 {
-    [CreateAssetMenu(fileName = "New Wave", menuName = "Events/Wave Event")]
+    [CreateAssetMenu(fileName = "New Wave Event", menuName = "Events/Wave Event")]
     public class WaveEvent : SpawnEvent
     {
+        public List<WaveEntityData> entitiesToSpawn = new List<WaveEntityData>();
         public float spawnDelay = 2f;
-        public float waveTime = 30f;
-        [AssetsOnly]
-        public List<EntityData> entitiesToSpawn = new List<EntityData>();
-        public Optional<Pickup> pickupToSpawn;
+        public Optional<AnimationCurve> spawnDelayCurve;
+        public Optional<int> endOnKillCount;
 
-        // ReSharper disable once CollectionNeverQueried.Local
         private List<Entity> _spawnedEntities;
+        private int _entityKills;
+
+
+        private float CurrentSpawnDelay => spawnDelayCurve.Enabled && spawnDelayCurve.Value != null
+            ? spawnDelayCurve.Value.Evaluate(EventCompletion) * spawnDelay
+            : spawnDelay;
+        private float KillCompletion => endOnKillCount.Enabled ? (float)_entityKills / endOnKillCount.Value : 0f;
+        protected override float EventCompletion => Mathf.Max(TimeCompletion, KillCompletion);
 
         public override IEnumerator RunEvent()
         {
@@ -32,20 +36,20 @@ namespace Events
             _spawnedEntities = new List<Entity>();
             
             // continuosly run wave
-            while (StartTime.TimeSince() <= waveTime)
+            while (!EndEvent)
             {
                 // wait
-                yield return new WaitForSeconds(spawnDelay);
+                yield return new WaitUntil(() => !GameIsPaused);
+                yield return new WaitForSeconds(CurrentSpawnDelay);
                 
                 // spawn enemies
                 Entity asset = SelectEntityAsset(entitiesToSpawn);
                 if (asset == null) continue;
                 _spawnedEntities.Add(SpawnEntity(asset, waveParent));
             }
-            if (pickupToSpawn.Enabled) SpawnPickup(pickupToSpawn.Value, GetRandomSpawnLocation());
         }
 
-        private static Entity SelectEntityAsset(IReadOnlyCollection<EntityData> allEnemies)
+        private static Entity SelectEntityAsset(IReadOnlyCollection<WaveEntityData> allEnemies)
         {
             if (allEnemies.Count == 0) return null;
             
@@ -53,7 +57,7 @@ namespace Events
             float totalSpawnRange = allEnemies.Sum(enemy => enemy.relativeSpawnChance);
             float random = Random.Range(0, totalSpawnRange);
             float last = 0f;
-            EntityData selectedEnemy = allEnemies.First(enemy =>
+            WaveEntityData selectedEnemy = allEnemies.First(enemy =>
             {
                 last += enemy.relativeSpawnChance;
                 return last >= random;
@@ -63,6 +67,7 @@ namespace Events
 
         public override void DespawnEntity(Entity entity)
         {
+            _entityKills++;
             _spawnedEntities.Remove(entity);
             base.DespawnEntity(entity);
         }

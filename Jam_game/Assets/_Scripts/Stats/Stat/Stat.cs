@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Gameplay.Stats.Stat.Modifier;
+using Stats.Stat.Modifier;
 using Stats.Type;
 using UnityEngine;
 
-namespace Gameplay.Stats.Stat
+namespace Stats.Stat
 {
     // can be float or int
     [Serializable]
@@ -30,11 +30,11 @@ namespace Gameplay.Stats.Stat
                 IsDirty = false;
                 _lastBaseValue = baseValue;
                 if (Modifiers == null) return _lastValue = baseValue;
-                return _lastValue = ModifiedValue(baseValue);
+                return _lastValue = ModifiedValue();
             }
         }
         protected abstract List<Modifier<T>> Modifiers { get; }
-        protected abstract T ModifiedValue(T startingValue);
+        protected abstract T ModifiedValue();
 
         protected abstract bool Compare(T a, T b);
         private static int CompareModifyOrder(Modifier<T> a, Modifier<T> b)

@@ -4,7 +4,7 @@ using Stats.Type;
 using Tools;
 using UnityEngine;
 
-namespace Gameplay.Stats.Stat.Modifier
+namespace Stats.Stat.Modifier
 {
     [Serializable]
     public class Modifier<T>
@@ -14,7 +14,7 @@ namespace Gameplay.Stats.Stat.Modifier
             modificationValue = setValue;
         }
 
-        [SerializeField] private ModificationTypes modificationType = ModificationTypes.AddMultiply;
+        [SerializeField] private ModificationTypes type = ModificationTypes.AddMultiply;
         [SerializeField] private Optional<float> timer;
 
         [SerializeField] private T modificationValue;
@@ -38,9 +38,9 @@ namespace Gameplay.Stats.Stat.Modifier
             return statTypes;
         }
         
-        public ModificationTypes ModificationType => modificationType;
+        public ModificationTypes Type => type;
         public Optional<float> Timer => timer;
 
-        public int Order => (int)modificationType;
+        public int Order => (int)type;
     }
 }

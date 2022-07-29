@@ -5,10 +5,10 @@ using Sirenix.OdinInspector;
 namespace Events
 {
     [Serializable]
-    public class EntityData
+    public class WaveEntityData
     {
-        public float relativeSpawnChance = 1f;
         [AssetsOnly]
         public Entity prefab;
+        public float relativeSpawnChance = 1f;
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Gameplay.Stats.Stat;
-using Gameplay.Stats.Stat.Modifier;
-using Gameplay.Stats.Stat.Variants;
+using Stats.Stat;
+using Stats.Stat.Modifier;
 using Stats.Type;
 using UnityEngine;
 

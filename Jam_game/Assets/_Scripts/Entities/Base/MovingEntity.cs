@@ -1,5 +1,5 @@
-﻿using Gameplay.Stats.Stat.Variants;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
+using Stats.Stat.Variants;
 using Tools;
 using UnityEngine;
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Entities.Players;
-using Gameplay.Stats.Stat.Modifier;
 using Management;
+using Stats.Stat.Modifier;
 using Tools;
 using UnityEngine;
 

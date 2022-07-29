@@ -1,25 +1,39 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Entities.Base;
 using Level;
 using Tools;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Events
 {
-	public class SpawnEvent : ExpandableScriptableObject
+	[Serializable]
+	public class SpawnEvent : GameEvent
 	{
-		protected float StartTime;
+		public Optional<Pickup> pickupToSpawnOnEnd;
 		protected Transform SpawningParent;
 		protected float MinSpawnDistance;
-		
+
 		public void SetSpawningParent(Transform spawningParent) => SpawningParent = spawningParent;
 		public void SetMinSpawnDistance(float minSpawnDistance) => MinSpawnDistance = minSpawnDistance;
 
-		public virtual IEnumerator RunEvent() // base as setup
+		private Vector2? _pickupSpawnLocation;
+		protected Vector2 PickupSpawnLocation
 		{
-			Debug.Log($"Started spawn event: {name}");
-			StartTime = Time.time;
-			yield break;
+			get
+			{
+				if (_pickupSpawnLocation != null) return _pickupSpawnLocation.Value;
+				return GetRandomSpawnLocation();
+			}
+			set => _pickupSpawnLocation = value;
+		}
+
+		public override IEnumerator RunEvent()
+		{
+			yield return PausingPoint();
+			yield return base.RunEvent();
+			if (pickupToSpawnOnEnd.Enabled) SpawnPickup(pickupToSpawnOnEnd.Value);
 		}
 
 		protected Entity SpawnEntity(Entity enemyPrefab, Transform enemyParent)
@@ -45,9 +59,9 @@ namespace Events
 			return Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
 		}
 
-		protected void SpawnPickup(Pickup pickup, Vector2 location)
+		protected void SpawnPickup(Pickup pickup)
 		{
-			Instantiate(pickup, location.PlaneToWorld(), Quaternion.identity, SpawningParent);
+			Instantiate(pickup, PickupSpawnLocation.PlaneToWorld(), Quaternion.identity, SpawningParent);
 		}
 	}
 }

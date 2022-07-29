@@ -2,8 +2,9 @@
 {
     public enum GameState
     {
+        Waiting,
         Playing,
         PausedDuringPlay,
-        Waiting,
+        Ended,
     }
 }

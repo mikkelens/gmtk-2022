@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using Entities.Base;
-using Level;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
@@ -10,25 +9,29 @@ namespace Events
     [CreateAssetMenu(fileName = "New Boss Event", menuName = "Events/Boss Event")]
     public class BossEvent : SpawnEvent
     {
+        [AssetsOnly]
         [SerializeField] private Entity bossPrefabToSpawn;
-        [SerializeField] private Optional<Pickup> pickupToDrop;
-        
+
+        private Entity _boss;
         private bool _bossAlive;
+
+        protected override bool EndEvent => base.EndEvent || !_bossAlive;
 
         public override IEnumerator RunEvent()
         {
             yield return base.RunEvent();
-
-            Entity boss = SpawnEntity(bossPrefabToSpawn, SpawningParent); // dont need reference, boss will call overridden despawn method
+            
+            _boss = SpawnEntity(bossPrefabToSpawn, SpawningParent); // dont need reference, boss will call overridden despawn method
             _bossAlive = true;
             
-            yield return new WaitUntil(() => !_bossAlive);
+            yield return new WaitUntil(() => EndEvent);
         }
 
         public override void DespawnEntity(Entity entity)
         {
+            if (pickupToSpawnOnEnd.Enabled) PickupSpawnLocation = entity.transform.position.WorldToPlane();
             _bossAlive = false;
-            if (pickupToDrop.Enabled) SpawnPickup(pickupToDrop.Value, entity.transform.position.WorldToPlane());
+            _boss = null;
             base.DespawnEntity(entity);
         }
     }

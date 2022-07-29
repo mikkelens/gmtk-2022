@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gameplay.Stats.Stat.Modifier;
+using Stats.Stat.Modifier;
 
-namespace Gameplay.Stats.Stat.Variants
+namespace Stats.Stat.Variants
 {
 	[Serializable]
 	public class BoolStat : Stat<bool>
@@ -13,11 +13,11 @@ namespace Gameplay.Stats.Stat.Variants
 		
 		private List<Modifier<bool>> _modifiers = new List<Modifier<bool>>();
 		protected override List<Modifier<bool>> Modifiers => _modifiers;
-		protected override bool ModifiedValue(bool startingValue)
+		protected override bool ModifiedValue()
 		{
 			// if any of the modifiers have a true value, flip starting value
 			bool containsATrue = Modifiers.Any(modifier => modifier.Value);
-			return startingValue ^ containsATrue;
+			return baseValue ^ containsATrue;
 		}
 		
 		public static implicit operator BoolStat(bool value) => new BoolStat(value);
