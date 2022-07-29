@@ -16,32 +16,34 @@ namespace Abilities.Weapons
     [CreateAssetMenu(fileName = "New Melee Weapon", menuName = "Abilities/Melee Weapon")]
     public class MeleeWeapon : Weapon
     {
+        public Optional<ImpactData> impact;
         public MeleeHitMethods hitMethod;
         [ShowIf("@hitMethod == MeleeHitMethods.Area")]
         public Optional<Vector2> physicsBox;
         [ShowIf("@hitMethod == MeleeHitMethods.Raycast")]
         public Optional<FloatStat> maxDistance;
-        public Optional<ImpactData> impact;
 
         protected override void Use()
         {
-            base.Use();
-            TryHitEntity(SourceEntity, targetMask.Value);
+            if (TryHitEntity(SourceEntity, targetMask.Value))
+                base.Use();
         }
-        public void TryHitEntity(CombatEntity source, LayerMask targetLayerMask)
+        
+        private bool TryHitEntity(CombatEntity source, LayerMask targetLayerMask)
         {
             Collider[] colliders;
             if (hitMethod == MeleeHitMethods.Raycast)
                 colliders = RaycastCheck(source, targetLayerMask);
             else
                 colliders = AreaCheck(source, targetLayerMask);
-            if (colliders.Length == 0) return;
+            if (colliders.Length == 0) return false;
             
             List<Entity> entities = colliders.Select(collider => collider.GetComponent<Entity>()).Where(entity => entity != null).ToList();
-            if (entities.Count == 0) return;
+            if (entities.Count == 0) return false;
             Debug.Log($"Weapon {name} hit something.");
 
             ImpactEntities(impact.Value, entities, AttackDirection);
+            return true;
         }
 
     #region Check methods
@@ -57,15 +59,5 @@ namespace Abilities.Weapons
             return Physics.RaycastAll(ray, maxdistance, ~targetLayerMask.value).Select(hit => hit.collider).ToArray();
         }
     #endregion
-
-    #if UNITY_EDITOR
-        private void OnValidate() // showing area check box
-        {
-            if (hitMethod != MeleeHitMethods.Area) return;
-            if (!physicsBox.Enabled) return;
-            Handles.color = Color.red;
-            Handles.DrawWireCube(AttackPoint.PlaneToWorld(), physicsBox.Value.PlaneToWorldBox());
-        }
-    #endif
     }
 }

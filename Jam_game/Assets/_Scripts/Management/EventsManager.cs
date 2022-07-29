@@ -12,7 +12,7 @@ namespace Management
     {
         public static EventsManager Instance;
         
-        [SerializeField] private float minSpawnDistance = 10f;
+        [SerializeField] private float minSpawnDistance = 12f;
         [SerializeField] private Transform rootEnemyParent;
         [SerializeField] private List<GameEvent> gameEvents = new List<GameEvent>();
         [SerializeField] private Optional<float> standardEventDelay = 1f;

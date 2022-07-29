@@ -15,7 +15,7 @@ namespace Events
     {
         [Required]
         public List<EntityData> entitiesToSpawn = new List<EntityData>();
-        public float spawnDelay = 2f;
+        public Optional<float> spawnDelay = 2f;
         public Optional<AnimationCurve> spawnDelayCurve;
         // [Min(1)]
         public Optional<int> endOnSpawnCount;
@@ -31,9 +31,11 @@ namespace Events
         [PropertyOrder(10)]
         public bool requireAllKilledToContinue = true;
 
-        private float CurrentSpawnDelay => spawnDelayCurve.Enabled && spawnDelayCurve.Value != null
-            ? spawnDelayCurve.Value.Evaluate(EventCompletion) * spawnDelay
-            : spawnDelay;
+        private float CurrentSpawnDelay => spawnDelay.Enabled
+        ? spawnDelayCurve.Enabled && spawnDelayCurve.Value != null
+        ? spawnDelayCurve.Value.Evaluate(EventCompletion) * spawnDelay.Value
+        : spawnDelay.Value
+        : 0f;
 
         private float SpawnCompletion => endOnSpawnCount.Enabled ? (float)_spawnCount / endOnSpawnCount.Value : 0f;
         private float KillCompletion => endOnKillCount.Enabled ? (float)_killCount / endOnKillCount.Value : 0f;

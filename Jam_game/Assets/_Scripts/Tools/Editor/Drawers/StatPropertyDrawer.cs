@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Tools.Editor
+namespace Tools.Editor.Drawers
 {
     [CustomPropertyDrawer(typeof(BoolStat))]
     [CustomPropertyDrawer(typeof(IntStat))]

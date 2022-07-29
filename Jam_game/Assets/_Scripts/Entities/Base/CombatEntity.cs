@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Abilities.Base;
 using Abilities.Spells;
+using Abilities.Weapons;
 using JetBrains.Annotations;
 using Management;
 using Sirenix.OdinInspector;
@@ -115,5 +116,31 @@ namespace Entities.Base
         {
             _usingAbility = false;
         }
+        
+        #if UNITY_EDITOR
+            private void OnDrawGizmos() // showing area check box
+            {
+                if (!defaultAbility.Enabled) return;
+                if (defaultAbility.Value == null) return;
+                Gizmos.color = Color.red;
+                Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+                if (defaultAbility.Value is MeleeWeapon melee)
+                {
+                    if (melee.hitMethod == MeleeHitMethods.Area)
+                    {
+                        if (!melee.physicsBox.Enabled) return;
+                        Vector2 pos = transform.position.WorldToPlane() + melee.AttackPoint;
+                        Gizmos.DrawWireCube(pos.PlaneToWorld(), melee.physicsBox.Value.PlaneToWorldBox());
+                    }
+                    else if (melee.hitMethod == MeleeHitMethods.Raycast)
+                    {
+                        float distance = melee.maxDistance.Enabled ? melee.maxDistance.Value : 99f;
+                        Vector3 pos = melee.AttackPoint.PlaneToWorld() + Vector3.up * 0.5f;
+                        Vector2 direction = Vector3.forward.WorldToPlane();
+                        Gizmos.DrawRay(pos, direction.PlaneToWorld() * distance);
+                    }
+                }
+            }
+        #endif    
     }
 }

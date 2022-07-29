@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Tools.Editor
+namespace Tools.Editor.Drawers
 {
     [CustomPropertyDrawer(typeof(Optional<>))]
     public class OptionalPropertyDrawer : PropertyDrawer

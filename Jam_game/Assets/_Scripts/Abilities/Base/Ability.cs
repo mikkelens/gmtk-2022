@@ -25,7 +25,7 @@ namespace Abilities.Base
 		public AbilityMetrics Metrics { get; } = new AbilityMetrics();
 		protected CombatEntity SourceEntity { get; private set; } // todo: use this to report damage numbers?
 
-		protected Vector2 AttackPoint
+		public Vector2 AttackPoint
 		{
 			get
 			{
@@ -33,7 +33,7 @@ namespace Abilities.Base
 				return SourceEntity.transform.position.WorldToPlane() + originOffset.Value;
 			}
 		}
-		protected Vector2 AttackDirection
+		public Vector2 AttackDirection
 		{
 			get
 			{

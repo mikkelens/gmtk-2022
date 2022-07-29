@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3497333121765313740, guid: 1a1613ff0ed8f1c4bb6b17c943013247,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6121795126706553912, guid: 1a1613ff0ed8f1c4bb6b17c943013247,
         type: 3}
       propertyPath: m_RootOrder
@@ -87,8 +92,98 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf116f99f4e4719a44bc80a9d7fbe56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingStats: {fileID: 11400000, guid: 8001e69821194a240acd4c6966b5be4a, type: 2}
-  stats: {fileID: 0}
+  godMode: 0
+  maxHealth:
+    baseValue: 2
+    value: 0
+    type: {fileID: 0}
+  freezingAffectsRotation: 1
+  stoppingAffectsRotation: 1
+  turnSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxSpeed:
+    baseValue: 3.6
+    value: 0
+    type: {fileID: 0}
+  walkAccelSpeed:
+    baseValue: 25
+    value: 0
+    type: {fileID: 0}
+  maxTurnSpeed:
+    baseValue: 0.85
+    value: 0
+    type: {fileID: 0}
+  maxStoppingBonus:
+    baseValue: 1.25
+    value: 0
+    type: {fileID: 0}
+  accelerationWhenStunned:
+    baseValue: 5
+    value: 0
+    type: {fileID: 0}
+  stunned:
+    baseValue: 0
+    value: 0
+    type: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  autoUseAbilities: 0
+  defaultAbility:
+    enabled: 0
+    value: {fileID: 0}
+  rotationAffectsMoveDirection: 1
+  minAttackAttemptDistance: 4
+  customTargetingOrigin:
+    enabled: 0
+    value: {fileID: 0}
+  collisionImpact:
+    enabled: 1
+    value:
+      damage:
+        enabled: 1
+        value:
+          baseValue: 1
+          value: 0
+          type: {fileID: 0}
+      healing:
+        enabled: 1
+        value:
+          baseValue: 0
+          value: 0
+          type: {fileID: 0}
+      knockback:
+        enabled: 1
+        value:
+          baseValue: 5
+          value: 0
+          type: {fileID: 0}
+      effects:
+        enabled: 0
+        value:
+          bools: []
+          ints: []
+          floats: []
+          colors: []
