@@ -14,17 +14,26 @@ namespace Events
         public List<WaveEntityData> entitiesToSpawn = new List<WaveEntityData>();
         public float spawnDelay = 2f;
         public Optional<AnimationCurve> spawnDelayCurve;
-        public Optional<int> endOnKillCount;
+        [Min(1)]
+        public Optional<uint> endOnSpawnCount;
+        [Min(1)]
+        public Optional<uint> maxEnemiesSimultaneously = 5;
+        [Min(1)]
+        public Optional<uint> endOnKillCount;
 
         private List<Entity> _spawnedEntities;
-        private int _entityKills;
-
-
+        private uint _spawnCount;
+        private uint _killCount;
+        
         private float CurrentSpawnDelay => spawnDelayCurve.Enabled && spawnDelayCurve.Value != null
             ? spawnDelayCurve.Value.Evaluate(EventCompletion) * spawnDelay
             : spawnDelay;
-        private float KillCompletion => endOnKillCount.Enabled ? (float)_entityKills / endOnKillCount.Value : 0f;
-        protected override float EventCompletion => Mathf.Max(TimeCompletion, KillCompletion);
+
+        private float SpawnCompletion => endOnSpawnCount.Enabled ? (float)_spawnCount / endOnSpawnCount.Value : 0f;
+        private float KillCompletion => endOnKillCount.Enabled ? (float)_killCount / endOnKillCount.Value : 0f;
+        private float EntityCompletion => Mathf.Max(SpawnCompletion, KillCompletion);
+        protected override float EventCompletion => Mathf.Max(TimeCompletion, EntityCompletion);
+        protected override bool AllKilled => _spawnedEntities.Count == 0;
 
         public override IEnumerator RunEvent()
         {
@@ -41,11 +50,15 @@ namespace Events
                 // wait
                 yield return new WaitUntil(() => !GameIsPaused);
                 yield return new WaitForSeconds(CurrentSpawnDelay);
-                
-                // spawn enemies
-                Entity asset = SelectEntityAsset(entitiesToSpawn);
-                if (asset == null) continue;
-                _spawnedEntities.Add(SpawnEntity(asset, waveParent));
+
+                if (!maxEnemiesSimultaneously.Enabled || _spawnedEntities.Count < maxEnemiesSimultaneously.Value)
+                {
+                    // select and spawn enemy
+                    Entity asset = SelectEntityAsset(entitiesToSpawn);
+                    if (asset == null) continue;
+                    _spawnedEntities.Add(SpawnEntity(asset, waveParent));
+                    _spawnCount++;
+                }
             }
         }
 
@@ -67,7 +80,7 @@ namespace Events
 
         public override void DespawnEntity(Entity entity)
         {
-            _entityKills++;
+            _killCount++;
             _spawnedEntities.Remove(entity);
             base.DespawnEntity(entity);
         }

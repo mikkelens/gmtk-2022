@@ -1,5 +1,7 @@
 ﻿using System.Collections;
-using Attacks;
+using Abilities;
+using Abilities.Data;
+using Abilities.Weapons;
 using Entities.Base;
 using Entities.Players;
 using Management;
@@ -56,17 +58,17 @@ namespace Entities.Enemies
             return (playerPos - pos).normalized;
         }
         
-        protected override void UseWeapon(Weapon weapon) // On enemies, attacks are slow animations
+        protected override void UseWeapon(MeleeWeapon weapon) // On enemies, attacks are slow animations
         {
             StartCoroutine(MeleeRoutine(weapon));
         }
         
-        private IEnumerator MeleeRoutine(Weapon weapon) // Think dark soulds attack with long chargeup
+        private IEnumerator MeleeRoutine(MeleeWeapon weapon) // Think dark soulds attack with long chargeup
         {
-            if (!weapon.chargeTime.Enabled) yield break;
+            if (!weapon.activationDelay.Enabled) yield break;
             Stopping = true;
             Animator.SetBool("Walking", false);
-            yield return new WaitForSeconds(weapon.chargeTime.Value);
+            yield return new WaitForSeconds(weapon.activationDelay.Value);
             TryHitWithWeapon(weapon);
             Animator.SetBool("Walking", true);
             Stopping = false;
@@ -83,7 +85,7 @@ namespace Entities.Enemies
             if (player == null) return;
 
             Vector2 collisionDirection = -collision.impulse.WorldToPlane().normalized;
-            player.TakeHit(collisionImpact.Value, collisionDirection);
+            player.RegisterImpact(collisionImpact.Value, collisionDirection);
         }
 
         public override void KillThis()

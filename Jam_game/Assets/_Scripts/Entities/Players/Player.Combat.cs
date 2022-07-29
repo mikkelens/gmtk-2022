@@ -1,11 +1,12 @@
-﻿using Attacks;
+﻿using Abilities;
+using Abilities.Weapons;
 using UnityEngine;
 
 namespace Entities.Players
 {
     public partial class Player
     {
-        public override Weapon ActiveWeapon
+        public override MeleeWeapon ActiveWeapon
         {
             set
             {

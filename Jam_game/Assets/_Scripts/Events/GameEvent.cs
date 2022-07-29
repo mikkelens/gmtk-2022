@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Management;
+using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace Events
 	[Serializable]
 	public class GameEvent : ExpandableScriptableObject
 	{
+		[PropertyOrder(5)]
 		public Optional<float> eventTime = 10f;
 		protected float StartTime;
 

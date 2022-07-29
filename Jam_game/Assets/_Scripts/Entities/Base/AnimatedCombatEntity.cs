@@ -1,31 +1,32 @@
-﻿using Attacks;
+﻿using Abilities;
+using Abilities.Weapons;
 using UnityEngine;
 
 namespace Entities.Base
 {
     public class AnimatedCombatEntity : CombatEntity
     {
-        protected override void StartAttack(Weapon weapon)
+        protected override void StartAttack(MeleeWeapon weapon)
         {
             base.StartAttack(weapon);
             
-            if (!weapon.animation.Enabled) return;
-            Animator.SetTrigger(weapon.animation.Value.name);
+            if (!weapon.usageAnimation.Enabled) return;
+            Animator.SetTrigger(weapon.usageAnimation.Value.name);
             
-            if (!weapon.animation.Value.isDirectional) return;
+            if (!weapon.usageAnimation.Value.isDirectional) return;
             string directionString = AttackAnimationDirectionString(weapon);
             Animator.SetBool(directionString, Animator.GetBool(directionString));
         }
 
-        protected override void EndAttack(Weapon weapon)
+        protected override void EndAttack(MeleeWeapon weapon)
         {
             base.EndAttack(weapon);
             
-            if (!weapon.animation.Enabled) return;
-            Animator.ResetTrigger(weapon.animation.Value.name);
+            if (!weapon.usageAnimation.Enabled) return;
+            Animator.ResetTrigger(weapon.usageAnimation.Value.name);
         }
 
-        protected static string AttackAnimationDirectionString(Weapon attack) => attack.animation.Value.name + "Direction";
+        protected static string AttackAnimationDirectionString(MeleeWeapon attack) => attack.usageAnimation.Value.name + "Direction";
 
         protected override void ApplyKnockback(Vector2 force)
         {

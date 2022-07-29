@@ -1,7 +1,10 @@
-using Attacks;
+using System.Collections.Generic;
+using Abilities;
+using Abilities.Data;
 using Events;
 using Management;
 using Sirenix.OdinInspector;
+using Stats.Stat.Modifier;
 using Stats.Stat.Variants;
 using UnityEngine;
 
@@ -65,22 +68,35 @@ namespace Entities.Base
             
         }
 
-        public void TakeHit(ImpactData impact, Vector2 knockbackDirection) // Main way of getting hit
+        public void RegisterImpact(ImpactData impact, Vector2 knockbackDirection) // Main way of getting hit
         {
             if (impact.knockback.Enabled) ApplyKnockback(knockbackDirection * impact.knockback.Value);
             if (!Alive) return;
+            if (impact.healing.Enabled) ApplyHealing(impact.healing.Value);
             if (impact.damage.Enabled) ApplyDamage(impact.damage.Value);
+            
+            if (impact.boolEffects.Enabled) ApplyEffects(impact.boolEffects.Value);
+            if (impact.intEffects.Enabled) ApplyEffects(impact.intEffects.Value);
+            if (impact.floatEffects.Enabled) ApplyEffects(impact.floatEffects.Value);
         }
 
+        protected virtual void ApplyKnockback(Vector2 force)
+        {
+            // only used in movable entities
+        }
         private void ApplyDamage(int damage)
         {
             if (godMode) return;
             _currentHealth -= damage;
             if (_currentHealth <= 0) KillThis();
         }
-        protected virtual void ApplyKnockback(Vector2 force)
+        private void ApplyHealing(int healing)
         {
-            // idk
+            _currentHealth += healing;
+        }
+        private void ApplyEffects<T>(List<Modifier<T>> effects)
+        {
+            this.FindAllStatsOnObject<T>().ApplyModifiers(effects);
         }
 
         public virtual void KillThis()
@@ -89,7 +105,6 @@ namespace Entities.Base
             Animator.SetTrigger("Death");
             SpawnOrigin.DespawnEntity(this);
         }
-
         public void HealToFull()
         {
             SetHealth(maxHealth);
@@ -98,10 +113,5 @@ namespace Entities.Base
         {
             _currentHealth = health;
         }
-        private void ApplyHealing(int healing)
-        {
-            _currentHealth += healing;
-        }
-
     }
 }

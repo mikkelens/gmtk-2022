@@ -1,4 +1,3 @@
-using Attacks;
 using Entities.Base;
 using Level;
 using Management;
@@ -34,7 +33,7 @@ namespace Entities.Players
             if (hazard == null) return;
             
             Vector2 direction = collision.impulse.WorldToPlane().normalized;
-            TakeHit(hazard.Impact, direction); // hit itself/player
+            RegisterImpact(hazard.Impact, direction); // hit itself/player
         }
     }
 }

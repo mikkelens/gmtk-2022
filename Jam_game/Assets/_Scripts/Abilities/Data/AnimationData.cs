@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Attacks
+namespace Abilities.Data
 {
     [Serializable]
     public class AnimationData

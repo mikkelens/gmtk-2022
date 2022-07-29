@@ -37,7 +37,7 @@ namespace Management
         {
             foreach (GameEvent gameEvent in gameEvents) // run each event
             {
-			    Debug.Log($"Started event: {name}");
+			    Debug.Log($"Started event: {gameEvent.name}");
                 if (gameEvent is SpawnEvent spawnEvent)
                 {
                     spawnEvent.SetSpawningParent(rootEnemyParent);

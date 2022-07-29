@@ -4,11 +4,11 @@ using Stats.Stat.Variants;
 using Tools;
 using UnityEngine;
 
-namespace Attacks
+namespace Abilities.Weapons
 {
     // Default weapon
     [CreateAssetMenu(fileName = "New RaycastWeapon", menuName = "Stats/RaycastWeapon")]
-    public class RaycastWeapon : Weapon
+    public class RaycastMeleeWeapon : MeleeWeapon
     {
         public Optional<Transform> attackPoint;
         public Optional<FloatStat> maxDistance;
@@ -24,5 +24,9 @@ namespace Attacks
             return Physics.RaycastAll(ray, maxdistance, ~targetLayerMask.value).Select(hit => hit.collider).ToArray();
         }
 
+        public override void UseAbility()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using Entities.Base;
 using Level;
+using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,10 +12,14 @@ namespace Events
 	[Serializable]
 	public class SpawnEvent : GameEvent
 	{
+		[PropertyOrder(10)]
 		public Optional<Pickup> pickupToSpawnOnEnd;
+		[PropertyOrder(10)]
+		public bool requireAllKilledToContinue = true;
+
 		protected Transform SpawningParent;
 		protected float MinSpawnDistance;
-
+		
 		public void SetSpawningParent(Transform spawningParent) => SpawningParent = spawningParent;
 		public void SetMinSpawnDistance(float minSpawnDistance) => MinSpawnDistance = minSpawnDistance;
 
@@ -29,11 +34,14 @@ namespace Events
 			set => _pickupSpawnLocation = value;
 		}
 
+		protected virtual bool AllKilled => false;
+
 		public override IEnumerator RunEvent()
 		{
 			yield return PausingPoint();
 			yield return base.RunEvent();
 			if (pickupToSpawnOnEnd.Enabled) SpawnPickup(pickupToSpawnOnEnd.Value);
+			if (requireAllKilledToContinue) yield return new WaitUntil(() => AllKilled);
 		}
 
 		protected Entity SpawnEntity(Entity enemyPrefab, Transform enemyParent)
