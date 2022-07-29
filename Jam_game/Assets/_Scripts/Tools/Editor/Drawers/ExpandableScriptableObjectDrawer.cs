@@ -1,5 +1,4 @@
-﻿using System;
-using Sirenix.Utilities;
+﻿using Sirenix.Utilities;
 using UnityEditor;
 using UnityEngine;
 

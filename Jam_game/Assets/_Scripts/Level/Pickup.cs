@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Entities.Players;
+﻿using Entities.Players;
 using Management;
 using Stats.Stat.Modifier;
 using Tools;
@@ -10,27 +9,17 @@ namespace Level
     [RequireComponent(typeof(Collider))]
     public class Pickup : MonoBehaviour
     {
-        [SerializeField] private Optional<List<Modifier<float>>> floatModifiers = new List<Modifier<float>>();
-        [SerializeField] private Optional<List<Modifier<int>>> intModifiers = new List<Modifier<int>>();
-        [SerializeField] private Optional<List<Modifier<bool>>> boolModifiers = new List<Modifier<bool>>();
+        [SerializeField] private Optional<ModifierCollection> modifiers;
 
         private void OnTriggerEnter(Collider other)
         {
             Player player = other.GetComponent<Player>();
             if (player == null) return;
 
-            if (floatModifiers.Enabled)
-            {
-                player.FindAllStatsOnObject<float>().ApplyModifiers(floatModifiers.Value);
-            }
-            if (intModifiers.Enabled)
-            {
-                player.FindAllStatsOnObject<int>().ApplyModifiers(intModifiers.Value);
-            }
-            if (boolModifiers.Enabled)
-            {
-                player.FindAllStatsOnObject<bool>().ApplyModifiers(boolModifiers.Value);
-            }
+            if (!modifiers.Enabled) return;
+            player.ApplyModifierCollectionToObject(modifiers.Value);
+
+            Debug.Log($"Player picked up pickup: {name}");
             // todo: add graphical effect on pickup
             Despawn();
         }

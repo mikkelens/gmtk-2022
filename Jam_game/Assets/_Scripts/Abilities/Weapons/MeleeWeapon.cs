@@ -1,68 +1,70 @@
-﻿#if UNITY_EDITOR
-#endif
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Abilities.Base;
 using Abilities.Data;
 using Entities.Base;
+using Sirenix.OdinInspector;
+using Stats.Stat.Variants;
 using Tools;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Abilities.Weapons
 {
-    public abstract class MeleeWeapon : Weapon
+    [CreateAssetMenu(fileName = "New Melee Weapon", menuName = "Abilities/Melee Weapon")]
+    public class MeleeWeapon : Weapon
     {
+        public MeleeHitMethods hitMethod;
+        [ShowIf("@hitMethod == MeleeHitMethods.Area")]
+        public Optional<Vector2> physicsBox;
+        [ShowIf("@hitMethod == MeleeHitMethods.Raycast")]
+        public Optional<FloatStat> maxDistance;
         public Optional<ImpactData> impact;
-        public HitMethods hitMethod; // todo: unify area and raycast
-        [Serializable]
-        public enum HitMethods
-        {
-            Raycast,
-            Area
-        }
 
-        public bool TryHitEntity(CombatEntity source, Vector2 direction, LayerMask targetLayerMask)
+        protected override void Use()
         {
-            Collider[] colliders = CastForEntity(source, direction, targetLayerMask);
-            if (colliders.Length == 0) return false;
+            TryHitEntity(SourceEntity, targetMask.Value);
+        }
+        public void TryHitEntity(CombatEntity source, LayerMask targetLayerMask)
+        {
+            Collider[] colliders;
+            if (hitMethod == MeleeHitMethods.Raycast)
+                colliders = RaycastCheck(source, targetLayerMask);
+            else
+                colliders = AreaCheck(source, targetLayerMask);
+            if (colliders.Length == 0) return;
             
             List<Entity> entities = colliders.Select(collider => collider.GetComponent<Entity>()).Where(entity => entity != null).ToList();
-            if (entities.Count == 0) return false;
+            if (entities.Count == 0) return;
             Debug.Log($"Weapon {name} hit something.");
 
-            if (maxEntitiesHit.Value <= 1)
-                HitEntity(entities.First(), direction);
-            else
-                entities.ForEach(entity => HitEntity(entity, direction));
-            return true;
+            ImpactEntities(impact.Value, entities, AttackDirection);
         }
-        private void HitEntity(Entity entity, Vector2 direction)
+
+    #region Check methods
+        private Collider[] AreaCheck(CombatEntity source, LayerMask targetLayerMask)
         {
-            if (impact.Enabled) entity.RegisterImpact(impact.Value, direction);
+            Vector2 center = originOffset.Enabled ? originOffset.Value : source.transform.position.WorldToPlane();
+            return Physics.OverlapBox(center.PlaneToWorld(), Vector3.one, Quaternion.identity, ~targetLayerMask.value);
         }
-        // overriden in raycastweapon etc.
-        protected abstract Collider[] CastForEntity(CombatEntity source, Vector2 direction, LayerMask targetLayerMask);
+        private Collider[] RaycastCheck(CombatEntity source, LayerMask targetLayerMask)
+        {
+            Ray ray = new Ray(AttackPoint.PlaneToWorld(), AttackDirection.PlaneToWorld());
+            float maxdistance = maxDistance.Enabled ? maxDistance.Value : float.MaxValue;
+            return Physics.RaycastAll(ray, maxdistance, ~targetLayerMask.value).Select(hit => hit.collider).ToArray();
+        }
+    #endregion
 
-        
-        
     #if UNITY_EDITOR
-        private const string MenuPath = "Convert To/";
-        private const string RayWeapon = nameof(RaycastMeleeWeapon);
-        private const string AreaWeapon = nameof(AreaMeleeWeapon);
-        
-        [ContextMenu(MenuPath + RayWeapon, true)]
-        public bool IsNotRay(MenuCommand menuCommand) => menuCommand.context is not RaycastMeleeWeapon;
-        [ContextMenu(MenuPath + RayWeapon)]
-        public void ConverToRaycast(MenuCommand menuCommand) => ConvertObjectToType(menuCommand.context as MeleeWeapon, typeof(RaycastMeleeWeapon));
-
-        [ContextMenu(MenuPath + AreaWeapon, true)]
-        public bool IsNotArea(MenuCommand menuCommand) => menuCommand.context is not AreaMeleeWeapon;
-        [ContextMenu(MenuPath + AreaWeapon)]
-        public void ConverToArea(MenuCommand menuCommand) => ConvertObjectToType(menuCommand.context as MeleeWeapon, typeof(AreaMeleeWeapon));
+        private void OnValidate() // showing area check box
+        {
+            if (hitMethod != MeleeHitMethods.Area) return;
+            if (!physicsBox.Enabled) return;
+            Handles.color = Color.red;
+            Handles.DrawWireCube(AttackPoint.PlaneToWorld(), physicsBox.Value.PlaneToWorldBox());
+        }
     #endif
     }
 }

@@ -1,5 +1,4 @@
-﻿using Abilities;
-using Abilities.Weapons;
+﻿using Abilities.Base;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Tools;
@@ -18,20 +17,20 @@ namespace Entities.Base
         [UsedImplicitly] protected virtual bool Headless => true;
      
         [FoldoutGroup(StatCategory)]
-        [SerializeField] protected Optional<MeleeWeapon> defaultWeapon; // class instance with stats in it
+        [SerializeField] protected Optional<Ability> defaultAbility; // class instance with stats in it
 
-        private MeleeWeapon _lastWeapon;
-        private MeleeWeapon _activeWeapon;
-        public virtual MeleeWeapon ActiveWeapon
+        private Ability _lastAbility;
+        private Ability _activeAbility;
+        public virtual Ability ActiveAbility
         {
-            get => _activeWeapon == null ? defaultWeapon.Enabled ? defaultWeapon.Value : null : _activeWeapon;
-            set => _lastWeapon = _activeWeapon = value;
+            get => _activeAbility == null ? defaultAbility.Enabled ? defaultAbility.Value : null : _activeAbility;
+            set => _activeAbility = value;
         }
         private float _lastAttackTime;
 
         // todo: maybe make animation handled in child class?
         protected virtual bool WantsToAttack => autoAttacks; // will only use "autoAttacks" field if WantsToAttack is not overridden
-        protected bool CanAttack => _lastWeapon == null || !_lastWeapon.cooldown.Enabled || _lastAttackTime.TimeSince() >= _lastWeapon.cooldown.Value;
+        protected bool CanAttack => _lastAbility == null || !_lastAbility.cooldown.Enabled || _lastAttackTime.TimeSince() >= _lastAbility.cooldown.Value;
 
         protected override void EntityUpdate()
         {
@@ -42,34 +41,32 @@ namespace Entities.Base
         protected virtual void CombatUpdate()
         {
             // See if thing in attack box
-            if (ActiveWeapon != null && WantsToAttack && CanAttack)
+            if (ActiveAbility != null && WantsToAttack && CanAttack)
             {
-                StartAttack(ActiveWeapon); // first attack. should probably be picked somehow
+                StartAbilityUse(ActiveAbility);
             }
         }
 
-        protected virtual void StartAttack(MeleeWeapon weapon) // overridden to add animation
+        protected virtual void StartAbilityUse(Ability ability) // overridden to add animation
         {
-            _lastWeapon = weapon;
+            _lastAbility = ability;
             _lastAttackTime = Time.time;
-            UseWeapon(weapon);
+            UseAbility(ability);
         }
 
         // seperates player and enemy logic, this is overriden in Enemy.cs
-        protected virtual void UseWeapon(MeleeWeapon weapon)
+        protected virtual void UseAbility(Ability ability)
         {
-            TryHitWithWeapon(weapon);
+            TryHitWithAbility(ability);
         }
         
-        protected void TryHitWithWeapon(MeleeWeapon weapon)
+        protected void TryHitWithAbility(Ability ability)
         {
-            Vector2 lookDirection = transform.forward.WorldToPlane();
-            bool hit = weapon.TryHitEntity(this, lookDirection, targetLayerMask);
-            if (hit && weapon.usageSelfKnockback.Enabled) ApplyKnockback(-lookDirection * weapon.usageSelfKnockback.Value); // apply knockback to self
-            EndAttack(weapon);
+            ability.UseAbility(this);
+            FinishAbilityUse(ability);
         }
 
-        protected virtual void EndAttack(MeleeWeapon weapon)
+        protected virtual void FinishAbilityUse(Ability ability)
         {
             // just for animation (?)
         }

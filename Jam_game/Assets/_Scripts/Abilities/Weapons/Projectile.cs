@@ -13,6 +13,7 @@ namespace Abilities.Weapons
 		public ProjectileData data;
 
 		private Rigidbody _rb;
+		private uint _entityHits;
 
 		private void Start()
 		{
@@ -35,7 +36,14 @@ namespace Abilities.Weapons
 			Entity entity = other.GetComponent<Entity>();
 			if (entity == null) return;
 			
-			entity.RegisterImpact(data.impact, data.move.moveDirection);
+			RegisterHit(entity);
+		}
+
+		private void RegisterHit(Entity entity)
+		{
+			_entityHits++;
+			source.Metrics.AddData(entity.RegisterImpact(data.impact, data.move.moveDirection));
+			if (!data.maxEntityHitAmount.Enabled || _entityHits < data.maxEntityHitAmount.Value) return;
 			DespawnProjectile();
 		}
 

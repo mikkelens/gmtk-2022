@@ -1,7 +1,6 @@
 ﻿using System.Collections;
-using Abilities;
+using Abilities.Base;
 using Abilities.Data;
-using Abilities.Weapons;
 using Entities.Base;
 using Entities.Players;
 using Management;
@@ -58,18 +57,18 @@ namespace Entities.Enemies
             return (playerPos - pos).normalized;
         }
         
-        protected override void UseWeapon(MeleeWeapon weapon) // On enemies, attacks are slow animations
+        protected override void UseAbility(Ability ability) // On enemies, attacks are slow animations
         {
-            StartCoroutine(MeleeRoutine(weapon));
+            StartCoroutine(MeleeRoutine(ability));
         }
         
-        private IEnumerator MeleeRoutine(MeleeWeapon weapon) // Think dark soulds attack with long chargeup
+        private IEnumerator MeleeRoutine(Ability ability) // Think dark soulds attack with long chargeup
         {
-            if (!weapon.activationDelay.Enabled) yield break;
+            if (!ability.activationDelay.Enabled) yield break;
             Stopping = true;
             Animator.SetBool("Walking", false);
-            yield return new WaitForSeconds(weapon.activationDelay.Value);
-            TryHitWithWeapon(weapon);
+            yield return new WaitForSeconds(ability.activationDelay.Value);
+            TryHitWithAbility(ability);
             Animator.SetBool("Walking", true);
             Stopping = false;
         }

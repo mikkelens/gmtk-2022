@@ -1,36 +1,28 @@
-﻿using Abilities;
-using Abilities.Weapons;
-using UnityEngine;
+﻿using Abilities.Base;
 
 namespace Entities.Base
 {
     public class AnimatedCombatEntity : CombatEntity
     {
-        protected override void StartAttack(MeleeWeapon weapon)
+        protected override void StartAbilityUse(Ability ability)
         {
-            base.StartAttack(weapon);
+            if (!ability.usageAnimation.Enabled) return;
+            Animator.SetTrigger(ability.usageAnimation.Value.name);
             
-            if (!weapon.usageAnimation.Enabled) return;
-            Animator.SetTrigger(weapon.usageAnimation.Value.name);
-            
-            if (!weapon.usageAnimation.Value.isDirectional) return;
-            string directionString = AttackAnimationDirectionString(weapon);
+            if (!ability.usageAnimation.Value.isDirectional) return;
+            string directionString = AttackAnimationDirectionString(ability);
             Animator.SetBool(directionString, Animator.GetBool(directionString));
+            base.StartAbilityUse(ability);
         }
 
-        protected override void EndAttack(MeleeWeapon weapon)
+        protected override void FinishAbilityUse(Ability ability)
         {
-            base.EndAttack(weapon);
+            base.FinishAbilityUse(ability);
             
-            if (!weapon.usageAnimation.Enabled) return;
-            Animator.ResetTrigger(weapon.usageAnimation.Value.name);
+            if (!ability.usageAnimation.Enabled) return;
+            Animator.ResetTrigger(ability.usageAnimation.Value.name);
         }
 
-        protected static string AttackAnimationDirectionString(MeleeWeapon attack) => attack.usageAnimation.Value.name + "Direction";
-
-        protected override void ApplyKnockback(Vector2 force)
-        {
-            base.ApplyKnockback(force);
-        }
+        protected static string AttackAnimationDirectionString(Ability attack) => attack.usageAnimation.Value.name + "Direction";
     }
 }

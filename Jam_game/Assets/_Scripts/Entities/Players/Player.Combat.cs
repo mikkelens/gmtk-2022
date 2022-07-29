@@ -1,16 +1,15 @@
-﻿using Abilities;
-using Abilities.Weapons;
+﻿using Abilities.Base;
 using UnityEngine;
 
 namespace Entities.Players
 {
     public partial class Player
     {
-        public override MeleeWeapon ActiveWeapon
+        public override Ability ActiveAbility
         {
             set
             {
-                base.ActiveWeapon = value;
+                base.ActiveAbility = value;
                 if (value.customCursor.Enabled)
                 {
                     _uiManager.CursorTexture = value.customCursor.Value;

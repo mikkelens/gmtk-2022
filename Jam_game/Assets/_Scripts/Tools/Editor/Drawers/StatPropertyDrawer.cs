@@ -1,5 +1,4 @@
-﻿using Sirenix.Utilities;
-using Stats.Stat.Variants;
+﻿using Stats.Stat.Variants;
 using UnityEditor;
 using UnityEngine;
 

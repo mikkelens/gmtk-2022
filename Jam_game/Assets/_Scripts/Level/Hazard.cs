@@ -1,5 +1,4 @@
-﻿using Abilities;
-using Abilities.Data;
+﻿using Abilities.Data;
 using UnityEngine;
 
 namespace Level

@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc88b1124444d3b88ac8ba11b0808ef, type: 3}
   m_Name: MINIBOSS
   m_EditorClassIdentifier: 
-  bossPrefabToSpawn: {fileID: 5965666004775563169, guid: de07590e2bd6b6842a5b022ba3cf05e0,
-    type: 3}
-  pickupToDrop: {fileID: 4116743815494763567, guid: 72a37bdfeced9a649a2c9ba7b9ee2858,
+  eventTime:
+    enabled: 0
+    value: 10
+  pickupToSpawnOnEnd:
+    enabled: 0
+    value: {fileID: 0}
+  requireAllKilledToContinue: 1
+  bossPrefabToSpawn: {fileID: 5926542520764643359, guid: c05c7516f2120a740b5cc713bdafdf93,
     type: 3}

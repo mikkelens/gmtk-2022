@@ -1,13 +1,12 @@
-﻿using System;
-using System.Reflection;
-using Abilities.Data;
+﻿using Abilities.Data;
 using Abilities.Weapons;
+using Entities.Base;
+using Sirenix.OdinInspector;
 using Stats.Stat;
 using Stats.Stat.Variants;
 using Tools;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Abilities.Base
 {
@@ -23,44 +22,38 @@ namespace Abilities.Base
         public Optional<AnimationData> usageAnimation;
 		public Optional<Texture2D> customCursor;
 
+		protected CombatEntity SourceEntity { get; private set; } // todo: use this to report damage numbers?
 
-		public abstract void UseAbility();
+		[field: SerializeField]
+		[field: ReadOnly]
+		public AbilityMetrics Metrics { get; } = new AbilityMetrics();
 
-		
-		
-		
-	#if UNITY_EDITOR
-		protected static void ConvertObjectToType(Object target, Type type)
+		public void UseAbility(CombatEntity source)
 		{
-			if (target == null)
-			{
-				Debug.LogWarning("Target weapon was not found?");
-				return;
-			}
-			string path = AssetDatabase.GetAssetPath(target);
-            
-			// create new weapon
-			MeleeWeapon newWeapon = CreateInstance(type) as MeleeWeapon;
-			foreach (FieldInfo field in typeof(MeleeWeapon).GetFields())
-			{
-				field.SetValue(newWeapon, field.GetValue(target)); // copy data over
-			}
-            
-			int undoGroup = Undo.GetCurrentGroup();
-            
-			Undo.DestroyObjectImmediate(target); // replace with new
-            
-			AssetDatabase.CreateAsset(newWeapon, path);
-			Undo.RegisterCreatedObjectUndo(newWeapon, $"Created {newWeapon!.GetType().Name}");
-            
-			AssetDatabase.SaveAssets(); // save changes
-			AssetDatabase.Refresh();
-			Undo.CollapseUndoOperations(undoGroup);
-            
-			Selection.objects = new Object[] { newWeapon }; // select object again
-
-			Debug.Log($"Converted {path.PathWithoutDirectory()} to {newWeapon!.GetType().Name}"); // success message
+			SourceEntity = source;
+			Use();
 		}
-	#endif
+
+		protected abstract void Use();
+		
+		protected void ImpactEntity(ImpactData impact, Entity entity, Vector2 direction)
+		{
+			Metrics.AddData(entity.RegisterImpact(impact, direction));
+		}
+	
+	#if UNITY_EDITOR
+		private const string MenuPath = "Convert To/";
+        private const string Melee = nameof(MeleeWeapon);
+        [ContextMenu(MenuPath + Melee, true)]
+        public bool IsNotMelee(MenuCommand menuCommand) => menuCommand.context is not MeleeWeapon;
+        [ContextMenu(MenuPath + Melee)]
+        public void ConvertToMelee(MenuCommand menuCommand) => (menuCommand.context as ScriptableObject).ConvertToType(typeof(MeleeWeapon));
+        
+        private const string Proj = nameof(ProjectileWeapon);
+        [ContextMenu(MenuPath + Proj, true)]
+        public bool IsNotProj(MenuCommand menuCommand) => menuCommand.context is not ProjectileWeapon;
+        [ContextMenu(MenuPath + Proj)]
+        public void ConvertToProj(MenuCommand menuCommand) => (menuCommand.context as ScriptableObject).ConvertToType(typeof(ProjectileWeapon));
+    #endif	
 	}
 }

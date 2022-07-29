@@ -12,7 +12,7 @@ namespace Stats.Stat
     public abstract class Stat<T>
     {
         [SerializeField] public T baseValue;
-        public T value;
+        private T _value; // possibly has to be public..?
         
         protected Stat(T value) => baseValue = value;
         

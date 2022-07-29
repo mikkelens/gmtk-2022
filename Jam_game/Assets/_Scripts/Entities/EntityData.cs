@@ -2,10 +2,10 @@
 using Entities.Base;
 using Sirenix.OdinInspector;
 
-namespace Events
+namespace Entities
 {
     [Serializable]
-    public class WaveEntityData
+    public class EntityData
     {
         [AssetsOnly]
         public Entity prefab;

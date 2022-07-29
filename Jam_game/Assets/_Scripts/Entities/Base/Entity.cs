@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Abilities;
 using Abilities.Data;
 using Events;
 using Management;
@@ -29,7 +27,6 @@ namespace Entities.Base
 
         // outside components
         protected GameManager Manager;
-        protected SpawnEvent SpawnOrigin;
 
         // components with this entity
         protected Transform Transform;
@@ -38,6 +35,7 @@ namespace Entities.Base
         // health status
         private int _currentHealth;
         protected bool Alive => _currentHealth > 0;
+        public SpawnEvent SpawnOrigin { get; set; }
 
         protected virtual void Awake()
         {
@@ -54,10 +52,6 @@ namespace Entities.Base
             Manager = GameManager.Instance;
             
         }
-        public void SetSpawnOrigin(SpawnEvent origin)
-        {
-            SpawnOrigin = origin;
-        }
 
         protected void Update()
         {
@@ -68,35 +62,40 @@ namespace Entities.Base
             
         }
 
-        public void RegisterImpact(ImpactData impact, Vector2 knockbackDirection) // Main way of getting hit
+        public ImpactResultData RegisterImpact(ImpactData impact, Vector2 knockbackDirection) // Main way of getting hit
         {
+            ImpactResultData resultData = new ImpactResultData();
+            if (impact.effects.Enabled) ApplyEffects(impact.effects.Value); 
             if (impact.knockback.Enabled) ApplyKnockback(knockbackDirection * impact.knockback.Value);
-            if (!Alive) return;
-            if (impact.healing.Enabled) ApplyHealing(impact.healing.Value);
-            if (impact.damage.Enabled) ApplyDamage(impact.damage.Value);
-            
-            if (impact.boolEffects.Enabled) ApplyEffects(impact.boolEffects.Value);
-            if (impact.intEffects.Enabled) ApplyEffects(impact.intEffects.Value);
-            if (impact.floatEffects.Enabled) ApplyEffects(impact.floatEffects.Value);
+            if (!Alive) return resultData;
+            if (impact.healing.Enabled) resultData.Healing = ApplyHealing(impact.healing.Value);
+            if (impact.damage.Enabled) resultData.Damage = ApplyDamage(impact.damage.Value);
+            if (!Alive) resultData.Kills++;
+           
+            return resultData;
         }
 
-        protected virtual void ApplyKnockback(Vector2 force)
+        public virtual void ApplyKnockback(Vector2 force)
         {
             // only used in movable entities
         }
-        private void ApplyDamage(int damage)
+        private int ApplyDamage(int damage)
         {
-            if (godMode) return;
+            if (godMode) return 0;
+            int previousHealth = _currentHealth;
             _currentHealth -= damage;
             if (_currentHealth <= 0) KillThis();
+            return previousHealth - _currentHealth;
         }
-        private void ApplyHealing(int healing)
+        private int ApplyHealing(int healing)
         {
+            int previousHealth = _currentHealth;
             _currentHealth += healing;
+            return _currentHealth - previousHealth;
         }
-        private void ApplyEffects<T>(List<Modifier<T>> effects)
+        private void ApplyEffects(ModifierCollection effects)
         {
-            this.FindAllStatsOnObject<T>().ApplyModifiers(effects);
+            this.ApplyModifierCollectionToObject(effects);
         }
 
         public virtual void KillThis()

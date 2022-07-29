@@ -123,7 +123,7 @@ namespace Entities.Base
             return accel;
         }
 
-        protected override void ApplyKnockback(Vector2 force)
+        public override void ApplyKnockback(Vector2 force)
         {
             base.ApplyKnockback(force);
             _rb.velocity += force.PlaneToWorld();

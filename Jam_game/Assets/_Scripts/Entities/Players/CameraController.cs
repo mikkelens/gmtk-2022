@@ -7,6 +7,8 @@ namespace Entities.Players
 {
     public class CameraController : MonoBehaviour
     {
+        public static CameraController Instance;
+        
         [SerializeField] private bool instantFollow = false;
         [HideIf("instantFollow")]
         [SerializeField] private float followSpeed = 25f;
@@ -16,12 +18,15 @@ namespace Entities.Players
         
         private GameManager _manager;
         private Player _player;
-    
-        private Vector3 _offset;
+
+        public Vector3 Offset { get; private set; }
+        public Vector2 PositionNoOffset => transform.position.WorldToPlane() - Offset.WorldToPlane();
+
+        private void Awake() => Instance = this;
 
         private void Start()
         {
-            _offset = transform.position;
+            Offset = transform.position;
         
             _manager = GameManager.Instance;
             if (_manager == null) throw new UnityException("No game manager in scene.");
@@ -32,7 +37,7 @@ namespace Entities.Players
 
         private void LateUpdate()
         {
-            Vector2 target = _player.transform.position.WorldToPlane() + _offset.WorldToPlane();
+            Vector2 target = _player.transform.position.WorldToPlane() + Offset.WorldToPlane();
 
             if (instantFollow)
                 InstantFollow(target);

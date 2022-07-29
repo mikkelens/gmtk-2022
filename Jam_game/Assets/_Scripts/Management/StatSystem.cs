@@ -35,7 +35,6 @@ namespace Management
             }
             return foundStats;
         }
-        
         public static void ApplyModifiers<T>(this List<Stat<T>> stats, List<Modifier<T>> modifiers)
         {
             GameManager manager = GameManager.Instance;
@@ -56,6 +55,13 @@ namespace Management
                 List<Stat<T>> appropriateStats = stats.Where(stat => stat != null && typeTargets.Contains(stat.type)).ToList();
                 appropriateStats.ForEach(stat => manager.AddModifierToStat(modifier, stat));
             }
+        }
+        public static void ApplyModifierCollectionToObject(this object target, ModifierCollection modifiers)
+        {
+            if (modifiers.bools.Count > 0) target.FindAllStatsOnObject<bool>().ApplyModifiers(modifiers.bools);
+            if (modifiers.ints.Count > 0) target.FindAllStatsOnObject<int>().ApplyModifiers(modifiers.ints);
+            if (modifiers.floats.Count > 0) target.FindAllStatsOnObject<float>().ApplyModifiers(modifiers.floats);
+            if (modifiers.colors.Count > 0) target.FindAllStatsOnObject<Color>().ApplyModifiers(modifiers.colors);
         }
     }
 }
