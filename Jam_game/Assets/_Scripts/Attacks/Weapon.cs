@@ -26,6 +26,8 @@ namespace Attacks
         public Optional<FloatStat> cooldown = (FloatStat)1f;
         public Optional<FloatStat> selfKnockbackStrength = (FloatStat)5f;
 
+        public Optional<Texture2D> customCursor;
+
         public bool TryHitEntity(CombatEntity source, Vector2 direction, LayerMask targetLayerMask)
         {
             Collider[] colliders = CastForEntity(source, direction, targetLayerMask);

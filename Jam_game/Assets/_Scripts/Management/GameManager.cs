@@ -59,7 +59,7 @@ namespace Management
             if (EventsManager == null) Debug.LogWarning("EventsManager is missing. Game cannot start read.");
             
             UI = UIManager.Instance; 
-            if (UI == null) Debug.LogWarning("EventsManager is missing. Game cannot start read.");
+            if (UI == null) Debug.LogWarning("UIManager is missing. Game cannot process or display UI.");
 
             State = GameState.Playing;
             EventsManager.StartEventLoop(this);

@@ -19,8 +19,7 @@ namespace Management
         private float MinSpawnEventTime => gameEvents.OfType<SpawnEvent>()
             .Where(spawnEvent => spawnEvent.eventTime.Enabled)
             .Sum(spawnEvent => spawnEvent.eventTime.Value);
-
-
+        
         private GameManager _manager;
 
         private void Awake()

@@ -1,5 +1,4 @@
 ﻿using Entities.Players;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,26 +6,6 @@ namespace Management.Inputs
 {
     public class InputManager : MonoBehaviour
     {
-        [ShowIf("@cursorSprite == null")]
-        [SerializeField] private Texture2D cursorTexture;
-        [ShowIf("@cursorTexture == null")]
-        [SerializeField] private Sprite cursorSprite;
-
-        private void OnApplicationFocus(bool hasFocus)
-        {
-            Texture2D cursor;
-            if (cursorTexture != null)
-            {
-                cursor = cursorTexture;
-            }
-            else if (cursorSprite != null)
-            {
-                cursor = cursorSprite.texture;
-            }
-            else return;
-            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
-        }
-
         public static InputManager Instance;
         private GameManager _gameManager;
         

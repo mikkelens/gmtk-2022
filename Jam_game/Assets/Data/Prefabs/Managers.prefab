@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1488532003811833286}
   - component: {fileID: 1488532003811833287}
   - component: {fileID: 3568603535711801134}
+  - component: {fileID: 4996605191489212261}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -46,8 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df91920b11d4b7aa0bf901f87de6b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorTexture: {fileID: 0}
-  cursorSprite: {fileID: 0}
 --- !u!114 &1488532003811833287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,8 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee4e4a2fb8e4c0bb448226e984042b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuElements: []
-  killScoreText: {fileID: 0}
 --- !u!114 &3568603535711801134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,4 +73,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSpawnDistance: 10
   rootEnemyParent: {fileID: 0}
-  gameEvents: []
+  gameEvents:
+  - {fileID: 11400000, guid: 5893711dbed9f9f4d993266b8b873db3, type: 2}
+  - {fileID: 11400000, guid: de6cf0c99c7917f47a5079dcef45c5b7, type: 2}
+  - {fileID: 11400000, guid: e5633886f6d84a6449942848f30991ce, type: 2}
+  - {fileID: 11400000, guid: 7f34070c60ed4a94ea4259405ec3d82b, type: 2}
+--- !u!114 &4996605191489212261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488532003811833336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3952449f873b448cabf5e3524f1e5845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 0}
+  cursorSprite: {fileID: 0}
+  pauseMenuElements: []
+  killScoreText: {fileID: 0}

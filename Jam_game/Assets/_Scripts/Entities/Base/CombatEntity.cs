@@ -17,31 +17,41 @@ namespace Entities.Base
         [UsedImplicitly] protected virtual bool Headless => true;
      
         [FoldoutGroup(StatCategory)]
-        [SerializeField, Required] protected Weapon entityWeapon; // class instance with stats in it
-        
-        protected Weapon LastWeapon;
-        protected float LastAttackTime;
+        [SerializeField] protected Optional<Weapon> defaultWeapon; // class instance with stats in it
+
+        private Weapon _activeWeapon;
+        public virtual Weapon ActiveWeapon
+        {
+            get => _activeWeapon == null ? defaultWeapon.Enabled ? defaultWeapon.Value : null : _activeWeapon;
+            set => _activeWeapon = value;
+        }
+
+        private Weapon _lastWeapon;
+        private float _lastAttackTime;
 
         // todo: maybe make animation handled in child class?
         protected virtual bool WantsToAttack => autoAttacks; // will only use "autoAttacks" field if WantsToAttack is not overridden
-        protected virtual bool CanAttack => LastWeapon is not { cooldown: { Enabled: true } } || LastAttackTime.TimeSince() >= LastWeapon.cooldown.Value;
-
+        protected bool CanAttack => !_lastWeapon.cooldown.Enabled || _lastAttackTime.TimeSince() >= _lastWeapon.cooldown.Value;
 
         protected override void EntityUpdate()
         {
             base.EntityUpdate();
+            CombatUpdate();
+        }
 
+        private void CombatUpdate()
+        {
             // See if thing in attack box
-            if (entityWeapon != null && WantsToAttack && CanAttack)
+            if (ActiveWeapon != null && WantsToAttack && CanAttack)
             {
-                StartAttack(entityWeapon); // first attack. should probably be picked somehow
+                StartAttack(ActiveWeapon); // first attack. should probably be picked somehow
             }
         }
 
         protected virtual void StartAttack(Weapon weapon) // overridden to add animation
         {
-            LastWeapon = weapon;
-            LastAttackTime = Time.time;
+            _lastWeapon = weapon;
+            _lastAttackTime = Time.time;
             UseWeapon(weapon);
         }
 

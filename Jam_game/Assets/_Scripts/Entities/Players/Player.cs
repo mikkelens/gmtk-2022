@@ -1,5 +1,7 @@
+using Attacks;
 using Entities.Base;
 using Level;
+using Management;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
@@ -11,6 +13,8 @@ namespace Entities.Players
     {
         public static Player Instance;
 
+        private UIManager _uiManager;
+
         [FoldoutGroup(QuirkCategory)]
         [Header("Player Specific")]
         [SerializeField] private float aimTurnSpeedBonus;
@@ -20,7 +24,7 @@ namespace Entities.Players
             Instance = this;
             base.Awake();
         }
-        
+
         // movement is decided by input set in "Player.Input.cs"
 
         private void OnCollisionEnter(Collision collision)
