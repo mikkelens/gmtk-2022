@@ -22,15 +22,19 @@ namespace Tools.Editor
             contentRect.x += foldoutRect.width + EditorGUIUtility.standardVerticalSpacing;
 
             // Draw foldout header
+            GUIContent content = new GUIContent(label);
             if (property.objectReferenceValue != null)
             {
-                GUIContent content = new GUIContent(label);
                 if (content.text.IsNullOrWhitespace()) content.text = property.objectReferenceValue.name;
                 property.isExpanded = EditorGUI.BeginFoldoutHeaderGroup(foldoutRect, property.isExpanded, content);
                 EditorGUI.EndFoldoutHeaderGroup();
             }
+            else
+            {
+                EditorGUI.LabelField(foldoutRect, label);
+            }
             
-            // Draw label
+            // Draw property (no label)
             EditorGUI.PropertyField(contentRect, property, GUIContent.none, true);
 
             // Draw foldout properties
