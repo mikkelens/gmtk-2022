@@ -85340,7 +85340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1920884850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85353,7 +85353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d658ff576197d44b0f9841ea6d5750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cullDelay: 0.5
+  cullDelay: 1
   averageFPS: 0
   averageDeltaTime: 0
   lowestDeltaTime: 0
@@ -94552,6 +94552,29 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1488532003811833287, guid: 2754f9f08060da64395577d5c4dccb46,
+        type: 3}
+      propertyPath: spawnEvents.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1488532003811833287, guid: 2754f9f08060da64395577d5c4dccb46,
+        type: 3}
+      propertyPath: spawnEvents.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: b8db81284c8cba54ebdf872fe7f85109,
+        type: 2}
+    - target: {fileID: 1488532003811833287, guid: 2754f9f08060da64395577d5c4dccb46,
+        type: 3}
+      propertyPath: spawnEvents.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c23aa60905a276f4f90aa114758a0632,
+        type: 2}
+    - target: {fileID: 1488532003811833287, guid: 2754f9f08060da64395577d5c4dccb46,
+        type: 3}
+      propertyPath: spawnEvents.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 63d7f0690c1bf584d9ff2c721a966cf2,
+        type: 2}
     - target: {fileID: 1488532003811833336, guid: 2754f9f08060da64395577d5c4dccb46,
         type: 3}
       propertyPath: m_Name

@@ -8,7 +8,6 @@ using UnityEngine;
 namespace Events
 {
     [CreateAssetMenu(fileName = "New Boss Event", menuName = "Events/Boss Event")]
-    [TypeInfoBox("Event where a boss is spawned.")]
     public class BossEvent : SpawnEvent
     {
         [SerializeField] private Entity bossPrefabToSpawn;

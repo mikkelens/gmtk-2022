@@ -11,7 +11,6 @@ using Random = UnityEngine.Random;
 namespace Events
 {
     [CreateAssetMenu(fileName = "New Wave", menuName = "Events/Wave Event")]
-    [TypeInfoBox("Event where a wave of enemies spawn for a while.")]
     public class WaveEvent : SpawnEvent
     {
         public float spawnDelay = 2f;
@@ -35,18 +34,21 @@ namespace Events
             // continuosly run wave
             while (StartTime.TimeSince() <= waveTime)
             {
-                // spawn enemies
-                Entity asset = SelectEntityAsset(entitiesToSpawn);
-                _spawnedEntities.Add(SpawnEntity(asset, waveParent));
-                
                 // wait
                 yield return new WaitForSeconds(spawnDelay);
+                
+                // spawn enemies
+                Entity asset = SelectEntityAsset(entitiesToSpawn);
+                if (asset == null) continue;
+                _spawnedEntities.Add(SpawnEntity(asset, waveParent));
             }
             if (pickupToSpawn.Enabled) SpawnPickup(pickupToSpawn.Value, GetRandomSpawnLocation());
         }
 
         private static Entity SelectEntityAsset(IReadOnlyCollection<EntityData> allEnemies)
         {
+            if (allEnemies.Count == 0) return null;
+            
             // count up spawn chances as a range, then generate a number within the range. Enemy with lowest number but above generated number will be chosen.
             float totalSpawnRange = allEnemies.Sum(enemy => enemy.relativeSpawnChance);
             float random = Random.Range(0, totalSpawnRange);

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Events
 {
-	public class SpawnEvent : ScriptableObject
+	public class SpawnEvent : ExpandableScriptableObject
 	{
 		protected float StartTime;
 		protected Transform SpawningParent;

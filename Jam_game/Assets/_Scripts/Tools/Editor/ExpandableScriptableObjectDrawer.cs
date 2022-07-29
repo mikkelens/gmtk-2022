@@ -1,10 +1,12 @@
-﻿using Attacks;
+﻿using System;
+using Attacks;
+using Sirenix.Utilities;
 using UnityEditor;
 using UnityEngine;
 
 namespace Tools.Editor
 {
-    [CustomPropertyDrawer(typeof(ImpactData))]
+    // [CustomPropertyDrawer(typeof(ImpactData))]
     [CustomPropertyDrawer(typeof(ExpandableScriptableObject), true)]
     public class ExpandableScriptableObjectDrawer : PropertyDrawer
     {
@@ -18,11 +20,13 @@ namespace Tools.Editor
             foldoutRect.width = EditorGUIUtility.labelWidth;
             contentRect.width -= foldoutRect.width + EditorGUIUtility.standardVerticalSpacing;
             contentRect.x += foldoutRect.width + EditorGUIUtility.standardVerticalSpacing;
-            
+
             // Draw foldout header
             if (property.objectReferenceValue != null)
             {
-                property.isExpanded = EditorGUI.BeginFoldoutHeaderGroup(foldoutRect, property.isExpanded, label);
+                GUIContent content = new GUIContent(label);
+                if (content.text.IsNullOrWhitespace()) content.text = property.objectReferenceValue.name;
+                property.isExpanded = EditorGUI.BeginFoldoutHeaderGroup(foldoutRect, property.isExpanded, content);
                 EditorGUI.EndFoldoutHeaderGroup();
             }
             
