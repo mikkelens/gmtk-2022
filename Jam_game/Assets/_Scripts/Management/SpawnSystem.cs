@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Entities;
-using Entities.Players;
+using Level;
 using UnityEngine;
 
 namespace Management
@@ -9,7 +9,7 @@ namespace Management
 	public static class SpawnSystem
 	{
 		private static System.Random _random;
-		public static System.Random MyRandom
+		private static System.Random MyRandom
 		{
 			get
 			{

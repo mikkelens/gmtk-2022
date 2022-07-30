@@ -1,7 +1,7 @@
 ﻿using Tools;
 using UnityEngine;
 
-namespace Entities.Players
+namespace Entities.PlayerScripts
 {
     public partial class Player // input receiving
     {

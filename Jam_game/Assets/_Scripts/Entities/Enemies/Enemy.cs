@@ -1,6 +1,6 @@
 ﻿using Abilities.Data;
 using Entities.Base;
-using Entities.Players;
+using Entities.PlayerScripts;
 using Management;
 using Sirenix.OdinInspector;
 using Tools;
