@@ -15,14 +15,11 @@ namespace Level
         [HideIf("instantFollow")]
         [SerializeField] private float maxDistance = 5f;
         [SerializeField] private bool instantFollow;
-    
         
         private GameManager _manager;
         private Player _player;
 
         public Vector3 Offset { get; private set; }
-        public Vector2 PositionNoOffset => transform.position.WorldToPlane() - Offset.WorldToPlane();
-
         private void Awake() => Instance = this;
 
         private void Start()

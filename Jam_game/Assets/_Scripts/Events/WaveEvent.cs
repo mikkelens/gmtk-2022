@@ -6,7 +6,6 @@ using Management;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
-using UnityEngine.tvOS;
 
 namespace Events
 {

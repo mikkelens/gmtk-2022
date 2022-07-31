@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Tools;
 using UnityEngine;
 
 namespace Level
@@ -78,6 +79,7 @@ namespace Level
 		{
 			return 2.0f * depth * Mathf.Tan(Main.fieldOfView * 0.5f * Mathf.Deg2Rad);
 		}
+		public static Vector2 PositionNoOffset => Transform.position.WorldToPlane() - Controller.Offset.WorldToPlane();
 	#endregion
 			
 	#region Screen/Mouse conversions

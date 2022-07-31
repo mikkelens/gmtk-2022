@@ -1,4 +1,4 @@
-﻿using Tools;
+﻿using Level;
 using UnityEngine;
 
 namespace Entities.PlayerScripts
@@ -13,13 +13,13 @@ namespace Entities.PlayerScripts
         private bool IsMoving => _moveInput.magnitude > 0.0f;
         private bool IsAiming => (UpdatedLookDirection != Vector2.zero && _lastAimWasController) || _holdingThrow;
 
-        private bool hasPressedMeleeSinceLastRead;
+        private bool _hasPressedMeleeSinceLastRead;
         protected bool ReadMelee
         {
             get
             {
-                if (!hasPressedMeleeSinceLastRead) return false;
-                hasPressedMeleeSinceLastRead = false;
+                if (!_hasPressedMeleeSinceLastRead) return false;
+                _hasPressedMeleeSinceLastRead = false;
                 return true;
             }
         }
@@ -43,7 +43,7 @@ namespace Entities.PlayerScripts
         
         public void SetMeleeInput(bool pressingMelee)
         {
-            if (pressingMelee) hasPressedMeleeSinceLastRead = true;
+            if (pressingMelee) _hasPressedMeleeSinceLastRead = true;
             _holdingMelee = pressingMelee;
         }
         public void SetThrowInput(bool holdingThrow)
