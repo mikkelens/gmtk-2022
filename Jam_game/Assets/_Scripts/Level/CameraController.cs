@@ -1,27 +1,25 @@
+using Entities.PlayerScripts;
 using Management;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
-namespace Entities.Players
+namespace Level
 {
     public class CameraController : MonoBehaviour
     {
-        public static CameraController Instance;
+        public static CameraController Instance { get; private set; }
         
-        [SerializeField] private bool instantFollow = false;
         [HideIf("instantFollow")]
         [SerializeField] private float followSpeed = 25f;
         [HideIf("instantFollow")]
         [SerializeField] private float maxDistance = 5f;
-    
+        [SerializeField] private bool instantFollow;
         
         private GameManager _manager;
         private Player _player;
 
         public Vector3 Offset { get; private set; }
-        public Vector2 PositionNoOffset => transform.position.WorldToPlane() - Offset.WorldToPlane();
-
         private void Awake() => Instance = this;
 
         private void Start()

@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
-namespace Entities.Players
+namespace Entities.PlayerScripts
 {
     [Tooltip("Player: This is the player script. It also derives from entity scripts.")]
     public partial class Player : AnimatedCombatEntity // main

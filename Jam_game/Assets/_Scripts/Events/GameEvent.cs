@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using Management;
-using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
