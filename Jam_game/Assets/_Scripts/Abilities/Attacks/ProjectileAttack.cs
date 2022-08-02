@@ -1,15 +1,14 @@
-﻿using Abilities.Base;
+﻿using System.Collections;
 using Abilities.Data;
 using Stats.Stat.Variants;
 using Tools;
 using UnityEngine;
 
-namespace Abilities.Weapons
+namespace Abilities.Attacks
 {
-	[CreateAssetMenu(fileName = "New Projectile Weapon", menuName = "Abilities/Projectile Weapon")]
-	public class ProjectileWeapon : Weapon
+	[CreateAssetMenu(fileName = "New Projectile Attack", menuName = MenuPath + "Projectile Attack")]
+	public class ProjectileAttack : Attack
 	{
-		public FloatStat fireDelay = 0.8f;
 		public Projectile projectilePrefab;
 		public ProjectileData projectileData;
 		public BoolStat autoFire = false;
@@ -25,17 +24,19 @@ namespace Abilities.Weapons
 			}	
 		}
 
-		protected override void Use()
+		public override bool CanUse => _lastFireTime.TimeSince() >= cooldown.Value;
+
+		protected override IEnumerator Use()
 		{
-			if (_lastFireTime.TimeSince() < fireDelay) return;
-			Use();
 			FireProjectile();
+			yield break;
 		}
 
 		private void FireProjectile()
 		{
 			_lastFireTime = Time.time;
-			Instantiate(projectilePrefab, AttackPoint.PlaneToWorld(), Quaternion.LookRotation(AttackDirection.PlaneToWorld()));
+			Projectile projectile = Instantiate(projectilePrefab, Point.PlaneToWorld(), Quaternion.LookRotation(Direction.PlaneToWorld()));
+			projectile.Data = projectileData;
 		}
 	}
 }

@@ -28,14 +28,16 @@ namespace Management
 
 		public static Vector2 GetRandomLocationOutsideCamBounds(float bonusDistance) // Location outside of viewable area
 		{
-            Vector2 bounds = CameraTools.VisibleGroundFrustum + Vector2.one * bonusDistance;
+            Vector2 maxBounds = CameraTools.VisibleGroundFrustum;
+            maxBounds += Vector2.one * bonusDistance;
             // offsetRange changes x or y, meaning that entities can spawn just outside camera in a random position
             if (RandomTools.NextBool())
-	            bounds.x *= RandomTools.NextFloat();
+	            maxBounds.x *= RandomTools.NextFloat();
             else
-	            bounds.y *= RandomTools.NextFloat();
-            Vector2 offsets = new Vector2(bounds.x * RandomTools.NextIntSign(), bounds.y * RandomTools.NextIntSign());
-			Vector2 groundPosOnCameraCenter = CameraTools.PositionNoOffset;
+	            maxBounds.y *= RandomTools.NextFloat();
+            Vector2 offsets = new Vector2(maxBounds.x * RandomTools.NextIntSign(), maxBounds.y * RandomTools.NextIntSign());
+			Debug.Log($"Random offsets: {offsets.ToString()}");
+            Vector2 groundPosOnCameraCenter = CameraTools.PositionNoOffset;
 			Vector2 spawnPosition = groundPosOnCameraCenter + offsets;
             return spawnPosition;
         }

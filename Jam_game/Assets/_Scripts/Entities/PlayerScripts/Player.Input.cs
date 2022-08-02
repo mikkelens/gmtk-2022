@@ -23,7 +23,6 @@ namespace Entities.PlayerScripts
                 return true;
             }
         }
-        protected override bool WantsToUseAbility => ReadMelee;
 
         private bool _aimIsDirty;
         private Vector2 _rawAimInput;

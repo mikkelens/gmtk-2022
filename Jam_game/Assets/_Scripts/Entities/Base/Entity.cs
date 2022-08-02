@@ -11,20 +11,22 @@ namespace Entities.Base
     [Tooltip("Entity: Hittable thing. think minecraft armor stand.")]
     [RequireComponent(typeof(Collider))]
     [SelectionBase]
-    public class Entity : MonoBehaviour
+    public abstract class Entity : MonoBehaviour
     {
         // foldout group titling & ease
         protected const string QuirkCategory = "Quirks";
         protected const string StatCategory = "Stats";
         
         [FoldoutGroup(QuirkCategory)]
-        [SerializeField] protected bool godMode = false;
+        [SerializeField] protected bool godMode;
         
         [FoldoutGroup(StatCategory)]
         [HideIf("godMode")]
         [SerializeField] protected IntStat maxHealth;
-
-
+        
+        // health status
+        private int _currentHealth;
+        
         // outside components
         protected GameManager Manager;
 
@@ -32,11 +34,11 @@ namespace Entities.Base
         protected Transform Transform;
         protected Animator Animator;
 
-        // health status
-        private int _currentHealth;
         protected bool Alive => _currentHealth > 0;
         public SpawnEvent SpawnOrigin { get; set; }
+        public Metrics Metrics { get; } = new Metrics();
 
+        
         protected virtual void Awake()
         {
             Transform = transform;

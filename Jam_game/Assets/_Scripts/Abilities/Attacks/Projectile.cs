@@ -1,19 +1,19 @@
-﻿using Abilities.Base;
-using Abilities.Data;
+﻿using Abilities.Data;
 using Entities.Base;
 using Tools;
 using UnityEngine;
 
-namespace Abilities.Weapons
+namespace Abilities.Attacks
 {
 	[RequireComponent(typeof(Rigidbody))]
 	public class Projectile : MonoBehaviour
 	{
-		public Ability source;
-		public ProjectileData data;
+		public Ability sourceAbility;
+		
+		public ProjectileData Data { private get; set; }
 
 		private Rigidbody _rb;
-		private uint _entityHits;
+		private int _entityHits;
 
 		private void Start()
 		{
@@ -23,15 +23,15 @@ namespace Abilities.Weapons
 			_rb.constraints = RigidbodyConstraints.FreezePositionY;
 			_rb.freezeRotation = true;
 			
-			if (!data.move.frozen)
-				_rb.velocity = (data.move.moveDirection * data.move.moveSpeed).PlaneToWorld();
-			if (!data.rotate.frozen)
-				_rb.angularVelocity = data.rotate.rotateDirection * data.rotate.rotationSpeed;
+			if (!Data.move.frozen)
+				_rb.velocity = (Data.move.moveDirection * Data.move.moveSpeed).PlaneToWorld();
+			if (!Data.rotate.frozen)
+				_rb.angularVelocity = Data.rotate.rotateDirection * Data.rotate.rotationSpeed;
 		}
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.gameObject.layer != source.targetMask.Value) return;
+			if (other.gameObject.layer != sourceAbility.targetMask.Value) return;
 			
 			Entity entity = other.GetComponent<Entity>();
 			if (entity == null) return;
@@ -42,8 +42,8 @@ namespace Abilities.Weapons
 		private void RegisterHit(Entity entity)
 		{
 			_entityHits++;
-			source.Metrics.AddData(entity.RegisterImpact(data.impact, data.move.moveDirection));
-			if (!data.maxEntityHitAmount.Enabled || _entityHits < data.maxEntityHitAmount.Value) return;
+			sourceAbility.AddDataToSource(entity.RegisterImpact(Data.impact, Data.move.moveDirection));
+			if (!Data.maxEntityHitAmount.Enabled || _entityHits < Data.maxEntityHitAmount.Value) return;
 			DespawnProjectile();
 		}
 

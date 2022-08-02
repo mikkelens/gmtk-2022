@@ -1,3 +1,4 @@
+using Abilities;
 using Entities.Base;
 using Level;
 using Management;
@@ -34,6 +35,11 @@ namespace Entities.PlayerScripts
             
             Vector2 direction = collision.impulse.WorldToPlane().normalized;
             RegisterImpact(hazard.Impact, direction); // hit itself/player
+        }
+
+        public override Ability GetAbilityToUse()
+        {
+            return default;
         }
     }
 }

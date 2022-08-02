@@ -1,29 +1,29 @@
-﻿using Abilities.Base;
+﻿using Abilities;
 
 namespace Entities.Base
 {
-    public class AnimatedCombatEntity : CombatEntity
+    public abstract class AnimatedCombatEntity : CombatEntity
     {
-        protected override void StartAbilityUse(Ability ability)
+        protected override void StartAbilityUse()
         {
-            if (!ability.usageAnimation.Enabled) return;
-            Animator.SetTrigger(ability.usageAnimation.Value.name);
+            if (!ActiveAbility.usageAnimation.Enabled) return;
+            Animator.SetTrigger(ActiveAbility.usageAnimation.Value.name);
             
-            if (!ability.usageAnimation.Value.isDirectional) return;
-            string directionString = AttackAnimationDirectionString(ability);
+            if (!ActiveAbility.usageAnimation.Value.isDirectional) return;
+            string directionString = AttackAnimationDirectionString(ActiveAbility);
             Animator.SetBool(directionString, Animator.GetBool(directionString));
             
-            base.StartAbilityUse(ability);
+            base.StartAbilityUse();
         }
 
-        protected override void FinishAbilityUse(Ability ability)
+        protected override void FinishAbilityUse()
         {
-            base.FinishAbilityUse(ability);
+            base.FinishAbilityUse();
             
-            if (!ability.usageAnimation.Enabled) return;
-            Animator.ResetTrigger(ability.usageAnimation.Value.name);
+            if (!ActiveAbility.usageAnimation.Enabled) return;
+            Animator.ResetTrigger(ActiveAbility.usageAnimation.Value.name);
         }
 
-        protected static string AttackAnimationDirectionString(Ability attack) => attack.usageAnimation.Value.name + "Direction";
+        private static string AttackAnimationDirectionString(Ability attack) => attack.usageAnimation.Value.name + "Direction";
     }
 }

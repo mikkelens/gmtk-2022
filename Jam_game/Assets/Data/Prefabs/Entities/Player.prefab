@@ -320,8 +320,14 @@ MonoBehaviour:
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  autoAttacks: 0
-  entityWeapon: {fileID: 0}
+  autoUseAbilities: 0
+  defaultKit:
+    enabled: 1
+    value:
+      primary: {fileID: 0}
+      secondary:
+        enabled: 1
+        value: {fileID: 0}
   aimTurnSpeedBonus: 1.45
 --- !u!4 &7804618059053159353 stripped
 Transform:

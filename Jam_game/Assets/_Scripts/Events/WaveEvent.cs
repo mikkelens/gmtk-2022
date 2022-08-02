@@ -59,8 +59,8 @@ namespace Events
             while (!EndEvent)
             {
                 // wait
-                yield return new WaitUntil(() => !GameIsPaused);
-                yield return new WaitForSeconds(CurrentSpawnDelay);
+                if (GameIsPaused) yield return new WaitUntil(() => !GameIsPaused);
+                if (spawnDelay.Enabled) yield return new WaitForSeconds(CurrentSpawnDelay);
 
                 if (!maxEnemiesSimultaneously.Enabled || _spawnedEntities.Count < maxEnemiesSimultaneously.Value)
                 {
@@ -69,7 +69,7 @@ namespace Events
                     if (asset == null) continue;
                     _spawnedEntities.Add(SpawnEntity(asset, waveParent));
                     _spawnCount++;
-                    Debug.Log($"Spawned Entity: {asset.name}");
+                    // Debug.Log($"Spawned Entity: {asset.name}");
                 }
             }
             // done spawning, maybe wait for entities to die

@@ -7,7 +7,7 @@ namespace Entities.Base
 {
     [Tooltip("Movable Entity: This entity can move around on its own. Think minecraft villager or boat.")]
     [RequireComponent(typeof(Rigidbody))]
-    public class MovingEntity : Entity
+    public abstract class MovingEntity : Entity
     {
         private string FreezeButtonText => IsFrozen ? "Unfreeze" : "Freeze";
         [FoldoutGroup(QuirkCategory)]
@@ -112,7 +112,7 @@ namespace Entities.Base
         
         private float GetAcceleration()
         {
-            if (stunned) return 0;
+            if (stunned) return accelerationWhenStunned;
             float accel = walkAccelSpeed;
             if (Stopping) return accel * maxStoppingBonus;
 

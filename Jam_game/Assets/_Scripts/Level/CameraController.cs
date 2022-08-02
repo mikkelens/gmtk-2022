@@ -1,3 +1,4 @@
+using System;
 using Entities.PlayerScripts;
 using Management;
 using Sirenix.OdinInspector;
@@ -8,7 +9,7 @@ namespace Level
 {
     public class CameraController : MonoBehaviour
     {
-        public static CameraController Instance { get; private set; }
+        public static CameraController Instance;
         
         [HideIf("instantFollow")]
         [SerializeField] private float followSpeed = 25f;
@@ -20,6 +21,7 @@ namespace Level
         private Player _player;
 
         public Vector3 Offset { get; private set; }
+
         private void Awake() => Instance = this;
 
         private void Start()
@@ -56,9 +58,8 @@ namespace Level
             
             // get speed
             float distance = Vector2.Distance(currentPos, targetPos);
-            float speed = followSpeed / (1 - Mathf.Min(0.95f, distance / maxDistance));
-            // Debug.Log($"Distance {distance}, Speed: {speed}");
-            
+            float speed = followSpeed / (1 - Mathf.Min(0.99f, distance / maxDistance));
+
             float increment = Mathf.Min(distance, speed * Time.deltaTime);
             Vector2 move = direction * increment;
             

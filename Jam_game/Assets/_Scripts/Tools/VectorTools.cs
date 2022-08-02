@@ -40,9 +40,12 @@ namespace Tools
         public static Vector3 PlaneToWorld(this Vector2 vector2) => new Vector3(vector2.x, 0, vector2.y);
         public static Vector3 PlaneToWorldBox(this Vector2 vector2, float height = 1f) => new Vector3(vector2.x, height, vector2.y); // converts plane to box (with custom height)
         public static Vector3 PlaneToWorldOffset(this Vector2 vector2, float offset = 0.5f) => new Vector3(vector2.x, offset, vector2.y); // for showing gizmos etc more visibly
+        
         public static Vector2 WorldToPlane(this Vector3 vector3) => new Vector2(vector3.x, vector3.z);
         public static Vector3 WorldToWorldBox(this Vector3 vector3, float height = 1f) => vector3.WithY(height);
         public static Vector3 WorldToWorldOffset(this Vector3 vector3, float offset = 0.5f) => vector3.WithY(offset);
+        
+        public static Vector3 FlattenBox(this Vector3 vector3, float height = 0f) => vector3.WithY(height);
     #endregion
     }
 }

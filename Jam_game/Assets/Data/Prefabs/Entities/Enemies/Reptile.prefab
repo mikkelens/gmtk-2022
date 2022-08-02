@@ -107,6 +107,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reptile
       objectReference: {fileID: 0}
+    - target: {fileID: 6248691945203294662, guid: 97462b41dbc863f40828a702f7b639b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6248691945203294663, guid: 97462b41dbc863f40828a702f7b639b3,
         type: 3}
       propertyPath: m_RootOrder
@@ -221,15 +226,15 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   maxSpeed:
-    baseValue: 3.95
+    baseValue: 3.25
     value: 3.95
     type: {fileID: 11400000, guid: f28495898b4de4f49b15f438e4e32f51, type: 2}
   walkAccelSpeed:
-    baseValue: 12
+    baseValue: 14
     value: 1
     type: {fileID: 0}
   maxTurnSpeed:
-    baseValue: 1
+    baseValue: 1.1
     value: 1
     type: {fileID: 0}
   maxStoppingBonus:
@@ -247,10 +252,16 @@ MonoBehaviour:
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  autoAttacks: 1
-  entityWeapon: {fileID: 11400000, guid: 6b6c25c2763700b40a56fa4b21a9fe66, type: 2}
-  rotationAffectsMoveDirection: 0
-  minAttackAttemptDistance: 6.5
+  autoUseAbilities: 0
+  defaultKit:
+    enabled: 0
+    value:
+      primary: {fileID: 0}
+      secondary:
+        enabled: 0
+        value: {fileID: 0}
+  rotationAffectsMoveDirection: 1
+  minAttackAttemptDistance: 5
   customTargetingOrigin:
     enabled: 0
     value: {fileID: 0}
@@ -263,19 +274,23 @@ MonoBehaviour:
           baseValue: 0
           value: 0
           type: {fileID: 0}
+      healing:
+        enabled: 1
+        value:
+          baseValue: 0
+          value: 0
+          type: {fileID: 0}
       knockback:
         enabled: 0
         value:
           baseValue: 0
           value: 0
           type: {fileID: 0}
-      floatEffects:
+      effects:
         enabled: 0
-        value: []
-      intEffects:
-        enabled: 0
-        value: []
-      boolEffects:
-        enabled: 0
-        value: []
-  angleBeforeHeadTurn: 10
+        value:
+          bools: []
+          ints: []
+          floats: []
+          colors: []
+  angleBeforeHeadTurn: 12

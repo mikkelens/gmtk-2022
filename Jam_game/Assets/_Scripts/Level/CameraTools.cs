@@ -31,7 +31,8 @@ namespace Level
 		{
 			get
 			{
-				_controller ??= CameraController.Instance;
+				if (_controller != null) return _controller;
+				_controller = CameraController.Instance;
 				if (_controller == null) Debug.LogWarning("No CameraController found.");
 				return _controller;
 			}
@@ -39,25 +40,28 @@ namespace Level
 		
 		// calculated values
 		private static float _previousFOV;
+		private static float _previousAspect;
+		private static float _previousAngle;
 		private static Vector3 _previousPosition;
 		private static Vector2 _visibleGroundFrustum;
-		public static Vector2 VisibleGroundFrustum // todo: use this
+		public static Vector2 VisibleGroundFrustum
 		{
 			get
 			{
-				if (Math.Abs(Main.fieldOfView - _previousFOV) < 0.1f) return _visibleGroundFrustum;
-				float downAngle = AngleFromDown;
-				float angleOffset = HalfVerticalFOV;
-				float upperFrustumHeight = CalculateFrustumHeightAtDistance(DistanceToGroundAtAngle(downAngle + angleOffset));
-				float lowerFrustumHeight = CalculateFrustumHeightAtDistance(DistanceToGroundAtAngle(downAngle - angleOffset));
-				float combinedFrustumHeight = upperFrustumHeight + lowerFrustumHeight;
-				float frustumWidth = combinedFrustumHeight * Main.aspect;
-				return _visibleGroundFrustum = new Vector2(upperFrustumHeight, frustumWidth);
+				if (Main.fieldOfView == _previousFOV && Main.aspect == _previousAspect && _previousAngle == Transform.eulerAngles.x) return _visibleGroundFrustum;
+				_previousFOV = Main.fieldOfView;
+				_previousAspect = Main.aspect;
+				_previousAngle = Transform.eulerAngles.x;
+				float distance = DistanceToGroundAtRotation();
+				float frustumHeight = CalculateFrustumHeightAtDistance(distance);
+				float frustumWidth = frustumHeight * Main.aspect;
+				return _visibleGroundFrustum = new Vector2(frustumWidth, frustumHeight);
 			}
 		}
 	#endregion
 
 	#region Math shorthands
+		public static float Angle => Transform.eulerAngles.x;
 		public static float HalfVerticalFOV => Main.fieldOfView * 0.5f; // assume field of view is vertical
 		public static float AngleFromDown => 90 - Transform.eulerAngles.x;
 		public static Vector2 OrtographicSize
@@ -71,9 +75,16 @@ namespace Level
 	#endregion
 
 	#region Camera position
-		public static float DistanceToGroundAtAngle(float angle)
+
+		public static float AngleDistanceOffset()
 		{
-			return Transform.position.y / Mathf.Cos(angle * Mathf.Deg2Rad);
+			float a = Transform.position.y;
+			float c = DistanceToGroundAtRotation();
+			return Mathf.Sqrt(c * c - a * a);
+		}
+		public static float DistanceToGroundAtRotation()
+		{
+			return Transform.position.y / Mathf.Cos(AngleFromDown * Mathf.Deg2Rad);
 		}
 		public static float CalculateFrustumHeightAtDistance(float depth)
 		{

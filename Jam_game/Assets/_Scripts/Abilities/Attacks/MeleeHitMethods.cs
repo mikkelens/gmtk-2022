@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Abilities.Weapons
+namespace Abilities.Attacks
 {
 	[Serializable]
 	public enum MeleeHitMethods
