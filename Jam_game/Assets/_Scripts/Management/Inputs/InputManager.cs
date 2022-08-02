@@ -1,4 +1,4 @@
-﻿using Entities.Players;
+﻿using Entities.PlayerScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

@@ -1,10 +1,10 @@
-﻿using Abilities.Data;
+﻿using Abilities;
+using Abilities.Data;
 using Entities.Base;
-using Entities.Players;
+using Entities.PlayerScripts;
 using Management;
 using Sirenix.OdinInspector;
 using Tools;
-using UnityEditor;
 using UnityEngine;
 
 namespace Entities.Enemies
@@ -27,6 +27,10 @@ namespace Entities.Enemies
         [SerializeField] protected Optional<ImpactData> collisionImpact;
 
         protected override bool Headless => false;
+        public override Ability GetAbilityToUse()
+        {
+            return ActiveKit.GetRandomAbility();
+        }
         private Ray TargetRay
         {
             get
@@ -35,7 +39,6 @@ namespace Entities.Enemies
                 return new Ray(originTransform.position, transform.forward);
             }
         }
-        protected override bool WantsToUseAbility => Physics.Raycast(TargetRay, minAttackAttemptDistance, targetLayerMask);
         protected override bool CanMove => base.CanMove && !stunned;
 
         protected override void Start()
@@ -48,6 +51,7 @@ namespace Entities.Enemies
         {
             return rotationAffectsMoveDirection ? Transform.forward.WorldToPlane() : GetTargetMoveDirection();
         }
+        
         protected override Vector2 GetTargetMoveDirection()
         {
             // walk towards player

@@ -1,4 +1,4 @@
-﻿using Entities.Players;
+﻿using Entities.PlayerScripts;
 using Management;
 using Stats.Stat.Modifier;
 using Tools;

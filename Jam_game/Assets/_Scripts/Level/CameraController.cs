@@ -1,26 +1,26 @@
+using System;
+using Entities.PlayerScripts;
 using Management;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
-namespace Entities.Players
+namespace Level
 {
     public class CameraController : MonoBehaviour
     {
         public static CameraController Instance;
         
-        [SerializeField] private bool instantFollow = false;
         [HideIf("instantFollow")]
         [SerializeField] private float followSpeed = 25f;
         [HideIf("instantFollow")]
         [SerializeField] private float maxDistance = 5f;
-    
+        [SerializeField] private bool instantFollow;
         
         private GameManager _manager;
         private Player _player;
 
         public Vector3 Offset { get; private set; }
-        public Vector2 PositionNoOffset => transform.position.WorldToPlane() - Offset.WorldToPlane();
 
         private void Awake() => Instance = this;
 
@@ -58,9 +58,8 @@ namespace Entities.Players
             
             // get speed
             float distance = Vector2.Distance(currentPos, targetPos);
-            float speed = followSpeed / (1 - Mathf.Min(0.95f, distance / maxDistance));
-            // Debug.Log($"Distance {distance}, Speed: {speed}");
-            
+            float speed = followSpeed / (1 - Mathf.Min(0.99f, distance / maxDistance));
+
             float increment = Mathf.Min(distance, speed * Time.deltaTime);
             Vector2 move = direction * increment;
             

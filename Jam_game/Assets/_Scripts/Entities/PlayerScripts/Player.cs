@@ -1,3 +1,4 @@
+using Abilities;
 using Entities.Base;
 using Level;
 using Management;
@@ -5,7 +6,7 @@ using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
-namespace Entities.Players
+namespace Entities.PlayerScripts
 {
     [Tooltip("Player: This is the player script. It also derives from entity scripts.")]
     public partial class Player : AnimatedCombatEntity // main
@@ -34,6 +35,11 @@ namespace Entities.Players
             
             Vector2 direction = collision.impulse.WorldToPlane().normalized;
             RegisterImpact(hazard.Impact, direction); // hit itself/player
+        }
+
+        public override Ability GetAbilityToUse()
+        {
+            return default;
         }
     }
 }

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Events;
+using Level;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
@@ -52,6 +54,13 @@ namespace Management
             }
             Debug.Log("Game ended.");
             _manager.State = GameState.Ended; // game end?
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (CameraController.Instance == null) return;
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireCube(CameraTools.PositionNoOffset.PlaneToWorld() + Vector3.forward * CameraTools.AngleDistanceOffset(), Vector3.one.FlattenBox() * minSpawnDistance + CameraTools.VisibleGroundFrustum.PlaneToWorld());
         }
     }
 }

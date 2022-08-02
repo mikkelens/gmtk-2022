@@ -1,19 +1,18 @@
-﻿using Abilities.Base;
+﻿using Abilities;
 using UnityEngine;
 
-namespace Entities.Players
+namespace Entities.PlayerScripts
 {
     public partial class Player
     {
-        public override Ability ActiveAbility
+        protected override Ability ActiveAbility
         {
             set
             {
                 base.ActiveAbility = value;
-                if (value.customCursor.Enabled)
-                {
-                    _uiManager.CursorTexture = value.customCursor.Value;
-                }
+                if (value == null) return;
+                if (!value.customCursor.Enabled) return;
+                _uiManager.CursorTexture = value.customCursor.Value;
             }
         }
 
