@@ -76,7 +76,7 @@ namespace Entities.Base
             _rb.velocity = _velocity.PlaneToWorld();
 
             bool isMoving = _velocity.magnitude > 0.0f;
-            Animator.SetBool("Walking", isMoving);
+            if (Animator != null) Animator.SetBool("Walking", isMoving);
         }
 
         protected virtual Vector2 GetLookDirection()

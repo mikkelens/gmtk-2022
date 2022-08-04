@@ -36,7 +36,7 @@ namespace Management
             else
 	            maxBounds.y *= RandomTools.NextFloat();
             Vector2 offsets = new Vector2(maxBounds.x * RandomTools.NextIntSign(), maxBounds.y * RandomTools.NextIntSign());
-			Debug.Log($"Random offsets: {offsets.ToString()}");
+			// Debug.Log($"Random offsets: {offsets.ToString()}");
             Vector2 groundPosOnCameraCenter = CameraTools.PositionNoOffset;
 			Vector2 spawnPosition = groundPosOnCameraCenter + offsets;
             return spawnPosition;
