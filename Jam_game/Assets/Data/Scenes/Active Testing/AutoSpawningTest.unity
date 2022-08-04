@@ -94707,6 +94707,11 @@ PrefabInstance:
       propertyPath: maxDistance
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1934767789084735905, guid: 9468432de95882841981415c93f4198e,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.151
+      objectReference: {fileID: 0}
     - target: {fileID: 1934767789084735909, guid: 9468432de95882841981415c93f4198e,
         type: 3}
       propertyPath: field of view
