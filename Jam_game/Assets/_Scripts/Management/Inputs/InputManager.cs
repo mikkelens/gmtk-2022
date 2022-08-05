@@ -54,11 +54,11 @@ namespace Management.Inputs
             
             // combat //
             // melee attack
-            _settings.Combat.Melee.performed += ctx => _player.SetMeleeInput(ctx.ReadValueAsButton());
-            _settings.Combat.Melee.canceled += _ => _player.SetMeleeInput(false);
+            _settings.Combat.Melee.performed += ctx => _player.SetPrimaryInput(ctx.ReadValueAsButton());
+            _settings.Combat.Melee.canceled += _ => _player.SetPrimaryInput(false);
             // throw attack
-            _settings.Combat.Throw.performed += ctx => _player.SetThrowInput(ctx.ReadValueAsButton());
-            _settings.Combat.Throw.canceled += _ => _player.SetThrowInput(false);
+            _settings.Combat.Throw.performed += ctx => _player.SetSecondaryInput(ctx.ReadValueAsButton());
+            _settings.Combat.Throw.canceled += _ => _player.SetSecondaryInput(false);
             // aim (mouse or controller)
             _settings.Combat.MouseAim.performed += ctx => Aim(ctx, false);
             _settings.Combat.MouseAim.canceled += ctx => Aim(ctx, false);

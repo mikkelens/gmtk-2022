@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using Abilities;
 using Abilities.Attacks;
-using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
@@ -13,33 +12,20 @@ namespace Entities.Base
     {
         [FoldoutGroup(QuirkCategory)]
         [SerializeField] protected LayerMask targetLayerMask;
-        [FoldoutGroup(QuirkCategory)]
-        [ShowIf("Headless")] // this should only be visible to designer if this entity is a dummy
-        [SerializeField] protected bool autoUseAbilities;
-        [UsedImplicitly] protected virtual bool Headless => true;
-     
-        [FoldoutGroup(StatCategory)]
-        [SerializeField] protected Optional<Kit> defaultKit; // class instance with stats in it
 
-        private Kit _activeKit;
-        protected Kit ActiveKit => _activeKit ?? (defaultKit.Enabled ? defaultKit.Value : null);
-
-        private Ability _activeAbility;
-        protected virtual Ability ActiveAbility { get; set; }
+        protected Ability ChosenAbility { get; private set; }
 
         // todo: maybe make animation handled in child class?
         protected override void EntityUpdate()
         {
             base.EntityUpdate();
-
-            // See if thing in attack box
-            if (ActiveAbility == null) return;
-            ActiveAbility = GetAbilityToUse();
-            if (ActiveAbility == null || !ActiveAbility.CanUse) return;
+            
+            ChosenAbility = SelectAbility();
+            if (ChosenAbility == null) return;
             StartAbilityUse();
         }
 
-        public abstract Ability GetAbilityToUse();
+        protected abstract Ability SelectAbility();
         
         // START
         protected virtual void StartAbilityUse() // overridden to add animation
@@ -51,7 +37,7 @@ namespace Entities.Base
         {
             Stopping = true;
             Animator.SetBool("Walking", false);
-            yield return StartCoroutine(ActiveAbility.TriggerAbility(this));
+            yield return StartCoroutine(ChosenAbility.TriggerAbility(this));
             Animator.SetBool("Walking", true);
             Stopping = false;
             FinishAbilityUse();
@@ -66,10 +52,10 @@ namespace Entities.Base
     #if UNITY_EDITOR
         private void OnDrawGizmos() // showing area check box
         {
-            if (ActiveAbility != null) return;
+            if (ChosenAbility != null) return;
             Gizmos.color = Color.red;
             Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
-            if (ActiveAbility is MeleeAttack melee)
+            if (ChosenAbility is MeleeAttack melee)
             {
                 if (melee.hitMethod == MeleeHitMethods.Area)
                 {
@@ -84,6 +70,14 @@ namespace Entities.Base
                     Vector2 direction = Vector3.forward.WorldToPlane();
                     Gizmos.DrawRay(pos, direction.PlaneToWorld() * distance);
                 }
+            }
+            else if (ChosenAbility is RangedAttack ranged)
+            {
+                Vector2 spawnPos = ranged.Point;
+                float distance = ranged.projectileData.move.moveSpeed;
+                Gizmos.DrawLine(spawnPos.PlaneToWorldOffset(), Transform.TransformPoint(Vector3.forward * distance));
+                Gizmos.color = Color.white;
+                Gizmos.DrawWireSphere(spawnPos.PlaneToWorldOffset(), 0.2f);
             }
         }
     #endif    

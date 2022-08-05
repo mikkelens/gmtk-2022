@@ -1,4 +1,3 @@
-using Abilities;
 using Entities.Base;
 using Level;
 using Management;
@@ -18,7 +17,7 @@ namespace Entities.PlayerScripts
         [FoldoutGroup(QuirkCategory)]
         [Header("Player Specific")]
         [SerializeField] private float aimTurnSpeedBonus;
-
+        
         protected override void Awake()
         {
             Instance = this;
@@ -37,9 +36,5 @@ namespace Entities.PlayerScripts
             RegisterImpact(hazard.Impact, direction); // hit itself/player
         }
 
-        public override Ability GetAbilityToUse()
-        {
-            return default;
-        }
     }
 }

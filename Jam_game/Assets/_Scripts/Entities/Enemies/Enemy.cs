@@ -1,4 +1,5 @@
-﻿using Abilities;
+﻿using System.Collections.Generic;
+using Abilities;
 using Abilities.Data;
 using Entities.Base;
 using Entities.PlayerScripts;
@@ -21,16 +22,14 @@ namespace Entities.Enemies
         [SerializeField] protected float minAttackAttemptDistance; // todo: should be weapon specific
         [FoldoutGroup("Quirks")]
         [SerializeField] protected Optional<Transform> customTargetingOrigin; // todo: should be weapon specific
-        
-        [Header("Enemy Specific")]
+
+        [Header("Enemy Specific")] [FoldoutGroup("Stats")] [SerializeField]
+        protected Possible<Ability> testAbility;
+        [FoldoutGroup("Stats")]
+        [SerializeField] protected List<Possible<Ability>> abilities;
         [FoldoutGroup("Stats")]
         [SerializeField] protected Optional<ImpactData> collisionImpact;
-
-        protected override bool Headless => false;
-        public override Ability GetAbilityToUse()
-        {
-            return ActiveKit.GetRandomAbility();
-        }
+        
         private Ray TargetRay
         {
             get
@@ -47,11 +46,16 @@ namespace Entities.Enemies
             Player = Player.Instance;
         }
 
+        protected override Ability SelectAbility() // randomly
+        {
+            if (abilities.Count == 0) return null;
+            return abilities.SelectPossibleRelative().Value;
+        }
+        
         protected override Vector2 GetMoveDirection()
         {
             return rotationAffectsMoveDirection ? Transform.forward.WorldToPlane() : GetTargetMoveDirection();
         }
-        
         protected override Vector2 GetTargetMoveDirection()
         {
             // walk towards player

@@ -1,4 +1,5 @@
-﻿using Stats.Stat.Variants;
+﻿using Stats.Stat;
+using Stats.Stat.Variants;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ namespace Tools.Editor.Drawers
             target.GetType().GetProperty("CurrentValue")?.GetValue(target);
 
             SerializedProperty baseValueProperty = property.FindPropertyRelative("baseValue");
-            SerializedProperty currentValueProperty = property.FindPropertyRelative("value");
+            SerializedProperty currentValueProperty = property.FindPropertyRelative("oldValue");
             SerializedProperty statTypeProperty = property.FindPropertyRelative("type");
 
             Rect baseRect = totalRect, currentRect = totalRect, statTypeRect = totalRect;

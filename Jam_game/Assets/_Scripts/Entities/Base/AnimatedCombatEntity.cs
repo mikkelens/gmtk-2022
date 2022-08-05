@@ -6,11 +6,11 @@ namespace Entities.Base
     {
         protected override void StartAbilityUse()
         {
-            if (!ActiveAbility.usageAnimation.Enabled) return;
-            Animator.SetTrigger(ActiveAbility.usageAnimation.Value.name);
+            if (!ChosenAbility.usageAnimation.Enabled) return;
+            Animator.SetTrigger(ChosenAbility.usageAnimation.Value.name);
             
-            if (!ActiveAbility.usageAnimation.Value.isDirectional) return;
-            string directionString = AttackAnimationDirectionString(ActiveAbility);
+            if (!ChosenAbility.usageAnimation.Value.isDirectional) return;
+            string directionString = AttackAnimationDirectionString(ChosenAbility);
             Animator.SetBool(directionString, Animator.GetBool(directionString));
             
             base.StartAbilityUse();
@@ -20,8 +20,8 @@ namespace Entities.Base
         {
             base.FinishAbilityUse();
             
-            if (!ActiveAbility.usageAnimation.Enabled) return;
-            Animator.ResetTrigger(ActiveAbility.usageAnimation.Value.name);
+            if (!ChosenAbility.usageAnimation.Enabled) return;
+            Animator.ResetTrigger(ChosenAbility.usageAnimation.Value.name);
         }
 
         private static string AttackAnimationDirectionString(Ability attack) => attack.usageAnimation.Value.name + "Direction";

@@ -21,7 +21,7 @@ namespace Abilities.Spells
 			SummonEachOnce
 		}
 		public SummonBehaviours summonBehaviour;
-		public List<EntityData> summonEntities = new List<EntityData>();
+		public List<Possible<Entity>> summonEntities = new List<Possible<Entity>>();
 		public Optional<IntStat> maxSimultaneousSummons = (IntStat)3;
 		public Optional<FloatStat> summonDelayTime;
 		public Optional<FloatStat> spawnPositionRandomness = (FloatStat) 0.35f;
@@ -42,21 +42,22 @@ namespace Abilities.Spells
 			yield return SourceEntity.StartCoroutine(SummonRoutine(SourceEntity.SpawnOrigin));
 		}
 
-		public IEnumerator SummonRoutine(SpawnEvent spawnOrigin)
+		private IEnumerator SummonRoutine(SpawnEvent spawnOrigin)
         {
-            List<EntityData> entitiesToSummon = new List<EntityData>(summonEntities);
+            List<Possible<Entity>> entitiesToSummon = new List<Possible<Entity>>(summonEntities);
             List<Entity> summonedEntities = new List<Entity>();
             while (summonedEntities.Count <= maxSimultaneousSummons.Value && entitiesToSummon.Count > 0)
             {
                 if (summonDelayTime.Enabled) yield return new WaitForSeconds(summonDelayTime.Value);
-                EntityData data = entitiesToSummon.SelectEntityAsset();
+                Possible<Entity> selectedEntity = entitiesToSummon.SelectPossibleRelative();
                 Vector2 pos = RandomPos;
-                Entity entity = Instantiate(data.prefab, pos.PlaneToWorld(), Quaternion.identity, spawnOrigin.SpawningParent);
+                Entity entity = Instantiate(selectedEntity.Value, pos.PlaneToWorld(), Quaternion.identity, spawnOrigin.SpawningParent);
                 summonedEntities.Add(entity);
-                if (summonBehaviour == SummonBehaviours.SummonEachOnce) entitiesToSummon.Remove(data);
+                if (summonBehaviour == SummonBehaviours.SummonEachOnce) entitiesToSummon.Remove(selectedEntity);
             }
         }
 		
+		// todo: test if this works
 	#if UNITY_EDITOR
 		private void OnValidate()
 		{

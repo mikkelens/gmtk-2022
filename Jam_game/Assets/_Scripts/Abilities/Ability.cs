@@ -12,11 +12,13 @@ namespace Abilities
 {
 	public abstract class Ability : ExpandableScriptableObject, IStatCollection
 	{
-		protected const string MenuPath = "Abilities/";
+		public const string MenuPath = "Abilities/";
 		
         public Optional<LayerMask> targetMask;
         
-        // use delay, should be off for player melee attacks
+        
+        // these should maybe be off for player melee attacks
+        public BoolStat continuousUsage = true;
         public Optional<FloatStat> activationDelay;
         public Optional<BoolStat> stopOnActivate;
         
@@ -68,9 +70,9 @@ namespace Abilities
         [ContextMenu(ConvertMenuPath + "Melee Weapon")]
         public void ConvertToMelee(MenuCommand menuCommand) => (menuCommand.context as ScriptableObject).ConvertToType(typeof(MeleeAttack));
         [ContextMenu(ConvertMenuPath + "Projectile Weapon", true)]
-        public bool IsNotProj(MenuCommand menuCommand) => menuCommand.context is not ProjectileAttack;
+        public bool IsNotProj(MenuCommand menuCommand) => menuCommand.context is not RangedAttack;
         [ContextMenu(ConvertMenuPath + "Projectile Weapon")]
-        public void ConvertToProj(MenuCommand menuCommand) => (menuCommand.context as ScriptableObject).ConvertToType(typeof(ProjectileAttack));
+        public void ConvertToProj(MenuCommand menuCommand) => (menuCommand.context as ScriptableObject).ConvertToType(typeof(RangedAttack));
     #endif
 	}
 }

@@ -5,24 +5,16 @@ namespace Entities.PlayerScripts
 {
     public partial class Player // input receiving
     {
+        
         private Vector2 _moveInput;
-        private bool _holdingMelee;
-        private bool _holdingThrow;
+        private bool _pressedPrimarySinceUse;
+        private bool _holdingPrimary;
+        private bool _pressedSecondarySinceUse;
+        private bool _holdingSecondary;
         private bool _lastAimWasController;
         
         private bool IsMoving => _moveInput.magnitude > 0.0f;
-        private bool IsAiming => (UpdatedLookDirection != Vector2.zero && _lastAimWasController) || _holdingThrow;
-
-        private bool _hasPressedMeleeSinceLastRead;
-        protected bool ReadMelee
-        {
-            get
-            {
-                if (!_hasPressedMeleeSinceLastRead) return false;
-                _hasPressedMeleeSinceLastRead = false;
-                return true;
-            }
-        }
+        private bool IsAiming => (UpdatedLookDirection != Vector2.zero && _lastAimWasController) || _holdingSecondary;
 
         private bool _aimIsDirty;
         private Vector2 _rawAimInput;
@@ -40,26 +32,27 @@ namespace Entities.PlayerScripts
             }
         }
         
-        public void SetMeleeInput(bool pressingMelee)
+        public void SetPrimaryInput(bool primary)
         {
-            if (pressingMelee) _hasPressedMeleeSinceLastRead = true;
-            _holdingMelee = pressingMelee;
+            if (primary) _pressedPrimarySinceUse = true;
+            _holdingPrimary = primary;
         }
-        public void SetThrowInput(bool holdingThrow)
+        public void SetSecondaryInput(bool secondary)
         {
-            _holdingThrow = holdingThrow;
+            if (secondary) _pressedSecondarySinceUse = true;
+            _holdingSecondary = secondary;
         }
         public void SetMoveInput(Vector2 input)
         {
             _moveInput = input;
             // Debug.Log($"Move input: {input}");
         }
-
         public void SetAimInput(Vector2 input, bool fromController)
         {
             _rawAimInput = input;
             _lastAimWasController = fromController;
             _aimIsDirty = true;
         }
+
     }
 }

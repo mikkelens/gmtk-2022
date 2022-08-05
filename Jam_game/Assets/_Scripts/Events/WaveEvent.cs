@@ -13,7 +13,7 @@ namespace Events
     public class WaveEvent : SpawnEvent
     {
         [Required]
-        public List<EntityData> entitiesToSpawn = new List<EntityData>();
+        public List<Possible<Entity>> entitiesToSpawn = new List<Possible<Entity>>();
         public Optional<float> spawnDelay = 2f;
         public Optional<AnimationCurve> spawnDelayCurve;
         // [Min(1)]
@@ -65,9 +65,9 @@ namespace Events
                 if (!maxEnemiesSimultaneously.Enabled || _spawnedEntities.Count < maxEnemiesSimultaneously.Value)
                 {
                     // select and spawn enemy
-                    Entity asset = entitiesToSpawn.SelectEntityAsset().prefab;
-                    if (asset == null) continue;
-                    _spawnedEntities.Add(SpawnEntity(asset, waveParent));
+                    Entity selectedEnemy = entitiesToSpawn.SelectPossibleRelative().Value;
+                    if (selectedEnemy == null) continue;
+                    _spawnedEntities.Add(SpawnEntity(selectedEnemy, waveParent));
                     _spawnCount++;
                     // Debug.Log($"Spawned Entity: {asset.name}");
                 }

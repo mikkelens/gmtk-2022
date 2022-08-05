@@ -12,20 +12,20 @@ namespace Tools.Editor.Drawers
             return EditorGUI.GetPropertyHeight(valueProperty, true);
         }
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        public override void OnGUI(Rect totalRect, SerializedProperty property, GUIContent label)
         {
             SerializedProperty valueProperty = property.FindPropertyRelative("value");
             SerializedProperty enabledProperty = property.FindPropertyRelative("enabled");
 
-            Rect valueRect = position, enabledRect = position;
+            Rect valueRect = totalRect, enabledRect = totalRect;
             float spacing = EditorGUIUtility.standardVerticalSpacing;
 
             enabledRect.width = enabledRect.height = EditorGUI.GetPropertyHeight(enabledProperty, false);
-            valueRect.width = position.width - enabledRect.width;
+            valueRect.width = totalRect.width - enabledRect.width;
             enabledRect.x += valueRect.width + spacing; // fixing centering issue
             valueRect.width -= spacing * 2f;
 
-            EditorGUI.BeginProperty(position, label, property);
+            EditorGUI.BeginProperty(totalRect, label, property);
             
             // value field
             EditorGUI.BeginDisabledGroup(!enabledProperty.boolValue); // greyed out if not enabled

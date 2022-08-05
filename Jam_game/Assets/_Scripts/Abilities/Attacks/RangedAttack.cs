@@ -7,9 +7,9 @@ using UnityEngine;
 namespace Abilities.Attacks
 {
 	[CreateAssetMenu(fileName = "New Projectile Attack", menuName = MenuPath + "Projectile Attack")]
-	public class ProjectileAttack : Attack
+	public class RangedAttack : Attack
 	{
-		public Projectile projectilePrefab;
+		public ProjectileComponent projectilePrefab;
 		public ProjectileData projectileData;
 		public BoolStat autoFire = false;
 
@@ -35,7 +35,7 @@ namespace Abilities.Attacks
 		private void FireProjectile()
 		{
 			_lastFireTime = Time.time;
-			Projectile projectile = Instantiate(projectilePrefab, Point.PlaneToWorld(), Quaternion.LookRotation(Direction.PlaneToWorld()));
+			ProjectileComponent projectile = Instantiate(projectilePrefab, Point.PlaneToWorld(), Quaternion.LookRotation(Direction.PlaneToWorld()));
 			projectile.Data = projectileData;
 		}
 	}

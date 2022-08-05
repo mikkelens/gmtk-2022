@@ -11,9 +11,9 @@ namespace Tools.Editor.Drawers
         // Cached scriptable object editor
         private UnityEditor.Editor _editor;
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        public override void OnGUI(Rect totalRect, SerializedProperty property, GUIContent label)
         {
-            Rect contentRect = position, foldoutRect = position;
+            Rect contentRect = totalRect, foldoutRect = totalRect;
 
             foldoutRect.width = EditorGUIUtility.labelWidth;
             contentRect.width -= foldoutRect.width + EditorGUIUtility.standardVerticalSpacing;
@@ -29,7 +29,8 @@ namespace Tools.Editor.Drawers
             }
             else
             {
-                EditorGUI.LabelField(foldoutRect, label);
+                if (label.text.IsNullOrWhitespace()) content.text = "Unassigned " + property.GetType().Name;
+                EditorGUI.LabelField(foldoutRect, content);
             }
             
             // Draw property (no label)

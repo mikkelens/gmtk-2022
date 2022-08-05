@@ -9,23 +9,6 @@ namespace Management
 {
 	public static class SpawnSystem
 	{
-		public static EntityData SelectEntityAsset(this List<EntityData> allEnemies)
-		{
-			if (allEnemies.Count == 0) return null;
-            
-			// count up spawn chances as a range, then generate a number within the range.
-			float relativeSum = allEnemies.Sum(enemy => enemy.relativeSpawnChance);
-			// float random = (float)MyRandom.NextDouble();
-			float scaledRandom = RandomTools.NextFloat() * relativeSum;
-			float last = 0;
-			foreach (EntityData entity in allEnemies)
-			{
-				last += entity.relativeSpawnChance;
-				if (last >= scaledRandom) return entity; // Enemy with lowest number but above generated number will be chosen.
-			}
-			return allEnemies.First();
-		}
-
 		public static Vector2 GetRandomLocationOutsideCamBounds(float bonusDistance) // Location outside of viewable area
 		{
             Vector2 maxBounds = CameraTools.VisibleGroundFrustum;

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Abilities.Attacks
 {
 	[RequireComponent(typeof(Rigidbody))]
-	public class Projectile : MonoBehaviour
+	public class ProjectileComponent : MonoBehaviour
 	{
 		public Ability sourceAbility;
 		

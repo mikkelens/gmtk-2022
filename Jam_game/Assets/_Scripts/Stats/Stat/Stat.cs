@@ -12,7 +12,7 @@ namespace Stats.Stat
     public abstract class Stat<T>
     {
         [SerializeField] public T baseValue;
-        [HideInInspector] public T value; // possibly has to be public..?
+        [HideInInspector] public T oldValue; // only for custom drawer. not sure how to hide this
         
         protected Stat(T value) => baseValue = value;
         
@@ -30,7 +30,7 @@ namespace Stats.Stat
                 IsDirty = false;
                 _lastBaseValue = baseValue;
                 if (Modifiers == null) return _lastValue = baseValue;
-                return _lastValue = ModifiedValue();
+                return oldValue = _lastValue = ModifiedValue();
             }
         }
         protected abstract List<Modifier<T>> Modifiers { get; }
