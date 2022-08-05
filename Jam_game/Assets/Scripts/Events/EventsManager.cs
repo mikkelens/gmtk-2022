@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Components;
-using Events;
+using Game;
 using Sirenix.OdinInspector;
 using Tools;
 using UnityEngine;
 
-namespace Management
+namespace Events
 {
     public class EventsManager : MonoBehaviour
     {
         public static EventsManager Instance;
         
-        [SerializeField] private float minSpawnDistance = 12f;
+        [SerializeField] private float extraSpawnDistance = 12f;
         [SerializeField] private Transform rootEnemyParent;
-        [SerializeField] private List<GameEvent> gameEvents = new List<GameEvent>();
         [SerializeField] private Optional<float> standardEventDelay = 1f;
+        [SerializeField] private List<GameEvent> gameEvents = new List<GameEvent>();
 
         [ShowInInspector]
         private float MinSpawnEventTime => gameEvents.OfType<SpawnEvent>()
@@ -45,7 +45,7 @@ namespace Management
                 if (gameEvent is SpawnEvent spawnEvent)
                 {
                     spawnEvent.SpawningParent = rootEnemyParent;
-                    spawnEvent.MinSpawnDistance = minSpawnDistance;
+                    spawnEvent.ExtraSpawnDistance = extraSpawnDistance;
                 }
                 gameEvent.Manager = this;
                 yield return StartCoroutine(gameEvent.RunEvent()); // run this event
@@ -59,7 +59,9 @@ namespace Management
         {
             if (CameraController.Instance == null) return;
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireCube(CameraTools.PositionNoOffset.PlaneToWorld() + Vector3.forward * CameraTools.AngleDistanceOffset(), Vector3.one.FlattenBox() * minSpawnDistance + CameraTools.VisibleGroundFrustum.PlaneToWorld());
+            Vector3 center = CameraTools.PositionNoOffset.PlaneToWorld() + Vector3.forward * CameraTools.AngleDistanceOffset();
+            Vector3 box = Vector3.one.FlattenBox() * extraSpawnDistance + CameraTools.VisibleGroundFrustum.PlaneToWorld();
+            Gizmos.DrawWireCube(center, box);
         }
     }
 }

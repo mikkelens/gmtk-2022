@@ -10,13 +10,13 @@ using UnityEngine;
 namespace Events
 {
 	[Serializable]
-	public class SpawnEvent : GameEvent
+	public abstract class SpawnEvent : GameEvent
 	{
 		[PropertyOrder(10)]
 		public Optional<PickupComponent> pickupToSpawnOnEnd;
 
 		public Transform SpawningParent { get; set; }
-		public float MinSpawnDistance { get; set; }
+		public float ExtraSpawnDistance { get; set; }
 
 		private Vector2? _pickupSpawnLocation;
 		protected Vector2 PickupSpawnLocation
@@ -24,12 +24,10 @@ namespace Events
 			get
 			{
 				if (_pickupSpawnLocation != null) return _pickupSpawnLocation.Value;
-				return SpawnSystem.GetRandomLocationOutsideCamBounds(MinSpawnDistance);
+				return SpawnSystem.GetRandomLocationOutsideCamBounds(ExtraSpawnDistance);
 			}
 			set => _pickupSpawnLocation = value;
 		}
-
-		protected virtual bool AllKilled => false;
 
 		public override IEnumerator RunEvent()
 		{
@@ -39,7 +37,7 @@ namespace Events
 
 		protected Entity SpawnEntity(Entity enemyPrefab, Transform enemyParent)
 		{
-			Vector2 pos = SpawnSystem.GetRandomLocationOutsideCamBounds(MinSpawnDistance);
+			Vector2 pos = SpawnSystem.GetRandomLocationOutsideCamBounds(ExtraSpawnDistance);
 			Entity spawnedEntity = Instantiate(enemyPrefab, pos.PlaneToWorld(), SpawnSystem.GetRandomRotation(), enemyParent);
 			spawnedEntity.SpawnOrigin = this;
 			return spawnedEntity;

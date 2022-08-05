@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventTime:
     enabled: 1
-    value: 10
+    value: 15
   extraStartDelay:
     enabled: 0
     value: 0
@@ -22,15 +22,15 @@ MonoBehaviour:
     enabled: 0
     value: {fileID: 0}
   entitiesToSpawn:
-  - chance: -0.13
-    value: {fileID: 0}
-  - chance: 0
-    value: {fileID: 0}
-  - chance: 0
-    value: {fileID: 0}
+  - chance: 30
+    value: {fileID: 447245091135592122, guid: ce5e9cd198e64af4dbfeeee179e02fb6, type: 3}
+  - chance: 30
+    value: {fileID: 2052279946271885656, guid: 36d65f6e55c0080408a71a2e2f0dcab1, type: 3}
+  - chance: 40
+    value: {fileID: 7550981007156027983, guid: 34bf71c5b8ac50b4185c973c70e28ea6, type: 3}
   spawnDelay:
     enabled: 1
-    value: 1
+    value: 2
   spawnDelayCurve:
     enabled: 1
     value:
@@ -38,30 +38,21 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5
-        inSlope: -0.4923385
-        outSlope: -0.4923385
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.5320666
-        value: 0.23804313
-        inSlope: 0.15268674
-        outSlope: 0.15268674
+        value: 1
+        inSlope: -1.46075
+        outSlope: -1.46075
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.16756502
-        outWeight: 0.5281331
+        inWeight: 0
+        outWeight: 0.094262294
       - serializedVersion: 3
         time: 1
-        value: 0.5
-        inSlope: 0.55981654
-        outSlope: 0.55981654
-        tangentMode: 34
+        value: 0.29999924
+        inSlope: 2.0514984
+        outSlope: 2.0514984
+        tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.14959013
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -71,7 +62,7 @@ MonoBehaviour:
     value: 0
   maxEnemiesSimultaneously:
     enabled: 1
-    value: 20
+    value: 25
   endOnKillCount:
     enabled: 0
     value: 10

@@ -1,8 +1,9 @@
 ﻿using Entities.PlayerScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using InputSettings = Management.Inputs.InputSettings;
 
-namespace Management.Inputs
+namespace Game.Inputs
 {
     public class InputManager : MonoBehaviour
     {

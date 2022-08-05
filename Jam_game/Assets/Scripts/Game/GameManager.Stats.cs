@@ -1,7 +1,7 @@
 ﻿using Stats.Stat;
 using Stats.Stat.Modifier;
 
-namespace Management
+namespace Game
 {
     public partial class GameManager
     {

@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
-namespace Management
+namespace Game
 {
 	public class UIManager : MonoBehaviour
 	{

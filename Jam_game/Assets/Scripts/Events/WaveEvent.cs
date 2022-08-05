@@ -21,7 +21,7 @@ namespace Events
         // [Min(1)]
         public Optional<int> endOnKillCount;
 
-        private List<Entity> _spawnedEntities;
+        private List<Entity> _aliveEnemies;
         private int _spawnCount;
         private int _killCount;
 
@@ -38,7 +38,7 @@ namespace Events
         private float KillCompletion => endOnKillCount.Enabled ? (float)_killCount / endOnKillCount.Value : 0f;
         private float EntityCompletion => Mathf.Max(SpawnCompletion, KillCompletion);
         protected override float EventCompletion => Mathf.Max(TimeCompletion, EntityCompletion);
-        protected override bool AllKilled => _spawnedEntities.Count == 0;
+        protected virtual bool AllKilled => _aliveEnemies.Count == 0;
 
         public override IEnumerator RunEvent()
         {
@@ -51,24 +51,24 @@ namespace Events
 
             // Create wave parent
             Transform waveParent = Instantiate(new GameObject("Parent: Wave"), SpawningParent).transform;
-            _spawnedEntities = new List<Entity>();
+            _aliveEnemies = new List<Entity>();
             
             // continuosly spawn entities
             while (!EndEvent)
             {
                 // wait
                 if (GameIsPaused) yield return new WaitUntil(() => !GameIsPaused);
-                if (spawnDelay.Enabled) yield return new WaitForSeconds(CurrentSpawnDelay);
 
-                if (!maxEnemiesSimultaneously.Enabled || _spawnedEntities.Count < maxEnemiesSimultaneously.Value)
+                if (!maxEnemiesSimultaneously.Enabled || _aliveEnemies.Count < maxEnemiesSimultaneously.Value)
                 {
                     // select and spawn enemy
                     Entity selectedEnemy = entitiesToSpawn.SelectPossibleRelative().Value;
                     if (selectedEnemy == null) continue;
-                    _spawnedEntities.Add(SpawnEntity(selectedEnemy, waveParent));
+                    _aliveEnemies.Add(SpawnEntity(selectedEnemy, waveParent));
                     _spawnCount++;
                     // Debug.Log($"Spawned Entity: {asset.name}");
                 }
+                if (spawnDelay.Enabled) yield return new WaitForSeconds(CurrentSpawnDelay);
             }
             // done spawning, maybe wait for entities to die
             if (requireAllKilledToContinue) yield return new WaitUntil(() => AllKilled);
@@ -77,7 +77,7 @@ namespace Events
         public override void DespawnEntity(Entity entity)
         {
             _killCount++;
-            _spawnedEntities.Remove(entity);
+            _aliveEnemies.Remove(entity);
             base.DespawnEntity(entity);
         }
     }

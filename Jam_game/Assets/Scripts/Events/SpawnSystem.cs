@@ -2,7 +2,7 @@
 using Tools;
 using UnityEngine;
 
-namespace Management
+namespace Events
 {
 	public static class SpawnSystem
 	{

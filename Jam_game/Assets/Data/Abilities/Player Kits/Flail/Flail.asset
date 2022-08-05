@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b1e2d01b7544e09b630528eec45c7c, type: 3}
   m_Name: Flail
   m_EditorClassIdentifier: 
-  primary: {fileID: 0}
+  primary: {fileID: 11400000, guid: c92db783dbfde654db5ccc0d2c9995eb, type: 2}
   secondary:
     enabled: 0
-    value: {fileID: 0}
+    value: {fileID: 11400000, guid: a99c09fe86ad45648b64d5270d54e085, type: 2}

@@ -16,7 +16,6 @@ namespace Events
         private bool _bossAlive;
 
         protected override bool EndEvent => base.EndEvent && !_bossAlive;
-        protected override bool AllKilled => !_bossAlive;
 
         public override IEnumerator RunEvent()
         {

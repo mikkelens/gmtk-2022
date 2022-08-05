@@ -3,7 +3,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Tools
+namespace Components
 {
     public class FPSRateScript : MonoBehaviour
     {

@@ -87,8 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71726402f09b46e4a82aecd18c5bf5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpawnDistance: 2
-  rootEnemyParent: {fileID: 1488532003811833285}
+  minSpawnDistance: 0
+  rootEnemyParent: {fileID: 0}
   gameEvents:
   - {fileID: 11400000, guid: 5893711dbed9f9f4d993266b8b873db3, type: 2}
   - {fileID: 11400000, guid: de6cf0c99c7917f47a5079dcef45c5b7, type: 2}

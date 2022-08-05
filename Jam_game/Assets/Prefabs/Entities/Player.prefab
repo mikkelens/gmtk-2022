@@ -265,8 +265,8 @@ MonoBehaviour:
   godMode: 0
   maxHealth:
     baseValue: 5
-    value: 5
     type: {fileID: 11400000, guid: 5b3b6e70f71fd4247acc80e09d2b17ba, type: 2}
+    lastValue: 0
   freezingAffectsRotation: 0
   stoppingAffectsRotation: 0
   turnSpeedCurve:
@@ -295,39 +295,34 @@ MonoBehaviour:
     m_RotationOrder: 4
   maxSpeed:
     baseValue: 10
-    value: 10
     type: {fileID: 0}
+    lastValue: 0
   walkAccelSpeed:
     baseValue: 30
-    value: 30
     type: {fileID: 0}
+    lastValue: 0
   maxTurnSpeed:
     baseValue: 6.5
-    value: 4.5
     type: {fileID: 0}
+    lastValue: 0
   maxStoppingBonus:
     baseValue: 5
-    value: 5
     type: {fileID: 0}
+    lastValue: 0
   accelerationWhenStunned:
     baseValue: 5
-    value: 0
     type: {fileID: 0}
+    lastValue: 0
   stunned:
     baseValue: 0
-    value: 0
     type: {fileID: 0}
+    lastValue: 0
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  autoUseAbilities: 0
-  defaultKit:
+  startingKit:
     enabled: 1
-    value:
-      primary: {fileID: 0}
-      secondary:
-        enabled: 1
-        value: {fileID: 0}
+    value: {fileID: 11400000, guid: 409bfdf2c769c9e42a161b635e94802c, type: 2}
   aimTurnSpeedBonus: 1.45
 --- !u!4 &7804618059053159353 stripped
 Transform:

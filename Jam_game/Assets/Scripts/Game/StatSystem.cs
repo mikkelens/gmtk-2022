@@ -6,7 +6,7 @@ using Stats.Stat.Modifier;
 using Stats.Type;
 using UnityEngine;
 
-namespace Management
+namespace Game
 {
     public static class StatSystem
     {
