@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Stats.Type
 {
-    // [TypeInfoBox("A collection of multiple stattypes.")]
-    [CreateAssetMenu(fileName = "New StatType Collection", menuName = "Stats/StatType Collection")]
+    [CreateAssetMenu(fileName = "New StatType Collection", menuName = MenuPath + "StatType Collection")]
     public class StatTypeCollection : StatTypeGeneric
     {
         public List<StatType> statTypes = new List<StatType>();

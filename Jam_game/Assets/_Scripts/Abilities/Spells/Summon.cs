@@ -11,15 +11,17 @@ using UnityEngine;
 
 namespace Abilities.Spells
 {
+	public enum SummonBehaviours
+	{
+		SummonUntillDead,
+		SummonEachOnce
+	}
+	
 	// can summon entities
 	[CreateAssetMenu(fileName = "New Summon Ability", menuName = MenuPath + "Summon")]
 	public class Summon : Spell
 	{
-		public enum SummonBehaviours
-		{
-			SummonUntillDead,
-			SummonEachOnce
-		}
+		[Header("Summon")]
 		public SummonBehaviours summonBehaviour;
 		public List<Possible<Entity>> summonEntities = new List<Possible<Entity>>();
 		public Optional<IntStat> maxSimultaneousSummons = (IntStat)3;
@@ -57,8 +59,8 @@ namespace Abilities.Spells
             }
         }
 		
-		// todo: test if this works
 	#if UNITY_EDITOR
+		// todo: test if this works
 		private void OnValidate()
 		{
 			if (spawnPositionOffsets.Enabled)

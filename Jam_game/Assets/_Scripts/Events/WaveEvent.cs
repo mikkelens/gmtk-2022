@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Events
 {
-    [CreateAssetMenu(fileName = "New Wave Event", menuName = "Events/Wave Event")]
+    [CreateAssetMenu(fileName = "New Wave Event", menuName = MenuPath + "Wave")]
     public class WaveEvent : SpawnEvent
     {
         [Required]

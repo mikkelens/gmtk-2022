@@ -9,6 +9,8 @@ namespace Events
 	[Serializable]
 	public class GameEvent : ExpandableScriptableObject
 	{
+		public const string MenuPath = "Events/";
+		
 		public Optional<float> eventTime = 10f;
 		public Optional<float> extraStartDelay;
 

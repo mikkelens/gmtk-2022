@@ -65694,8 +65694,29 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
+      propertyPath: maxSpeed.oldValue
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
+      propertyPath: startingKit.value
+      value: 
+      objectReference: {fileID: 11400000, guid: 409bfdf2c769c9e42a161b635e94802c,
+        type: 2}
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
+      propertyPath: maxHealth.oldValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
       propertyPath: defaultWeapon.value
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
+      propertyPath: startingKit.enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
@@ -65710,8 +65731,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
         type: 3}
+      propertyPath: maxTurnSpeed.oldValue
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
       propertyPath: defaultAbility.enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
+      propertyPath: walkAccelSpeed.oldValue
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
+      propertyPath: maxStoppingBonus.oldValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753149267886756660, guid: 94691372665626847aa961e06a42ea72,
+        type: 3}
+      propertyPath: accelerationWhenStunned.oldValue
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7804618059053159352, guid: 94691372665626847aa961e06a42ea72,
         type: 3}

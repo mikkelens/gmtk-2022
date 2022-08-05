@@ -9,6 +9,7 @@ namespace Abilities.Attacks
 	[CreateAssetMenu(fileName = "New Projectile Attack", menuName = MenuPath + "Projectile Attack")]
 	public class RangedAttack : Attack
 	{
+		[Header("Ranged Attack")]
 		public ProjectileComponent projectilePrefab;
 		public ProjectileData projectileData;
 		public BoolStat autoFire = false;

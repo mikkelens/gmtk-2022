@@ -31,7 +31,7 @@ namespace Abilities.Attacks
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.gameObject.layer != sourceAbility.targetMask.Value) return;
+			if (other.gameObject.layer != sourceAbility.targetMask) return;
 			
 			Entity entity = other.GetComponent<Entity>();
 			if (entity == null) return;

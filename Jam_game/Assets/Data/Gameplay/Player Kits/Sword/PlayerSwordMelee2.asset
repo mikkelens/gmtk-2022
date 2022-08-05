@@ -10,90 +10,70 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ccd2758183c4362b1df20198b8051ca, type: 3}
-  m_Name: PlayerMeleeWeapon
+  m_Name: PlayerSwordMelee2
   m_EditorClassIdentifier: 
+  continuousUsage:
+    baseValue: 1
+    oldValue: 1
+    type: {fileID: 0}
   targetMask:
-    enabled: 1
-    value:
-      serializedVersion: 2
-      m_Bits: 64
+    serializedVersion: 2
+    m_Bits: 0
   activationDelay:
     enabled: 0
     value:
       baseValue: 0
-      value: 0
+      oldValue: 0
+      type: {fileID: 0}
+  stopOnActivate:
+    enabled: 0
+    value:
+      baseValue: 0
+      oldValue: 0
       type: {fileID: 0}
   cooldown:
     enabled: 1
     value:
       baseValue: 1
-      value: 0
+      oldValue: 1
       type: {fileID: 0}
   originOffset:
-    enabled: 1
-    value: {x: 0, y: 2.84}
+    enabled: 0
+    value: {x: 0, y: 0}
   usageAnimation:
     enabled: 0
     value:
       name: Melee
       isDirectional: 0
   customCursor:
-    enabled: 1
-    value: {fileID: 2800000, guid: 6d3b588048607f34491052d2b3ecdad4, type: 3}
-  selfImpact:
-    enabled: 1
-    value:
-      damage:
-        enabled: 0
-        value:
-          baseValue: 1
-          value: 0
-          type: {fileID: 0}
-      healing:
-        enabled: 0
-        value:
-          baseValue: 0
-          value: 0
-          type: {fileID: 0}
-      knockback:
-        enabled: 1
-        value:
-          baseValue: 10
-          value: 0
-          type: {fileID: 0}
-      effects:
-        enabled: 0
-        value:
-          bools: []
-          ints: []
-          floats: []
-          colors: []
+    enabled: 0
+    value: {fileID: 0}
   maxEntitiesHit:
     enabled: 0
     value:
-      baseValue: 1
-      value: 0
+      baseValue: 0
+      oldValue: 0
       type: {fileID: 0}
   impact:
-    enabled: 1
+    enabled: 0
     value:
       damage:
         enabled: 1
         value:
           baseValue: 1
-          value: 0
+          oldValue: 1
           type: {fileID: 0}
       healing:
         enabled: 1
         value:
           baseValue: 0
-          value: 0
+          oldValue: 0
           type: {fileID: 0}
       knockback:
         enabled: 1
         value:
           baseValue: 5
-          value: 0
+          oldValue: 5
           type: {fileID: 0}
       effects:
         enabled: 0
@@ -102,13 +82,13 @@ MonoBehaviour:
           ints: []
           floats: []
           colors: []
-  hitMethod: 1
+  hitMethod: 0
   physicsBox:
-    enabled: 1
-    value: {x: 2.62, y: 5.22}
+    enabled: 0
+    value: {x: 0, y: 0}
   maxDistance:
-    enabled: 1
+    enabled: 0
     value:
-      baseValue: 5
-      value: 0
+      baseValue: 0
+      oldValue: 0
       type: {fileID: 0}

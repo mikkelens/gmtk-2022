@@ -2,6 +2,7 @@
 using Abilities.Attacks;
 using Abilities.Data;
 using Entities.Base;
+using Sirenix.OdinInspector;
 using Stats.Stat;
 using Stats.Stat.Variants;
 using Tools;
@@ -14,11 +15,11 @@ namespace Abilities
 	{
 		public const string MenuPath = "Abilities/";
 		
-        public Optional<LayerMask> targetMask;
-        
+		[Header("Ability")]
+        public BoolStat continuousUsage = true;
+        public LayerMask targetMask;
         
         // these should maybe be off for player melee attacks
-        public BoolStat continuousUsage = true;
         public Optional<FloatStat> activationDelay;
         public Optional<BoolStat> stopOnActivate;
         
@@ -29,7 +30,6 @@ namespace Abilities
 		public Optional<Texture2D> customCursor;
 		
 		protected CombatEntity SourceEntity { get; private set; } // todo: use this to report damage numbers?
-		protected int HitMask => targetMask.Enabled ? targetMask.Value.value : Physics.AllLayers;
 
 		private float _lastUseTime;
 		

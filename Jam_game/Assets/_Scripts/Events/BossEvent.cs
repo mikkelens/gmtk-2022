@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Events
 {
-    [CreateAssetMenu(fileName = "New Boss Event", menuName = "Events/Boss Event")]
+    [CreateAssetMenu(fileName = "New Boss Event", menuName = MenuPath + "Boss")]
     public class BossEvent : SpawnEvent
     {
         [AssetsOnly]

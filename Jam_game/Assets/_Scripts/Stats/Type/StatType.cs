@@ -2,7 +2,7 @@
 
 namespace Stats.Type
 {
-    [CreateAssetMenu(fileName = "New Stat Type", menuName = "Stats/StatType")]
+    [CreateAssetMenu(fileName = "New Stat Type", menuName = MenuPath + "StatType")]
     public class StatType : StatTypeGeneric
     {
         

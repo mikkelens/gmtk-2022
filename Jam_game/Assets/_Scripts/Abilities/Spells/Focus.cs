@@ -8,6 +8,7 @@ namespace Abilities.Spells
 	[CreateAssetMenu(fileName = "New Focus Ability", menuName = MenuPath + "Focus")]
 	public class Focus : Spell
 	{
+		[Header("Focus")]
 		public ImpactData selfImpact;
 		
 		protected override IEnumerator Use()

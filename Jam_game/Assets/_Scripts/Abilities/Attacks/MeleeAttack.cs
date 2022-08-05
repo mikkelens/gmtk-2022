@@ -21,6 +21,7 @@ namespace Abilities.Attacks
     [CreateAssetMenu(fileName = "New Melee Attack", menuName = MenuPath + "Melee Attack")]
 	public class MeleeAttack : Attack
 	{
+		[Header("Melee Attack")]
 		public Optional<ImpactData> impact;
 		public MeleeHitMethods hitMethod;
 
@@ -59,13 +60,13 @@ namespace Abilities.Attacks
 
 		private Collider[] AreaCheck()
 		{
-			return Physics.OverlapBox(Point.PlaneToWorld(), Vector3.one, Quaternion.identity, HitMask);
+			return Physics.OverlapBox(Point.PlaneToWorld(), Vector3.one, Quaternion.identity, targetMask);
 		}
 
 		private Collider[] RaycastCheck()
 		{
 			Ray ray = new Ray(Point.PlaneToWorld(), Direction.PlaneToWorld());
-			return Physics.RaycastAll(ray, MaxDistance, HitMask).Select(hit => hit.collider).ToArray();
+			return Physics.RaycastAll(ray, MaxDistance, targetMask).Select(hit => hit.collider).ToArray();
 		}
 
 	#endregion
