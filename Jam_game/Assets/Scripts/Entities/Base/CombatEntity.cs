@@ -44,23 +44,21 @@ namespace Entities.Base
         }
 
         // END
-        protected virtual void FinishAbilityUse()
-        {
-            
-        }
+        protected abstract void FinishAbilityUse();
         
     #if UNITY_EDITOR
         private void OnDrawGizmos() // showing area check box
         {
             if (ChosenAbility != null) return;
+            Transform ??= transform;
             Gizmos.color = Color.red;
-            Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+            Gizmos.matrix = Matrix4x4.TRS(Transform.position, Transform.rotation, Vector3.one);
             if (ChosenAbility is MeleeAttack melee)
             {
                 if (melee.hitMethod == MeleeHitMethods.Area)
                 {
                     if (!melee.physicsBox.Enabled) return;
-                    Vector2 pos = transform.position.WorldToPlane() + melee.Point;
+                    Vector2 pos = Transform.position.WorldToPlane() + melee.Point;
                     Gizmos.DrawWireCube(pos.PlaneToWorld(), melee.physicsBox.Value.PlaneToWorldBox());
                 }
                 else if (melee.hitMethod == MeleeHitMethods.Raycast)

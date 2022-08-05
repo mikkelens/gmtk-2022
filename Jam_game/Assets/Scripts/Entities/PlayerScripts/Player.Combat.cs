@@ -36,26 +36,30 @@ namespace Entities.PlayerScripts
             // choose
             Ability newAbility = null;
             if (_pressedPrimarySinceUse || ActiveKit.primary.continuousUsage && _holdingPrimary)
+            {
                 newAbility = ActiveKit.primary;
+                _pressedPrimarySinceUse = false;
+            }
             if (ActiveKit.secondary.Enabled &&
                 (_pressedSecondarySinceUse || ActiveKit.secondary.Value.continuousUsage && _holdingSecondary))
+            {
                 newAbility = ActiveKit.secondary.Value;
+                _pressedSecondarySinceUse = false;
+            }
             
             // maybe switch cursor
-            if (newAbility != null  && newAbility != _lastSelectedAbility && newAbility.customCursor.Enabled)
-                _uiManager.CursorTexture = newAbility.customCursor.Value;
+            if (newAbility != null && newAbility != _lastSelectedAbility)
+            {
+                Debug.Log($"Player drew ability: {newAbility.name}");
+                if (_uiManager != null && newAbility.customCursor.Enabled)
+                {
+                    _uiManager.CursorTexture = newAbility.customCursor.Value;
+                }
+            }
             
             return _lastSelectedAbility = newAbility;
         }
 
-        protected override void StartAbilityUse()
-        {
-            // remember that player selected (used) ability
-            if (ChosenAbility == ActiveKit.primary) _pressedPrimarySinceUse = false;
-            if (ChosenAbility == ActiveKit.secondary.Value) _pressedSecondarySinceUse = false;
-            base.StartAbilityUse();
-        }
-        
         public override void KillThis()
         {
             Debug.Log("Player was killed!");

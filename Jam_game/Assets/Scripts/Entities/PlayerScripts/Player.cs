@@ -24,6 +24,12 @@ namespace Entities.PlayerScripts
             base.Awake();
         }
 
+        protected override void Start()
+        {
+            _uiManager = UIManager.Instance;
+            base.Start();
+        }
+
         // movement is decided by input set in "Player.Input.cs"
 
         private void OnCollisionEnter(Collision collision)

@@ -18,8 +18,6 @@ namespace Entities.Base
 
         protected override void FinishAbilityUse()
         {
-            base.FinishAbilityUse();
-            
             if (!ChosenAbility.usageAnimation.Enabled) return;
             Animator.ResetTrigger(ChosenAbility.usageAnimation.Value.name);
         }
