@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ccd2758183c4362b1df20198b8051ca, type: 3}
+  m_Name: SwordAttack1
+  m_EditorClassIdentifier: 
+  continuousUsage:
+    baseValue: 1
+    oldValue: 1
+    type: {fileID: 0}
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  activationDelay:
+    enabled: 0
+    value:
+      baseValue: 0
+      oldValue: 0
+      type: {fileID: 0}
+  stopOnActivate:
+    enabled: 0
+    value:
+      baseValue: 0
+      oldValue: 0
+      type: {fileID: 0}
+  cooldown:
+    enabled: 1
+    value:
+      baseValue: 1
+      oldValue: 1
+      type: {fileID: 0}
+  originOffset:
+    enabled: 1
+    value: {x: 0, y: 2.84}
+  usageAnimation:
+    enabled: 0
+    value:
+      name: Melee
+      isDirectional: 0
+  customCursor:
+    enabled: 1
+    value: {fileID: 2800000, guid: 6d3b588048607f34491052d2b3ecdad4, type: 3}
+  maxEntitiesHit:
+    enabled: 0
+    value:
+      baseValue: 1
+      oldValue: 1
+      type: {fileID: 0}
+  impact:
+    enabled: 1
+    value:
+      damage:
+        enabled: 1
+        value:
+          baseValue: 1
+          oldValue: 1
+          type: {fileID: 0}
+      healing:
+        enabled: 1
+        value:
+          baseValue: 0
+          oldValue: 0
+          type: {fileID: 0}
+      knockback:
+        enabled: 1
+        value:
+          baseValue: 5
+          oldValue: 5
+          type: {fileID: 0}
+      effects:
+        enabled: 0
+        value:
+          bools: []
+          ints: []
+          floats: []
+          colors: []
+  hitMethod: 1
+  physicsBox:
+    enabled: 1
+    value: {x: 2.62, y: 5.22}
+  maxDistance:
+    enabled: 1
+    value:
+      baseValue: 5
+      oldValue: 0
+      type: {fileID: 0}
