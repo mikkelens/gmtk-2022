@@ -23,8 +23,7 @@ namespace Entities.Enemies
         [FoldoutGroup("Quirks")]
         [SerializeField] protected Optional<Transform> customTargetingOrigin; // todo: should be weapon specific
 
-        [Header("Enemy Specific")] [FoldoutGroup("Stats")] [SerializeField]
-        protected Possible<Ability> testAbility;
+        [Header("Enemy Specific")]
         [FoldoutGroup("Stats")]
         [SerializeField] protected List<Possible<Ability>> abilities;
         [FoldoutGroup("Stats")]
