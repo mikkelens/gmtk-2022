@@ -9,18 +9,19 @@ using UnityEngine;
 
 namespace Stats.Stat
 {
-    // can be float or int
+    // can be of different types. Implemented variations: Color, Float, Int, Bool
     [Serializable]
-    public abstract class Stat<T>
+    public class Stat<T> where T
     {
+        // editable
         [SerializeField] protected T baseValue;
-        // [HideInInspector] public T oldValue; // only for custom drawer. not sure how to hide this
+        [SerializeField] protected StatType type;
         
         protected Stat(T value) => baseValue = value;
-        
-        public StatType type;
-        
+
+        // serialized to supply drawer
         [SerializeField] private T lastValue;
+        
         private T _lastBaseValue;
         protected bool IsDirty = true;
         public T CurrentValue
@@ -31,13 +32,21 @@ namespace Stats.Stat
                 IsDirty = false;
                 _lastBaseValue = baseValue;
                 if (Modifiers == null) return lastValue = baseValue;
-                return lastValue = ModifiedValue();
+                return lastValue = ModifiedValue(baseValue);
             }
         }
-        protected abstract List<Modifier<T>> Modifiers { get; }
-        protected abstract T ModifiedValue();
 
-        protected abstract bool Compare(T a, T b);
+        protected List<Modifier<T>> Modifiers { get; }
+
+        protected T ModifiedValue<int>(T startingValue) where T : IEquatable<int>
+        {
+
+        }
+        
+        protected bool Compare<T>(T a, T b) where T : IComparable<T>
+        {
+            return a.CompareTo(b) == 0;
+        }
         private static int CompareModifyOrder(Modifier<T> a, Modifier<T> b)
         {
             if (a.Order < b.Order) return -1;
@@ -64,5 +73,13 @@ namespace Stats.Stat
             RemoveModifier(modifier);
         }
         
+    }
+
+    public static class StatGetters
+    {
+        public static int ModifiedValue(this Stat<int> stat)
+        {
+            
+        }
     }
 }
