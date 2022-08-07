@@ -15,8 +15,8 @@ namespace Stats.Stat.Modifier
         [SerializeField] public T modificationValue;
         [SerializeField] public ModificationTypes type = ModificationTypes.AddMultiply;
         [SerializeField] public Optional<float> usageDelay;
-        [SerializeField] public Optional<float> usageTime;
-        
+        [SerializeField] public Optional<float> resetAfterTime;
+
         [Tooltip("If disabled, modification does not repeatedly add")]
         [SerializeField] public Optional<float> repeatDelay;
         

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Stats.Stat.Modifier;
 using Stats.Type;
+using Tools;
 using UnityEngine;
 
 namespace Stats.Stat
@@ -49,20 +50,25 @@ namespace Stats.Stat
         {
             if (modifier.usageDelay.Enabled)
                 yield return new WaitForSeconds(modifier.usageDelay.Value);
-            
-            IsDirty = true;
-            Modifiers.Add(modifier);
-            Modifiers.Sort(CompareModifyOrder);
-            
-            if (modifier.usageTime.Enabled)
-                yield return new WaitForSeconds(modifier.usageTime.Value);
+            float usageTime = Time.time;
 
+            do
+            {
+                IsDirty = true;
+                Modifiers.Add(modifier);
+                Modifiers.Sort(CompareModifyOrder);
+            } while (modifier.resetAfterTime.Enabled);
+
+            if (modifier.resetAfterTime.Enabled && usageTime.TimeSince() > modifier.resetAfterTime.Value)
+            {
+                RemoveModifier(modifier);
+            }
         }
-        public IEnumerator<bool> RemoveModifier(Modifier<T> modifier)
+        public bool RemoveModifier(Modifier<T> modifierToRemove)
         {
-            bool removed = Modifiers.Remove(modifier);
+            bool removed = Modifiers.RemoveAll(eachModifier => eachModifier.Equals(modifierToRemove)) > 0;
             if (removed) IsDirty = true;
-            yield return removed;
+            return removed;
         }
     }
 }
