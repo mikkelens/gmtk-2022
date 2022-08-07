@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Stats.Stat;
@@ -10,7 +11,7 @@ namespace Game
 {
     public static class StatSystem
     {
-        public static List<Stat<T>> FindAllStatsOnObject<T>(this object target)
+        public static List<Stat<T>> FindAllStatsOnObject<T>(this object target) where T : IEquatable<T>
         {
             List<Stat<T>> foundStats = new List<Stat<T>>();
 
@@ -35,7 +36,7 @@ namespace Game
             }
             return foundStats;
         }
-        public static void ApplyModifiers<T>(this List<Stat<T>> stats, List<Modifier<T>> modifiers)
+        public static void ApplyModifiers<T>(this List<Stat<T>> stats, List<Modifier<T>> modifiers) where T : IEquatable<T>
         {
             GameManager manager = GameManager.Instance;
             if (manager == null)
@@ -52,11 +53,11 @@ namespace Game
                 if (typeTargets == null) continue;
                 
                 // get list appropriate to modifier target types
-                List<Stat<T>> appropriateStats = stats.Where(stat => stat != null && typeTargets.Contains(stat.type)).ToList();
+                List<Stat<T>> appropriateStats = stats.Where(stat => stat != null && typeTargets.Contains(stat.associatedType)).ToList();
                 appropriateStats.ForEach(stat => manager.AddModifierToStat(modifier, stat));
             }
         }
-        public static void ApplyModifierCollectionToObject(this object target, ModifierCollection modifiers)
+        public static void ApplyModifierCollectionToObject(this object target, Effect modifiers)
         {
             if (modifiers.bools.Count > 0) target.FindAllStatsOnObject<bool>().ApplyModifiers(modifiers.bools);
             if (modifiers.ints.Count > 0) target.FindAllStatsOnObject<int>().ApplyModifiers(modifiers.ints);

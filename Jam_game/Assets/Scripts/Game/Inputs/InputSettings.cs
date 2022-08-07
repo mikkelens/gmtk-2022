@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Management.Inputs
+namespace Game.Inputs
 {
     public partial class @InputSettings : IInputActionCollection2, IDisposable
     {

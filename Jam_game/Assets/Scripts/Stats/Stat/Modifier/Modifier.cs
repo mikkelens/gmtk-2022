@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Stats.Type;
 using Tools;
 using UnityEngine;
@@ -9,18 +10,21 @@ namespace Stats.Stat.Modifier
     [Serializable]
     public class Modifier<T>
     {
-        public Modifier(T setValue)
-        {
-            modificationValue = setValue;
-        }
+        public Modifier(T setValue) => modificationValue = setValue;
 
-        [SerializeField] private ModificationTypes type = ModificationTypes.AddMultiply;
-        [SerializeField] private Optional<float> timer;
-
-        [SerializeField] private T modificationValue;
+        [SerializeField] public T modificationValue;
+        [SerializeField] public ModificationTypes type = ModificationTypes.AddMultiply;
+        [SerializeField] public Optional<float> usageDelay;
+        [SerializeField] public Optional<float> usageTime;
+        
+        [Tooltip("If disabled, modification does not repeatedly add")]
+        [SerializeField] public Optional<float> repeatDelay;
+        
+        // private for clarity. we need to use the target method below
         [SerializeField] private List<StatTypeGeneric> modificationTargets;
-        public T Value => modificationValue;
 
+        public int Order => (int)type;
+        
         public List<StatType> GetAllTargets()
         {
             List<StatType> statTypes = new List<StatType>();
@@ -37,10 +41,5 @@ namespace Stats.Stat.Modifier
             }
             return statTypes;
         }
-        
-        public ModificationTypes Type => type;
-        public Optional<float> Timer => timer;
-
-        public int Order => (int)type;
     }
 }

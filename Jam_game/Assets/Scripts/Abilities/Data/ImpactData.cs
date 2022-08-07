@@ -13,6 +13,6 @@ namespace Abilities.Data
         public Optional<IntStat> healing = (IntStat)0;
         public Optional<FloatStat> knockback = (FloatStat)5f;
 
-        public Optional<ModifierCollection> effects;
+        public Optional<Effect> effects;
     }
 }

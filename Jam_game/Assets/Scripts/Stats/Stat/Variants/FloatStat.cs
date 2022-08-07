@@ -8,10 +8,7 @@ namespace Stats.Stat.Variants
     public class FloatStat : Stat<float>
     {
         public FloatStat(float value) : base(value) { }
-        protected override bool Compare(float a, float b) => Math.Abs(a - b) < 0.000000001;
         
-        private List<Modifier<float>> _modifiers = new List<Modifier<float>>();
-        protected override List<Modifier<float>> Modifiers => _modifiers;
         protected override float ModifiedValue()
         {
             float modifierValue = baseValue;
@@ -19,26 +16,26 @@ namespace Stats.Stat.Variants
             for (int i = 0; i < Modifiers.Count; i++)
             {
                 Modifier<float> modifier = Modifiers[i];
-                if (modifier.Type == ModificationTypes.Replace)
+                if (modifier.type == ModificationTypes.Replace)
                 {   // relying on our sorted list...
-                    modifierValue = modifier.Value;
+                    modifierValue = modifier.modificationValue;
                 }
-                else if (modifier.Type == ModificationTypes.Add)
+                else if (modifier.type == ModificationTypes.Add)
                 {
-                    modifierValue += modifier.Value;
+                    modifierValue += modifier.modificationValue;
                 }
-                else if (modifier.Type == ModificationTypes.AddMultiply)
+                else if (modifier.type == ModificationTypes.AddMultiply)
                 {
-                    sumPercentAdd += modifier.Value;
-                    if (i + 1 >= Modifiers.Count || Modifiers[i + 1].Type != ModificationTypes.AddMultiply)
+                    sumPercentAdd += modifier.modificationValue;
+                    if (i + 1 >= Modifiers.Count || Modifiers[i + 1].type != ModificationTypes.AddMultiply)
                     {   // relying on our sorted list...
                         modifierValue *= 1 + sumPercentAdd;
                         sumPercentAdd = 0;
                     }
                 }
-                else if (modifier.Type == ModificationTypes.TrueMultiply)
+                else if (modifier.type == ModificationTypes.TrueMultiply)
                 {
-                    modifierValue *= 1 + modifier.Value;
+                    modifierValue *= 1 + modifier.modificationValue;
                 }
             }
             return modifierValue;

@@ -10,13 +10,37 @@ namespace Stats.Stat.Variants
     public class IntStat : Stat<int>
     {
         public IntStat(int value) : base(value) { }
-        protected override bool Compare(int a, int b) => a == b;
-        
-        private List<Modifier<int>> _modifiers = new List<Modifier<int>>();
-        protected override List<Modifier<int>> Modifiers => _modifiers;
+
         protected override int ModifiedValue()
         {
-            
+            int modifiedValue = baseValue;
+            float sumMultiplierAdd = 0;
+            for (int i = 0; i < Modifiers.Count; i++)
+            {
+                Modifier<int> modifier = Modifiers[i];
+                if (modifier.type == ModificationTypes.Replace)
+                {
+                    modifiedValue = modifier.modificationValue;
+                }
+                else if (modifier.type == ModificationTypes.Add)
+                {
+                    modifiedValue += Mathf.CeilToInt(modifier.modificationValue);
+                }
+                else if (modifier.type == ModificationTypes.AddMultiply)
+                {
+                    sumMultiplierAdd += modifier.modificationValue;
+                    if (i + 1 >= Modifiers.Count || Modifiers[i + 1].type != ModificationTypes.AddMultiply)
+                    {   // relying on our sorted list...
+                        modifiedValue = Mathf.CeilToInt(modifiedValue * sumMultiplierAdd);
+                        sumMultiplierAdd = 0;
+                    }
+                }
+                else if (modifier.type == ModificationTypes.TrueMultiply)
+                {
+                    modifiedValue = Mathf.CeilToInt(modifiedValue * modifier.modificationValue);
+                }
+            }
+            return modifiedValue;
         }
 
         public static implicit operator IntStat(int value) => new IntStat(value);

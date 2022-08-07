@@ -9,14 +9,10 @@ namespace Stats.Stat.Variants
 	public class BoolStat : Stat<bool>
 	{
 		public BoolStat(bool value) : base(value) { }
-		protected override bool Compare(bool a, bool b) => a == b;
-		
-		private List<Modifier<bool>> _modifiers = new List<Modifier<bool>>();
-		protected override List<Modifier<bool>> Modifiers => _modifiers;
 		protected override bool ModifiedValue()
 		{
 			// if any of the modifiers have a true value, flip starting value
-			bool containsATrue = Modifiers.Any(modifier => modifier.Value);
+			bool containsATrue = Modifiers.Any(modifier => modifier.modificationValue);
 			return baseValue ^ containsATrue;
 		}
 		

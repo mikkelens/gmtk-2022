@@ -1,4 +1,5 @@
-﻿using Stats.Stat;
+﻿using System;
+using Stats.Stat;
 using Stats.Stat.Modifier;
 
 namespace Game
@@ -13,12 +14,9 @@ namespace Game
         	UI.UpdateKillCount(_killCount);
         }
 
-        public void AddModifierToStat<T>(Modifier<T> modifier, Stat<T> stat)
+        public void AddModifierToStat<T>(Modifier<T> modifier, Stat<T> stat) where T : IEquatable<T>
         {
-            if (modifier.Timer.Enabled)
-                StartCoroutine(stat.TimedModifier(modifier));
-            else
-                stat.AddModifier(modifier);
+            StartCoroutine(stat.AddModifier(modifier, this));
         }
     }
 }

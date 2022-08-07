@@ -9,10 +9,6 @@ namespace Stats.Stat.Variants
 	public class ColorStat : Stat<Color>
 	{
 		public ColorStat(Color value) : base(value) { }
-		protected override bool Compare(Color a, Color b) => a == b;
-
-		private List<Modifier<Color>> _modifiers = new List<Modifier<Color>>();
-		protected override List<Modifier<Color>> Modifiers => _modifiers;
 		protected override Color ModifiedValue()
 		{
 			Color modifiedValue = baseValue;
@@ -20,26 +16,26 @@ namespace Stats.Stat.Variants
 			for (int i = 0; i < Modifiers.Count; i++)
 			{
 				Modifier<Color> modifier = Modifiers[i];
-				if (modifier.Type == ModificationTypes.Replace)
+				if (modifier.type == ModificationTypes.Replace)
 				{	// relying on our sorted list...
-					modifiedValue = modifier.Value;
+					modifiedValue = modifier.modificationValue;
 				}
-				else if (modifier.Type == ModificationTypes.Add)
+				else if (modifier.type == ModificationTypes.Add)
 				{
-					modifiedValue += modifier.Value;
+					modifiedValue += modifier.modificationValue;
 				}
-				else if (modifier.Type == ModificationTypes.AddMultiply)
+				else if (modifier.type == ModificationTypes.AddMultiply)
 				{
-					sumPercentAdd += modifier.Value;
-					if (i + 1 >= Modifiers.Count || Modifiers[i + 1].Type != ModificationTypes.AddMultiply)
+					sumPercentAdd += modifier.modificationValue;
+					if (i + 1 >= Modifiers.Count || Modifiers[i + 1].type != ModificationTypes.AddMultiply)
 					{	// relying on our sorted list...
 						modifiedValue *= Color.clear + sumPercentAdd;
 						sumPercentAdd = Color.clear;
 					}
 				}
-				else if (modifier.Type == ModificationTypes.TrueMultiply)
+				else if (modifier.type == ModificationTypes.TrueMultiply)
 				{
-					modifiedValue *= Color.clear + modifier.Value;
+					modifiedValue *= Color.clear + modifier.modificationValue;
 				}
 			}
 			return modifiedValue;

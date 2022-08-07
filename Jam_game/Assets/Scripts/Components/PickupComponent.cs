@@ -1,6 +1,5 @@
 ﻿using Entities.PlayerScripts;
 using Game;
-using Management;
 using Stats.Stat.Modifier;
 using Tools;
 using UnityEngine;
@@ -10,7 +9,7 @@ namespace Components
     [RequireComponent(typeof(Collider))]
     public class PickupComponent : MonoBehaviour
     {
-        [SerializeField] private Optional<ModifierCollection> modifiers;
+        [SerializeField] private Optional<Effect> modifiers;
 
         private void OnTriggerEnter(Collider other)
         {

@@ -1,7 +1,6 @@
 using Abilities.Data;
 using Events;
 using Game;
-using Management;
 using Sirenix.OdinInspector;
 using Stats.Stat.Modifier;
 using Stats.Stat.Variants;
@@ -96,7 +95,7 @@ namespace Entities.Base
             _currentHealth += healing;
             return _currentHealth - previousHealth;
         }
-        private void ApplyEffects(ModifierCollection effects)
+        private void ApplyEffects(Effect effects)
         {
             this.ApplyModifierCollectionToObject(effects);
         }

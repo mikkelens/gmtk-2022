@@ -1,7 +1,6 @@
 ﻿using Entities.PlayerScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using InputSettings = Management.Inputs.InputSettings;
 
 namespace Game.Inputs
 {
