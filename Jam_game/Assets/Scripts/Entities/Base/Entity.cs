@@ -57,9 +57,9 @@ namespace Entities.Base
 
         protected void Update()
         {
-            if (Alive) EntityUpdate();
+            if (Alive) AliveUpdate();
         }
-        protected virtual void EntityUpdate() // Update, but only ran if entity is alive
+        protected virtual void AliveUpdate() // Update, but only ran if entity is alive
         {
             
         }

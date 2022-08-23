@@ -59,9 +59,9 @@ namespace Entities.Base
             // PreviousLookDirection = Vector2.down; // looking down by default
         }
 
-        protected override void EntityUpdate()
+        protected override void AliveUpdate()
         {
-            base.EntityUpdate();
+            base.AliveUpdate();
             UpdateMovement();
         }
 

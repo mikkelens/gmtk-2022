@@ -16,9 +16,9 @@ namespace Entities.Base
         protected Ability ChosenAbility { get; private set; }
 
         // todo: maybe make animation handled in child class?
-        protected override void EntityUpdate()
+        protected override void AliveUpdate()
         {
-            base.EntityUpdate();
+            base.AliveUpdate();
             
             ChosenAbility = SelectAbility();
             if (ChosenAbility == null) return;

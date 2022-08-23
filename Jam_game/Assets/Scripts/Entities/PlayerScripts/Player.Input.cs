@@ -53,6 +53,5 @@ namespace Entities.PlayerScripts
             _lastAimWasController = fromController;
             _aimIsDirty = true;
         }
-
     }
 }
