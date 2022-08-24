@@ -43,7 +43,7 @@ namespace Stats.Stat.Variants
             return modifiedValue;
         }
 
-        public static implicit operator IntStat(int value) => new IntStat(value);
+        public static implicit operator IntStat(int value) => new(value);
         public static implicit operator int(IntStat stat) => stat.CurrentValue; // can write "myStat" instead of "myStat.CurrentValue" 
     }
 }

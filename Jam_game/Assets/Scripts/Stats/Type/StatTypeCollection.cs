@@ -6,7 +6,7 @@ namespace Stats.Type
     [CreateAssetMenu(fileName = "New StatType Collection", menuName = MenuPath + "StatType Collection")]
     public class StatTypeCollection : StatTypeGeneric
     {
-        public List<StatType> statTypes = new List<StatType>();
+        public List<StatType> statTypes = new();
     }
 
     // [CreateAssetMenu(fileName = "New Stat Type Collection", menuName = "Stats/Stat Type Collection")]

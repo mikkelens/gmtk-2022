@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using JetBrains.Annotations;
+using Sirenix.OdinInspector;
 using Stats.Stat.Variants;
 using Tools;
 using UnityEngine;
@@ -9,10 +10,10 @@ namespace Entities.Base
     [RequireComponent(typeof(Rigidbody))]
     public abstract class MovingEntity : Entity
     {
-        private string FreezeButtonText => IsFrozen ? "Unfreeze" : "Freeze";
         [FoldoutGroup(QuirkCategory)]
         [PropertyOrder(-5)]
-        [Button("$FreezeButtonText")] private void ToggleFreezeEntity() => IsFrozen = !IsFrozen;
+        [UsedImplicitly] private string FreezeButtonText => isFrozen ? "Unfreeze" : "Freeze";
+        [Button("$FreezeButtonText")] private void ToggleFreezeEntity() => isFrozen = !isFrozen;
         [FoldoutGroup(QuirkCategory)]
         [SerializeField] protected bool freezingAffectsRotation = true;
         [FoldoutGroup(QuirkCategory)]
@@ -34,20 +35,20 @@ namespace Entities.Base
 
         [FoldoutGroup(StatCategory)]
         [SerializeField] protected BoolStat stunned; // cannot accelerate
-        
 
         private Rigidbody _rb;
-        
-        protected bool Stopping;
-        protected bool IsFrozen;
-        protected Vector2 PreviousLookDirection;
+
+        private bool isFrozen;
+        protected bool stopping;
+        protected Vector2 previousLookDirection;
         
         // [ShowInInspector] // for debugging
         private Vector2 _velocity; // on the topdown plane view
+        private static readonly int Walking = Animator.StringToHash("Walking");
 
 
-        protected virtual bool CanMove => !IsFrozen && !Stopping;
-        protected virtual bool CanRotate => (!IsFrozen || !freezingAffectsRotation) && (!Stopping || !stoppingAffectsRotation);
+        protected virtual bool CanMove => !isFrozen && !stopping;
+        private bool CanRotate => (!isFrozen || !freezingAffectsRotation) && (!stopping || !stoppingAffectsRotation);
 
         protected override void Start()
         {
@@ -55,7 +56,7 @@ namespace Entities.Base
             _rb = GetComponent<Rigidbody>();
             if (_rb == null) Debug.LogError($"No rigidbody on movable entity {name}.");
                 
-            Stopping = false;
+            stopping = false;
             // PreviousLookDirection = Vector2.down; // looking down by default
         }
 
@@ -76,7 +77,7 @@ namespace Entities.Base
             _rb.velocity = _velocity.PlaneToWorld();
 
             bool isMoving = _velocity.magnitude > 0.0f;
-            if (Animator != null) Animator.SetBool("Walking", isMoving);
+            if (Animator != null) Animator.SetBool(Walking, isMoving);
         }
 
         protected virtual Vector2 GetLookDirection()
@@ -101,7 +102,7 @@ namespace Entities.Base
             float turnSpeed = GetTurnSpeed(currentRotation, targetRotation);
             Quaternion newRotation = Quaternion.RotateTowards(currentRotation, targetRotation, turnSpeed * Time.deltaTime);
             Transform.rotation = newRotation;
-            PreviousLookDirection = targetDirection;
+            previousLookDirection = targetDirection;
         }
         protected virtual float GetTurnSpeed(Quaternion currentRotation, Quaternion targetRotation)
         {
@@ -114,7 +115,7 @@ namespace Entities.Base
         {
             if (stunned) return accelerationWhenStunned;
             float accel = walkAccelSpeed;
-            if (Stopping) return accel * maxStoppingBonus;
+            if (stopping) return accel * maxStoppingBonus;
 
             float likeness = Vector2.Dot(_velocity.normalized, GetTargetMoveDirection().normalized);
             float stopFactor = (1 - likeness) / 2f; // from (-1 to 1) to (0 to 1), and in reverse

@@ -41,7 +41,7 @@ namespace Stats.Stat.Variants
             return modifierValue;
         }
         
-        public static implicit operator FloatStat(float value) => new FloatStat(value);
+        public static implicit operator FloatStat(float value) => new(value);
         public static implicit operator float(FloatStat stat) => stat.CurrentValue; // can write "myStat" instead of "myStat.CurrentValue" 
     }
 }

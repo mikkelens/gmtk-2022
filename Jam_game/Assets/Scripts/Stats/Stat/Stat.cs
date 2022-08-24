@@ -22,20 +22,20 @@ namespace Stats.Stat
         [SerializeField] private T lastValue;
         
         private T _lastBaseValue;
-        protected bool IsDirty = true;
+        protected bool isDirty = true;
         public T CurrentValue
         {
             get
             {
-                if (!IsDirty && _lastBaseValue.Equals(baseValue)) return lastValue;
-                IsDirty = false;
+                if (!isDirty && _lastBaseValue.Equals(baseValue)) return lastValue;
+                isDirty = false;
                 _lastBaseValue = baseValue;
                 if (Modifiers == null) return lastValue = baseValue;
                 return lastValue = ModifiedValue();
             }
         }
 
-        protected List<Modifier<T>> Modifiers { get; } = new List<Modifier<T>>();
+        protected List<Modifier<T>> Modifiers { get; } = new();
 
         protected abstract T ModifiedValue();
 
@@ -52,22 +52,26 @@ namespace Stats.Stat
                 yield return new WaitForSeconds(modifier.usageDelay.Value);
             float usageTime = Time.time;
 
-            do
+            do // do at least once
             {
-                IsDirty = true;
+                isDirty = true;
                 Modifiers.Add(modifier);
                 Modifiers.Sort(CompareModifyOrder);
-            } while (modifier.resetAfterTime.Enabled);
 
-            if (modifier.resetAfterTime.Enabled && usageTime.TimeSince() > modifier.resetAfterTime.Value)
-            {
-                RemoveModifier(modifier);
-            }
+                if (modifier.resetAfterTime.Enabled && usageTime.TimeSince() >= modifier.resetAfterTime.Value)
+                {
+                    RemoveModifier(modifier); // we dont need to sort because of how removing works
+                    yield break;
+                }
+                // repeat if we should repeat
+            } while (modifier.repeatEachTime.Enabled && usageTime.TimeSince() >= modifier.repeatEachTime.Value);
+
         }
+
         public bool RemoveModifier(Modifier<T> modifierToRemove)
         {
             bool removed = Modifiers.RemoveAll(eachModifier => eachModifier.Equals(modifierToRemove)) > 0;
-            if (removed) IsDirty = true;
+            if (removed) isDirty = true;
             return removed;
         }
     }

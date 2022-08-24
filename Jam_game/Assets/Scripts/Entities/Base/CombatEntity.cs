@@ -35,11 +35,11 @@ namespace Entities.Base
 
         private IEnumerator UseAbility() // Think dark soulds attack with long chargeup
         {
-            Stopping = true;
+            stopping = true;
             Animator.SetBool("Walking", false);
             yield return StartCoroutine(ChosenAbility.TriggerAbility(this));
             Animator.SetBool("Walking", true);
-            Stopping = false;
+            stopping = false;
             FinishAbilityUse();
         }
 

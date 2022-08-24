@@ -16,7 +16,7 @@ namespace Stats.Stat.Variants
 			return baseValue ^ containsATrue;
 		}
 		
-		public static implicit operator BoolStat(bool value) => new BoolStat(value);
+		public static implicit operator BoolStat(bool value) => new(value);
 		public static implicit operator bool(BoolStat stat) => stat.CurrentValue;
 	}
 }

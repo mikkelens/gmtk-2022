@@ -18,7 +18,7 @@ namespace Stats.Stat.Modifier
         [SerializeField] public Optional<float> resetAfterTime;
 
         [Tooltip("If disabled, modification does not repeatedly add")]
-        [SerializeField] public Optional<float> repeatDelay;
+        [SerializeField] public Optional<float> repeatEachTime;
         
         // private for clarity. we need to use the target method below
         [SerializeField] private List<StatTypeGeneric> modificationTargets;
@@ -27,7 +27,7 @@ namespace Stats.Stat.Modifier
         
         public List<StatType> GetAllTargets()
         {
-            List<StatType> statTypes = new List<StatType>();
+            List<StatType> statTypes = new();
             foreach (StatTypeGeneric baseType in modificationTargets)
             {
                 if (baseType is StatType single)

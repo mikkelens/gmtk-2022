@@ -8,7 +8,7 @@ namespace Entities.PlayerScripts
         {
             if (IsAiming) return UpdatedLookDirection;
             if (IsMoving) return GetTargetMoveDirection(); // updates look direction
-            return PreviousLookDirection; // use previous look (aim) direction
+            return previousLookDirection; // use previous look (aim) direction
         }
 
         protected override Vector2 GetTargetMoveDirection()
