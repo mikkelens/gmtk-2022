@@ -1,0 +1,3 @@
+[submodule "Jam_game/Assets/WebGLTemplates"]
+	path = Jam_game/Assets/WebGLTemplates
+	url = https://github.com/mikkelens/unity-webgl-template
